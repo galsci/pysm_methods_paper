@@ -123,10 +123,15 @@ We use HEALPix \footnote{https://healpix.sourceforge.io} \texttt{anafast} functi
 
 The $TT$, $EE$ and $BB$ power spectra comparisons, for model s5, are shown in Figure \ref{fig:Dl_sync_galmask}. The comparison for models s4, s6 and s7 have nearly identical results. The $TT$ power spectra for masked skies show excellent agreement with the BeyondPlanck synchrotron temperature power spectra. However, there is poor agreement for the full sky power spectra. On the full sky most of the spectra is dominated by what happens in the galactic plane, which for observational data is contaminated by free-free and anomalous microwave emission (AME). Despite the BeyondPlanck component separation, the synchrotron power in the brightest sky regions are likely to have some residual contamination and associated uncertainty. So, it is reasonable to argue that for synchrotron temperature there is excellent agreement for all but the brightest parts of the sky, where the comparison is harder to make at 30 GHz. For polarization we find reasonable agreement till $\ell \sim 100$. For $\ell > 100$ the PySM synchrotron models typically have lower power compared to the data. It is important to remember that despite the point source masking, there is some residual radio point source contribution to this power in the LFI maps.
 
-
-
 \subsubsection{BICEP / Keck patch}
 The cleanest patch of sky in the southern hemisphere is particularly important for ongoing and future CMB experiments that target measurement of the primordial CMB B-modes. We focus on the small clean patch of sky that is targeted for the BICEP/Keck experiment for their constraints on the tensor-to-scalar ratio. This overlaps with the tentative sky patch that will be targeted by the CMB-S4 experiment for their primorial B-mode search. In their 2021 analysis the BICEP/Keck team placed a upper limit of $A_s<1.4 \mu{\rm K}^2$ at a pivot frequency of 23 GHz and $\beta_s=-3.1$. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.49\textwidth]{figures/Dlcomp_PySM3-4b8_BKpatch.png}
+    \caption{Figure showing comparison of power spectra in the BICEP/Keck patch for the new PySM synchrotron models s4, s5 and s7 with old synchrotron model s1 and the limits on the synchrotron power obtained in BICEP/Keck 2018 \cite{} at the reference frequency of 23 GHz.}
+    \label{fig:Dl_sync_BK}
+\end{figure}
 
 % \subsection{Power spectra} \label{sec:power_spectra}
 
