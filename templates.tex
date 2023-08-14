@@ -17,7 +17,7 @@ where $\beta_s(p) \simeq -3$ when the emission is expressed in Rayleigh-Jeans te
 \end{equation}
 where $\beta_d(p) \simeq 1.6$ on average, ranging from about 1.0 to about 2.2, and $T_d(p)$ ranges from 10 to 30~K.
 
-\subsection{Dust Amplitude}
+\subsection{Dust Amplitude}\label{sec:dustamplitude}
 The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous PySM models like \bsh{fill} employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for detailed discussion).
 
 To address this issue, we instead use dust templates for the {\tt d9} and {\tt d10} models from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{2011MNRAS.418..467R}. In total intensity we employ the Planck GNILC 2015 component separated map at $353$\,GHz \citep{planck2016-XLVIII}\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}}, 

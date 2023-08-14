@@ -245,9 +245,15 @@ In this section, we compare the decorrelation properties of various models, comp
 
 Myra Norton's decorrelation plot to go here. Github: https://github.com/galsci/pysm/issues/123
 
-\subsection{CIB Contamination} \label{sec:CIBcontamination}
+\subsection{Extragalactic Contamination} \label{sec:CIBcontamination}
 
 [Stanford student Monica Hicks is working with Susan on cross-correlating our models with galaxy surveys a la Chiang \& Menard. Hopefully summary figure here.] 
+
+%Our Galactic dust templates are based on measurements of the 
+We quantify the extragalactic contamination present in our dust models using a tomographic redshift-clustering technique \citep{Schmidt:2015, Chiang:2019}. Our intensity-based Galactic dust templates inevitably contain emission from both Galactic dust and external galaxies. As described in Section \ref{sec:dustamplitude}, the new \texttt{d9} and \texttt{d10} dust templates are derived from GNILC-processed Planck data, while older PySM dust templates used \texttt{Commander} data products. We thus expect that the new Galactic dust models are significantly less affected by CIB contamination than previous models. Here we quantify this contamination by measuring the angular cross-correlation between our dust models and the clustering of galaxies as a function of redshift in spectroscopic survey data. A perfect Galactic dust template would be uncorrelated with such clustering; the signature of CIB contamination is excess template emission correlated with galaxy clustering. 
+
+Following the procedure in \citet{Chiang:2019}, we 
+
 
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 writing: Yao + Nico
