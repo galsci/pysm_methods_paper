@@ -154,16 +154,16 @@ In Figure~\ref{fig:spectra_by_field} we show the $TT$, $EE$, and $BB$ power spec
 \subsubsection{Small Field Power Analysis} 
 %Kenny's analysis here
 
-\textbf{Kenny:} To compare the small-scale performances of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data, we mainly follow the analysis method described in \cite{planck2014-XXX} to examine the model behaviors. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian (resulting in $f_{\rm sky} \approx 0.008$), and apply such a mask to the mean-subtracted dust model and NPIPE detector-split maps at 353~GHz. We then use \texttt{anafast} to compute the binned $BB$ auto-spectra of the masked model maps at $\ell = 55,90,135,190,255,330$ with $\Delta \ell = 30$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$ by dividing the apodization mask integral squared. For the masked NPIPE data maps, we instead compute cross-spectrum from the two split maps to minimize the noise correlation. The representative results from two selected circular fields at $|b| > 35^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. (\textbf{Kenny:} this analysis uses anafast - contradicts with the NaMaster stated above?)
+\textbf{Kenny:} To compare the small-scale performances of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data, we mainly follow the analysis method described in \cite{planck2014-XXX} to examine the model behaviors. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian (resulting in $f_{\rm sky} \approx 0.008$), and apply such a mask to the mean-subtracted dust model and NPIPE half-ring split maps at 353~GHz. We then use \texttt{anafast} to compute the binned $BB$ auto-spectra of the masked model maps at $\ell = 55,90,135,190,255,330$ with $\Delta \ell = 30$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$ by dividing the apodization mask integral squared. For the masked NPIPE data maps, we instead compute cross-spectrum from the two split maps to minimize the noise correlation. The representative results from two selected circular fields at $|b| > 35^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. (\textbf{Kenny:} this analysis uses anafast - contradicts with the NaMaster stated above?)
 
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/smallfield_power.pdf}
-    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE detector-split maps and dust model maps \texttt{d9} and \texttt{d12}. The model maps are integrated with a 353~GHz delta bandpass and the NPIPE data maps are color-corrected (i.e., scaled by a factor of 0.92) to the same single frequency. The dashed lines indicate the best-fit of the fixed-index power law on the NPIPE maps, which is largely driven by the first two band powers. Note that we only show the \texttt{d9} results as this model is identical to \texttt{d10} at 353~GHz. (\textbf{Kenny}: Both d9 and d12 need to be updated --- especially the latter one!)}
+    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE half-ring split maps and dust model maps \texttt{d9} and \texttt{d12}. The model maps are integrated with a 353~GHz delta bandpass and the NPIPE data maps are color-corrected (i.e., scaled by a factor of 0.92) to the same single frequency. The dashed lines indicate the best-fit of the fixed-index power law on the NPIPE maps, which is largely driven by the first two band powers. Note that we only show the \texttt{d9} results as this model is identical to \texttt{d10} at 353~GHz.}
     \label{fig:smallfield_power}
 \end{figure}
 
-We in addition run a fixed-index fit $\mathcal{D}_\ell^{BB} = A^{BB} \big( l/80 \big)^{\alpha^{BB}+2}$ where $\alpha^{BB} = -2.42$ to the $BB$ power spectra. We find that the NPIPE map spectra agree with such a power law within their noise level in nearly all small fields. The \texttt{d9} and \texttt{d10} dust models can basically reproduce the same amplitude $A^{BB}$ in their own fits, while \texttt{d12} produces an amplitude which is somewhat smaller. These models also demonstrate some successes in following the power law up to $\ell \approx 350$, although their agreements are not as close as those of the data. If we define the ratio of the first two band powers to the last four band powers as a proxy for describing the spatial power change across the modulation scale, while the perfect fixed-index power law yields a value of $\approx 1.60$, the NPIPE maps give $1.65 \pm 0.68$ and the model maps give $2.32 \pm 0.72$ over sky patches with $|b| > 30^\circ$.
+We in addition run a fixed-index fit $\mathcal{D}_\ell^{BB} = A^{BB} \big( l/80 \big)^{\alpha^{BB}+2}$ where $\alpha^{BB} = -2.42$ to the $BB$ power spectra. We find that the NPIPE map spectra agree with such a power law within their noise level in nearly all small fields. The \texttt{d9} and \texttt{d10} dust models can basically reproduce the same amplitude $A^{BB}$ in their own fits, while \texttt{d12} produces an amplitude which is somewhat smaller. These models also demonstrate some successes in following the power law up to $\ell \approx 350$, although their agreements are not as close as those of the data. If we define the ratio of the first two band powers to the last four band powers as a proxy for describing the spatial power change across the modulation scale, while the perfect fixed-index power law yields a value of $\approx 1.60$, the NPIPE maps give $1.65 \pm 0.68$ and the \texttt{d9}/\texttt{d10} (\texttt{d12}) model map gives $2.37 \pm 0.77$ ($2.24 \pm 0.87$) over sky patches with $|b| > 30^\circ$.
 
 \subsubsection{BICEP / Keck} \label{sec:bkspt_spectra}
 
@@ -261,9 +261,8 @@ Following the procedure in \citet{Chiang:2019}, we
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 writing: Yao + Nico
 
-In this section, we investigate the level of non-Gaussianity induced on the small scales generated through the polarization fraction tensor transformation utilizing two different statistical tools: Minkowski functionals and Reduced Wavelet Scattering Transform (RWST). We do that by comparing the MFs or RWST coefficients of the small scales structures from this framework with those from Gaussian realizations of extrapolated power law in standard $IQU$ domain, focusing on the thermal dust component.
+In this section, we investigate the level of non-Gaussianity induced in the small scales generated through the polarization fraction tensor transformation. We do that by comparing the Minkowski Functionals (MFs) of the small scales structures from this framework with those from Gaussian realizations of extrapolated power law in standard $IQU$ domain, focusing on the thermal dust component.
 
-\subsubsection{Minkowski functionals}
 In particular, for any n-dimensional excursion set defined with a threshold value $\rho$, there exists $n+1$ kinds of MFs that geometrically and topologically describe the morphology of the set \citep{}. These MFs have long been used as estimators of non-Gaussianity. Therefore, in our case, for the 2-dimensional maps, we have 3 kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which corresponds to the area, the length and the connectivity of the excursion set.
 
 To help determine the extra non-Gaussianity introduced by going into $iqu$ domain, we build a reference set made of 50 Gaussian realizations small scales structures, generated from the power law fitted to the power spectra of the final sets of maps obtained by going into $iqu$ domain, in particular:
@@ -289,42 +288,29 @@ We can see that in Figure~\ref{fig:MF:patch2} for the patch with center [$45^{\c
 
 The two patches shown in Fig.~\ref{fig:MF:patch2} and ~\ref{fig:MF:patch1} are in fact two typical cases of the MFs for different patches considered. In one case the MFs of the two sets of small scales are similar and in the other case the two differs a lot. So overall the \texttt{poltens-ss} will have more non-Gaussianity than \texttt{Gaussian-ss} but this statement depends on the sky position interested. 
 
-
 \begin{figure*}[hbt]
     \centering
-    \includegraphics[width=180mm]{maps_patch2.pdf}
-    \caption{The zoom-in plot of the maps, in the selected patch with center [$45^{\circ}$ , $45^{\circ} $]. From left to right, we show the final map with \texttt{Gaussian-ss}, final map with \texttt{poltens-ss}, \texttt{Gaussian-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel value in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
-    \label{fig:maps:patch2}
-\end{figure*}
-
-\begin{figure*}[hbt]
-    \centering
-    \includegraphics[width=180mm]{maps_patch1.pdf}
-    \caption{Same as Fig.~\ref{fig:maps:patch2} for the patch with center [$0^{\circ}$ , $45^{\circ} $].}
-    \label{fig:maps:patch1}
-\end{figure*}
-
-\begin{figure*}[hbt]
-    \centering
-    \includegraphics[width=180mm]{center_45_45.pdf}
-    \caption{Minkowski Functionals as a function of the threshold $\rho$ for the I, Q and U small scales in the patch with center of [45, 45] in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. Shaded area is the fluctuation of the 50 realizations of small scales and the line is the mean. The blue dotted one is for Gaussian realization from the extended power law while the orange solid one is from the polfrac tensor framework. }
-    \label{fig:MF:patch2}
-\end{figure*}
-
-\begin{figure*}[hbt]
-    \centering
-    \includegraphics[width=180mm]{center_0_45.pdf}
-    \caption{Same as Fig.~\ref{fig:MF:patch2} for the patch with center [0, 45].}
+    \includegraphics[width=180mm]{figures/MFs_80p_sky_Q.pdf}
+    \caption{MFs for the maps on the sphere with 80\% mask. }
     \label{fig:MF:patch1}
 \end{figure*}
 
-\subsubsection{Reduced Wavelet Scattering Transform}
-WST... and RWST...
+\begin{figure*}[hbt]
+    \centering
+    \includegraphics[width=180mm]{figures/maps_patch_345_35.pdf}
+    \caption{The zoom-in plot of the maps, in the selected patch with center [$-15^{\circ}$ , $45^{\circ} $]. From left to right, we show the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss}, \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel value in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
+    \label{fig:maps:patch2}
+\end{figure*}
+\begin{figure*}[hbt]
+    \centering
+    \includegraphics[width=180mm]{figures/MFs_345_45_with_G_rescaled.pdf}
+    \caption{Minkowski Functionals as a function of the threshold $\rho$ for the one realization of I, Q and U small scales in the patch with center of [$-15^{\circ}$ , $45^{\circ} $] in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. The blue dotted one is for \texttt{Gaussian-mod-ss} while the orange solid one is from \texttt{poltens-ss}. We also show the \texttt{Gaussian-ss} in dashed gray line as a comparison.}
+    \label{fig:MF:patch2}
+\end{figure*}
 
 
 \section{Model Suite}\label{sec:modelsuite}
 Writing: Susan + others
-
 \begin{table*}[]
     \centering
     \begin{tabular}{lcc}
