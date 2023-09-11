@@ -9,6 +9,7 @@
 
 \newcommand{\done}{{\tt d1}}
 \newcommand{\dnine}{{\tt d9}}
+\newcommand{\dten}{{\tt d10}}
 
 \usepackage{color}
 \newcommand{\bsh}[1]{\textcolor{red}{(BSH: #1)}}
@@ -261,44 +262,49 @@ Following the procedure in \citet{Chiang:2019}, we
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 writing: Yao + Nico
 
-In this section, we investigate the level of non-Gaussianity induced in the small scales generated through the polarization fraction tensor transformation. We do that by comparing the Minkowski Functionals (MFs) of the small scales structures from this framework with those from Gaussian realizations of extrapolated power law in standard $IQU$ domain, focusing on the thermal dust component.
+In this section, we focus on the thermal dust component and investigate the level of non-Gaussianity induced in the small scales generated through the polarization fraction tensor transformation, i.e., the simulations from PySM dust model \dten{}. We use the Minkowski Functionals (MFs, \cite{Minkowski1903})  to measure the non-Gaussianity in the maps, which have long been used as estimators of non-Gaussianity
 
-In particular, for any n-dimensional excursion set defined with a threshold value $\rho$, there exists $n+1$ kinds of MFs that geometrically and topologically describe the morphology of the set \citep{}. These MFs have long been used as estimators of non-Gaussianity. Therefore, in our case, for the 2-dimensional maps, we have 3 kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which corresponds to the area, the length and the connectivity of the excursion set.
+According to Hadwiger’s theorem\citep{hadwigerVorlesungenUeberInhalt1957}, for any n-dimensional excursion set defined with a threshold value $\rho$, there exists $n+1$ kinds of MFs that geometrically and topologically describe the morphology of the set. Therfore, in our case, for the 2-dimensional maps, we have 3 kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which corresponds to the area, the length and the connectivity of the excursion set.
 
-To help determine the extra non-Gaussianity introduced by going into $iqu$ domain, we build a reference set made of 50 Gaussian realizations small scales structures, generated from the power law fitted to the power spectra of the final sets of maps obtained by going into $iqu$ domain, in particular:
+By comparing the MFs of the small scales structures from \dten{} with those of Gaussian realizations from extrapolated power law, which is fitted from the power spectra of the maps from \dten{}, in standard $IQU$ domain, we can have a qualitative estimation of non-Gaussianity in \dten{} introduced by going into $iqu$ domain. As mentioned in Section \ref{subsec:methodology}, the generated small scales in the \dten{} model are modulated before adding to the large scales. To study the potential effect of anisotropy on the non-Gaussianity, we also generate Gaussian realizations with modulation so that we can compare the non-Gaussianity directly, without the influence of anisotropy. The two reference sets made of pure Gaussian small scales and modulated Gaussian small scales are built as follows:
 
 \begin{enumerate}
 
-\item we first fit power laws to the $TT$ ($EE$, $BB$) power spectra in the multipole range $[550, 900]$ ($[400, 700]$) obtained from the full sky maps generated through the polarization tensor formalism, and extrapolate them up to $\ell_{\rm max}=4096$. 
-\item To generate only the small scales, we apply a high-pass filter to the fitted power law with $\ell_{cut} = 400$ and 110 for intensity and polarization respectively, and then generate full sky small scales realizations using \texttt{synfast}. 
-\item These full-sky small scales are then multiplied with modulation maps. 
-\item At the same time, the small scales in the real data are filtered out and the large scales remain untouched.
+\item We first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the full sky maps output by \dten{}, and extrapolate them up to $\ell_{\rm max}=4096$. 
+\item To obtain only the small scales, we apply a high-pass filter to the fitted power law with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations using \texttt{synfast} routine provided by \texttt{HEALPix}. 
+\item For modulated Gaussian maps, these full-sky small scales are then multiplied with modulation maps to have similar anisotropies with the small scales from \dten{}. While for pure Gaussian maps, we do not apply modulations. 
+\item Meanwhile, the small scales with multipoles larger than 200 in the observed data are filtered out and the large scales remain untouched.
 \item At last, the generated Gaussian small scales are added into observed large scales to form the final set of maps. 
 \end{enumerate}
 
-Now we have two sets of maps with different small scales co-added: one with small scales generated in $iqu$ domain, the other with modulated Gaussian small scales in the $IQU$ domain. We then apply a high-pass filter to retain only the small scales of these two set of maps, that we call \texttt{poltens-ss} and \texttt{Gaussian-ss}. To calculate the MFs we select several patches on the sky and project them onto flat plane.
+Now we have three sets of maps with different small scales co-added: one from \dten{}, one from pure Gaussian and the last from modulated Gaussian realization in the $IQU$ domain. We then apply a high-pass filter to retain only the small scales of these maps, that we call \texttt{poltens-ss}, \texttt{Gaussian-mod-ss}, and \texttt{Gaussian-ss} respectively. To calculate the MFs we select several patches on the sky and project them onto flat plane. Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are thought to be fully Gaussian and isotropic. 
 
-Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-ss} maps  have the same power spectra behavior as \texttt{poltens-ss}, on different masks that exclude the inner part of the Galactic plane. 
+Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
 
-Here we present the comparison results for two specific patches with centers at [$0^{\circ}$ , $45^{\circ} $] and [$45^{\circ}$ , $45^{\circ} $], each with dimension of $20^{\circ}\times20^{\circ}$,  as shown in Fig.~\ref{fig:maps:patch2} and ~\ref{fig:maps:patch1}.
+\subsubsection{MFs on the sphere}
 
-In Fig.~\ref{fig:MF:patch2} and ~\ref{fig:MF:patch1}, the three MFs for I, Q and U for the two sets of maps are shown, for the two patches considered. The shaded region is the dispersion of MFs over 50 realizations and the solid line is the mean. The blue dotted one is for \texttt{Gaussian-ss} while the orange solid one is from \texttt{poltens-ss}.
+Following the algorithm in \cite{2022OJAp....5E..13G}, we calculate the MFs for the three Q maps on the sphere, i.e. \texttt{HEALPix} format, with a Planck HFI 80\% sky mask \footnote{\url{http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_Mask_GalPlane-apo2_2048_R2.00.fits}}, which masks out the complex Galactic plane.  Before the calculation we first normalize the maps by dividing each map by its standard deviation separately and choose [-3, 3] as the threshold range to calclate the MFs. Results are shown in Figure.~\ref{fig:MF:sphere}, where the first, second and third kind of MFs are shown from left to right.(MFs of U maps look like very similar to Q maps and are not shown here). 
 
-We can see that in Figure~\ref{fig:MF:patch2} for the patch with center [$45^{\circ}$ , $45^{\circ} $], the mean values and dispersions of the MFs of \texttt{poltens-ss} and \texttt{Gaussian-ss} are highly overlapped with each other, which means that in this patch the generation of maps in $iqu$ domain does not lead to any extra non-Gaussian structure. While in Fig.~\ref{fig:MF:patch1} for the patch [$0^{\circ}$ , $45^{\circ} $], a significant difference is visible between the MFs of \texttt{poltens-ss} and \texttt{Gaussian-ss} which indicates the difference in the level of non-Gaussianity in \texttt{poltens-ss} and \texttt{Gaussian-ss}. By looking into the details of Figure~\ref{fig:maps:patch1}, we find the that in this patch there is a strong point source in the intensity map(at [$4.5^{\circ}$ , $36.5^{\circ} $]) which leak power into the polarization map through the polarization tensor transformation. However in the Gaussian small scales there will not be such leakage from the point source.  
+We can see that when averaging for large sky fraction, the MFs of \texttt{Gaussian-mod-ss} in blue and \texttt{poltens-ss} in orange are almost the same, while MFs of \texttt{Gaussian-ss} differ a lot in dashed gray color. The difference in MFs between \texttt{poltens-ss} and \texttt{Gaussian-ss} means the existence of non-Gaussianity in \texttt{poltens-ss}, but the similarity between \texttt{poltens-ss} and \texttt{Gaussian-mod-ss} proves that the non-Gaussianity in \texttt{poltens-ss} comes from the anisotropy in the maps, which originates from the modulation, rather than from the polarization fraction tensor transformation.   
 
-The two patches shown in Fig.~\ref{fig:MF:patch2} and ~\ref{fig:MF:patch1} are in fact two typical cases of the MFs for different patches considered. In one case the MFs of the two sets of small scales are similar and in the other case the two differs a lot. So overall the \texttt{poltens-ss} will have more non-Gaussianity than \texttt{Gaussian-ss} but this statement depends on the sky position interested. 
-
-\begin{figure*}[hbt]
+\begin{figure*}[hbt!]
     \centering
     \includegraphics[width=180mm]{figures/MFs_80p_sky_Q.pdf}
-    \caption{MFs for the maps on the sphere with 80\% mask. }
-    \label{fig:MF:patch1}
+    \caption{MFs for the small scales of three sets of maps on the sphere with Planck HFI 80\% mask. The small scales are filtered out by excluding multipoles smaller than 200 in the maps and we choose $lmax = 2048$ when obaining the small scales. We show the MFs as a function of threshold $\rho$, for \texttt{Gaussian-mod-ss} in blue, \texttt{poltens-ss} in orange and  \texttt{Gaussian-ss} in dashed gray.}
+    \label{fig:MF:sphere}
 \end{figure*}
+
+
+\subsubsection{MFs on the flat patch}
+In this section we zoom into a specific region centered at [$-15^{\circ}$ , $45^{\circ} $] with dimension of $20^{\circ}\times20^{\circ}$ to see if, by looking at smaller regions of the sky, we can measure a significance difference in the MFs between \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} sets of maps. Those maps are shown the third and fourth column in Figure~\ref{fig:maps:patch2} respectively, with the Gaussian modulated and \dten{} full resolution maps including both large and small scales shown in the first and second column. Here we consider I, Q and U maps which are shown from upper to lower panel. When zooming into this patch, we can see by eye that \texttt{poltens-ss} have some structures, following those in the full resolution maps, which are not present in the \texttt{Gaussian-mod-ss} maps. Again we calculate the MFs of these small scales to have an understanding of the non-Gaussianities, following \cite{2008JSMTE..12..015M} for the calculation of MFs for a square patch. Before the calculation, we also rescale all the small scales to be in the range [-1, 1].
+
+Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} maps presented in Figure.~\ref{fig:maps:patch2} as blue and orange lines respectively, while MFs for \texttt{Gaussian-ss} are shown in dashed gray lines. 
+Contrary to the results presented in Figure \ref{fig:MF:sphere}, in this case we can detect a departure of the \texttt{poltens-ss} from the \texttt{Gaussian-mod-ss} ones. This points towards the fact that the polarization fraction tensor transformation may induced some level of non-Gaussianity, different from pure modulation effects, which are detectable on small sky regions. We can thus conclude that the level of induced non-Gaussianity differs from one region to the other and it is in general small enough not to impact significantly the statistical properties when averaged on large sky fraction.  
 
 \begin{figure*}[hbt]
     \centering
     \includegraphics[width=180mm]{figures/maps_patch_345_35.pdf}
-    \caption{The zoom-in plot of the maps, in the selected patch with center [$-15^{\circ}$ , $45^{\circ} $]. From left to right, we show the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss}, \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel value in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
+    \caption{The zoom-in plot of the maps, in the selected patch with center [$-15^{\circ}$ , $45^{\circ} $]. From left to right, we show the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss}, \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
     \label{fig:maps:patch2}
 \end{figure*}
 \begin{figure*}[hbt]
