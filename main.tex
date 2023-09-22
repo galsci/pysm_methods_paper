@@ -9,7 +9,7 @@
 
 \newcommand{\done}{{\tt d1}}
 \newcommand{\dnine}{{\tt d9}}
-\newcommand{\dten}{{\tt d10}}
+\newcommand{\deleven}{{\tt d11}}
 
 \usepackage{color}
 \newcommand{\bsh}[1]{\textcolor{red}{(BSH: #1)}}
@@ -251,33 +251,41 @@ Myra Norton's decorrelation plot to go here. Github: https://github.com/galsci/p
 
 \subsection{Extragalactic Contamination} \label{sec:CIBcontamination}
 
-[Stanford student Monica Hicks is working with Susan on cross-correlating our models with galaxy surveys a la Chiang \& Menard. Hopefully summary figure here.] 
+%[Stanford student Monica Hicks is working with Susan on cross-correlating our models with galaxy surveys a la Chiang \& Menard. Hopefully summary figure here.] 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/EGC_galaxy@857Part_0-1.png}
+    \caption{Relative extragalactic contamination in three of the new dust templates (\texttt{d10, d11, d12}), compared to the \texttt{d1} model. Contamination is quantified as the excess 857 GHz emission within $11'$ of galaxies from the GLADE+ catalog, normalized to the maximum excess and plotted as a function of redshift (z). All three new dust templates contain less extragalactic contamination than older dust models because they are based on GNILC-processed Planck data. The improvement is most significant for \texttt{d10} and \texttt{d11}.  }
+    \label{fig:extragal_contamination}
+\end{figure}
+
 
 %Our Galactic dust templates are based on measurements of the 
 We quantify the extragalactic contamination present in our dust models using a tomographic redshift-clustering technique \citep{Schmidt:2015, Chiang:2019}. Our intensity-based Galactic dust templates inevitably contain emission from both Galactic dust and external galaxies. As described in Section \ref{sec:dustamplitude}, the new \texttt{d9} and \texttt{d10} dust templates are derived from GNILC-processed Planck data, while older PySM dust templates used \texttt{Commander} data products. We thus expect that the new Galactic dust models are significantly less affected by CIB contamination than previous models. Here we quantify this contamination by measuring the angular cross-correlation between our dust models and the clustering of galaxies as a function of redshift in spectroscopic survey data. A perfect Galactic dust template would be uncorrelated with such clustering; the signature of CIB contamination is excess template emission correlated with galaxy clustering. 
 
-Following the procedure in \citet{Chiang:2019}, we 
+Following the procedure in \citet{Chiang:2019}, we compute the cross-correlation between local fluctuations in the Galactic emission maps and the galaxy density as a function of redshift, using galaxies from the GLADE+ catalog \citep{Dalya:2022}. We compute this cross-correlation for each of the \texttt{d1, d10, d11}, and \texttt{d12} dust emission templates at 857 GHz, at high Galactic latitudes ($\left|b\right| > 30\deg$). Figure \ref{fig:extragal_contamination} shows that while each of the new GNILC-based maps contain less extragalactic contamination than \texttt{d1}, the decreased contamination is more marked in \texttt{d10} and \texttt{d11} than in \texttt{d12}. This is likely due to [FILTERING CHOICES? TO DISCUSS WITH JACQUES]
 
 
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 writing: Yao + Nico
 
-In this section, we focus on the thermal dust component and investigate the level of non-Gaussianity induced in the small scales generated through the polarization fraction tensor transformation, i.e., the simulations from PySM dust model \dten{}. We use the Minkowski Functionals (MFs, \cite{Minkowski1903})  to measure the non-Gaussianity in the maps, which have long been used as estimators of non-Gaussianity
+In this section, we focus on the thermal dust component and investigate the level of non-Gaussianity induced in the small scales generated through the polarization fraction tensor transformation, i.e., the simulations from PySM dust model \deleven{}. We use the Minkowski Functionals (MFs, \cite{Minkowski1903})  to measure the non-Gaussianity in the maps, which have long been used as estimators of non-Gaussianity.
 
 According to Hadwiger’s theorem\citep{hadwigerVorlesungenUeberInhalt1957}, for any n-dimensional excursion set defined with a threshold value $\rho$, there exists $n+1$ kinds of MFs that geometrically and topologically describe the morphology of the set. Therfore, in our case, for the 2-dimensional maps, we have 3 kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which corresponds to the area, the length and the connectivity of the excursion set.
 
-By comparing the MFs of the small scales structures from \dten{} with those of Gaussian realizations from extrapolated power law, which is fitted from the power spectra of the maps from \dten{}, in standard $IQU$ domain, we can have a qualitative estimation of non-Gaussianity in \dten{} introduced by going into $iqu$ domain. As mentioned in Section \ref{subsec:methodology}, the generated small scales in the \dten{} model are modulated before adding to the large scales. To study the potential effect of anisotropy on the non-Gaussianity, we also generate Gaussian realizations with modulation so that we can compare the non-Gaussianity directly, without the influence of anisotropy. The two reference sets made of pure Gaussian small scales and modulated Gaussian small scales are built as follows:
+By comparing the MFs of the small scales structures from \deleven{} with those of Gaussian realizations from extrapolated power law, which is fitted from the power spectra of the maps from \deleven{}, in standard $IQU$ domain, we can have a qualitative estimation of non-Gaussianity in \deleven{} introduced by going into $iqu$ domain. As mentioned in Section \ref{subsec:methodology}, the generated small scales in the \deleven{} model are modulated before adding to the large scales. To study the potential effect of anisotropy on the non-Gaussianity, we also generate Gaussian realizations with modulation so that we can compare the non-Gaussianity directly, without the influence of anisotropy. The two reference sets made of pure Gaussian small scales and modulated Gaussian small scales are built as follows:
 
 \begin{enumerate}
 
-\item We first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the full sky maps output by \dten{}, and extrapolate them up to $\ell_{\rm max}=4096$. 
+\item We first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the full sky maps output by \deleven{}, and extrapolate them up to $\ell_{\rm max}=4096$. 
 \item To obtain only the small scales, we apply a high-pass filter to the fitted power law with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations using \texttt{synfast} routine provided by \texttt{HEALPix}. 
-\item For modulated Gaussian maps, these full-sky small scales are then multiplied with modulation maps to have similar anisotropies with the small scales from \dten{}. While for pure Gaussian maps, we do not apply modulations. 
+\item For modulated Gaussian maps, these full-sky small scales are then multiplied with modulation maps to have similar anisotropies with the small scales from \deleven{}. While for pure Gaussian maps, we do not apply modulations. 
 \item Meanwhile, the small scales with multipoles larger than 200 in the observed data are filtered out and the large scales remain untouched.
 \item At last, the generated Gaussian small scales are added into observed large scales to form the final set of maps. 
 \end{enumerate}
 
-Now we have three sets of maps with different small scales co-added: one from \dten{}, one from pure Gaussian and the last from modulated Gaussian realization in the $IQU$ domain. We then apply a high-pass filter to retain only the small scales of these maps, that we call \texttt{poltens-ss}, \texttt{Gaussian-mod-ss}, and \texttt{Gaussian-ss} respectively. To calculate the MFs we select several patches on the sky and project them onto flat plane. Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are thought to be fully Gaussian and isotropic. 
+Now we have three sets of maps with different small scales co-added: one from \deleven{}, one from pure Gaussian and the last from modulated Gaussian realization in the $IQU$ domain. We then apply a high-pass filter to retain only the small scales of these maps, that we call \texttt{poltens-ss}, \texttt{Gaussian-mod-ss}, and \texttt{Gaussian-ss} respectively. To calculate the MFs we select several patches on the sky and project them onto flat plane. Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are thought to be fully Gaussian and isotropic. 
 
 Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
 
@@ -296,7 +304,7 @@ We can see that when averaging for large sky fraction, the MFs of \texttt{Gaussi
 
 
 \subsubsection{MFs on the flat patch}
-In this section we zoom into a specific region centered at [$-15^{\circ}$ , $45^{\circ} $] with dimension of $20^{\circ}\times20^{\circ}$ to see if, by looking at smaller regions of the sky, we can measure a significance difference in the MFs between \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} sets of maps. Those maps are shown the third and fourth column in Figure~\ref{fig:maps:patch2} respectively, with the Gaussian modulated and \dten{} full resolution maps including both large and small scales shown in the first and second column. Here we consider I, Q and U maps which are shown from upper to lower panel. When zooming into this patch, we can see by eye that \texttt{poltens-ss} have some structures, following those in the full resolution maps, which are not present in the \texttt{Gaussian-mod-ss} maps. Again we calculate the MFs of these small scales to have an understanding of the non-Gaussianities, following \cite{2008JSMTE..12..015M} for the calculation of MFs for a square patch. Before the calculation, we also rescale all the small scales to be in the range [-1, 1].
+In this section we zoom into a specific region centered at [$-15^{\circ}$ , $45^{\circ} $] with dimension of $20^{\circ}\times20^{\circ}$ to see if, by looking at smaller regions of the sky, we can measure a significance difference in the MFs between \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} sets of maps. Those maps are shown the third and fourth column in Figure~\ref{fig:maps:patch2} respectively, with the Gaussian modulated and \deleven{} full resolution maps including both large and small scales shown in the first and second column. Here we consider I, Q and U maps which are shown from upper to lower panel. When zooming into this patch, we can see by eye that \texttt{poltens-ss} have some structures, following those in the full resolution maps, which are not present in the \texttt{Gaussian-mod-ss} maps. Again we calculate the MFs of these small scales to have an understanding of the non-Gaussianities, following \cite{2008JSMTE..12..015M} for the calculation of MFs for a square patch. Before the calculation, we also rescale all the small scales to be in the range [-1, 1].
 
 Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} maps presented in Figure.~\ref{fig:maps:patch2} as blue and orange lines respectively, while MFs for \texttt{Gaussian-ss} are shown in dashed gray lines. 
 Contrary to the results presented in Figure \ref{fig:MF:sphere}, in this case we can detect a departure of the \texttt{poltens-ss} from the \texttt{Gaussian-mod-ss} ones. This points towards the fact that the polarization fraction tensor transformation may induced some level of non-Gaussianity, different from pure modulation effects, which are detectable on small sky regions. We can thus conclude that the level of induced non-Gaussianity differs from one region to the other and it is in general small enough not to impact significantly the statistical properties when averaged on large sky fraction.  
