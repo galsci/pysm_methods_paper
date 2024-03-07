@@ -7,6 +7,7 @@
 \usepackage{url}
 \usepackage{booktabs} 
 \usepackage{algorithm2e}
+\usepackage{array}
 \newcommand{\done}{{\tt d1}}
 \newcommand{\dnine}{{\tt d9}}
 \newcommand{\deleven}{{\tt d11}}
@@ -923,7 +924,62 @@ We have done X. The principal conclusions of this work are as follows:
 \end{enumerate}
 
 Short forward-looking paragraph.
+\newpage
+\begin{appendix}
+\begin{table}
+\caption{Summary of the PySM 3.4 models - Dust}
+\begin{center}
+\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
 
+  \toprule
+Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
+\midrule
+Dust & d9 & IQU Planck 2018 GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
+\hline
+Dust & d10 & same as above & same as above & Planck GNILC spectral index and dust temperature & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & same as above & 8192 \\
+\hline
+
+Dust & d11 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates, spectral index and dust temperature & same as above & 8192 \\
+\hline
+
+Dust & d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps. & Random fluctuations based on extrapolated spectrum in I. Power laws in ell in polarization, with alpha\_s=-2.41 for E and -2.52 for B. & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Summary of the PySM 3.4 models - Synchrotron and Carbon Monoxide}
+\begin{center}
+\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
+
+  \toprule
+Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
+\midrule
+Synch & s4 & I Haslam at 408 MHz (Remazeilles2014), QU WMAP 23 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & uniform spectral index &  & Deterministic & Power law & 8192 \\
+\hline
+
+Synch & s5 & same as above & same as above & Haslam/WMAP spectral index corrected with S-PASS & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & Power law & 8192 \\
+\hline
+
+Synch & s6 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates and spectral index & Power law & 8192 \\
+\hline
+
+Synch & s7 & same as above & same as above & same + power law curvature term based on ARCADE & same + fluctuations in the curvature term & Deterministic & Curved power law & 8192 \\
+\hline
+
+CO & co1 & Planck 2013 MILCA smoothed to 1 deg &  &  &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
+\hline
+
+CO & co2 & same as above &  &  &  & Deterministic & same as above + polarized .1\% & 2048 \\
+\hline
+
+CO & co3 & same as above & Simulated High Galactic clouds &  &  & Deterministic & same as above & 2048 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+\end{appendix}
 \begin{acknowledgments}
 
 This work was supported by the National Science Foundation under grant No. AST-2106607 (PI S.E.C.). This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration.
