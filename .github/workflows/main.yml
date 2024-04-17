@@ -6,16 +6,20 @@ on:
   workflow_dispatch:
       
 jobs:
-  build:
+  sync-overleaf:
+    name: Synchronize with Overleaf
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
-          fetch-depth: 0
-    - run: |
-        git remote add overleaf https://git:${OVERLEAF_COOKIE}@git.overleaf.com/${OVERLEAF_PROJECT_ID}
-        git pull --rebase overleaf master && git push --force origin main
-        #git push overleaf master
+          fetch-depth: 0 # need to fetch history to rebase
+    - name: Configure Overleaf remote
+      run: git remote add overleaf https://git:${OVERLEAF_COOKIE}@git.overleaf.com/${OVERLEAF_PROJECT_ID}
       env:
         OVERLEAF_PROJECT_ID: ${{ secrets.OVERLEAF_PROJECT_ID }}
         OVERLEAF_COOKIE: ${{ secrets.OVERLEAF_COOKIE }}
+    - name: Pull changes from Overleaf
+      run: git pull --rebase overleaf master 
+    - name: Push changes to Github and Overleaf (only from main)
+      run: git push --force origin main && git push overleaf master
+      if: ${{ github.ref == 'refs/heads/main' }}
