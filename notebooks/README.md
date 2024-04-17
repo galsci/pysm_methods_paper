@@ -1,6 +1,7 @@
 # Notebooks to generate figures
 
 This folder should be used to store notebooks used to generate figures in the paper.
+Please open a Pull Request on the Github repository at https://github.com/galsci/pysm_methods_paper to add Notebooks to the paper.
 
 Some recommendations:
 
