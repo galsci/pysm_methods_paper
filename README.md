@@ -1,4 +1,4 @@
-# PySM Method paper
+# PySM Methods paper
 
 The paper is automatically synchronized from Overleaf to the Github repository [`galsci/pysm_methods_paper`](https://github.com/galsci/pysm_methods_paper/) hourly.
 
