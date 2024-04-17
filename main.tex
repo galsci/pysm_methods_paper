@@ -36,10 +36,7 @@ One of the principal challenges for current and future cosmic microwave backgrou
 
 Foreground emission models are needed to ensure that cosmological analyses are robust. Galactic emission is constrained by current data across the full sky over a range of angular scales and frequencies. However, it is not known perfectly, and a primary role of modeling is to provide a suite of possible extrapolations to unmeasured scales and frequencies that reflect the current level of uncertainties in the spatial distribution and frequency dependence of each contributing emission mechanism. At the same time, all simulations should accord with observational constraints as closely as possible.
 
-To this end, tools have been developed to simulate full-sky, multi-frequency realizations of Galactic emission drawing both on data-driven constraints and theoretical models. The Planck Sky Model \citep[PSM;][]{delabrouille2012} was originally put together to develop data analysis tools for the Planck mission, using pre-existing data sets. It evolved throughout the Planck mission timeline to include Planck observations and adjust to Planck data analysis requirements, and has been widely used in various data challenges and/or for planning future CMB experiments.
-\citep[e.g.,][]{2022JCAP...10..063G,2022A&A...664A..18F}
-%\textcolor{red}{[JD: Should we cite a few examples here, or leave it at that?]}. 
-Building on the PSM, the Python Sky Model \citep[PySM;][]{Thorne:2017} provides a Python interface to expanded classes of foreground models. PySM has been widely used for both forecasting \citep[e.g.,][]{Abazajian:2022,Hensley:2022,CCAT-PrimeCollaboration:2023,Wolz:2023} and data analysis \citep{Vacher:2023}.
+To this end, tools have been developed to simulate full-sky, multi-frequency realizations of Galactic emission drawing both on data-driven constraints and theoretical models. The Planck Sky Model \citep[PSM;][]{delabrouille2012} was originally put together to develop data analysis tools for the Planck mission, using pre-existing data sets. It evolved throughout the Planck mission timeline to include Planck observations and adjust to Planck data analysis requirements, and has been widely used in various data challenges and/or for planning future CMB experiments \citep[e.g.,][]{2022JCAP...10..063G,2022A&A...664A..18F}. Building on the PSM, the Python Sky Model \citep[PySM;][]{Thorne:2017} provides a Python interface to expanded classes of foreground models. PySM has been widely used for both forecasting \citep[e.g.,][]{Abazajian:2022,Hensley:2022,CCAT-PrimeCollaboration:2023,Wolz:2023} and data analysis \citep{Vacher:2023}.
 
 In this work, we develop techniques to overcome a number of limitations of previous generations of models. We first introduce the polarization fraction tensor formalism as a physically-motivated way to model Galactic polarization at small angular scales in a relatively spatially isotropic way. We demonstrate the use of this framework in generating ensembles of sky realizations up to arbitrarily small angular scales while retaining the well-measured large-scale features of the Galaxy. In addition to algorithmic development, we update our models to accord with the latest analyses of microwave emission and polarization data. Finally, we implement a number of additional models of dust and CO emission from the literature. All models are validated and assessed on their relative strengths both in capturing various physical effects and in according with available data-driven constraints.
 
@@ -131,7 +128,65 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 
 \subsection{Summary of New Models}
 
-[Table summarizing all models] % BH: We need this, but not sure yet where it goes
+Reference Table~\ref{table:summarydust} for Dust and Table~\ref{table:summarysynchroco} for Synchrotron and CO.
+% BH: We need this, but not sure yet where it goes
+
+\begin{table*}[t]
+\caption{Summary of the PySM 3.4 models - Dust}
+\begin{center}
+\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
+
+  \toprule
+Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
+\midrule
+Dust & d9 & I: Planck 2015 (PR2) GNILC at 353 GHz. QU: Planck 2018 (PR3) GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
+\hline
+Dust & d10 & same as above & same as above & Planck GNILC spectral index and dust temperature & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & same as above & 8192 \\
+\hline
+
+Dust & d11 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates, spectral index and dust temperature & same as above & 8192 \\
+\hline
+
+Dust & d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps. & Random fluctuations based on extrapolated spectrum in I. Power laws in ell in polarization, with alpha\_s=-2.41 for E and -2.52 for B. & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{table:summarydust}
+\end{table*}
+
+\begin{table*}[t]
+\caption{Summary of the PySM 3.4 models - Synchrotron and Carbon Monoxide}
+\begin{center}
+\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
+
+  \toprule
+Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
+\midrule
+Synch & s4 & I Haslam at 408 MHz (Remazeilles2014), QU WMAP 23 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & uniform spectral index &  & Deterministic & Power law & 8192 \\
+\hline
+
+Synch & s5 & same as above & same as above & Haslam/WMAP spectral index corrected with S-PASS & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & Power law & 8192 \\
+\hline
+
+Synch & s6 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates and spectral index & Power law & 8192 \\
+\hline
+
+Synch & s7 & same as above & same as above & same + power law curvature term based on ARCADE & same + fluctuations in the curvature term & Deterministic & Curved power law & 8192 \\
+\hline
+
+CO & co1 & Planck 2013 MILCA smoothed to 1 deg &  &  &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
+\hline
+
+CO & co2 & same as above &  &  &  & Deterministic & same as above + polarized .1\% & 2048 \\
+\hline
+
+CO & co3 & same as above & Simulated High Galactic clouds &  &  & Deterministic & same as above & 2048 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{table:summarysynchroco}
+\end{table*}
+
 
 \section{Dust and Synchrotron Models: Stochastic Emission at Small Angular Scales} \label{sec:small_scales}
 The methods presented here aim to preserve the well-measured large-scale information in our various data-driven templates, filter out the noisy small-scale emission in those templates, and replace those small scales with a stochastic realization that has a reasonable correspondence with the large scale emission. Specifically, the synthetic small-scale structure should have a power spectrum that connects smoothly to the power spectrum of the real data at large scales and should inherit some of the information from the large-scale data. Our approach is to generate stochastic realizations of small-scale emission that we then modulate by the large-scale signal.
@@ -266,14 +321,15 @@ We do not intend for the above procedure to be useful for the inner Galactic pla
 \subsubsection{Dust Amplitude}\label{sec:dustamplitude}
 The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous PySM models, e.g., \texttt{d0} and \texttt{d1}, employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for detailed discussion). To address this issue, we instead use dust templates from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{Remazeilles:2011}. 
 
-In total intensity we employ the Planck GNILC 2015 component separated map at $353$\,GHz \citep{planck2016-XLVIII}\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky regions, which complicates its use in our analysis. Therefore, we reprocess the map as follows to a spatially uniform resolution of 21.8\arcmin. To do so, we first note that the map was synthesized from ten needlet (wavelet) maps of different, but spatially-uniform, resolution \citep[][Figure~A.2]{planck2016-l04}. We produce a map of uniform resolution by retaining only the first six needlet maps, which probe the dust intensity from the largest scales down to $21.8\arcmin$. This yields an $N_{\rm side} = 2048$ that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8$\arcmin. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l04}.
+In total intensity we employ the Planck GNILC 2015 component separated map at $353$\,GHz \citep{planck2016-XLVIII}\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky regions, which complicates its use in our analysis. Therefore, we reprocess the map as follows to a spatially uniform resolution of 21.8\arcmin. To do so, we first note that the map was synthesized from ten needlet (wavelet) maps of different, but spatially-uniform, resolution \citep[][Figure~A.2]{planck2016-l04}. We produce a map of uniform resolution by retaining only the first six needlet maps, which probe the dust intensity from the largest scales down to $21.8\arcmin$. This yields an $N_{\rm side} = 2048$ that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8$\arcmin. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map %\citep[][Section~2.2]{planck2016-l04}.
+\citep[][Section~2.2]{planck2016-l11B}.
 
 For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the third Planck release \citep{planck2016-l04,planck2016-l11B}. Unlike for the $I$ maps, we make use of the variable resolution maps to retain as much information as possible in the maps. The variable resolution $Q$ and $U$ maps have a resolution that varies much more smoothly across the sky than in the $I$ map [cite paper], making it more amenable to our methodology for adding small-scale fluctuations. The resolution of these maps ranges from $21.8\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
 
 To produce dust emission templates at a monochromatic frequency of 353\,GHz, we divide each of the $I$, $Q$, and $U$ maps by a factor of 1.098 to correct for the Planck bandpass \citep[][Table~2]{planck2016-l11A}.
 
 \subsubsection{Synchrotron Amplitude}
-Deriving a full-sky template for synchrotron emission in total intensity is challenging both for the paucity of low frequency surveys with full sky coverage and the difficulty in disentangling synchrotron emission from free-free emission and AME at frequencies above $\sim$10\,GHz. We follow \citet{Thorne:2017} in basing our template on the Haslam 408\,MHz survey with reprocessing \citep{Remazeilles:2015}. We rescale the 408\,MHz map of \citep{Remazeilles:2015} to 23\,GHz assuming a sky-constant power law $I_\nu \propto \nu^{-3.1}$. Finally, we smooth the resulting map to a resolution of $2^\circ$.
+Deriving a full-sky template for synchrotron emission in total intensity is challenging both for the paucity of low frequency surveys with full sky coverage and the difficulty in disentangling synchrotron emission from free-free emission and AME at frequencies above $\sim$10\,GHz. We follow \citet{Thorne:2017} in basing our template on the Haslam 408\,MHz survey with reprocessing \citep{Remazeilles:2015}. We rescale the 408\,MHz map of \cite{Remazeilles:2015} to 23\,GHz assuming a sky-constant power law $I_\nu \propto \nu^{-3.1}$. Finally, we smooth the resulting map to a resolution of $2^\circ$.
 
 Constructing a synchrotron template in polarization is somewhat easier than total intensity because both free-free emission and AME have very low levels of polarization. Thus, we employ the WMAP K-band (23\,GHz) $Q$ and $U$ maps directly as our templates. As with the $I$ map, we smooth the $Q$ and $U$ templates to a resolution of $2^\circ$.
 
@@ -461,27 +517,42 @@ For the polarized intensity, close to the Galactic plane (Figure \ref{fig:353_po
 
 \subsubsection{Dust Emission}
 
-We present power spectra computed on large-area Galactic masks. We define a set of Galactic masks starting from the unapodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo0\_2048\_R2.00.fits} distributed \url{https://pla.esac.esa.int}} by the Planck collaboration via the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available for analysis. We apodize each mask with a cosine taper of characteristic length $2^\circ$ resulting in nine masks: \texttt{GAL015}, \texttt{GAL034}, \texttt{GAL052}, \texttt{GAL062}, \texttt{GAL072}, \texttt{GAL082}, \texttt{GAL092}, \texttt{GAL096}, where the number indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$.  
+To compare the performance of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data over a broad range of scales, we present their power spectra computed on both large-area and small-area masks. We first apply the defined masks to the mean-subtracted PySM dust models and NPIPE ``A''/``B'' detector-split maps at delta 353~GHz. We then use \texttt{anafast} to compute the cross-spectra of the masked NPIPE data split maps to minimize noise correlation, bin the spectra with a dynamic $\ell$ interval optimized for map noise, and scale the results into the full-sky $\mathcal{D}_\ell$, accounting properly for the $f_{\mathrm{sky}}$ of the mask. The error bars associated to these cross-spectra are given by the method stated in \cite{Tristram:2005}. The same method is applied to calculate the auto-spectra of the masked model maps. 
 
-\begin{figure*}
+%We define a set of Galactic masks starting from the unapodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo0\_2048\_R2.00.fits} distributed \url{https://pla.esac.esa.int}} by the Planck collaboration via the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available for analysis. We apodize each mask with a cosine taper of characteristic length $2^\circ$ resulting in nine masks: \texttt{GAL015}, \texttt{GAL034}, \texttt{GAL052}, \texttt{GAL062}, \texttt{GAL072}, \texttt{GAL082}, \texttt{GAL092}, \texttt{GAL096}, where the number indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$.  
+
+For our large-area comparison, we use a set of $2^\circ$-apodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits} distributed \url{https://pla.esac.esa.int}} by the Planck collaboration via the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available, in which we take four representative ones for our analysis. It results in masks \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080}, where the number indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$. In Figure~\ref{fig:largefield_power} we show the $TT$, $EE$, and $BB$ power spectra of the \dnine{} model, and of the GNILC maps from which the \dnine{} model was derived, computed on four of the Galactic masks described above. ... 
+
+%We present power spectra computed on large-area Galactic masks. We define a set of Galactic masks starting from the unapodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo0\_2048\_R2.00.fits} distributed \url{https://pla.esac.esa.int}} by the Planck collaboration via the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available for analysis. We apodize each mask with a cosine taper of characteristic length $2^\circ$ resulting in nine masks: \texttt{GAL015}, \texttt{GAL034}, \texttt{GAL052}, \texttt{GAL062}, \texttt{GAL072}, \texttt{GAL082}, \texttt{GAL092}, \texttt{GAL096}, where the number indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$.  
+
+%In Figure~\ref{fig:spectra_by_field} we show the $TT$, $EE$, and $BB$ power spectra of the \dnine{} model, and of the GNILC maps from which the \dnine{} model was derived, computed on four of the Galactic masks described above.
+
+\begin{figure}
     \centering
-    \includegraphics[width=2.\columnwidth]{figures/dust_valspectra.pdf}
-    \caption{This figure compares the power spectra of the \dnine{} model (dark circles) and the input GNILC map (light circles) when computed on the \texttt{GAL090}, \texttt{GAL070}, \texttt{GAL040}, and \texttt{GAL020} Galactic masks.}
-    \label{fig:spectra_by_field}
-\end{figure*}
+    \includegraphics[width=\columnwidth]{figures/largefield_power_all_TEB_pub.pdf}
+    \caption{This figure compares the power spectra of the \dnine{} model (dark circles) and the input GNILC map (light circles) when computed on the \texttt{GAL090}, \texttt{GAL070}, \texttt{GAL040}, and \texttt{GAL020} Galactic masks. ... Note that we do not show the \texttt{d10} results as this model is identical to \texttt{d9} at 353~GHz.}
+    \label{fig:largefield_power}
+\end{figure}
+
+%\begin{figure*}
+%    \centering
+%    \includegraphics[width=2.\columnwidth]{figures/dust_valspectra.pdf}
+%    \caption{This figure compares the power spectra of the \dnine{} model (dark circles) and the input GNILC map (light circles) when computed on the \texttt{GAL090}, \texttt{GAL070}, \texttt{GAL040}, and \texttt{GAL020} Galactic masks.}
+%    \label{fig:spectra_by_field}
+%\end{figure*}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/smallfield_power.pdf}
-    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE half-ring split maps and dust model maps \texttt{d9} and \texttt{d12}. The model maps are integrated with a 353~GHz delta bandpass and the NPIPE data maps are color-corrected (i.e. scaled by a factor of 0.92) to the same single frequency. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A^{BB} \big( l/80 \big)^{\alpha^{BB}+2}$ where $\alpha^{BB} = -2.42$) to the NPIPE data points, which is largely driven by the first two band powers. Note that we only show the \texttt{d9} results as this model is identical to \texttt{d10} at 353~GHz.}
+    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE half-ring split maps and dust model maps \texttt{d9} and \texttt{d12}. The model maps are integrated with a 353~GHz delta bandpass and the NPIPE data maps are color-corrected (i.e. scaled by a factor of 0.92) to the same single frequency. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A^{BB} \big( l/80 \big)^{\alpha^{BB}+2}$ where $\alpha^{BB} = -2.42$) to the NPIPE data points, which is largely driven by the first two band powers.}
     \label{fig:smallfield_power}
 \end{figure}
 
-In Figure~\ref{fig:spectra_by_field} we show the $TT$, $EE$, and $BB$ power spectra of the \dnine{} model, and of the GNILC maps from which the \dnine{} model was derived, computed on four of the Galactic masks described above.
+In our small-area case, we mainly follow the analysis method described in \cite{planck2014-XXX} to define the masks for spectra computation. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian, resulting in $f_{\rm sky} \approx 0.008$. We then compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$. The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. 
 
-To compare the small-scale performances of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data, we mainly follow the analysis method described in \cite{planck2014-XXX} to examine the model behaviors. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian (resulting in $f_{\rm sky} \approx 0.008$), and apply such a mask to the mean-subtracted dust model and NPIPE half-ring split maps at 353~GHz. We then use \texttt{anafast} to compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$, accounting properly for the $f_{\mathrm{sky}}$ of the circular mask. For the masked NPIPE data maps, we instead compute cross-spectrum from the two split maps to minimize the noise correlation. The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. 
+%To compare the small-scale performances of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data, we mainly follow the analysis method described in \cite{planck2014-XXX} to examine the model behaviors. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian (resulting in $f_{\rm sky} \approx 0.008$), and apply such a mask to the mean-subtracted dust model and NPIPE half-ring split maps at 353~GHz. We then use \texttt{anafast} to compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$, accounting properly for the $f_{\mathrm{sky}}$ of the circular mask. For the masked NPIPE data maps, we instead compute cross-spectrum from the two split maps to minimize the noise correlation. The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. 
 
-We would like to explore whether the PySM models can reproduce the dust $BB$ power spectrum's amplitude and steepness over $\ell$ in reality, especially in those high Galactic latitude small fields. We therefore compute the low-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $\ell = 55, 90$) and the high-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $\ell = 135, 190, 255, 330$) of each small field for the model and NPIPE maps, and we present the results in scatter plots in Fig.~\ref{fig:smallfield_power_all}. It turns out that the amplitude of the \texttt{d12} model is in general smaller than the preference of NPIPE data, as a large fraction of the d12 data points cluster around the lower-left corner of the plot. The wider span of the \texttt{d12} data points along the vertical direction also implies the model spectrum steepness varies more over the sky. In contrast, the \texttt{d9}/\texttt{d10} data points are fairly compatible with the NPIPE results, although they predict slightly steeper power spectra. If we define the ratio of the low-$\ell$ mean value to the high-$\ell$ mean value as a proxy for describing the spatial power change across the modulation scale, while the perfect fixed-index power law $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ yields a value of $\approx 1.60$, the NPIPE maps give $1.65 \pm 0.68$ and the \texttt{d9}/\texttt{d10} (\texttt{d12}) model map gives $2.37 \pm 0.77$ ($2.24 \pm 0.87$) over sky patches with $|b| > 30^\circ$.
+As one of the major science missions of CMB experiments is to acquire high precision primordial B-mode polarization measurements from a small sky patch, we would like to explore whether the PySM models can reproduce the dust $BB$ power spectrum's amplitude and steepness over $\ell$ in reality, especially in those high Galactic latitude small fields which could be part of future observation fields. We therefore compute the low-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $\ell = 55, 90$) and the high-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $\ell = 135, 190, 255, 330$) of each small field for the model and NPIPE maps, and we present the results in scatter plots in Fig.~\ref{fig:smallfield_power_all}. It turns out that the amplitude of the \texttt{d12} model is in general smaller than the preference of NPIPE data, as a large fraction of the d12 data points cluster around the lower-left corner of the plot. The wider span of the \texttt{d12} data points along the vertical direction also implies the model spectrum steepness varies more over the sky. In contrast, the \texttt{d9}/\texttt{d10} data points are fairly compatible with the NPIPE results, although they predict slightly steeper power spectra. If we define the ratio of the low-$\ell$ mean value to the high-$\ell$ mean value as a proxy for describing the spatial power change across the modulation scale, while the perfect fixed-index power law $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ yields a value of $\approx 1.60$, the NPIPE maps give $1.86 \pm 0.93$ and the \texttt{d9}/\texttt{d10} (\texttt{d12}) model map gives $2.37 \pm 0.77$ ($2.24 \pm 0.87$) over sky patches with $|b| > 30^\circ$.
 
 \begin{figure}
     \centering
@@ -498,15 +569,15 @@ We would like to explore whether the PySM models can reproduce the dust $BB$ pow
     \caption{This figure compares the power spectra of the \texttt{s4} model (dark circles) and the input HASLAM/WMAP K-band  map (light circles) when computed on the \texttt{GAL090}, \texttt{GAL070}, \texttt{GAL040}, and \texttt{GAL020} Galactic masks.}
     \label{fig:spectra_by_field}
 \end{figure*}
-In this section we detail the validation of the new synchrotron models by comparing them with BeyondPlanck synchrotron map for temperature, and LFI 30\,GHz observations for polarization. We compare the model with data at both  map and power spectrum  levels. For validating the PySM synchrotron temperature models, we use the synchrotron map from the BeyondPlanck re-analysis of Planck LFI data \citep{Andersen:2023}. BeyondPlanck released a synchrotron map\footnote{https://beyondplanck.science/products/files\_v1} at a reference frequency of 30\,GHz and at $2^\circ$ angular resolution. We produce single frequency temperature maps for the different synchrotron models at 30\,GHz and smoothed with a Gaussian beam with FWHM = $2^\circ$.
+In this section we detail the validation of the new synchrotron models by comparing the power spectra with observations. For validating the PySM synchrotron temperature models, we use the synchrotron map from the BeyondPlanck re-analysis of Planck LFI data \citep{Andersen:2023}. BeyondPlanck released a synchrotron map\footnote{https://beyondplanck.science/products/files\_v1} at a reference frequency of 30\,GHz and at $2^\circ$ angular resolution. We produce single frequency temperature maps for the different synchrotron models at 30\,GHz and smoothed with a Gaussian beam with FWHM = $2^\circ$.
 
 \giuse{In case of the synchrotron polarization, we  compare the models with band integrated observations. So, we compute bandpass integrated maps  with PySM~3 routines and for  the different synchrotron models. For the sake of fair comparison with Planck data, we adopt the average LFI 30\,GHz RIMO transmission \citep{planck2014-a03}.} The bandpass integrated maps are further smoothed with Gaussian beams of 33.1\arcmin beams to produce model maps at native resolutions of the LFI 30\,GHz data. Finally, the observed power spectra are computed by taking the cross-spectrum between independent detector splits, e.g. A and B, of the NPIPE \footnote{Publicly available through NERSC at \\ /global/cfs/cdirs/cmb/data/planck2020} (PR4) 30\,GHz maps \citep{planck2020-LVII}. 
 
 \giuse{We estimated the synchrotron power spectra considering three choices of masks:  full sky  (100\%), 70\% and 50\% sky fractions. To produce the synchrotron  masks, we use the LFI 30\,GHz map of polarized intensity, smoothed with a Gaussian beam of $2^\circ$ FWHM, and masking all the pixels larger than  17 and 10 $\mu{\rm K}_{\rm CMB}$, as shown in Figure \ref{fig:sync_masks}.  Masks are tapered  with a $2^\circ$ cosine apodization.  For the polarization analysis, polarized point sources are also masked using the Planck-LFI DR2 mask\footnote{\bf @shamik could you add the filename reference?}. }
 \begin{figure}
     \centering
-    \includegraphics[width=0.46\textwidth]{figures/sync_galactic_mask.png}
-    \caption{Figure showing the two different Galactic masks used for the synchrotron validation. The yellow region is included by the 50\% sky mask, while the 70\% mask additionally includes the pink region.}
+    \includegraphics[width=0.46\textwidth]{figures/SYNC_mask_stack.png}
+    \caption{Figure showing the four different Galactic masks used for the synchrotron validation. The red region is the 20 \% mask; the orange region shows the additional sky coverage for 40 \% mask; the green region shows the added coverage for 60 \%; the light blue region is the added sky patch of 80 \% mask. The deep blue region is excluded in all masks. }
     \label{fig:sync_masks}
 \end{figure}
 
@@ -514,19 +585,19 @@ We use HEALPix \footnote{https://healpix.sourceforge.io} \texttt{anafast} functi
 For this validation test, 
 %do not use a pseudo-$C_\ell$ estimator as the synchrotron signal is not statistically isotropic, and we correct for the partial sky by naively dividing by an $f_{\rm sky}$ factor.
 
-%\begin{figure}
-   % \centering
-   % \includegraphics[width=0.48\textwidth]{figures/Dlcomp_PySM3-4b7_s5_vs_BPnLFI30_BPI.png}
-    %\caption{Figure showing comparison of power spectra of the PySM s5 model with observation on different sky fractions. The spectra obtained for models s4, s6 and s7 are similar so we don't show them here. The $TT$ power spectrum comparison is done with synchrotron maps from BeyondPlanck release 1 \citep{Anderson2023}. The $EE$ and $BB$ power spectra is compared with NPIPE LFI 30\,GHz map \citep{planck2020-LVII}. The LFI 30\,GHz spectra are computed as a cross spectra between the NPIPE splits A and B.}
-   % \label{fig:Dl_sync_galmask}
-%\end{figure}
+\begin{figure}
+   \centering
+   \includegraphics[width=0.48\textwidth]{figures/Dlcomp_PySM3-4_s5_vs_BPPR_SYNC.png}
+    \caption{Figure showing comparison of power spectra of the PySM s5 model with observation on different sky fractions. The spectra obtained for models s4, s6 and s7 are similar so we don't show them here. The $TT$ power spectrum comparison is done with synchrotron intensity map from BeyondPlanck release 1 \citep{Anderson2023} at 30 GHz with $2^\circ$ beam. The $EE$ and $BB$ power spectra is compared with Planck Revisited \citep{Delabrouille2024} polarized synchrotron map at 30\,GHz with $1^\circ$ beam. The EE and BB spectra for observations are debiased for noise, computed from 200 simulations.}
+   \label{fig:Dl_sync_galmask}
+\end{figure}
 
 The $TT$, $EE$ and $BB$ power spectra comparisons, for model \texttt{s5}, are shown in Figure~\ref{fig:Dl_sync_galmask}. The comparison for models \texttt{s4}, \texttt{s6} and \texttt{s7} have nearly identical results. The $TT$ power spectra for masked skies show excellent agreement with the BeyondPlanck synchrotron temperature power spectra. However, there is poor agreement for the full sky power spectra. On the full sky most of the spectra is dominated by what happens in the Galactic plane, which for observational data is contaminated by free-free and AME. Even with the BeyondPlanck component separation, the synchrotron power in the brightest sky regions is likely to have some residual contamination and associated uncertainty. The new PySM synchrotron models are difficult to assess in the regions of brightest galactic synchrotron emission and we caution users against using the synchrotron models in the brightest parts of the galaxy. However, going away from the Galactic plane, we find excellent agreement with observations at power spectrum level.
 % So, it is reasonable to argue that for synchrotron temperature there is excellent agreement for all but the brightest parts of the sky, where the comparison is harder to make at 30\,GHz. 
 For polarization we find reasonable agreement at $\ell \lesssim 100$. For $\ell > 100$ the PySM synchrotron models typically have less power than the data. \giuse{ However, such a divergence is somewhat expected as we are considering multipoles far from the injection one ($\ell\sim36$).  In fact the features observed in the LFI 30 GHz spectra are not found in the pysm spectra as they are by construction generated to have a power law shape.     
 }
 
-\giuse{Morever, an important caveat of the current synchrotron templates is   that despite the point source masking, we find and excess  due to Galactic point sources at low   latitudes around the Galactic center. We thus remark here that the \texttt{s4}, \texttt{s5},\texttt{s6} and \texttt{s7} models  are reliable at $\ell \lesssim 3000 $ and outside the Galactic plane. We devote to a future release the   treatment of small scale structure in bright regions. }
+\giuse{Moreover, an important caveat of the current synchrotron templates is   that despite the point source masking, we find and excess  due to Galactic point sources at low   latitudes around the Galactic center. We thus remark here that the \texttt{s4}, \texttt{s5},\texttt{s6} and \texttt{s7} models  are reliable at $\ell \lesssim 3000 $ and outside the Galactic plane. We devote to a future release the   treatment of small scale structure in bright regions. }
 
 
 \subsubsection{BICEP-Keck Patch}
@@ -924,62 +995,7 @@ We have done X. The principal conclusions of this work are as follows:
 \end{enumerate}
 
 Short forward-looking paragraph.
-\newpage
-\begin{appendix}
-\begin{table}
-\caption{Summary of the PySM 3.4 models - Dust}
-\begin{center}
-\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
 
-  \toprule
-Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
-\midrule
-Dust & d9 & IQU Planck 2018 GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
-\hline
-Dust & d10 & same as above & same as above & Planck GNILC spectral index and dust temperature & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & same as above & 8192 \\
-\hline
-
-Dust & d11 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates, spectral index and dust temperature & same as above & 8192 \\
-\hline
-
-Dust & d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps. & Random fluctuations based on extrapolated spectrum in I. Power laws in ell in polarization, with alpha\_s=-2.41 for E and -2.52 for B. & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}
-
-\begin{table}
-\caption{Summary of the PySM 3.4 models - Synchrotron and Carbon Monoxide}
-\begin{center}
-\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
-
-  \toprule
-Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
-\midrule
-Synch & s4 & I Haslam at 408 MHz (Remazeilles2014), QU WMAP 23 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & uniform spectral index &  & Deterministic & Power law & 8192 \\
-\hline
-
-Synch & s5 & same as above & same as above & Haslam/WMAP spectral index corrected with S-PASS & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & Power law & 8192 \\
-\hline
-
-Synch & s6 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates and spectral index & Power law & 8192 \\
-\hline
-
-Synch & s7 & same as above & same as above & same + power law curvature term based on ARCADE & same + fluctuations in the curvature term & Deterministic & Curved power law & 8192 \\
-\hline
-
-CO & co1 & Planck 2013 MILCA smoothed to 1 deg &  &  &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
-\hline
-
-CO & co2 & same as above &  &  &  & Deterministic & same as above + polarized .1\% & 2048 \\
-\hline
-
-CO & co3 & same as above & Simulated High Galactic clouds &  &  & Deterministic & same as above & 2048 \\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}
-\end{appendix}
 \begin{acknowledgments}
 
 This work was supported by the National Science Foundation under grant No. AST-2106607 (PI S.E.C.). This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration.
