@@ -1,8 +1,7 @@
 # PySM Method paper
 
-All files should only be edited via Overleaf.
+The paper is automatically synchronized from Overleaf to the Github repository [`galsci/pysm_methods_paper`](https://github.com/galsci/pysm_methods_paper/) hourly.
 
-We have an automatic hourly backup to the [`galsci/pysm_methods_paper`](https://github.com/galsci/pysm_methods_paper/) on Github.
-This is only for backup or for browsing Jupyter Notebooks in a better interface.
+It is recommended to work on the paper text only via Overleaf, to avoid the problem of having multiple people working on the same piece of text and then having to manually handle conflicts.
 
-Still, *if you know what you are doing*, you can push to Overleaf from `git` using [the Overleaf git integration](https://www.overleaf.com/learn/how-to/Git_integration).
+Working instead on Jupyter Notebooks and figures is better handled by opening a Pull Request on Github, so we can have a round of reviews before having code merged into the repositories and we can have atomic commits, instead of the bundled commits created by Overleaf.
