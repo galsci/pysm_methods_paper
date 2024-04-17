@@ -1,0 +1,22 @@
+name: Overleaf Sync with Git
+on:
+  schedule:
+    - cron: "0 * * * *"
+  push:
+  workflow_dispatch:
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        git remote add overleaf https://git:${OVERLEAF_COOKIE}@git.overleaf.com/${OVERLEAF_PROJECT_ID}
+        git fetch overleaf
+        git reset --hard overleaf/master
+        git config user.name "Overleaf Sync Bot"
+        git config user.email "actions@github.com"
+        git push --force
+      env:
+        OVERLEAF_PROJECT_ID: ${{ secrets.OVERLEAF_PROJECT_ID }}
+        OVERLEAF_COOKIE: ${{ secrets.OVERLEAF_COOKIE }}
