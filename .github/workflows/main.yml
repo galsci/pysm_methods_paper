@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+          fetch-depth: 0
     - run: |
         git remote add overleaf https://git:${OVERLEAF_COOKIE}@git.overleaf.com/${OVERLEAF_PROJECT_ID}
         git pull --rebase overleaf master && git push --force origin main
