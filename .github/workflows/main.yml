@@ -19,11 +19,7 @@ jobs:
         OVERLEAF_PROJECT_ID: ${{ secrets.OVERLEAF_PROJECT_ID }}
         OVERLEAF_COOKIE: ${{ secrets.OVERLEAF_COOKIE }}
     - name: Pull changes from Overleaf
-      uses: nick-fields/retry@v3
-      with:
-        timeout_minutes: 10
-        max_attempts: 3
-        command: git pull --rebase overleaf master
+      run: git pull --rebase overleaf master 
     - name: Push changes to Github and Overleaf (only from main)
       run: git push --force origin main && git push overleaf HEAD:master
       if: ${{ github.ref == 'refs/heads/main' }}
