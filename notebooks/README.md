@@ -6,7 +6,7 @@ Please open a Pull Request on the Github repository at https://github.com/galsci
 Some recommendations:
 
 * Import all packages at the top of the notebook to highlight all dependencies together
-* Store maps produced for the paper inside the folder `/global/cfs/cdirs/cmb/www/pysm-methods-paper`, please use descriptive filenames, these files will be available publicly at <https://portal.nersc.gov/project/cmb/pysm-methods-paper/>, fix permissions inside the folder you created:
+* Store maps produced for the paper inside a dedicated subfolder of `/global/cfs/cdirs/cmb/www/pysm-methods-paper`, please use descriptive filenames, these files will be available publicly at <https://portal.nersc.gov/project/cmb/pysm-methods-paper/>, fix permissions inside the folder you created:
 
     ```bash
     chgrp -R mp107d .
