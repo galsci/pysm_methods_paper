@@ -131,13 +131,14 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 Reference Table~\ref{table:summarydust} for Dust and Table~\ref{table:summarysynchroco} for Synchrotron and CO.
 % BH: We need this, but not sure yet where it goes
 
-\begin{table*}[t]
+\begin{deluxetable*}{ccccccccc}
+%\begin{table*}[t]
 \caption{Summary of the PySM 3.4 models - Dust}
 \begin{center}
 \begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
 
   \toprule
-Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
+Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Max Nside \\
 \midrule
 Dust & d9 & I: Planck 2015 (PR2) GNILC at 353 GHz. QU: Planck 2018 (PR3) GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
 \hline
@@ -152,7 +153,8 @@ Dust & d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarizati
 \end{tabular}
 \end{center}
 \label{table:summarydust}
-\end{table*}
+%\end{table*}
+\end{deluxetable*}
 
 \begin{table*}[t]
 \caption{Summary of the PySM 3.4 models - Synchrotron and Carbon Monoxide}
