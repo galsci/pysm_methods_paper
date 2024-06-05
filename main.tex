@@ -134,24 +134,25 @@ Reference Table~\ref{table:summarydust} for Dust and Table~\ref{table:summarysyn
 \begin{deluxetable*}{ccccccccc}
 %\begin{table*}[t]
 \caption{Summary of the PySM 3.4 models - Dust}
-\begin{center}
-\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
 
-  \toprule
-Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Max Nside \\
-\midrule
+%\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
+
+%  \toprule
+\tablewidth{0pt}
+\tablehead{
+\colhead{Comp}  & \colhead{Tag} & \colhead{Templates at large scales} & \colhead{Templates at small scales} & \colhead{Frequency scaling} & \colhead{Frequency scaling at small scales} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside}} 
+\startdata
 Dust & d9 & I: Planck 2015 (PR2) GNILC at 353 GHz. QU: Planck 2018 (PR3) GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
 \hline
 Dust & d10 & same as above & same as above & Planck GNILC spectral index and dust temperature & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & same as above & 8192 \\
 \hline
-
 Dust & d11 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates, spectral index and dust temperature & same as above & 8192 \\
 \hline
-
 Dust & d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps. & Random fluctuations based on extrapolated spectrum in I. Power laws in ell in polarization, with alpha\_s=-2.41 for E and -2.52 for B. & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
-\bottomrule
-\end{tabular}
-\end{center}
+%\bottomrule
+%\end{tabular}
+%\end{center}
+\enddata
 \label{table:summarydust}
 %\end{table*}
 \end{deluxetable*}
