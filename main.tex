@@ -131,24 +131,19 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 Reference Table~\ref{table:summarydust} for Dust and Table~\ref{table:summarysynchroco} for Synchrotron and CO.
 % BH: We need this, but not sure yet where it goes
 
-\begin{deluxetable*}{ccccccccc}
-%\begin{table*}[t]
+\begin{deluxetable*}{m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm} m{.7cm}}
 \caption{Summary of the PySM 3.4 models - Dust}
-
-%\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
-
-%  \toprule
 \tablewidth{0pt}
 \tablehead{
-\colhead{Comp}  & \colhead{Tag} & \colhead{Templates at large scales} & \colhead{Templates at small scales} & \colhead{Frequency scaling} & \colhead{Frequency scaling at small scales} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside}} 
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
 \startdata
-Dust & d9 & I: Planck 2015 (PR2) GNILC at 353 GHz. QU: Planck 2018 (PR3) GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
+d9 & I: Planck 2015 (PR2) GNILC at 353 GHz. QU: Planck 2018 (PR3) GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
 \hline
-Dust & d10 & same as above & same as above & Planck GNILC spectral index and dust temperature & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & same as above & 8192 \\
+d10 & same as above & same as above & Planck GNILC spectral index and dust temperature & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & same as above & 8192 \\
 \hline
-Dust & d11 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates, spectral index and dust temperature & same as above & 8192 \\
+d11 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates, spectral index and dust temperature & same as above & 8192 \\
 \hline
-Dust & d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps. & Random fluctuations based on extrapolated spectrum in I. Power laws in ell in polarization, with alpha\_s=-2.41 for E and -2.52 for B. & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
+d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps. & Random fluctuations based on extrapolated spectrum in I. Power laws in ell in polarization, with alpha\_s=-2.41 for E and -2.52 for B. & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
 %\bottomrule
 %\end{tabular}
 %\end{center}
