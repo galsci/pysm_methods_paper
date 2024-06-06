@@ -117,6 +117,10 @@ PySM provides a model of polarized AME encoding  2\% polarization fraction,  map
 \subsubsection{CO Emission}
 
 
+At the microwave frequency range, molecular emission from our own Galaxy can be observed thanks to the rotational lines Carbon Monoxide (CO): $J = 1\rightarrow0, 2\rightarrow1$, and $3\rightarrow2$ transitions at 115.3, 230.6, and 345.8\,GHz, respectively. 
+
+CO line emission can be linearly polarized via the Goldreich-Kylafis effect \citep{Goldreich:1981, Crutcher:2012}.  As CO polarization surveys are hard to be realized,  mainly due to the intrinsically low degree of polarization and the long integration time required to achieve a significant detection,  so far the approach has been to model it assuming an, albeit small, degree of polarization. \citet{Puglisi:2017} presented a model to simulate the polarized emission of CO lines in molecular clouds at high Galactic latitudes by considering the 3D spatial distribution of CO in the Galaxy. The model   successfully reproduced not only the angular power spectrum of the observed Planck  CO intensity maps \citep{planck2013-p03a},  but also the intensity profile  in longitude bins at low Galactic latitudes.  Given the lack of observational constraints, the model assumed a strong correlation between the CO polarization and the polarized galactic dust emission to forecast the amplitude of CO polarized emission.  We present in this work the  models  of CO  line emissions employing  both  high-Galactic laitude clouds and  polarized emission.
+
 \subsubsection{Other Emission Mechanisms} % BH: Not sure if this is useful, or if it goes here vs discussion
 The current suite of PySM models encompasses most of the emission and polarization mechanism observed from the diffuse ISM of the Milky Way. However, it is not exhaustive, and we identify here a few potential targets for future work. 
 
@@ -412,14 +416,12 @@ where $S_\nu(p)$ stands for any of the three Stokes parameters of interest, $I$,
 
 \subsection{CO Emission}
 
-PySM3 employs models of Carbon Monoxide (CO) emission  of  the first three CO rotational lines: $J = 1\rightarrow0, 2\rightarrow1$, and $3\rightarrow2$ transitions at 115.3, 230.6, and 345.8\,GHz, respectively. We adopted  the CO $J = 1\rightarrow0$ \texttt{Type-1} map\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} released by \citet{2014A&A...571A..13P}.  This CO map is obtained exploiting the mismatches in the detector bandpass to recover the CO from the CMB and the other Galactic foregrounds, with the MILCA component separation algorithm.  
+The PySM3 employs models of CO emission  are based on   the CO $J = 1\rightarrow0$ \texttt{Type-1} map\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} released by \citet{2014A&A...571A..13P}.  This CO map is obtained exploiting the mismatches in the detector bandpass to recover the CO from the CMB and the other Galactic foregrounds, with the MILCA component separation algorithm.  
  
 %Although the \texttt{Type-1} maps suffer of a lower SNR with respect to the other maps they are less affected by Galactic foreground residuals, as they encode information coming solely from the 100 GHz \emph{Planck} detectors. 
-Moreover, being the  CO map has been released at the nominal resolution (10\arcmin) we convolve it with a 1$^\circ$ gaussian beam to further lower the noise contamination  especially at intermediate and high Galactic latitudes.
+Moreover, being the  CO map released at the nominal resolution (10\arcmin) we convolve it with a 1$^\circ$ gaussian beam to further lower the noise contamination  especially at intermediate and high Galactic latitudes.
 
-CO line emission can be linearly polarized via the Goldreich-Kylafis effect \citep{Goldreich:1981, Crutcher:2012}.  As CO polarization surveys are hard to be realized,  mainly due to the intrinsically low degree of polarization and the long integration time required to achieve a significant detection,  so far the approach has been to model it assuming an, albeit small, degree of polarization. \citet{Puglisi:2017} presented a model to simulate the polarized emission of CO lines in molecular clouds at high Galactic latitudes by considering the 3D spatial distribution of CO in the Galaxy. The model   successfully reproduced not only the angular power spectrum of the observed Planck  CO intensity maps \citep{planck2013-p03a},  but also the intensity profile  in longitude bins at low Galactic latitudes.  Given the lack of observational constraints, the model assumed a strong correlation between the CO polarization and the polarized galactic dust emission to forecast the amplitude of CO polarized emission. 
-
- We, thus,  propose  3  models of CO emission defined as follows: 
+    3  models  of CO emission are available in the pysm3, described    as follows: 
 \begin{itemize}
     \item {\bf\texttt{co1}:} unpolarized emission using  the Planck templates derived from  CO $J:1\rightarrow0$ Type 1 intensity   maps \citep{planck2013-p03a}. To reduce noise contamination, we downgrade the resolution of the maps at 1 deg and repixelized to Healpix \texttt{nside=512}. 
       \item {\bf\texttt{co2}:} model for both unpolarized and polarized emission, with fractional polarization a free parameter set by the user (default $\Pi = 0.1 \%$). This model employs the same intensity templates used in  {\bf\texttt{co1}}.  Stokes $Q$ and $U$ CO maps are modeled following \citet[eqs. (12) and (13) of]{Puglisi:2017}, employing  depolarization  and polarization angle  templates derived from   Planck thermal dust maps \citep{planck2014-a12}. 
