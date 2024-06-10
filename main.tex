@@ -1,24 +1,20 @@
 \documentclass[twocolumn]{aastex631}
 \bibliographystyle{aasjournal}
+\providecommand{\sorthelp}[1]{}
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{mathtools}
-\usepackage{url}
 \usepackage{booktabs} 
-\usepackage{algorithm2e}
-\usepackage{array}
+
 \newcommand{\done}{{\tt d1}}
 \newcommand{\dnine}{{\tt d9}}
 \newcommand{\deleven}{{\tt d11}}
 
+% For commenting, to be deleted when done
 \usepackage{color}
 \newcommand{\bsh}[1]{\textcolor{red}{(BSH: #1)}}
 \newcommand{\giuse}[1]{\textcolor{orange}{(GP: #1)}}
 \newcommand{\sg}[1]{\textcolor{teal}{(SG: #1)}}
 \newcommand{\mr}[1]{\textcolor{magenta}{#1}}
 \newcommand{\jd}[1]{\textcolor{green}{#1}}
-\providecommand{\sorthelp}[1]{}
 
 \begin{document}
 
@@ -28,7 +24,9 @@
 \date{\today}
 
 \begin{abstract}
-\giuse{We present in this work a new version of the Python Sky Model package to simulate maps of microwave Galactic emission both in intensity and polarization, to serve the design of forthcoming  cosmic microwave background experiments and the Galactic science that can be inferred with observations in the sub-mm regime. The package  provides  an updated interface and relies on  the latest publicly available observations  from the Planck and WMAP surveys. In particular, we focus on including new models of thermal dust and molecular line emissions, given the latest releases from the Planck satellite.  We further provide the user several levels of model complexities related to spectral changes along and/or at different lines of sight. We further  present a novel algorithm for synthesizing the  emission at small angular scales,  allowing us to go beyond the intrinsic resolution of the latest templates which are mostly contaminated by  instrumental noise at these scales. We also  present a  suite of tests employed to validate and verify the new models before publicly releasing them. } 
+%\giuse{We present in this work a new version of the Python Sky Model package to simulate maps of microwave Galactic emission both in intensity and polarization, to serve the design of forthcoming  cosmic microwave background experiments and the Galactic science that can be inferred with observations in the sub-mm regime. The package  provides  an updated interface and relies on  the latest publicly available observations  from the Planck and WMAP surveys. In particular, we focus on including new models of thermal dust and molecular line emissions, given the latest releases from the Planck satellite.  We further provide the user several levels of model complexities related to spectral changes along and/or at different lines of sight. We further  present a novel algorithm for synthesizing the  emission at small angular scales,  allowing us to go beyond the intrinsic resolution of the latest templates which are mostly contaminated by  instrumental noise at these scales. We also  present a  suite of tests employed to validate and verify the new models before publicly releasing them. } 
+
+Foreground polarized emission from the Galaxy is one of the biggest challenges facing current and upcoming cosmic microwave background (CMB) polarization experiments. We develop new models of polarized dust and synchrotron emission at CMB frequencies that draw on the latest observational constraints, that employ the ``polarization fraction tensor'' framework to couple intensity and polarization in a physically motivated way, and that allow for stochastic realizations of small-scale structure at sub-arcminute angular scales currently unconstrained by full-sky data. We implement these models into the publicly available Python Sky Model (PySM) software and additionally provide PySM interfaces to models of dust and CO emission from the literature. Finally, we synthesize models of the various foreground components into a coherent suite of three plausible microwave skies that span a range of astrophysical complexity allowed by current data.
 
 \end{abstract}
 
@@ -316,11 +314,11 @@ We do not intend for the above procedure to be useful for the inner Galactic pla
 %Since we want the small scales to be modulated by the amplitude of the dust emission at large scales, we apply two different modulations for the $i$ and for the $qu$ maps as they are convolved with different beam resolutions. We adopt  the $i$  map   smoothed at 5 deg as a template for both modulation maps.  We then identify a region encoding  low and intermediate Galactic latitudes by masking  all the pixels in the smoothed $i$ map  whose  value is $>4.5 \log ( \mu K )$.  The  intensity modulation is then constructed by performing two different normalization in the regions defined outside and inside  the mask. We use the \emph{MinMax} rescaling ranging   between $1$ and $2$ for the low-intermediate latitudes and between $0.1$ and $1$ for the high latitudes. For the polarization modulation map, we rescale similarly outside the mask between $0.1$ and $1$ but we saturate to   $1$  all the pixels  inside the low latitude region. Once the small scale maps are modulated, they are then co-added to the  low-pass filtered  $iqu$ maps (given the $\ell$-pivot scale) that encode  large scales only. Finally, the $iqu$ maps are transformed   back to the real $IQU$ maps  to perform the validation steps required to assess the quality of the maps. 
 
 \subsubsection{Dust Amplitude}\label{sec:dustamplitude}
-The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous PySM models, e.g., \texttt{d0} and \texttt{d1}, employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for detailed discussion). To address this issue, we instead use dust templates from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{Remazeilles:2011}. 
+The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous PySM models, e.g., \texttt{d0} and \texttt{d1}, employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for a detailed discussion). To address this issue, we instead use dust templates from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{Remazeilles:2011}. 
 
 In total intensity we employ the Planck GNILC 2015 component separated map at $353$\,GHz \citep{planck2016-XLVIII}\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky regions, which complicates its use in our analysis. Therefore, we reprocess the map as follows to a spatially uniform resolution of 21.8\arcmin. To do so, we first note that the map was synthesized from ten needlet (wavelet) maps of different, but spatially-uniform, resolution \citep[][Figure~A.2]{planck2016-l04}. We produce a map of uniform resolution by retaining only the first six needlet maps, which probe the dust intensity from the largest scales down to $21.8\arcmin$. This yields an $N_{\rm side} = 2048$ that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8$\arcmin. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l11B}.
 
-For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the third Planck release \citep{planck2016-l04,planck2016-l11B}. Unlike for the $I$ maps, we make use of the variable resolution maps to retain as much information as possible in the maps. The variable resolution $Q$ and $U$ maps have a resolution that varies much more smoothly across the sky than in the $I$ map [cite paper], making it more amenable to our methodology for adding small-scale fluctuations. The resolution of these maps ranges from $21.8\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
+For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the Planck Public Release 3 \citep{planck2016-l04,planck2016-l11B}. While these maps have variable angular resolution, the resolution varies over the sky much more smoothly than in the $I$ map. Given this, and that we wish to retain as much polarization information in our analysis as possible, we employ these variable resolution maps as-is. Their resolution ranges from $21.8\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
 
 To produce dust emission templates at a monochromatic frequency of 353\,GHz, we divide each of the $I$, $Q$, and $U$ maps by a factor of 1.098 to correct for the Planck bandpass \citep[][Table~2]{planck2016-l11A}.
 
@@ -352,14 +350,13 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
 \end{table}
 
 Just as a map of Galactic emission at a single frequency is expected to have fluctuations at smaller angular scales than have been measured, maps of parameters governing its frequency dependence should also have small-scale fluctuations. We therefore introduce small scale fluctuations to our spectral parameter template maps in a way analogous to the amplitude template maps. This more realistically captures the complexity of small-scale Galactic emission.
-%\giuse{ Indeed most of the previous models  did not include fluctuations beyond what was already captured by the templates \citep{Thorne:2017}.}
 
 As there is no sense of polarization in the spectral parameter maps, we do not work within the polarization fraction tensor framework but rather with standard power spectra. Given a template map $\mathcal{T}$ of some spectral parameter $\beta$, we first fit the power spectrum of $\mathcal{T}$ with a power law $C_\ell \propto \ell^\alpha$ over a range of scales where it is well measured, up to some multipole $\ell_1$. We then generate a map of small scale fluctuations using the power law fit. We multiply the resulting map by a modulation map in analogy with the amplitude modulations described in Section~\ref{sec:dustamplitude}. Finally, we combine the template map with the synthesized small scales using the filter function in Equation~\ref{eq:filter}.
 
 The application of this procedure to the dust and synchrotron spectral parameters is described in the following sections. The adopted fit parameters for each spectral parameter are listed in Table~\ref{tab:smallscale_specpar}.
 
 \subsubsection{Dust Spectral Parameters}\label{subsec:dust_spec_params}
-As described in Section~\ref{subsubsec:dust_model}, the dust emission in all models developed here is governed by the spectral parameters $\beta_d$ and $T_d$. For the $\beta_d$ and $T_d$ template maps, we employ the $\beta_d$ and $T_d$ maps\footnote{\texttt{COM\_CompMap\_Dust-GNILC-Model-Spectral-Index\_2048\_R2.00.fits}, \texttt{COM\_CompMap\_Dust-GNILC-Model-Temperature\_2048\_R2.00.fits}} derived from 2015 Planck GNILC component separation analysis. These maps benefit from lower CIB residuals than the \texttt{Commander} $\beta_d$ and $T_d$ as the methodology employed both spatial and spectral information to disentangle the CIB contribution to the total emission.
+As described in Section~\ref{subsubsec:dust_model}, the dust emission in all models developed here is governed by the spectral parameters $\beta_d$ and $T_d$. For the $\beta_d$ and $T_d$ template maps, we employ the $\beta_d$ and $T_d$ maps\footnote{\texttt{COM\_CompMap\_Dust-GNILC-Model-Spectral-Index\_2048\_R2.00.fits}, \texttt{COM\_CompMap\_Dust-GNILC-Model-Temperature\_2048\_R2.00.fits}} derived from 2015 Planck GNILC component separation analysis \citep{planck2016-XLVIII}. These maps benefit from lower CIB residuals than the \texttt{Commander} $\beta_d$ and $T_d$ as the methodology employed both spatial and spectral information to disentangle the CIB contribution to the total emission.
 %However, the estimate of $\beta_d$ and $T_d$ is highly degenerate making the maps at small angular scales ($<21.8^\prime$) are contaminated by artifacts due to noise and calibration errors. 
 
 We fit the power spectra of the $\beta_d$ and $T_d$ template maps over the multipole ranges $200 < \ell < 400$ and $100 < \ell < 400$, respectively. We find that $\alpha_{\beta_d}= 0.04$ and $\alpha_{T_d} = -0.47$ over this range, both flatter than the $\alpha_{tt} = -0.80$ found for the dust amplitude. The adopted pivot multipole $\ell_1$ is larger than that used for dust amplitudes (see Table~\ref{tab:smallscale_par}) since the template maps employed here are derived from intensity-only data rather than a combination of total and polarized intensity. Thus, they remain signal-dominated at $\sim$4 times smaller angular scales.
@@ -376,20 +373,20 @@ As described in Section~\ref{subsubsec:synch_model}, the synchrotron emission in
 
 Incorporating newer constraints on synchrotron emission at 2.3\,GHz from S-PASS, \citet{Krachmalnicoff:2018} determined that this $\beta_s$ map underestimates the true level of spatial variations in $\beta_s$ across the Southern Galactic Hemisphere. Thus, we follow \citet{Krachmalnicoff:2018} and rescale the $\beta_s$ map by first subtracting its mean value, multiplying the resulting map by a factor of $1.572$, and then adding back the mean value.
 
-We next fit a power-law to the power spectrum of this new template map over the multipole range $2<\ell<38$, finding $\alpha_{\beta_s}=-0.61$ then construct a map from this power spectrum extrapolated to high multipoles. We next construct a modulation map by taking the Haslam 408\,GHz $I$ map, smoothing to $5^\circ$ resolution, then renormalizing the map through a linear transformation such that the (dimensionless) pixel values range from 0.1--2. As with the dust spectral parameter maps (see Section~\ref{subsec:beta_d}), we combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~X. %BH: I don't understand the following sentence: Even in this case, the extreme of rescaling ensure the excursion range  of observed synchrotron spectral index.
+We next fit a power-law to the power spectrum of this new template map over the multipole range $2<\ell<38$, finding $\alpha_{\beta_s}=-0.61$ then construct a map from this power spectrum extrapolated to high multipoles. We next construct a modulation map by taking the Haslam 408\,GHz $I$ map, smoothing to $5^\circ$ resolution, then renormalizing the map through a linear transformation such that the (dimensionless) pixel values range from 0.1--2. As with the dust spectral parameter maps (see Section~\ref{subsec:dust_spec_params}), we combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
  
 For the synchrotron curvature parameter $c_s$, there are no readily available template maps. The existing \texttt{s3} model implements curvature as a sky-constant $c_s = -0.052$, consistent with the measurements from ARCADE \citep[$c_s=-0.052 \pm 0.005$][]{Kogut:2012}. As an attempt to model a reasonable range of spatial variability, we assume that fluctuations in the value of $c_s$ follow the synchrotron intensity at large angular scales. Specifically, we start from the Haslam map 408\,MHz $I$ map smoothed to a resolution of $5 \deg$, which we then rescale with a linear transformation such that the minimum and maximum pixel values are  $-0.0517$ and $0.0054$, respectively, corresponding to the range of $c_s$ measurements from ARCADE \citep{Kogut:2012}. The resulting $c_s$ map has a mean and standard deviation of $-0.0517$ and $0.0054$, respectively. 
 
 % BH: If this was done, it needs to be described quantitatively with reference to the relevant equations
 %Finally, both the $\beta_s$ and the $c_s$ templates are low pass filtered with $\ell=36$ to minimize artifacts from noise and the large beamsize.
 
-To extend our $c_s$ map to smaller angular scales $\ell > 36$, we first generate a map of Gaussian random fluctuations with the same power law index as the $\beta_s$ map, i.e., $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$. We modulate the resulting map with the same modulation map as used for $\beta_s$ and combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~X.
+To extend our $c_s$ map to angular scales $\ell > 36$, we first generate a map of Gaussian random fluctuations with the same power law index as the $\beta_s$ map, i.e., $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$. We modulate the resulting map with the same modulation map as used for $\beta_s$ and combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
 %Small  scales at multipoles $\ell>36$  are therefore  included   assuming them to follow  the same power law as  the $\beta_s$ ones,  i.e. $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$, and that are  modulated with the exact same modulation map as the one we  adopted for $\beta_s$.
 
-\subsection{New Model Summary}
+\subsection{Summary of New Dust and Synchrotron Models}
 Explain d9, d10, d11, s5, s6, s7 here
 
-\section{Other Models Implemented in PySM} \label{sec:other_models}
+\section{Other Models Implemented} \label{sec:other_models}
 
 \subsection{Dust Layer Model} \label{sec:layers}
 Evidence for variation of Galactic foreground emission laws as a function of frequency across the sky implies that emission laws must vary along the line of sight. As a consequence, we anticipate that dust emission, if locally matching a modified blackbody in the form of Equation~\ref{eq:dust-emission-law}, is seen by an observer as a superposition (an integral along the line of sight) of modified blackbodies---which is not a modified blackbody. In addition, if along the line of sight different line elements emit polarized radiation with different polarization angles, the frequency scaling should vary between $I$, $Q$ and $U$ \citep{Tassis:2015}.
@@ -722,7 +719,7 @@ At present, it is unclear whether d1, d9, d10, or d12 is a more accurate descrip
 
 %[Stanford student Monica Hicks is working with Susan on cross-correlating our models with galaxy surveys a la Chiang \& Menard.] 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=\columnwidth]{figures/EGC_galaxy@857Part_0-1.png}
     \caption{Relative extragalactic contamination in three of the new dust templates (\texttt{d10, d11, d12}), compared to the \texttt{d1} model. Contamination is quantified as the excess 857 GHz emission within $11'$ of galaxies from the GLADE+ catalog, normalized to the maximum excess and plotted as a function of redshift (z). All three new dust templates contain less extragalactic contamination than older dust models because they are based on GNILC-processed Planck data. The improvement is most significant for \texttt{d10} and \texttt{d11}.  }
