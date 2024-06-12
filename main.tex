@@ -30,7 +30,8 @@ Polarized foreground emission from the Galaxy is one of the biggest challenges f
 \section{Introduction}
 One of the principal challenges for current and future cosmic microwave background (CMB) polarization experiments is mitigating contaminating emission from the Galaxy. Polarized Galactic emission is brighter than current upper limits on a primordial B-mode signal at all frequencies, even in particularly clean patches of the high Galactic latitude sky \citep{planck2016-l11A}. Many ongoing and upcoming surveys such as the Simons Observatory \citep{Ade:2019}, CMB-S4 \citep{Abazajian:2022}, and LiteBIRD \citep{LiteBIRDCollaboration:2023} observe large sky fractions ($f_{\rm sky} \gtrsim 10\%$) and will need to mitigate foreground emission potentially many times brighter than the targeted cosmological signals. Understanding potential complexities of Galactic emission and designing analyses robust to these complexities is of paramount importance for constraining the physics of the early Universe.
 
-Foreground emission models are needed to ensure that cosmological analyses are robust. Galactic emission is constrained by current data across the full sky over a range of angular scales and frequencies. However, it is not known perfectly, and a primary role of modeling is to provide a suite of possible extrapolations to unmeasured scales and frequencies that reflect the current level of uncertainties in the spatial distribution and frequency dependence of each contributing emission mechanism. At the same time, all simulations should accord with observational constraints as closely as possible.
+%Foreground emission models are needed to ensure that cosmological analyses are robust. 
+Galactic emission is constrained by current data across the full sky over a range of angular scales and frequencies. However, it is not known perfectly, and a primary role of modeling is to provide a suite of possible extrapolations to unmeasured scales and frequencies that reflect the current level of uncertainties in the spatial distribution and frequency dependence of each contributing emission mechanism. At the same time, all simulations should accord with observational constraints as closely as possible.
 
 To this end, tools have been developed to simulate full-sky, multi-frequency realizations of Galactic emission drawing both on data-driven constraints and theoretical models. The Planck Sky Model \citep[PSM;][]{delabrouille2012} was originally built to develop data analysis tools for the Planck mission, using pre-existing data sets. It evolved throughout the Planck mission timeline to include Planck observations and adjust to Planck data analysis requirements, and has been widely used in various data challenges and for planning future CMB experiments \citep[e.g.,][]{Fornazier:2022, Ghosh:2022}. Building on the PSM, the Python Sky Model \citep[PySM;][]{Thorne:2017} provides a Python interface to expanded classes of foreground models. PySM has been widely used for both forecasting \citep[e.g.,][]{Abazajian:2022,Hensley:2022,CCAT-PrimeCollaboration:2023,Wolz:2024} and data analysis \citep{Vacher:2023}.
 
@@ -1058,7 +1059,13 @@ for example analyzing CMB-S4 data together with that of the precursor South Pole
 \section{Discussion} \label{sec:discussion}
 
 \giuse{The models presented in this work represent a further step forward in order to increase the complexity of Galactic emission. They  exploit the latest templates from \emph{Planck } surveys as well as latest  constraints on the spectral parameters published in the literature in the past years. 
-This is  critical in several CMB science cases as foreground complexity  could  impact the driver on the requirements    
+This is  critical in several CMB experiments as foreground complexity  could  potentially impact  the  cosmological parameter estimates. }
+
+\giuse{We carefully design new foreground  models to employ a non-zero level of non-gaussianity, allowing  unprecedented analysis and studies on non-gaussian small scales Galactic residuals and their impact on the de-lensing procedure of \emph{B-}modes. }
+
+The algorithms presented here can be further improved as they  models  
+
+
 However, we would like to remark in this section
 writing: Susan + others
 
