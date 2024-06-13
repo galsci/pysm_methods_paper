@@ -30,21 +30,11 @@ Polarized foreground emission from the Galaxy is one of the biggest challenges f
 \section{Introduction}
 One of the principal challenges for current and future cosmic microwave background (CMB) polarization experiments is mitigating contaminating emission from the Galaxy. Polarized Galactic emission is brighter than current upper limits on a primordial B-mode signal at all frequencies, even in particularly clean patches of the high Galactic latitude sky \citep{planck2016-l11A}. Many ongoing and upcoming surveys such as the Simons Observatory \citep{Ade:2019}, CMB-S4 \citep{Abazajian:2022}, and LiteBIRD \citep{LiteBIRDCollaboration:2023} observe large sky fractions ($f_{\rm sky} \gtrsim 10\%$) and will need to mitigate foreground emission potentially many times brighter than the targeted cosmological signals. Understanding potential complexities of Galactic emission and designing analyses robust to these complexities is of paramount importance for constraining the physics of the early Universe.
 
-%Foreground emission models are needed to ensure that cosmological analyses are robust. 
 Galactic emission is constrained by current data across the full sky over a range of angular scales and frequencies. However, it is not known perfectly, and a primary role of modeling is to provide a suite of possible extrapolations to unmeasured scales and frequencies that reflect the current level of uncertainties in the spatial distribution and frequency dependence of each contributing emission mechanism. At the same time, all simulations should accord with observational constraints as closely as possible.
 
 To this end, tools have been developed to simulate full-sky, multi-frequency realizations of Galactic emission drawing both on data-driven constraints and theoretical models. The Planck Sky Model \citep[PSM;][]{delabrouille2012} was originally built to develop data analysis tools for the Planck mission, using pre-existing data sets. It evolved throughout the Planck mission timeline to include Planck observations and adjust to Planck data analysis requirements, and has been widely used in various data challenges and for planning future CMB and 21cm line mapping experiments \citep[e.g.,][]{Remazeilles:2018, Fornazier:2022, Ghosh:2022}. Building on the PSM, the Python Sky Model \citep[PySM;][]{Thorne:2017} provides a Python interface to expanded classes of foreground models. PySM has been widely used for both forecasting \citep[e.g.,][]{Abazajian:2022, Hensley:2022, CCAT-PrimeCollaboration:2023, Wolz:2024} and data analysis \citep{Vacher:2023}.
 
-In this work, we develop techniques to overcome a number of limitations of previous generations of Galactic emission models. We first introduce the polarization fraction tensor formalism as a physically-motivated way to model Galactic polarization at small angular scales in a relatively spatially isotropic way. We demonstrate the use of this framework in generating ensembles of sky realizations up to arbitrarily small angular scales while retaining the well-measured large-scale features of the Galaxy. In addition to algorithmic development, we employ data products produced by more recent analyses of microwave emission and polarization data than used in previous models. Finally, we implement a number of additional models of dust and CO emission from the literature to provide a more complete range of models consistent with current data that reflect the present uncertainties on the behavior of microwave foregrounds. All models are validated and assessed on their relative strengths both in capturing various physical effects and in according with available data-driven constraints.
-
-%\giuse{In this work, we present new framework for simulating stochastic realizations of small-scale emission, allowing users to generate many realizations of the Galactic microwave sky with the same statistical properties but different small-scale morphologies. We employ this framework to include small scale fluctuations in maps of both foreground amplitudes as well as spectral parameters, such as dust temperature.} 
-
-%\giuse{Finally, we introduce several important improvements to the PySM software. First, we update foreground emission templates at large angular scales to agree with current best determinations. }
-
-%\giuse{Moreover, evidence for variation of Galactic foreground emission laws as a function of frequency across the sky implies that emission laws must vary along the line of sight. As a consequence, we anticipate that dust emission, if locally matching a modified blackbody, is seen by an observer as several modified black-bodies integrated along the line of sight, which do  not correspond to a modified blackbody. In addition, if along the line of sight different line elements emit polarized radiation with different polarization angles, the frequency scaling should vary between $I$, $Q$ and $U$ \citep{Tassis:2015}. 
-%Therefore, we include the possibility to import  new additional models, e.g.   the ``layer model'' of \citet{Martinez-Solaeche:2018} (henceforth the ``MKD'' model) for dust.  The  emission is modeled from the sum of  six discrete layers along the line of sight. This results in sky simulations having non-zero line-of-sight \emph{decorrelation}, a phenomenon recently detected in Planck data in which the dust polarization angle can change with frequency \citep{Pelgrims:2021}.}
-
-%\giuse{We further present in this work  several models to account for carbon monoxide (CO) rotational line emission from our own Galaxy, from the Planck  templates \citep{planckXIII}.  The model includes polarized emission exploiting the correlation between dust and CO, and high-Galactic latitude molecular clouds as prescribed by \citet{Puglisi:2017}.}
+In this work, we develop techniques to overcome a number of limitations of previous generations of Galactic emission models. We first introduce the polarization fraction tensor formalism as a physically-motivated way to model Galactic polarization at small angular scales in a relatively spatially isotropic way. We demonstrate the use of this framework in generating ensembles of sky realizations in which each realization has a different spatial morphology but the same statistical properties at small angular scales while retaining the well-measured large-scale features of the Galaxy. In addition to algorithmic development, we employ data products produced by more recent analyses of microwave emission and polarization data than used in previous models. Finally, we implement a number of additional models of dust and CO emission from the literature to provide a more complete range of models consistent with current data that reflect the present uncertainties on the behavior of microwave foregrounds. All models are validated and assessed on their relative strengths both in capturing various physical effects and in according with available data-driven constraints.
 
 %The models developed here follow several general principles, in line with the ethos of previous generations of Galactic emission models. The models are explicitly data-based on scales and frequencies where the Galactic emission is well-measured: we use the best available data to the extent possible. Where we do not have high-fidelity measurements, we have some freedom on the ultimate characteristics of our synthetic Galactic emission. We strive to be guided by two principles: first, we take a \giuse{``physics-driven" approach to the problem wherever possible, preferring to be guided by our current understanding of ISM physics. Second, we consider follow an ``data-driven'' approach so that the new models rely on the  state of art of  latest datasets. }
 
@@ -183,14 +173,16 @@ CO & co3 & same as above & Simulated High Galactic clouds &  &  & Deterministic 
 
 
 \section{Dust and Synchrotron Models: Stochastic Emission at Small Angular Scales} \label{sec:small_scales}
-The methods presented here aim to preserve the well-measured large-scale information in our various data-driven templates, filter out the noisy small-scale emission in those templates, and replace those small scales with a stochastic realization that has a reasonable correspondence with the large scale emission. Specifically, the synthetic small-scale structure should have a power spectrum that connects smoothly to the power spectrum of the real data at large scales and should inherit some of the information from the large-scale data. Our approach is to generate stochastic realizations of small-scale emission that we then modulate by the large-scale signal.
+The methods presented here aim to preserve the well-measured large-scale information in existing observations of dust and synchrotron emission (the ``template'' maps), filter out the noisy small-scale emission in the maps, and replace those small scales with a stochastic realization that has a reasonable correspondence with the large-scale emission. Specifically, the synthetic small-scale structure should have a power spectrum that connects smoothly to the power spectrum of the real data at large scales. 
+%and should inherit some of the information from the large-scale data. 
+Our approach is to generate stochastic realizations of small-scale emission that is modulated by the large-scale signal.
 
 \subsection{Small-Scale Fluctuations in Amplitude Parameters}
 
 \subsubsection{Methods Overview}\label{subsec:methodology}
 A principal challenge for generating realizations of Galactic emission at small angular scales over the full sky is that amplitude of the fluctuations is strongly dependent on proximity to the Galactic plane. Further, Gaussian random fluctuations are a poor representation of the typically filamentary structure of the Galactic ISM \citep[e.g.,][]{Hacar:2023}. We address each of these challenges through use of the polarization fraction tensor framework.
 
-While the mathematical model of this framework can be applied to any emission mechanism, it is motivated by a simple model of dust emission. In this picture, the morphology of the dust polarized intensity $P$ at large angular scales is set primarily by the density structure of the dust, probed in projection by the total intensity $I$, and then secondarily by the large-scale morphology of the Galactic magnetic field, which modulates the polarization fraction of the dust, $p \equiv P/I$. Random fluctuations of the turbulent component of the Galactic magnetic field lead to fluctuations on top of this smooth, large-scale polarized intensity distribution. The amplitude of these fluctuations are much more spatially isotropic than fluctuations in the $P$ map itself. Further, total and polarized dust emission are coupled through the angle between the local magnetic field and the line of sight $\gamma$, such that the sum $I+P$ is independent of $\gamma$. This suggests the following transformations between $I$, $Q$, and $U$ and their polarization fraction tensor framework analogues $i$, $q$, and $u$:
+While the mathematical model of this framework can be applied to any emission mechanism, it is motivated by a simple model of dust emission. In this picture, the morphology of the dust polarized intensity $P$ at large angular scales is set primarily by the density structure of the dust, probed in projection by the total intensity $I$, and then secondarily by the large-scale morphology of the Galactic magnetic field, which modulates the polarization fraction of the dust, $p \equiv P/I$. Random fluctuations of the turbulent component of the Galactic magnetic field lead to fluctuations on top of this smooth, large-scale polarized intensity distribution. The amplitude of these fluctuations are much more spatially isotropic than fluctuations in the $P$ map itself. Further, total and polarized dust emission are coupled through the angle $\gamma$ between the local magnetic field and the line of sight, such that the sum $I+P$ is independent of $\gamma$ \citep{Hensley:2019}. This suggests the following transformations between $I$, $Q$, and $U$ and their polarization fraction tensor framework analogues $i$, $q$, and $u$:
 
 \begin{align}\label{eq:real2pt}
     i &\equiv \frac{1}{2} \ln (I^2 - P^2)\nonumber  \\
@@ -212,18 +204,18 @@ where $\xi \equiv \sqrt{q^2 + u^2}$. The transformations are non-linear, and thu
 
 % Paragraph describing overall plan here?
 
-Here we summarize the method for generating small-scale emission, with further details below: 
+The method for generating small-scale emission is summarized as follows: 
 \begin{enumerate}
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
     \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
     \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the spectrum at $\ell > \ell_2$ is constructed with the power law index of the $tt$ spectrum. The $tb$ and $eb$ spectra are assumed to be 0 for $\ell > \ell_1$.
-    \item  We then synthesize $i$, $q$, and $u$ maps using the constructed $tt$, $te$, $ee$, and $bb$ spectra. These maps are then high-pass filtered at cut-off multipole $\ell_1$.
+    \item  We synthesize $i$, $q$, and $u$ maps using the constructed $tt$, $te$, $ee$, and $bb$ spectra. These maps are then high-pass filtered at cut-off multipole $\ell_1$.
     \item We construct modulation maps $m_i$ and $m_p$ for intensity and polarization, respectively (see Figure~\ref{fig:modulation_maps}). The synthesized maps are then multiplied by the modulation maps.
     \item We low-pass filter the template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$.
-    \item Finally, we sum the small-scale and large-scale maps and then transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
+    \item Finally, we sum the small-scale and large-scale maps and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
 \end{enumerate}
 
-This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The pivot scale $\ell_2$ prevents the $TE$, $EE$, or $BB$ spectra from exceeding the $TT$ spectrum at any scale. While such power spectra are not necessarily unphysical, maps synthesized from them can produce pixels with polarization fractions in excess of unity unless other constraints are imposed, and we wish to avoid this complication here. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
+This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The pivot scale $\ell_2$ prevents the $TE$, $EE$, or $BB$ spectra from exceeding the $TT$ spectrum at any scale. While such power spectra are not necessarily unphysical, maps synthesized from them can produce pixels with polarization fractions in excess of unity unless other constraints are imposed, and we wish to avoid that complication here. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
 %The algorithm followed to inject small angular scales into the models is summarized in Alg. \ref{alg:small_scales}.
 %\begin{algorithm}
@@ -238,24 +230,6 @@ This prescription has several free parameters that require tuning. The pivot sca
 
 % $ TQU_{out} = $ \texttt {logpoltens2real(}$ tqu_{out}$ \texttt{)} \;
 %\end{algorithm}
-
- 
-Maps of the models are obtained as follows: 
-\begin{equation}
-    a_{\ell m }^{x, out}=  a_{\ell m }^{x, \mathcal{T}} \left(1-\sigma_\ell\right)^{0.2} + a_{\ell m }^{x, ss} \sigma_\ell. \label{eq:filter}
-\end{equation}
-where $a_{\ell m }^{x, \mathcal{T}}$ are the coefficients of the large-scale templates, with $x$ any of $t$, $e$, and $b$, and $a_{\ell m }^{x, ss}$ is derived from the synthesized small-scale fluctuation maps. The filter $\sigma_\ell$ is given by
-%Thus, the power spectra are described by
-%\begin{equation} \label{eq:filter}
-%    C_\ell^{xy} = C_\ell^{xy, \mathcal{T}}\left(1-\sigma_\ell\right)^{0.4} + C_\ell^{xy, ss} \sigma_\ell 
-%\end{equation}
-%where $C_\ell^{xy, \mathcal{T}}$ are the power spectra of the data-driven templates (Section~\ref{sec:templates}), $xy$ is any of $tt$, $te$, $ee$, and $bb$. The filter $\sigma_\ell$ is given by
-
-\begin{equation}
-\sigma_\ell  = \left[1+  e^{ -c_1 (\ell/ \ell_1  -c_2 )}\right]^{-1}  
-~~~,
-\end{equation}
-where the parameters $c_1$ and $c_2$ govern the width of the filter in multipoles. We adopt $c_1=40$ and $c_2=0.9$ throughout this work. The exponent of $0.2$ on the $\left(1-\sigma_\ell\right)$ term in Equation~\ref{eq:filter} is chosen empirically to smooth the transition between our data-driven templates and the generated small scales. We found that this choice minimizes artifacts at $\ell \simeq \ell_1$ in power spectra computed over large sky areas while maintaining the correct asymptotic behavior.
 
 \begin{table*}
     \centering
@@ -272,18 +246,13 @@ where the parameters $c_1$ and $c_2$ govern the width of the filter in multipole
     \label{tab:smallscale_par}
 \end{table*}
 
-Since the generation of the small scales depends only upon a fixed input power spectrum, we can generate a different map realization on the fly each time a sky is simulated. Thus, the methodology presented here enables generation of an ensemble of sky realizations having the same well-measured large scales but stochastic realizations of the poorly-measured small scales. Further, the small-scale fluctuations can be generated at arbitrarily small scales set only by the resolution of the map since all power spectra can be extended indefinitely in $\ell$. In practice, small scales are generated up to an $\ell_{\rm max} = 3N_{\rm side}-1$.
+%Once we have generated small-scale maps, we smoothly connect them to the large scales that are well-measured on the sky. To do this, we need to modulate the amplitude of our small-scale maps so that they inherit information about the large-scale synchrotron or dust intensity.
 
-%\subsubsection{Modulation of Small-Scale Amplitude Parameters} \label{subsec:modulation}
-%\giuse{In this section we describe the procedure to generate the modulation templates  for the  amplitudes of the small-scale foreground emission, as described in Section~\ref{sec:small_scales}. This modulation introduces   amplitude variation over the sky, accordingly with the large-scale templates.}
-
-Once we have generated small-scale amplitude fluctuation maps, we smoothly connect them to the large-scale amplitudes that are well-measured on the sky. To do this, we need to modulate the amplitude of our small-scale fluctuation maps so that they inherit information about the large-scale synchrotron or dust intensity.
-
-To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{x}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{x} $ of radius $11^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We then compute the $tt$ and $ee$ power spectra within that mask via the NaMaster estimator \citep{Alonso:2019}. The modulation maps are constructed from the ratios 
+To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We then compute the $tt$ and $ee$ power spectra within that mask via the NaMaster estimator \citep{Alonso:2019}. The modulation maps are constructed from the ratios 
 
 \begin{align}
-    m_i\left(\hat{x} \right) &= \left(\frac{C^{tt}_{\ell_*,circ}}{C^{tt}_{\ell_*,full}}\right)^{1/2} \\
-    m_p\left(\hat{x}\right) &= \left(\frac{C^{ee}_{\ell_*,circ}}{C^{ee}_{\ell_*,full}}\right)^{1/2}
+    m_i\left(\hat{\theta} \right) &= \left(\frac{C^{tt}_{\ell_*,circ}}{C^{tt}_{\ell_*,full}}\right)^{1/2} \\
+    m_p\left(\hat{\theta}\right) &= \left(\frac{C^{ee}_{\ell_*,circ}}{C^{ee}_{\ell_*,full}}\right)^{1/2}
 \end{align}
 where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectrum at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. 
  
@@ -301,11 +270,27 @@ The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the modulation map
 
 %\giuse{increasing at $\ell>40$ in the K-band spectra estimated by masking 80\% of the sky.  Therefore, we  adopt $\ell = 36$ as  cut-off multipole scale  for synchrotron.}
 
-%The chosen cut-off multipole for $\beta_d$ and $T_d$ is the same as the one adopted for the intensity amplitude template, i.e., $\ell=400 $.
+The final maps are obtained from 
+\begin{equation} \label{eq:filter}
+    a_{\ell m }^{X, out}=  a_{\ell m }^{x, \mathcal{T}} \left(1-\sigma_\ell\right)^{0.2} + a_{\ell m }^{x, ss} \sigma_\ell
+    ~~~, 
+\end{equation}
+where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$, and $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps. The filter $\sigma_\ell$ is given by
+%Thus, the power spectra are described by
+%\begin{equation} \label{eq:filter}
+%    C_\ell^{xy} = C_\ell^{xy, \mathcal{T}}\left(1-\sigma_\ell\right)^{0.4} + C_\ell^{xy, ss} \sigma_\ell 
+%\end{equation}
+%where $C_\ell^{xy, \mathcal{T}}$ are the power spectra of the data-driven templates (Section~\ref{sec:templates}), $xy$ is any of $tt$, $te$, $ee$, and $bb$. The filter $\sigma_\ell$ is given by
 
-We do not intend for the above procedure to be useful for the inner Galactic plane, which has been imaged at high signal-to-noise ratio at relatively small scales. We thus do not apply the small-scale amplitude extrapolation to the $3\%$ of the sky in the Galactic plane as defined by the Planck \texttt{GAL097} mask\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits}}, using using the templates as-is at all scales. To ensure a smooth transition between the template used in this region and synthesized small scales employed over the rest of the map, we apodize with a $5^\circ$ Gaussian taper. This reflects our expectation that these maps are most useful for making physically motivated synthetic realizations of diffuse Galactic emission at high Galactic latitudes rather than in the Galactic plane. 
+\begin{equation}
+\sigma_\ell  = \left[1+  e^{ -c_1 (\ell/ \ell_1  -c_2 )}\right]^{-1}  
+~~~,
+\end{equation}
+where the parameters $c_1$ and $c_2$ govern the width of the filter in multipoles. We adopt $c_1=40$ and $c_2=0.9$ throughout this work. The exponent of $0.2$ on the $\left(1-\sigma_\ell\right)$ term in Equation~\ref{eq:filter} is chosen empirically to smooth the transition between our data-driven templates and the generated small scales. We found that this choice minimizes artifacts at $\ell \simeq \ell_1$ in power spectra computed over large sky areas while maintaining the correct asymptotic behavior.
 
-%Moreover, the synthesis of small scales involves regions far from the Galactic plane, essentially outside in a region encoding 97\% of the sky. This is because, inside this area, the dust signal presents a very high SNR that small angular scales (e.g. $\sim20 $ arcmin ) are less affected by noise. We therefore decide to optimally exploit the state-of-art data on dust emission by employing the real small scales from observations nearby the Galactic plane.
+Since the generation of the small scales depends only upon a fixed input power spectrum, we can generate a different map realization on the fly each time a sky is simulated. Thus, the methodology presented here enables generation of an ensemble of sky realizations having the same well-measured large scales but stochastic realizations of the poorly-measured small scales. Further, the small-scale fluctuations can be generated at arbitrarily small scales set only by the resolution of the map since all power spectra can be extended indefinitely in $\ell$. In practice, small scales are generated up to an $\ell_{\rm max} = 3N_{\rm side}-1$.
+
+We do not intend for the above procedure to be useful for the inner Galactic plane, which has been imaged at high signal-to-noise ratio at relatively small scales. We thus do not apply the small-scale amplitude extrapolation to the $3\%$ of the sky in the Galactic plane as defined by the Planck \texttt{GAL097} mask\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits}}, where we instead use the observed templates as-is at all scales. To ensure a smooth transition between the template used in this region and synthesized small scales employed over the rest of the map, we apodize the mask with a $5^\circ$ Gaussian taper. This reflects our expectation that our procedure is most useful for making physically motivated synthetic realizations of diffuse Galactic emission at high Galactic latitudes rather than in the Galactic plane.
 
 % BH: To go through and ensure all is captured in the text above
 %We first compute the $tt$, $ee$, and $bb$ power spectra from the dust template $i$, $q$, and $u$ maps and fit each with a power law $A\ell^{\gamma}$ in different multipole ranges depending on the native resolution of the map. Given that the intensity template has been estimated in a different way to the Q and U templates, we employ two different multipole scale cut-offs: $\ell=400$ and $100$, respectively. This further prevents the mixing of scales due to variable resolutions. Specifically, we employ $100 < \ell < 400$ for $tt$ and $30 < \ell < 110$ for $ee$ and $bb$. The spectral indices estimated from the fit are $\gamma = -1.29$, $-0.33$, and $-0.40$ for $tt$, $ee$, and $bb$, respectively.Adopting these values of $\gamma$ directly would lead to the $ee$ and $bb$ power exceeding $tt$ for large enough $\ell$ given the steeper index of the latter. {\bf Some words on why this is ok in principle but gives problems with polarization fraction in practice} We prevent this by adopting a common spectral index $\gamma = -1.29$ to extrapolate all three spectra to higher $\ell$. This choice is further motivated by the fact that the dust intensity template is provided at a higher resolution than the polarization ones, allowing to observe the dust specifics at higher detail with respect to the polarization data being more affected by noise and systematics. Although we are assuming that small scale polarized dust emission to be the same spectral index as the intensity one, this  is something that is physically intuitive and expected   from magneto-hydro dynamic simulations \citep[][]{Kim:2019}. We then generate $iqu$ maps encoding only small scales generated from the fit power law spectra and ranging from the pivot $\ell$-scale up to the multipole related to the desired pixel resolution scale of the dust map we want to simulate.  
@@ -359,6 +344,8 @@ As described in Section~\ref{subsubsec:dust_model}, the dust emission in all mod
 
 We fit the power spectra of the $\beta_d$ and $T_d$ template maps over the multipole ranges $200 < \ell < 400$ and $100 < \ell < 400$, respectively. We find that $\alpha_{\beta_d}= 0.04$ and $\alpha_{T_d} = -0.47$ over this range, both flatter than the $\alpha_{tt} = -0.80$ found for the dust amplitude. The adopted pivot multipole $\ell_1$ is larger than that used for dust amplitudes (see Table~\ref{tab:smallscale_par}) since the template maps employed here are derived from intensity-only data rather than a combination of total and polarized intensity. Thus, they remain signal-dominated at $\sim$4 times smaller angular scales.
 
+%The chosen cut-off multipole for $\beta_d$ and $T_d$ is the same as the one adopted for the intensity amplitude template, i.e., $\ell=400 $.
+
 We construct the modulation map from the GNILC $I$ map smoothed to a resolution of $5^\circ$. We apply a linear renormalization such that the (now dimensionless) pixel values in the map range from 0.1 to 2. %BH The text below makes me think that pixels in the I map above and below a certain threshold were ignored in this process rather than taking the literal min and max values of the map
 
 %\giuse{ Also in this case, we   employ a modulation map for the $\beta_d$ and $T_d$ synthetic small scales.   The modulation template is derived from $I$ GNILC amplitude map, smoothed  at 5 deg and \emph{min-max} normalized   from $0.1$ and $2$. The latter step is needed as we expect the modulation map to be dimensionless and  the extreme values have been  empirically identified as the best choice to preserve the range of variation observed in   $\beta_d$ and $T_d$ at both low and intermediate Galactic latitudes. } 
@@ -387,7 +374,7 @@ The new dust and synchrotron models implemented here all improve on previous mod
 \section{Other Models Implemented} \label{sec:other_models}
 
 \subsection{Dust Layer Model} \label{sec:layers}
-Evidence for variation of Galactic foreground emission laws as a function of frequency across the sky implies that emission laws must vary along the line of sight. As a consequence, even if dust emission can be described locally by a modified blackbody (Equation~\ref{eq:dust-emission-law}), a superposition of emission regions (i.e., an integral along the line of sight) is not a modified blackbody. In addition, if along the line of sight different line elements emit polarized radiation with different polarization angles, the frequency scaling can vary between $I$, $Q$ and $U$ \citep{Tassis:2015}.
+Evidence for variation of Galactic foreground emission laws as a function of frequency across the sky implies that emission laws must vary along the line of sight. As a consequence, even if dust emission can be described locally by a modified blackbody (Equation~\ref{eq:dust-emission-law}), a superposition of emission regions (i.e., an integral along the line of sight) is not a modified blackbody. In addition, if along the line of sight different line elements emit polarized radiation with different polarization angles, the frequency scaling can vary between $I$, $Q$ and $U$ \citep{Tassis:2015}. Evidence for this ``line-of-sight frequency decorrelation'' has been found in Planck data \citep{Pelgrims:2021}.
 
 To model the complexity of multiple layers of dust along the line of sight, we base our  PySM~3 implementation  on the approach of \cite{Martinez-Solaeche:2018} in the PSM software\footnote{See version 2.3.3 \url{https://apc.u-paris.fr/~delabrou/PSM/psm.html}.}. 
 
@@ -404,6 +391,8 @@ We remark, that in the implementation used here, the 353~GHz templates for the s
 \subsection{CO Emission} \label{subsec:co_models}
 
 The PySM3 employs models of CO emission  are based on   the CO $J = 1\rightarrow0$ \texttt{Type-1} map\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} released by \citet{planck2013-p03a}.  This CO map is obtained exploiting the mismatches in the detector bandpass to recover the CO from the CMB and the other Galactic foregrounds, with the MILCA component separation algorithm.  
+
+%\giuse{We further present in this work  several models to account for carbon monoxide (CO) rotational line emission from our own Galaxy, from the Planck  templates \citep{planckXIII}.  The model includes polarized emission exploiting the correlation between dust and CO, and high-Galactic latitude molecular clouds as prescribed by \citet{Puglisi:2017}.}
 
 %CO line emission can be linearly polarized via the Goldreich-Kylafis effect \citep{Goldreich:1981, Crutcher:2012}.  As CO polarization surveys are hard to be realized,  mainly due to the intrinsically low degree of polarization and the long integration time required to achieve a significant detection,  so far the approach has been to model it assuming an, albeit small, degree of polarization. \citet{Puglisi:2017} presented a model to simulate the polarized emission of CO lines in molecular clouds at high Galactic latitudes by considering the 3D spatial distribution of CO in the Galaxy. The model   successfully reproduced not only the angular power spectrum of the observed Planck  CO intensity maps \citep{planck2013-p03a},  but also the intensity profile  in longitude bins at low Galactic latitudes.  Given the lack of observational constraints, the model assumed a strong correlation between the CO polarization and the polarized galactic dust emission to forecast the amplitude of CO polarized emission.  We present in this work the  models  of CO  line emissions employing  both  high-Galactic laitude clouds and  polarized emission.
  
