@@ -54,7 +54,7 @@ The second issue is memory usage. PySM~3 leverages \texttt{numba} \citep{Lam:201
 
 In this work, we develop new models of dust and synchrotron emission that we then implement in PySM. In addition to these new models, we implement one existing dust model and three CO models from the literature. All of these models are added to the suite of existing PySM models. Finally, we define three sets of models that provide ``low,'' ``medium,'' and ``high'' complexity realizations of the microwave sky based on current constraints from data and modeling uncertainties. As these model suites involve both old and new PySM models, we provide an overview of Galactic emission models in the following subsection before detailing the new models in Sections~\ref{sec:small_scales} and \ref{sec:other_models}.
 
-\subsection{Overview of Galactic Emission Mechanisms}
+\subsection{Overview of Galactic Emission Mechanisms} \label{sec:emission_mechanisms}
 The Galactic interstellar medium (ISM) consists of matter and radiation in various forms. At the microwave wavelengths relevant for CMB observations, there are several relevant emission mechanisms each with their own frequency dependence and spatial distribution on the sky.
 
 Cold ($\sim$10--30~K) grains of interstellar dust emit thermal vibrational radiation with a spectrum that peaks at $\sim$2~THz. The dust emission spectrum shows an excess over expectations from thermal vibrational emission below $\nu=100$~GHz: this excess is dubbed anomalous microwave emission (AME). AME is thought to be electric dipole radiation from rapidly spinning, sub-nanometer dust grains \citep{Draine:1998}. Relativistic cosmic ray electrons spiraling in the Galactic magnetic field emit synchrotron radiation, while warm ionized gas emits free-free radiation (or \emph{bremsstrahlung}) through the interaction of free electrons with ions. Synchrotron and free-free emission typically dominate the Galactic ISM emission at frequencies $\sim$10--100~GHz. Finally, atoms and molecules in the Galactic ISM, through vibrational and rotational shifts in energy levels, emit radiation in the form of a rich spectrum of discrete lines. Most notable among these is a bright comb of carbon monoxide (CO) emission lines at integer multiples of the $J=1$--$0$ $\nu \simeq 115$~GHz rotational transition.
@@ -180,6 +180,7 @@ Our approach is to generate stochastic realizations of small-scale emission that
 We divide our discussion into amplitude parameters ($A_d^S$ and $A_s^S$ in Equations~\ref{eq:dust-emission-law} and \ref{eq:synch-emission-law}, respectively) in Section~\ref{sec:amp_params} and spectral parameters ($\beta_d$ and $T_d$ in Equation~\ref{eq:dust-emission-law} and $\beta_s$ and $c_s$ in Equation~\ref{eq:synch-emission-law}) in Section~\ref{sec:spec_params} as the methodology differs for each.
 
 \subsection{Small-Scale Fluctuations in Amplitude Parameters} \label{sec:amp_params}
+To implement the parametric models of dust and synchrotron emission described in Section~\ref{sec:emission_mechanisms}, we require maps of $A^I$, $A^Q$, and $A^U$ for each mechanism, i.e., the total emission and polarization at a reference frequency. We start from template $I$, $Q$, and $U$ maps derived from data, to which we add fluctuations at scales that are noise-dominated. Our treatment of amplitude parameters differs from spectral parameters (Section~\ref{sec:spec_params}) because amplitude parameters need all of $I$, $Q$, and $U$ and thus consistency among them.
 
 \subsubsection{Methods Overview}\label{subsec:methodology}
 A principal challenge for generating realizations of Galactic emission at small angular scales over the full sky is that amplitude of the fluctuations is strongly dependent on proximity to the Galactic plane. Further, Gaussian random fluctuations are a poor representation of the typically filamentary structure of the Galactic ISM \citep[e.g.,][]{Hacar:2023}. We address each of these challenges through use of the polarization fraction tensor framework.
@@ -204,9 +205,7 @@ The inverse transformations are:
 \end{align}
 where $\xi \equiv \sqrt{q^2 + u^2}$. The transformations are non-linear, and thus Gaussian fluctuations introduced in $i$, $q$, and $u$ maps will necessarily become non-Gaussian when transformed back to $I$, $Q$, and $U$.
 
-% Paragraph describing overall plan here?
-
-The method for generating small-scale emission is summarized as follows: 
+The method for generating small-scale fluctuations is summarized as follows: 
 \begin{enumerate}
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
     \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
@@ -262,7 +261,7 @@ where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ an
      \label{fig:modulation_maps}
  \end{figure*}
  
-The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the modulation maps are presented in Table~\ref{tab:smallscale_par}. The values of $\ell_1$ and $\ell_*$ are driven both by the angular resolution and the signal-to-noise ratio of the template maps. We employ $\ell_1=100$ and $\ell_*=80$ for dust and $\ell_1=38$ and $\ell_*=36$ for synchrotron. The $\ell_2$ parameter is chosen to be high enough that dust and synchrotron emission are relatively unconstrained by current full-sky data. We adopt  $\ell_2=2000$ for dust and $\ell_2 = 400$ for synchrohtron. The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}.
+The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the modulation maps are presented in Table~\ref{tab:smallscale_par}. The values of $\ell_1$ and $\ell_*$ are driven both by the angular resolution and the signal-to-noise ratio of the template maps. We employ $\ell_1=100$ and $\ell_*=80$ for dust and $\ell_1=38$ and $\ell_*=36$ for synchrotron. The $\ell_2$ parameter is chosen to be high enough that dust and synchrotron emission are relatively unconstrained by current full-sky data. We adopt  $\ell_2=2000$ for dust and $\ell_2 = 400$ for synchrotron. The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}.
 
 %Given that the intensity template has been estimated in a different way to the Q and U templates, we employ two different multipole scale cut-offs: $\ell=400$ and $100$, respectively. This further prevents the mixing of scales due to variable resolutions.
 
