@@ -38,8 +38,7 @@ In this work, we develop techniques to overcome a number of limitations of previ
 
 %The models developed here follow several general principles, in line with the ethos of previous generations of Galactic emission models. The models are explicitly data-based on scales and frequencies where the Galactic emission is well-measured: we use the best available data to the extent possible. Where we do not have high-fidelity measurements, we have some freedom on the ultimate characteristics of our synthetic Galactic emission. We strive to be guided by two principles: first, we take a \giuse{``physics-driven" approach to the problem wherever possible, preferring to be guided by our current understanding of ISM physics. Second, we consider follow an ``data-driven'' approach so that the new models rely on the  state of art of  latest datasets. }
 
-Synthesizing the suite of models implemented in this work and elsewhere, we define three full-sky models of Galactic foreground emission and polarization. These models are driven by the existing data where observational constraints are unambiguous and span a range of complexities (labeled low, medium, and high) in their approach to modeling emission in the parameter space not well-constrained by data. This suite enables individual experiments to optimize their designs over our current understanding of the Galactic foreground sky and supports self-consistent comparative and---especially---joint analyses of multiple experiments. 
-%, for example analyzing CMB-S4 data together with that of the precursor South Pole and/or Simons Observatories, or using CMB-S4 high resolution data to help delens LiteBIRD and LiteBIRD high frequency data to help remove dust from CMB-S4.
+Synthesizing the suite of models implemented in this work and elsewhere, we define three full-sky models of Galactic foreground emission and polarization. These models are driven by the existing data where observational constraints are unambiguous and span a range of complexities (labeled low, medium, and high) in their approach to modeling emission in the parameter space not well-constrained by data. This suite enables individual experiments to optimize their designs over our current understanding of the Galactic foreground sky and supports self-consistent comparative and---especially---joint analyses of multiple experiments.
 
 We organize the paper as follows: Section~\ref{sec:methods} is an overview of how Galactic emission models are implemented in PySM; Section~\ref{sec:small_scales} presents our methodology for generating stochastic simulations of small-scale emission using the polarization fraction tensor formalism; Section~\ref{sec:other_models} describes our implementation of an alternative dust model and of a suite of CO emission models; Section~\ref{sec:validation} details a collection of validation metrics for the new models; Section \ref{sec:modelsuite} presents our proposed triplet of sky models that span a range of complexity; Section~\ref{sec:discussion} discusses current limitations and future directions for development; and Section~\ref{sec:summary} concludes with a summary.
 
@@ -747,11 +746,25 @@ Following the algorithm in \cite{Grewal:2022}, we calculate the MFs for the thre
 
 Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the MFs of \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} are almost identical, while the MFs of \texttt{Gaussian-ss} differ substantially. The difference in MFs between \texttt{poltens-ss} and \texttt{Gaussian-ss} implies the existence of non-Gaussianity in \texttt{poltens-ss}, but the similarity between \texttt{poltens-ss} and \texttt{Gaussian-mod-ss} demonstrates that the non-Gaussianity in \texttt{poltens-ss} comes from the anisotropy in the maps, which originates from the modulation, rather than from the polarization fraction tensor transformation.
 
-\begin{figure*}[hbt!]
+\begin{figure*}
     \centering
     \includegraphics[width=180mm]{figures/MFs_80p_sky_Q.pdf}
     \caption{MFs for the small scales of three sets of maps on the sphere with Planck HFI 80\% mask. The small scales are filtered out by excluding multipoles $\ell < 200$ in the maps, and we choose $\ell_\text{max} = 2048$ when obtaining the small scales. We show the MFs as a function of threshold $\rho$, for \texttt{Gaussian-mod-ss} in blue, \texttt{poltens-ss} in orange and \texttt{Gaussian-ss} in dashed gray.}
     \label{fig:MF:sphere}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=180mm]{figures/maps_patch_345_35.pdf}
+    \caption{The zoom-in plot of the maps, in the selected patch with center [$-15^{\circ}$ , $45^{\circ} $]. From left to right, we show the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss}, \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
+    \label{fig:maps:patch2}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=180mm]{figures/MFs_345_45_with_G_rescaled.pdf}
+    \caption{Minkowski Functionals as a function of the threshold $\rho$ for the one realization of I, Q and U small scales in the patch with center of [$-15^{\circ}$ , $45^{\circ} $] in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. The blue dotted one is for \texttt{Gaussian-mod-ss} while the orange solid one is from \texttt{poltens-ss}. We also show the \texttt{Gaussian-ss} in dashed gray line as a comparison.}
+    \label{fig:MF:patch2}
 \end{figure*}
 
 \subsubsection{Minkowski Functionals on small regions}
@@ -760,19 +773,6 @@ We consider a region centered at $(l, b) = (-15^{\circ}$, $45^{\circ})$ with dim
 Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} maps presented in Figure~\ref{fig:maps:patch2}. In contrast with the large-area results presented in Figure~\ref{fig:MF:sphere}, in this case we do measure a departure of the \texttt{poltens-ss} MFs from the \texttt{Gaussian-mod-ss} ones. %This points towards the fact that the polarization fraction tensor transformation may indeed have induced some level of non-Gaussianity, distinct from pure modulation effects, that are detectable on small sky regions. 
 This means that the polarization fraction tensor transformation introduced non-Gaussian small-scale structure, distinct from pure modulation effects, that is detectable on small sky regions. 
 We conclude that the level of induced non-Gaussianity differs from one region to the other and does not significantly impact the statistical properties when averaged over large sky fractions.
-
-\begin{figure*}[hbt]
-    \centering
-    \includegraphics[width=180mm]{figures/maps_patch_345_35.pdf}
-    \caption{The zoom-in plot of the maps, in the selected patch with center [$-15^{\circ}$ , $45^{\circ} $]. From left to right, we show the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss}, \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
-    \label{fig:maps:patch2}
-\end{figure*}
-\begin{figure*}[hbt]
-    \centering
-    \includegraphics[width=180mm]{figures/MFs_345_45_with_G_rescaled.pdf}
-    \caption{Minkowski Functionals as a function of the threshold $\rho$ for the one realization of I, Q and U small scales in the patch with center of [$-15^{\circ}$ , $45^{\circ} $] in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. The blue dotted one is for \texttt{Gaussian-mod-ss} while the orange solid one is from \texttt{poltens-ss}. We also show the \texttt{Gaussian-ss} in dashed gray line as a comparison.}
-    \label{fig:MF:patch2}
-\end{figure*}
 
 % BH: The commented text below has been moved, but retained here for reference + original comments
 % \subsection{Synchrotron validation} \label{sec:sync_validation}
@@ -1014,4 +1014,3 @@ This work was supported by the National Science Foundation under grant No. AST-2
 \bibliography{refs.bib,refsADS.bib,refsPlanck.bib}
 
 \end{document}
-
