@@ -727,7 +727,7 @@ To isolate the non-Gaussianity of the small-scales, we also generate Gaussian ra
 
 \item We first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the \deleven\ maps with the \texttt{GAL097} mask, and we synthesize Gaussian random fields that have the fitted power law out to ell = $\ell_{\rm max}=4096$. 
 
-\item To obtain only the small scales, we apply a high-pass filter to the fitted power law with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations from the truncated power law using \texttt{synfast} routine provided by HEALPix. 
+\item To obtain only the small scales, we apply a high-pass filter to the fitted power law with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations from the truncated power law using the \texttt{synfast} routine provided by HEALPix. 
 
 \item For modulated Gaussian maps, the full-sky small-scale structure realizations are then multiplied with modulation maps to have similar anisotropies with the small scales from \deleven{}. %We do not modulate the pure Gaussian maps. 
 
@@ -737,7 +737,7 @@ To isolate the non-Gaussianity of the small-scales, we also generate Gaussian ra
 \end{enumerate}
 
 Now we have three sets of maps with different small scales co-added: model \deleven, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
-We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-mod-ss}, and \texttt{Gaussian-ss}, respectively. We calculate the MFs both on the sphere and in several select regions of the sky projected into a Cartesian projection. Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are fully Gaussian and isotropic since they are built from texttt{synfast} routine without any further processing . 
+We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-mod-ss}, and \texttt{Gaussian-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are fully Gaussian and isotropic since they are built from texttt{synfast} routine without any further processing . 
 
 %Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
 
