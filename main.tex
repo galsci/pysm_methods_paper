@@ -185,25 +185,29 @@ To implement the parametric models of dust and synchrotron emission described in
 \subsubsection{Methods Overview}\label{subsec:methodology}
 A principal challenge for generating realizations of Galactic emission at small angular scales over the full sky is that amplitude of the fluctuations is strongly dependent on proximity to the Galactic plane. Further, Gaussian random fluctuations are a poor representation of the typically filamentary structure of the Galactic ISM \citep[e.g.,][]{Hacar:2023}. We address each of these challenges through use of the polarization fraction tensor framework.
 
-While the mathematical model of this framework can be applied to any emission mechanism, it is motivated by a simple model of dust emission. In this picture, the morphology of the dust polarized intensity $P$ at large angular scales is set primarily by the density structure of the dust, probed in projection by the total intensity $I$, and then secondarily by the large-scale morphology of the Galactic magnetic field, which modulates the polarization fraction of the dust, $p \equiv P/I$. Random fluctuations of the turbulent component of the Galactic magnetic field lead to fluctuations on top of this smooth, large-scale polarized intensity distribution. The amplitude of these fluctuations are much more spatially isotropic than fluctuations in the $P$ map itself. Further, total and polarized dust emission are coupled through the angle $\gamma$ between the local magnetic field and the line of sight, such that the sum $I+P$ is independent of $\gamma$ \citep{Hensley:2019}. This suggests the following transformations between $I$, $Q$, and $U$ and their polarization fraction tensor framework analogues $i$, $q$, and $u$:
+While the mathematical model of this framework can be applied to any emission mechanism, it is motivated by a simple model of dust emission. In this picture, the morphology of the dust polarized intensity $P$ at large angular scales is set primarily by the density structure of the dust, probed in projection by the total intensity $I$, and then secondarily by the large-scale morphology of the Galactic magnetic field, which modulates the polarization fraction of the dust, $p \equiv P/I$. Random fluctuations of the turbulent component of the Galactic magnetic field lead to fluctuations on top of this smooth, large-scale polarized intensity distribution. The amplitude of these fluctuations are much more spatially isotropic than fluctuations in the $P$ map itself. Further, total and polarized dust emission are coupled through the angle $\gamma$ between the local magnetic field and the line of sight, such that the sum $I+P$ is independent of $\gamma$ \af{and traces dust column density} \citep{Hensley:2019}. \af{For other polarized emission components, one could in principle try to construct similar estimators that aim to disentangle model parameters from observed data, but they would be model dependent, and affected by the averaging along the line of site (which might be significant, as is the case for synchrotron radiation).}
 
+\af{We adopt a simple, if somewhat heuristic, approach that treats intensity and polarization components on equal footing, and seems to work well both for dust and synchrotron radiation. Since Galactic emission has such a large dynamic range, $\ln I$ is often used for visualization (and has one-point PDF closer to Gaussian one than the original distribution of $I$). On the other hand, polarization fraction $p$ is widely used in description and analysis of galactic foregrounds, but it is only one scalar quantity out of many that could be constructed from Stokes parameters $I$, $Q$, and $U$. In general, the two-dimensional sky map intensity and polarization are described by a rank 2 symmetric tensor $P_{ab}$, with components transforming under local coordinate changes. This suggests that the transformation that attempts to normalize emission should be applied to polarization \textit{tensor}, not its components. The simplest such transformation is logarithmic, with $p_{ab} = \ln P_{ab}$ in the matrix sense}
+\begin{equation}\label{eq:logP}
+\left[ \begin{matrix} i+q & u \\ u & i-q \end{matrix} \right] \ = \ 
+    \ln \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right].
+\end{equation}
+\af{This transformation can be easily computed analytically by applying logarithm to eigenvalue decomposition of $P_{ab}$, and preserves direction of polarization, but compresses Stokes parameters $I$, $Q$, $U$ into their polarization fraction tensor analogues $i$, $q$, $u$}
 \begin{align}\label{eq:real2pt}
     i &\equiv \frac{1}{2} \ln (I^2 - P^2)\nonumber  \\
-    q &\equiv  \frac{Q}{2P} \ln \frac{I+P}{I-P} \\
-    u &\equiv  \frac{U}{2P} \ln \frac{I+P}{I-P}\nonumber 
+    q &\equiv  \frac{1}{2}\frac{Q}{P} \ln \frac{I+P}{I-P} \\
+    u &\equiv  \frac{1}{2}\frac{U}{P} \ln \frac{I+P}{I-P}\nonumber 
     ~~~,
 \end{align}
-where $P \equiv \sqrt{Q^2 + U^2}$. Through the normalization of $Q$ and $U$ by $P$, maps of $q$ and $u$ are designed to have fluctuations roughly independent of proximity to the Galactic plane. % BH: I have not fully captured the physical/mathematical raison d'être here, probably need to coordinate with Andrei. E.g., why this functional form?
-
-The inverse transformations are:
-
+where $P \equiv \sqrt{Q^2 + U^2}$ \af{is the usual polarization invariant}.
+\af{For small polarization, these reduce to familiar quantities $i\simeq\ln I$, $q\simeq Q/I$, and $u\simeq U/I$, but for large polarization these variables have some nicer properties. In particular, inverse transformation}
 \begin{align}\label{eq:pt2real}
     I &= e^i \cosh \xi \nonumber \\
     Q &= \frac{q}{\xi}e^i\sinh \xi  \\
     U &= \frac{u}{\xi}e^i\sinh \xi \nonumber
     ~~~,
 \end{align}
-where $\xi \equiv \sqrt{q^2 + u^2}$. The transformations are non-linear, and thus Gaussian fluctuations introduced in $i$, $q$, and $u$ maps will necessarily become non-Gaussian when transformed back to $I$, $Q$, and $U$.
+where $\xi \equiv \sqrt{q^2 + u^2}$, \af{will never result in polarization fraction $p > 1$ as $p=\tanh\xi$}. The transformations are non-linear, and thus Gaussian fluctuations introduced in $i$, $q$, and $u$ maps will necessarily become non-Gaussian when transformed back to $I$, $Q$, and $U$.
 
 The method for generating small-scale fluctuations is summarized as follows: 
 \begin{enumerate}
