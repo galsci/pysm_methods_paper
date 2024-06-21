@@ -14,7 +14,7 @@ Some recommendations:
     chmod -R o+rx .
     ```
   
-* If you use data please use `!wget` inside the notebook to retrieve them at execution time or assume that the notebook is being executed on `Jupyter@NERSC` and point to paths on Perlmutter accessible by the `cmb` group
+* If you use data please use `!wget` inside the notebook to retrieve them at execution time or assume that the notebook is being executed on `Jupyter@NERSC` and point to paths on Perlmutter accessible by the `cmb` and/or the `mp107d` group
 * Write the updated figures directly inside the `../figures` folder
 * Do not store outputs inside the Notebooks, it is best to clean them up with `nbstripout` before uploading them
 * Run `black notebook.ipynb` to apply automatic formatting (you need to install `pip install "black[jupyter]"`)
