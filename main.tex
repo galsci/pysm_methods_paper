@@ -615,7 +615,7 @@ With the same process applied to other PySM models at frequencies of interest, w
 
 %The current upper limit on the tensor-to-scalar ratio is set by a combination of BICEP / Keck (BK), Planck, and WMAP data: $r < 0.036~(95\%)$ \citep{Ade:2021}. Over the next few years, a collaborative effort between the South Pole Telescope (SPT) and BICEP / Keck will combine high-resolution SPT-3G observations with BK observations in order to ``delens'' the observed CMB B-modes, and further constrain $r$. Therefore, there will be continued interest in simulating Galactic foregrounds on this particular patch of sky.
 
-While model \texttt{d9} and \texttt{d10} generally display a spatial variation that can be described by a power law, we find that \texttt{d12} has a fall in power in low $\ell$ regime as it has a fairly smooth map region at the upper left corner of the patch, different than the one being shown in Figure~\ref{fig:psym_BKmatrix}. Notably, all of them have excess $BB$ power compared to the measured amplitude in this patch of sky at 353~GHz. We thus further show the deviation ratios of these models down to 85~GHz in table~\ref{tab:BB_dustratio} to demonstrate how their amplitudes vary over frequency. It turns out that \texttt{d9} and \texttt{d12} have a fairly stable factor of 2 deviation, but \texttt{d10} deviates less from the measurement as frequency decreases, pointing to a slightly smaller $\beta_d$. At larger scales of $\ell \lesssim 80$, these models are dominated by the underlying GNILC template, so the mismatch in amplitude between the BK maximum likelihood model and our templates is most likely due to residual noise in the GNILC template. Indeed, most of the constraining power on dust BB power in Ref~\cite{Ade:2021} is driven by BK observations at 220~GHz, which are not used to inform our model.
+While model \texttt{d9} and \texttt{d10} generally display a spatial variation that can be described by a power law, we find that \texttt{d12} has a fall in power in low $\ell$ regime as it has a fairly smooth map region at the upper left corner of the patch, different than the one being shown in Figure~\ref{fig:psym_BKmatrix}. Notably, all of them have excess $BB$ power compared to the measured amplitude in this patch of sky at 353~GHz. We thus further show the deviation ratios of these models down to 85~GHz in table~\ref{tab:BB_dustratio} to demonstrate how their amplitudes vary over frequency. It turns out that \texttt{d9} and \texttt{d12} have a fairly stable factor of 2 deviation, but \texttt{d10} deviates less from the measurement as frequency decreases, pointing to a slightly smaller $\beta_d$ preference. At larger scales of $\ell \lesssim 80$, these models are dominated by the underlying GNILC template, so the mismatch in amplitude between the BK maximum likelihood model and our templates is most likely due to residual noise in the GNILC template. Indeed, most of the constraining power on dust BB power in Ref~\cite{Ade:2021} is driven by BK observations at 220~GHz, which are not used to inform our model.
 
 %In Figure~\ref{fig:d1d9_bkpatch} we compare the BB power spectrum of the new \dnine{} model with the original PySM \done{} model, the GNILC input map, and the maximum likelihood dust model in this patch of sky determined from a combination of BK, Planck and WMAP data \citep{Ade:2021}. Model \done{} clearly has excess dust BB power compared to the measured amplitude in this patch of sky, which has been known for some time. This is somewhat ameliorated in model \dnine{}, primarily due to the steeper spectral tilt of the \dnine{} model leading to a factor of $\sim 10$ decrease in power relative to \done{} by multipoles of $\ell \gtrsim 300$. At larger scales of $\ell \lesssim 50$ both the \done{} and \dnine{} models are dominated by the underlying GNILC template, rather than the simulated small scale realizations, and so the mismatch in amplitude between the BK maximum likelihood model and our templates is most likely due to residual noise in the GNILC template. Indeed, most of the constraining power on dust BB power in Ref~\cite{Ade:2021} is driven by BK observations at 220\,GHz, which are not used to inform our model. 
 
@@ -637,23 +637,6 @@ While model \texttt{d9} and \texttt{d10} generally display a spatial variation t
 One may argue that the amplitude of the \texttt{d9}, \texttt{d10} and \texttt{d12} model disagree with existing observations in the BK patch of sky. While this is true, it is beyond the scope of this work to provide full sky simulations that guarantee consistency with all sets of full sky and partial sky observations. Indeed, the use of power spectrum-based techniques requires a certain amount of global averaging of power spectrum parameters that are in fact known to vary across the sky \cite{planck2016-l04}. For example, while the dust amplitude can be modulated by the use of a large scale template, the spectral tilt has to be fixed to a single value for the full sky, which is not realistic. 
 
 %One may argue that the amplitude and spectral tilt of the \dnine{} model clearly disagree with existing observations in the BK patch of sky. While this is true, it is beyond the scope of this work to provide full sky simulations that guarantee consistency with all sets of full sky and partial sky observations. Indeed, the use of power spectrum-based techniques requires a certain amount of global averaging of power spectrum parameters that are in fact known to vary across the sky \cite{planck2016-l04}. For example, while the dust amplitude can be modulated by the use of a large scale template, the spectral tilt has to be fixed to a single value for the full sky, which is not realistic.
-
-%\begin{table}[]
-%    \centering
-%    \begin{tabular}{lccc}
-%    \toprule 
-%     & 20~GHz & 30~GHz & 40~GHz\\
-%    \midrule
-%    \texttt{s4} & & & \\
-%    \texttt{s5} & & & \\
-%    \texttt{s7} & & & \\
-%   \bottomrule
-%    \end{tabular}
-%    \caption{Same as table~\ref{tab:BB_dustratio} but for PySM synchrotron models.}
-%    \label{tab:BB_syncratio}
-%\end{table}
-% 1. All sync models behave similarly? 
-% 2. No ratio to 0 of BK18...
 
 %\begin{figure}[ht]
 %    \centering
