@@ -107,18 +107,18 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
 
 \begin{deluxetable*}{m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm} m{.7cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models - Dust}
+\caption{Summary of the PySM 3.4 models - Dust. $ {} ^{\dag}$See Tab.\ref{tab:smallscale_par} for $\alpha_EE$ and $alpha_BB$ .}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
 \startdata
-d9 & I: Planck 2015 (PR2) GNILC at 353 GHz. QU: Planck 2018 (PR3) GNILC at 353 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & Uniform spectral index and dust temperature &  & Deterministic & Modified black body & 8192 \\
+d9 &  GNILC PR2 (I) + GNILC PR3 (QU) 353 GHz &  Modulated + polarization tensor & Uniform spectral parameters &  & Deterministic & Modified black body & 8192 \\
 \hline
-d10 & same as above & same as above & Planck GNILC spectral index and dust temperature & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & same as above & 8192 \\
+d10 & same as above & same as above &  $\beta_d, \, T_d$ from GNILC data & Modulated & Deterministic & same as above & 8192 \\
 \hline
-d11 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates, spectral index and dust temperature & same as above & 8192 \\
+d11 & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral parameters & same as above & 8192 \\
 \hline
-d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps. & Random fluctuations based on extrapolated spectrum in I. Power laws in ell in polarization, with alpha\_s=-2.41 for E and -2.52 for B. & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
+d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
 %\bottomrule
 %\end{tabular}
 %\end{center}
@@ -134,16 +134,16 @@ d12 & I from PR2 GNILC. QU from an early version of Planck PR3 polarization maps
   \toprule
 Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
 \midrule
-Synch & s4 & I Haslam at 408 MHz (Remazeilles2014), QU WMAP 23 GHz & Random fluctuations based on extrapolated spectrum in polarization fraction formalism and modulated by a temperature-based template & uniform spectral index &  & Deterministic & Power law & 8192 \\
+Synch & s4 & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & uniform spectral index &  & Deterministic & Power law & 8192 \\
 \hline
 
-Synch & s5 & same as above & same as above & Haslam/WMAP spectral index corrected with S-PASS & Random fluctuations based on extrapolated spectrum and modulated by a temperature-based template & Deterministic & Power law & 8192 \\
+Synch & s5 & same as above & same as above & $\beta_s$ from Haslam/WMAP + S-PASS corrections & Modulated  & Deterministic & Power law & 8192 \\
 \hline
 
-Synch & s6 & same as above & same as above & same as above & same as above & Stochastic small scales in IQU templates and spectral index & Power law & 8192 \\
+Synch & s6 & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral index & Power law & 8192 \\
 \hline
 
-Synch & s7 & same as above & same as above & same + power law curvature term based on ARCADE & same + fluctuations in the curvature term & Deterministic & Curved power law & 8192 \\
+Synch & s7 & same as above & same as above & same +  $c_s$ from ARCADE & same + fluctuations in $c_s$   & Deterministic & Curved power law & 8192 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -624,7 +624,7 @@ As demonstrated in Figure~\ref{fig:psym_BKmatrix}, we apply a new method to comp
     \label{tab:BB_dustratio}
 \end{table}
 
-With the same process applied to other PySM models at frequencies of interest, we acquire a set of filtered and purified foreground polarization maps which represent the foreground outcomes from realistic B-mode measurements of the sky patch. We then proceed to calculate their $BB$ auto power spectra using the BK binning. In Figure~\ref{fig:BKfield_power}, we show the \texttt{d9} and \texttt{d12} $BB$ band power at 353~GHz and the \texttt{s5} and \texttt{s6} band power at 23~GHz, the pivot frequencies adopted in the BK analyses. These PySM power spectra are compared with the BK18 maximum likelihood foreground model comprising a modified blackbody power spectrum ($T_d$ fixed at $19.6~\text{K}$) with parameter $A_{d,\ell=80} = 4.4 \; \mu\text{K}^2$ , $\beta_d = 1.5$ and $\alpha_d = -0.66$ for dust, and a square-law power spectrum with parameter $A_{s,\ell=80} = 0.6 \; \mu\text{K}^2$, $\beta_s = -3.0$ and $\alpha_s = 0.00$ for synchrotron. These BK18 model lines are suppressed by its band power window function to account for the mode loss and mode coupling induced by the observation matrix, purification matrix, masking and binning as well. 
+With the same process applied to other PySM models at frequencies of interest, we acquire a set of filtered and purified foreground polarization maps which represent the foreground outcomes from realistic B-mode measurements of the sky patch. We then proceed to calculate their $BB$ auto power spectra using the BK binning. In Figure~\ref{fig:BKfield_power}, we show the \texttt{d9} and \texttt{d12} $BB$ band power at 353~GHz and the \texttt{s5} band power at 23~GHz, the pivot frequencies adopted in the BK analyses. These PySM power spectra are compared with the BK18 maximum likelihood foreground model comprising a modified blackbody power spectrum ($T_d$ fixed at $19.6~\text{K}$) with parameter $A_{d,\ell=80} = 4.4 \; \mu\text{K}^2$ , $\beta_d = 1.5$ and $\alpha_d = -0.66$ for dust, and a square-law power spectrum with parameter $A_{s,\ell=80} = 0.6 \; \mu\text{K}^2$, $\beta_s = -3.0$ and $\alpha_s = 0.00$ for synchrotron. These BK18 model lines are suppressed by its band power window function to account for the mode loss and mode coupling induced by the observation matrix, purification matrix, masking and binning as well. 
 
 %The current upper limit on the tensor-to-scalar ratio is set by a combination of BICEP / Keck (BK), Planck, and WMAP data: $r < 0.036~(95\%)$ \citep{Ade:2021}. Over the next few years, a collaborative effort between the South Pole Telescope (SPT) and BICEP / Keck will combine high-resolution SPT-3G observations with BK observations in order to ``delens'' the observed CMB B-modes, and further constrain $r$. Therefore, there will be continued interest in simulating Galactic foregrounds on this particular patch of sky.
 
@@ -646,7 +646,7 @@ One may argue that the amplitude of the \texttt{d9}, \texttt{d10} and \texttt{d1
 %The cleanest patch of sky in the southern hemisphere is particularly important for ongoing and future CMB experiments that target measurement of the primordial CMB B-modes. We focus on the small clean patch of sky that is targeted for the BICEP/Keck experiment for their constraints on the tensor-to-scalar ratio. This overlaps with the tentative sky patch that will be targeted by the CMB-S4 experiment for their primordial B-mode search \citep{Abazajian:2022}. In their 2021 analysis the BICEP/Keck team placed a upper limit of $A_s<1.4 \mu{\rm K}^2$ at a pivot frequency of 23\,GHz with $\beta_s=-3.1$ after marginalizing over the range $-1<\alpha_s<0$ \citep{Ade:2021}. The BICEP/Keck maximum likelihood model for the synchrotron spectrum is parameterized by $A_s=0.6 \mu{\rm K}^2$, $\beta_s=-3.0$ and $\alpha_s=0$. 
 % In Figure~\ref{fig:Dl_sync_BK}, we compare these two sets of constraints from the BICEP/Keck 2018 results with the new PySM synchrotron models s4, s5 and s7. We also plot the old PySM s1 synchrotron model to show how the synchrotron model has changed in this patch of interest.
 
-We present only the PySM \texttt{s5} and \texttt{s6} power spectra in the same figure as other new models yield similar results in this sky patch. These models clearly exhibit a non-zero $\alpha_s$ and a significantly larger amplitude at the pivot frequency. However, this trend reverses at 40~GHz, where the synchrotron amplitude from the BK data becomes several times larger instead, suggesting that the models have a more negative $\beta_s$. It is important not to overinterpret these discrepancies between our models and the data since the latest BK results provide weak constraints on the synchrotron foreground, relying on reprocessed WMAP 23/33~GHz and NPIPE 30/40~GHz maps. Revisiting the discrepancies will be interesting when new synchrotron measurements are released from the BICEP Array telescope which comprises a dedicated 30/40~GHz receiver~\citep{Moncelsi:2020}. 
+We present only the PySM \texttt{s5} power spectra in the same figure as other new models yield similar results in this sky patch. These models clearly exhibit a non-zero $\alpha_s$ and a significantly larger amplitude at the pivot frequency. However, this trend reverses at 40~GHz, where the synchrotron amplitude from the BK data becomes several times larger instead, suggesting that the models have a more negative $\beta_s$. It is important not to overinterpret these discrepancies between our models and the data since the latest BK results provide weak constraints on the synchrotron foreground, relying on reprocessed WMAP 23/33~GHz and NPIPE 30/40~GHz maps. Revisiting the discrepancies will be interesting when new synchrotron measurements are released from the BICEP Array telescope which comprises a dedicated 30/40~GHz receiver~\citep{Moncelsi:2020}. 
 
 %The new synchrotron models, s4, s5 and s7, have more power in the BICEP/Keck patch when compared to the old s1 synchrotron model. The latest BICEP/Keck results only has weak detection of synchrotron. We find that both the old and new PySM models are consistent with the BICEP/Keck upper limit on the synchrotron power. However, the BICEP/Keck maximum likelihood model for synchrotron has a better agreement with the new synchrotron models s4, s5 and s7 than with the old s1 synchrotron model. Thus, the new small scale generation in the synchrotron models s4, s5, and s7 increases the synchrotron power in the BICEP/Keck patch and is in better agreement with the constraints from the latest BICEP/Keck results.
 
