@@ -130,7 +130,7 @@ d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  &
 %\end{table*}
 \end{deluxetable*}
 
-\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm}  m{.7cm}  } 
+\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm}  m{.7cm}  } \label{table:summarysynch}
 \caption{Summary of the PySM 3.4 models - Synchrotron}
 \tablewidth{0pt}
 \tablehead{
@@ -144,11 +144,9 @@ d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  &
 \hline
  s7 & same as above & same as above & same +  $c_s$ from ARCADE & same + fluctuations in $c_s$   & Deterministic & Curved power law & 8192 \\
 \enddata 
- 
-\label{table:summarysynch}
 \end{deluxetable*}
 
-\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}     m{2cm}  m{2cm}  m{.7cm}  } 
+\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}     m{2cm}  m{2cm}  m{.7cm}  } \label{table:summaryco}
 \caption{Summary of the PySM 3.4 models - CO}
 \tablewidth{0pt}
 \tablehead{
@@ -159,8 +157,7 @@ d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  &
  co2 & same as above &   & Deterministic & same as above + polarized .1\% & 2048 \\
 \hline
  co3 & same as above & Simulated High Galactic clouds &    Deterministic & same as above & 2048 \\
-\enddata 
-\label{table:summaryco}
+\enddata
 \end{deluxetable*}
 
 
@@ -172,7 +169,7 @@ Our approach is to generate stochastic realizations of small-scale emission that
 We divide our discussion into amplitude parameters ($A_d^S$ and $A_s^S$ in Equations~\ref{eq:dust-emission-law} and \ref{eq:synch-emission-law}, respectively) in Section~\ref{sec:amp_params} and spectral parameters ($\beta_d$ and $T_d$ in Equation~\ref{eq:dust-emission-law} and $\beta_s$ and $c_s$ in Equation~\ref{eq:synch-emission-law}) in Section~\ref{sec:spec_params} as the methodology differs for each.
 
 \subsection{Small-Scale Fluctuations in Amplitude Parameters} \label{sec:amp_params}
-To implement the parametric models of dust and synchrotron emission described in Section~\ref{sec:emission_mechanisms}, we require maps of $A^I$, $A^Q$, and $A^U$ for each mechanism, i.e., the total emission and polarization at a reference frequency. We start from template $I$, $Q$, and $U$ maps derived from data, to which we add fluctuations at scales that are noise-dominated. Our treatment of amplitude parameters differs from spectral parameters (Section~\ref{sec:spec_params}) because amplitude parameters need all of $I$, $Q$, and $U$ and thus consistency among them.
+To implement the parametric models of dust and synchrotron emission described in Section~\ref{sec:emission_mechanisms}, we require maps of $A^I$, $A^Q$, and $A^U$ for each mechanism, i.e., the total emission and polarization at a reference frequency. We start from template $I$, $Q$, and $U$ maps derived from data, to which we add fluctuations at scales that are noise-dominated. Our treatment of amplitude parameters differs from spectral parameters (Section~\ref{sec:spec_params}) because amplitudes are needed in all of $I$, $Q$, and $U$ with consistency among them.
 
 \subsubsection{Methods Overview}\label{subsec:methodology}
 A principal challenge for generating realizations of Galactic emission at small angular scales over the full sky is that amplitude of the fluctuations is strongly dependent on proximity to the Galactic plane. Further, Gaussian random fluctuations are a poor representation of the typically filamentary structure of the Galactic ISM \citep[e.g.,][]{Hacar:2023}. We address each of these challenges through use of the polarization fraction tensor framework.
@@ -210,12 +207,11 @@ where $\xi \equiv \sqrt{q^2 + u^2}$. A number of useful features of this transfo
     p = \tanh\xi
     ~~~,
 \end{equation}
-and so $0 \leq p \leq 1$. 
-Since the transformation is non-linear, Gaussian fluctuations introduced in $i$, $q$, and $u$ maps will necessarily become non-Gaussian when transformed back to $I$, $Q$, and $U$.
+and so $0 \leq p \leq 1$. Since the transformation is non-linear, Gaussian fluctuations introduced in $i$, $q$, and $u$ maps will necessarily become non-Gaussian when transformed back to $I$, $Q$, and $U$.
 
 This formalism does not take into account noise in the map, and so care must be taken in regions of low signal-to-noise ratio. Nevertheless, application of this framework to radio astronomy data has yielded significant improvements in reconstruction quality \citep{Arras:2021}.
 
-Thus, the method for generating small-scale fluctuations \af{in polarized emission} is summarized as follows: 
+Thus, the method for generating small-scale fluctuations is summarized as follows: 
 \begin{enumerate}
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
     \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
@@ -367,7 +363,7 @@ Incorporating newer constraints on synchrotron emission at 2.3\,GHz from S-PASS,
 
 We next fit a power-law to the power spectrum of this new template map over the multipole range $2<\ell<38$, finding $\alpha_{\beta_s}=-0.61$ then construct a map from this power spectrum extrapolated to high multipoles. We next construct a modulation map by taking the Haslam 408\,GHz $I$ map, smoothing to $5^\circ$ resolution, then renormalizing the map through a linear transformation such that the (dimensionless) pixel values range from 0.1--2. As with the dust spectral parameter maps (see Section~\ref{subsec:dust_spec_params}), we combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
  
-For the synchrotron curvature parameter $c_s$, there are no readily available template maps. The existing \texttt{s3} model implements curvature as a sky-constant $c_s = -0.052$, consistent with the measurements from ARCADE \citep[$c_s=-0.052 \pm 0.005$][]{Kogut:2012}. As an attempt to model a reasonable range of spatial variability, we assume that fluctuations in the value of $c_s$ follow the synchrotron intensity at large angular scales. Specifically, we start from the Haslam map 408\,MHz $I$ map smoothed to a resolution of $5 \deg$, which we then rescale with a linear transformation such that the minimum and maximum pixel values are  $-0.0517$ and $0.0054$, respectively, corresponding to the range of $c_s$ measurements from ARCADE \citep{Kogut:2012}. The resulting $c_s$ map has a mean and standard deviation of $-0.0517$ and $0.0054$, respectively. 
+For the synchrotron curvature parameter $c_s$, there are no readily available template maps. The existing \texttt{s3} model implements curvature as a sky-constant $c_s = -0.052$, consistent with the measurements from ARCADE \citep[$c_s=-0.052 \pm 0.005$,][]{Kogut:2012}. As an attempt to model a reasonable range of spatial variability, we assume that fluctuations in the value of $c_s$ follow the synchrotron intensity at large angular scales. Specifically, we start from the Haslam map 408\,MHz $I$ map smoothed to a resolution of $5 \deg$, which we then rescale with a linear transformation such that the minimum and maximum pixel values are  $-0.0517$ and $0.0054$, respectively, corresponding to the range of $c_s$ measurements from ARCADE \citep{Kogut:2012}. The resulting $c_s$ map has a mean and standard deviation of $-0.0517$ and $0.0054$, respectively. 
 
 % BH: If this was done, it needs to be described quantitatively with reference to the relevant equations
 %Finally, both the $\beta_s$ and the $c_s$ templates are low pass filtered with $\ell=36$ to minimize artifacts from noise and the large beamsize.
@@ -376,7 +372,7 @@ To extend our $c_s$ map to angular scales $\ell > 36$, we first generate a map o
 %Small  scales at multipoles $\ell>36$  are therefore  included   assuming them to follow  the same power law as  the $\beta_s$ ones,  i.e. $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$, and that are  modulated with the exact same modulation map as the one we  adopted for $\beta_s$.
 
 \subsection{Summary of New Dust and Synchrotron Models}
-The new dust and synchrotron models implemented here all improve on previous models through new data-driven templates and use of the polarization fraction tensor framework to model small-scale fluctuations. Multiple models each of dust and synchrotron are provided to explore a range of astrophysical complexity allowed by current constraints. In brief, the d9 and s5 models use the new data-driven templates and include $I$, $Q$, and $U$ fluctuations up to the largest $\ell$ values simulated, but these models have sky-constant spectral parameters and thus no frequency decorrelation (see Section~\ref{subsec:decorrelation} for discussion). In contrast, d10 and s5 employ data-driven maps of spectral parameters to which small-scale fluctuations are added, inducing frequency decorrelation. The s7 synchrotron model provides an extra spectral parameter---curvature of the frequency spectrum---and thus additional complexity. The d11 and s6 models allow many realizations of d10 and s5, respectively, to be generated in which the large scales are fixed to the data-driven templates and the small scales have the same statistical properties but differing spatial morphologies. Extensive model comparisons are given in Section~\ref{sec:validation}.
+The new dust and synchrotron models implemented here all improve on previous models through new data-driven templates and use of the polarization fraction tensor framework to model small-scale fluctuations. Multiple models each of dust and synchrotron are provided to explore a range of astrophysical complexity allowed by current constraints. In brief, the d9 and s5 models use the new data-driven templates and include $I$, $Q$, and $U$ fluctuations up to the largest $\ell$ values simulated, but these models have sky-constant spectral parameters and thus no frequency decorrelation (see Section~\ref{subsec:decorrelation} for discussion). In contrast, d10 and s5 employ data-driven maps of spectral parameters to which small-scale fluctuations are added, inducing frequency decorrelation. The s7 synchrotron model provides an extra spectral parameter---curvature of the frequency spectrum---and thus additional complexity. The d11 and s6 models allow many realizations of d10 and s5, respectively, to be generated in which the large scales are fixed to the data-driven templates and the small scales have the same statistical properties but differing spatial morphologies. Extensive model comparisons are made in Section~\ref{sec:validation}.
 
 \section{Other Models Implemented} \label{sec:other_models}
 
@@ -396,15 +392,15 @@ where $S_\nu(\theta)$ stands for any of the three Stokes parameters of interest,
 We remark, that in the implementation used here, the 353~GHz templates for the six emission layers are slightly different from those of \cite{Martinez-Solaeche:2018} as we construct them from more recent Planck data products. Large scale polarized emission maps are the GNILC maps obtained in \cite{planck2016-l04} using the method developed by \cite{Remazeilles:2011}. These are complemented by small scale realizations with scale dependence matching the $T$, $E$ and $B$ dust spectra measured in \cite{planck2016-l11A}, modulated by the large scale local intensity and polarized intensity level. This does result in some filtering out of the real small scale power in intensity and polarization, which is replaced by random fluctuations. Thus we expect departures from the non-Gaussian and non-stationary properties of real dust emission at these scales. %We devote a future work the improvement of statistical properties of the generated of small scale fluctuations.
 
 \subsection{CO Models} \label{subsec:co_models}
-Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ transitions have been detected even in the broad photometric Planck bands \citep{planck2013-p03a, planck2014-a12}. Since this emission can be polarized \citep{Goldreich:1981}, CO emission could be a relevant foreground for CMB polarization analyses \citep{Puglisi:2017}. Thus, we provide an implementation of three CO emission and polarization models developed by \citet{Puglisi:2017} into the PySM framework.
+Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ transitions have been detected even in the broad photometric Planck bands \citep{planck2013-p03a, planck2014-a12}. Since CO emission can be polarized \citep{Goldreich:1981}, it may be a relevant foreground for CMB polarization analyses \citep{Puglisi:2017}. Thus, we provide an implementation of three CO emission and polarization models developed by \citet{Puglisi:2017} into the PySM~3 framework.
 
-All CO models implemented here are based on the CO $J = 1\rightarrow0$ \texttt{Type-1} intensity map\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} derived by \citet{planck2013-p03a}. This CO map is obtained exploiting the mismatches in the detector bandpass to recover the CO from the CMB and the other Galactic foregrounds, with the MILCA component separation algorithm. This template is preferred to those from spectroscopic surveys \citep[e.g.,][]{Dame:2001} because it is not limited to low Galactic latitudes and has a uniform angular resolution. Although the map is released at a resolution of 10\arcmin, we convolve it with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes. The template is then downgraded to coarser pixellization of \texttt{nside=512}.
+All CO models implemented here are based on the CO $J = 1\rightarrow0$ \texttt{Type-1} intensity map\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} derived by \citet{planck2013-p03a}. This CO map is obtained exploiting the mismatches in the detector bandpass to recover the CO from the CMB and the other Galactic foregrounds, with the MILCA component separation algorithm. This template is preferred to those from existing spectroscopic surveys \citep[e.g.,][]{Dame:2001} because it is not limited to low Galactic latitudes and has a uniform angular resolution. Although the map is released at a resolution of 10\arcmin, we convolve it with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes. The template is then downgraded to coarser pixellization of \texttt{nside=512}.
 
-The first CO model {\bf\texttt{co1}} encodes   intensity -only  emission from the Planck templates once preprocessed with the steps listed above. Templates  for the other two lines, namely  $J = 2\rightarrow1$ and $J = 3\rightarrow2$,  are derived  assuming two constant rescaling factors $0.595$ and $0.297$ as in  \citep[Sect. 4.2.3]{planck2013-p03a}. This is mainly because the templates for the other lines  employ different signal-to-noise ratio as the CO emission gets dimmer at higher transitions.  
+The first CO model {\bf\texttt{co1}} adopts the $J = 1\rightarrow0$ template as-is and assumes no polarization. Emission from the other two transitions is computed assuming constant rescaling factors $0.595$ and $0.297$ for $J = 2\rightarrow1$ and $J = 3\rightarrow2$ \citep[Sect. 4.2.3]{planck2013-p03a}. We do not employ the Planck maps of emission in these transitions directly since their signal-to-noise ratio is much lower.
 
-The complexity in the other two CO  models  gradually increases, and it aims at modelling polarized CO emission both at low and high Galactic latitudes.  The {\bf\texttt{co2}} model  accounts also  for  polarized emission,  with fractional polarization left as a free parameter that can be set by the user (default $p = 0.1 \%$). For this model, Stokes $Q$ and $U$ CO maps are modeled by considering  polarization templates from the  COMMANDER thermal dust maps \citep{planck2014-a12}   \citet[Sect. 4]{Puglisi:2017}.  
+The second CO model  {\bf\texttt{co2}} introduces a simple implementation of polarization. The $I$ maps of the three transitions used in  {\bf\texttt{co1}} are converted to $P$ maps using a sky-constant, user-defined polarization fraction $p$, where the default is $p = 1$\%. The $Q$ and $U$ maps are made from the $P$ maps using the polarization angle of the thermal dust emission as determined by a component separation analysis with Commander \citep{planck2014-a12}.
 
-Finally, the {\bf\texttt{co3}} not only accounts for the polarized emission as in {\bf\texttt{co2}} but it also includes     small scale emission from high-Galactic latitude clouds with the procedure outlined in \citet{Puglisi:2017}.  We specifically consider the {\bf\texttt{LogSpiral}} model from  \citet{Puglisi:2017} that best fitted the Planck data and perform a dedicated simulation to produce the template   of  polarized and unpolarized  high-latitude Galactic clouds. This $IQU $ template is finally  coadded with the  {\bf\texttt{co2}} one.
+Finally, the third CO model {\bf\texttt{co3}} not only accounts for the polarized emission as in {\bf\texttt{co2}} but also includes small-scale emission from high-Galactic latitude clouds. We adopt the {\bf\texttt{LogSpiral}} model from \citet{Puglisi:2017}, which provided the best fit to Planck data, and perform a dedicated simulation to produce maps of the total and polarized emission from high-latitude Galactic clouds specifically. The $I$, $Q$, and $U$ maps generated by the simulation are then added to the $I$, $Q$, and $U$ maps of {\bf\texttt{co2}} to produce the final {\bf\texttt{co3}} model.
  
 \section{Validation and Characterization of Models} \label{sec:validation}
 
