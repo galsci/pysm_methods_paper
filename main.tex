@@ -111,7 +111,7 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
 
 \begin{deluxetable*}{m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm} m{.7cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models - Dust. $ {} ^{\dag}$See Tab.\ref{tab:smallscale_par} for $\alpha_EE$ and $alpha_BB$ .}
+\caption{Summary of the PySM 3.4 models - Dust. $ {} ^{\dag}$See Tab.\ref{tab:smallscale_par} for $\alpha_{EE}$ and $alpha_{BB}$ .}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
@@ -130,50 +130,38 @@ d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  &
 %\end{table*}
 \end{deluxetable*}
 
-\begin{table*}[t]
+\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm}  m{.7cm}  } 
 \caption{Summary of the PySM 3.4 models - Synchrotron}
-\begin{center}
-\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
-
-  \toprule
-Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
-\midrule
-Synch & s4 & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & uniform spectral index &  & Deterministic & Power law & 8192 \\
+\tablewidth{0pt}
+\tablehead{
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
+\startdata
+ s4 & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & uniform spectral index &  & Deterministic & Power law & 8192 \\
 \hline
-
-Synch & s5 & same as above & same as above & $\beta_s$ from Haslam/WMAP + S-PASS corrections & Modulated  & Deterministic & Power law & 8192 \\
+ s5 & same as above & same as above & $\beta_s$ from Haslam,  S-PASS, WMAP    & Modulated  & Deterministic & Power law & 8192 \\
 \hline
-
-Synch & s6 & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral index & Power law & 8192 \\
+ s6 & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral index & Power law & 8192 \\
 \hline
-
-Synch & s7 & same as above & same as above & same +  $c_s$ from ARCADE & same + fluctuations in $c_s$   & Deterministic & Curved power law & 8192 \\
-\bottomrule
-\end{tabular}
-\end{center}
+ s7 & same as above & same as above & same +  $c_s$ from ARCADE & same + fluctuations in $c_s$   & Deterministic & Curved power law & 8192 \\
+\enddata 
+ 
 \label{table:summarysynch}
-\end{table*}
+\end{deluxetable*}
 
-\begin{table*}[t]
+\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}     m{2cm}  m{2cm}  m{.7cm}  } 
 \caption{Summary of the PySM 3.4 models - CO}
-\begin{center}
-\begin{tabular}{ | m{1cm} | m{0.5cm}| m{2cm} | m{2.2cm} | m{2cm}| m{2.2cm} | m{2cm} | m{2cm}| m{.7cm} | } 
-
-  \toprule
-Comp & Tag & Templates at large scale & Templates at small scales & Frequency scaling & Frequency scaling at small scales & Stochasticity & Modelling properties & Up to Nside \\
-\midrule
-CO & co1 & Planck 2013 MILCA smoothed to 1 deg &  &  &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
+\tablewidth{0pt}
+\tablehead{
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} &   \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & &   &&&}
+\startdata
+ co1 & Planck 2013 MILCA smoothed to 1 deg   &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
 \hline
-
-CO & co2 & same as above &  &  &  & Deterministic & same as above + polarized .1\% & 2048 \\
+ co2 & same as above &   & Deterministic & same as above + polarized .1\% & 2048 \\
 \hline
-
-CO & co3 & same as above & Simulated High Galactic clouds &  &  & Deterministic & same as above & 2048 \\
-\bottomrule
-\end{tabular}
-\end{center}
+ co3 & same as above & Simulated High Galactic clouds &    Deterministic & same as above & 2048 \\
+\enddata 
 \label{table:summaryco}
-\end{table*}
+\end{deluxetable*}
 
 
 \section{Dust and Synchrotron Models: Stochastic Emission at Small Angular Scales} \label{sec:small_scales}
