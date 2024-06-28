@@ -174,7 +174,7 @@ We divide our discussion into amplitude parameters ($A_d^S$ and $A_s^S$ in Equat
 \subsection{Small-Scale Fluctuations in Amplitude Parameters} \label{sec:amp_params}
 To implement the parametric models of dust and synchrotron emission described in Section~\ref{sec:emission_mechanisms}, we require maps of $A^I$, $A^Q$, and $A^U$ for each mechanism, i.e., the total emission and polarization at a reference frequency. We start from template $I$, $Q$, and $U$ maps derived from data, to which we add fluctuations at scales that are noise-dominated. Our treatment of amplitude parameters differs from spectral parameters (Section~\ref{sec:spec_params}) because amplitudes are needed in all of $I$, $Q$, and $U$ with consistency among them.
 
-\subsubsection{Methods Overview}\label{subsec:methodology}
+\subsubsection{The Polarization Fraction Tensor Formalism} \label{sec:polfrac}
 A principal challenge for generating realizations of Galactic emission at small angular scales over the full sky is that amplitude of the fluctuations is strongly dependent on proximity to the Galactic plane. Further, Gaussian random fluctuations are a poor representation of the typically filamentary structure of the Galactic ISM \citep[e.g.,][]{Hacar:2023}. We address each of these challenges through use of the polarization fraction tensor framework.
 
 While the mathematical model of this framework can be applied to any emission mechanism, it is motivated by a simple model of dust emission. In this picture, the morphology of the dust polarized intensity $P$ at large angular scales is set primarily by the density structure of the dust, probed in projection by the total intensity $I$, and then secondarily by the large-scale morphology of the Galactic magnetic field, which modulates the polarization fraction of the dust, $p \equiv P/I$. Random fluctuations of the turbulent component of the Galactic magnetic field lead to fluctuations on top of this smooth, large-scale polarized intensity distribution. The amplitude of these fluctuations is much more spatially isotropic than fluctuations in the $P$ map itself. Further, total and polarized dust emission are coupled through the angle $\gamma$ between the local magnetic field and the line of sight, such that the sum $I+P$ is independent of $\gamma$ and proportional to the dust column density \citep{Hensley:2019}. Finally, Galactic dust emission has a large dynamic range in $I$, whereas $\ln I$ not only varies much less but has a roughly Gaussian distribution over the sky.
@@ -214,6 +214,7 @@ and so $0 \leq p \leq 1$. Since the transformation is non-linear, Gaussian fluct
 
 This formalism does not take into account noise in the map, and so care must be taken in regions of low signal-to-noise ratio. Nevertheless, application of this framework to radio astronomy data has yielded significant improvements in reconstruction quality \citep{Arras:2021}.
 
+\subsubsection{General Methodology}\label{subsec:methodology}
 Thus, the method for generating small-scale fluctuations is summarized as follows: 
 \begin{enumerate}
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
