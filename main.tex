@@ -114,7 +114,7 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
 
 \begin{deluxetable*}{m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm} m{.7cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models - Dust. $ {} ^{\dag}$See Tab.\ref{tab:smallscale_par} for $\alpha_{EE}$ and $alpha_{BB}$ .}
+\caption{Summary of the PySM 3.4 models - Dust. $ {} ^{\dag}$See Tab.\ref{tab:smallscale_par} for $\alpha_{EE}$ and $\alpha_{BB}$ .}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
@@ -204,7 +204,7 @@ The inverse transformations are
     U &= \frac{u}{\xi}\,e^i\sinh \xi \nonumber
     ~~~,
 \end{align}
-where $\xi \equiv \sqrt{q^2 + u^2}$. A number of useful features of this transformation are evident. First, for any values of $i$, $q$, and $u$,  $I$ is guaranteed to be positive. Further, it is straightforward to show that
+where $\xi \equiv \sqrt{q^2 + u^2}$. A number of useful features of this transformation are evident. First, for any values of $i$, $q$, and $u$,  $I$ is guaranteed to be positive. Further,
 
 \begin{equation}
     p = \tanh\xi
@@ -383,7 +383,7 @@ The new dust and synchrotron models implemented here all improve on previous mod
 \subsection{Dust Layer Model} \label{sec:layers}
 Evidence for variation of Galactic foreground emission laws as a function of frequency across the sky implies that emission laws must vary along the line of sight. As a consequence, even if dust emission can be described locally by a modified blackbody (Equation~\ref{eq:dust-emission-law}), a superposition of emission regions (i.e., an integral along the line of sight) is not a modified blackbody. In addition, if along the line of sight different line elements emit polarized radiation with different polarization angles, the frequency scaling can vary between $I$, $Q$ and $U$ \citep{Tassis:2015}. Evidence for this ``line-of-sight frequency decorrelation'' has been found in Planck data \citep{Pelgrims:2021}.
 
-To model the complexity of multiple layers of dust along the line of sight, we base our  PySM~3 implementation  on the approach of \cite{Martinez-Solaeche:2018} in the PSM software\footnote{See version 2.3.3 \url{https://apc.u-paris.fr/~delabrou/PSM/psm.html}.}. 
+To model the complexity of multiple layers of dust along the line of sight, we base our  PySM~3 implementation ``d12'' on the approach of \cite{Martinez-Solaeche:2018} in the PSM software\footnote{See version 2.3.3 \url{https://apc.u-paris.fr/~delabrou/PSM/psm.html}.}. 
 
 The PSM has been run to produce six maps of dust emission at 353~GHz (intensity and polarization, for a total of 18 HEALPix maps at {\tt nside=2048}), and six maps of dust spectral index $\beta_d$ and dust temperature $T_d$, also at {\tt nside=2048}, following the approach described in \cite{Martinez-Solaeche:2018}. The PySM software uses these maps as inputs, and generates the dust Stokes parameters maps as:
 \begin{equation}
@@ -400,9 +400,9 @@ Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\
 
 All CO models implemented here are based on the CO $J = 1\rightarrow0$ \texttt{Type-1} intensity map\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} derived by \citet{planck2013-p03a}. This CO map is obtained exploiting the mismatches in the detector bandpass to recover the CO from the CMB and the other Galactic foregrounds, with the MILCA component separation algorithm. This template is preferred to those from existing spectroscopic surveys \citep[e.g.,][]{Dame:2001} because it is not limited to low Galactic latitudes and has a uniform angular resolution. Although the map is released at a resolution of 10\arcmin, we convolve it with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes. The template is then downgraded to coarser pixellization of \texttt{nside=512}.
 
-The first CO model {\bf\texttt{co1}} adopts the $J = 1\rightarrow0$ template as-is and assumes no polarization. Emission from the other two transitions is computed assuming constant rescaling factors $0.595$ and $0.297$ for $J = 2\rightarrow1$ and $J = 3\rightarrow2$ \citep[Sect. 4.2.3]{planck2013-p03a}, obtained  from a dedicated  analysis on small bright CO regions (Taurus, Orion, Polaris). We do not employ the Planck maps of emission in these transitions directly since their signal-to-noise ratio is much lower.
+The first CO model {\bf\texttt{co1}} adopts the $J = 1\rightarrow0$ template as-is and assumes no polarization. Emission from the other two transitions is computed directly from the $J = 1\rightarrow0$ template with constant rescaling factors $0.595$ and $0.297$ for $J = 2\rightarrow1$ and $J = 3\rightarrow2$, respectively, consistent with observations of small CO-bright regions like Taurus, Orion, and Polaris \citep[][Section~4.2.3]{planck2013-p03a}. We do not employ the Planck maps of emission in these transitions directly since their signal-to-noise ratio is much lower.
 
-The second CO model  {\bf\texttt{co2}} introduces a simple implementation of polarization. The $I$ maps of the three transitions used in  {\bf\texttt{co1}} are converted to $P$ maps using a sky-constant, user-defined polarization fraction $p$, where the default is $p = 0.1$\%. The $Q$ and $U$ maps are made from the $P$ maps using the polarization angle of the thermal dust emission as determined by a component separation analysis with Commander \citep{planck2014-a12}.
+The second CO model {\bf\texttt{co2}} introduces a simple implementation of polarization. The $I$ maps of the three transitions used in  {\bf\texttt{co1}} are converted to $P$ maps using a sky-constant, user-defined polarization fraction $p$, where the default is $p = 0.1$\%. The $Q$ and $U$ maps are made from the $P$ maps using the polarization angle of the thermal dust emission as determined by a component separation analysis with Commander \citep{planck2014-a12}.
 
 Finally, the third CO model {\bf\texttt{co3}} not only accounts for the polarized emission as in {\bf\texttt{co2}} but also includes small-scale emission from high-Galactic latitude clouds. We adopt the {\bf\texttt{LogSpiral}} model from \citet{Puglisi:2017}, which provided the best fit to Planck data, and perform a dedicated simulation to produce maps of the total and polarized emission from high-latitude Galactic clouds specifically. The $I$, $Q$, and $U$ maps generated by the simulation are then added to the $I$, $Q$, and $U$ maps of {\bf\texttt{co2}} to produce the final {\bf\texttt{co3}} model.
  
