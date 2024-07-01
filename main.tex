@@ -44,7 +44,7 @@ In this work, we develop techniques to overcome a number of limitations of previ
 
 Synthesizing the suite of models implemented in this work and elsewhere, we define three full-sky models of Galactic foreground emission and polarization. These models are driven by the existing data where observational constraints are unambiguous and span a range of complexities (labeled low, medium, and high) in their approach to modeling emission in the parameter space not well-constrained by data. This suite enables individual experiments to optimize their designs over our current understanding of the Galactic foreground sky and supports self-consistent comparative and---especially---joint analyses of multiple experiments.
 
-We organize the paper as follows: Section~\ref{sec:methods} is an overview of how Galactic emission models are implemented in PySM; Section~\ref{sec:small_scales} presents our methodology for generating stochastic simulations of small-scale emission using the polarization fraction tensor formalism; Section~\ref{sec:other_models} describes our implementation of an alternative dust model and of a suite of CO emission models; Section~\ref{sec:validation} details a collection of validation metrics for the new models; Section~\ref{sec:discussion} discusses current limitations and future directions for development; Section \ref{sec:modelsuite} presents our proposed suite of three sky models that span a range of complexity; and Section~\ref{sec:summary} concludes with a summary.
+We organize the paper as follows: Section~\ref{sec:methods} is an overview of how Galactic emission models are implemented in PySM; Section~\ref{sec:small_scales} presents our methodology for generating stochastic simulations of small-scale emission using the polarization fraction tensor formalism; Section~\ref{sec:other_models} describes our implementation of an alternative dust model and of a suite of CO emission models; Section~\ref{sec:validation} details a collection of validation metrics for the new models; Section~\ref{sec:discussion} discusses limitations of the models presented here and future directions for development; Section \ref{sec:modelsuite} presents our proposed suite of three sky models that span a range of complexity; and Section~\ref{sec:summary} concludes with a summary.
 
 \section{Methods Overview} \label{sec:methods}
 
@@ -706,7 +706,8 @@ To isolate the non-Gaussianity of the small-scales, we also generate Gaussian ra
 
 \item To obtain only the small scales, we apply a high-pass filter to the fitted power law with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations from the truncated power law using the \texttt{synfast} routine provided by HEALPix. 
 
-\item For modulated Gaussian maps, the full-sky small-scale structure realizations are then multiplied with modulation maps to have similar anisotropies with the small scales from \deleven{}. %We do not modulate the pure Gaussian maps. 
+\item For modulated Gaussian maps, the full-sky small-scale structure realizations are then multiplied with modulation maps so that they inherit the same large-scale anisotropy as the modeled small scales in \texttt{d10}. 
+%to have similar anisotropies with the small scales from \deleven{}. %We do not modulate the pure Gaussian maps. 
 
 %\item Meanwhile, the small scales with multipoles larger than 200 in the observed data are filtered out and the large scales remain untouched.
 
