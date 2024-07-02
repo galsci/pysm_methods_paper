@@ -4,19 +4,11 @@
 \usepackage{amsmath}
 \usepackage{booktabs} % BH: Not sure that this is neede
 
-% BH: We need to agree on a convention, and I suggest
-% we not use dedicated commands (i.e., delete these
-% eventually)
-\newcommand{\done}{{\tt d1}}
-\newcommand{\dnine}{{\tt d9}}
-\newcommand{\deleven}{{\tt d11}}
-
 % For commenting, to be deleted when done
 %\usepackage[svgnames]{xcolor}
 \newcommand{\bsh}[1]{\textcolor{red}{(BSH: #1)}}
 \newcommand{\giuse}[1]{\textcolor{orange}{(GP: #1)}}
 \newcommand{\sg}[1]{\textcolor{teal}{#1}}
-\newcommand{\mr}[1]{\textcolor{magenta}{#1}}
 \newcommand{\jd}[1]{\textcolor{green}{#1}}
 \newcommand{\af}[1]{\textcolor{blue}{#1}}
 
@@ -77,7 +69,7 @@ In all dust models developed in this work, the frequency dependence of the dust 
 \end{equation}
 where $S$ is any of $I$, $Q$, or $U$ and $B_\nu\left(T\right)$ is the Planck function. The parameter $A_d^S$ is the dust intensity $S_\nu$ at the reference frequency $\nu_0$, here taken to be 353\,GHz. We refer the $A_d$ as ``amplitude'' parameters. The parameters $\beta_d$ and dust temperature $T_d$ describe the frequency dependence of the emission. We refer to them as ``spectral'' parameters. Typical values of the spectral parameters for dust emission in both total intensity and polarization are $\beta_d = 1.5$ and $T_d = 20$\,K \citep{planck2016-l11A}, with variations of order 10\% observed in total intensity in the high Galactic latitude sky \citep[e.g.,][]{planck2014-a12, planck2016-XLVIII}.
 
-In this work, we present the new dust models ``d9,'' ``d10,'' ``d11'' (Section~\ref{sec:small_scales}) and an implementation of the \citet{Martinez-Solaeche:2018} (``MKD'') model as ``d12'' (Section~\ref{sec:layers}). We employ previous PySM dust models only for purposes of comparison.
+In this work, we present the new dust models \texttt{d9}, \texttt{d10}, \texttt{d11} (Section~\ref{sec:small_scales}) and an implementation of the \citet{Martinez-Solaeche:2018} (``MKD'') model as \texttt{d12} (Section~\ref{sec:layers}). We employ previous PySM dust models only for purposes of comparison.
 
 \subsubsection{Synchrotron Emission} \label{subsubsec:synch_model}
 In all synchrotron models developed in this work, the frequency dependence of the synchrotron emission is described by a power law with possible curvature:
@@ -88,18 +80,18 @@ In all synchrotron models developed in this work, the frequency dependence of th
 \end{equation}
 where $S$ is any of $I$, $Q$, or $U$. The parameter $A_s^S$ is the synchrotron intensity $S_\nu$ at the reference frequency $\nu_0$, here taken to be 23\,GHz. As with dust, we refer the $A_s$ as ``amplitude'' parameters. The parameters $\beta_s$, $c_s$, and $\nu_c$ describe the frequency dependence of the emission. We refer to them as ``spectral'' parameters. In all models, we take $\nu_c = 23$\,GHz. When expressing $S$ in specific intensity units, $\beta_s \simeq -1$.
 
-In this work, we present the new synchrotron models ``s5,'' ``s6,'' and ``s7'' (Section~\ref{sec:small_scales}). We employ previous PySM synchrotron models only for purposes of comparison.
+In this work, we present the new synchrotron models \texttt{s5}, \texttt{s6}, and \texttt{s7} (Section~\ref{sec:small_scales}). We employ previous PySM synchrotron models only for purposes of comparison.
 
 \subsubsection{Free-free Emission}
-We do not develop new models of free-free emission in this work, but rather rely on the existing ``f1'' model \citep{Thorne:2017}. The frequency-dependence of free-free emission is known from theory \citep[][and references therein]{Draine:2011}, but over the range of frequencies relevant for microwave observations, it can be approximated as a simple power law. The f1 model assumes a sky-constant power-law behavior $S_\nu \propto \nu^{-2.14}$. The amplitude is given by the free-free amplitude map from the \texttt{Commander} component separation analysis \citep{planck2014-a12}, which has an angular resolution of $1^\circ$. At angular scales $<1^\circ$, the emission is based on Gaussian random fluctuations modulated by the intensity map \citep[see][for details]{Thorne:2017}. Free-free emission is assumed to be unpolarized.
+We do not develop new models of free-free emission in this work, but rather rely on the existing \texttt{f1} model \citep{Thorne:2017}. The frequency-dependence of free-free emission is known from theory \citep[][and references therein]{Draine:2011}, but over the range of frequencies relevant for microwave observations, it can be approximated as a simple power law. The f1 model assumes a sky-constant power-law behavior $S_\nu \propto \nu^{-2.14}$. The amplitude is given by the free-free amplitude map from the \texttt{Commander} component separation analysis \citep{planck2014-a12}, which has an angular resolution of $1^\circ$. At angular scales $<1^\circ$, the emission is based on Gaussian random fluctuations modulated by the intensity map \citep[see][for details]{Thorne:2017}. Free-free emission is assumed to be unpolarized.
 
 \subsubsection{Anomalous Microwave Emission (AME)}
-We do not develop new models of AME in this work, but rather rely on the existing ``a1'' and ``a2'' models \citep{Thorne:2017}. These models are based on a \texttt{Commander} component separation analysis that produced full-sky maps of AME amplitude and spectral parameters at $1^\circ$ resolution \citep{planck2014-a12}. The AME frequency dependence is modeled as a sum of two components each having spectra based on theoretical models computed by the \texttt{SpDust} software \citep{Ali-Haimoud:2009, Silsbee:2011}. While each component is described by an amplitude and a peak frequency, one component was required to have a sky-constant peak frequency, fit to a value of 33.35\,GHz \citep{planck2014-a12}. Thus, the AME model is based upon three maps: the amplitude of each of the two components and the peak frequency of one component. Emission at scales $<1^\circ$ is generated using the higher-resolution observations of thermal dust emission, where the spatially-varying scaling factor is determined by convolving the thermal dust emission map to $1^\circ$ resolution and taking the ratio with the AME map \citep{Thorne:2017}.
+We do not develop new models of AME in this work, but rather rely on the existing \texttt{a1} and \texttt{a2} models \citep{Thorne:2017}. These models are based on a \texttt{Commander} component separation analysis that produced full-sky maps of AME amplitude and spectral parameters at $1^\circ$ resolution \citep{planck2014-a12}. The AME frequency dependence is modeled as a sum of two components each having spectra based on theoretical models computed by the \texttt{SpDust} software \citep{Ali-Haimoud:2009, Silsbee:2011}. While each component is described by an amplitude and a peak frequency, one component was required to have a sky-constant peak frequency, fit to a value of 33.35\,GHz \citep{planck2014-a12}. Thus, the AME model is based upon three maps: the amplitude of each of the two components and the peak frequency of one component. Emission at scales $<1^\circ$ is generated using the higher-resolution observations of thermal dust emission, where the spatially-varying scaling factor is determined by convolving the thermal dust emission map to $1^\circ$ resolution and taking the ratio with the AME map \citep{Thorne:2017}.
 
-The a1 and a2 models differ only in their treatment of polarization. AME polarization has not been detected, and recent analysis places an upper limit on the intrinsic polarization fraction of $\lesssim3$\% \citep{Herman:2023}. The a1 model assumes that AME is unpolarized, whereas the a2 model assumes a constant polarization fraction of 2\%. The polarization angle of the AME in the a2 model is based on the polarization angle of the 353\,GHz polarized dust emission determined by component separation with \texttt{Commander} \citep{planck2014-a12}. As with total intensity, the AME polarization map inherits the small-scale fluctuations introduced to the thermal dust polarization map \citep[see][for details]{Thorne:2017}.
+The \texttt{a1} and \texttt{a2} models differ only in their treatment of polarization. AME polarization has not been detected, and recent analysis places an upper limit on the intrinsic polarization fraction of $\lesssim3$\% \citep{Herman:2023}. The \texttt{a1} model assumes that AME is unpolarized, whereas the \texttt{a2} model assumes a constant polarization fraction of 2\%. The polarization angle of the AME in the \texttt{a2} model is based on the polarization angle of the 353\,GHz polarized dust emission determined by component separation with \texttt{Commander} \citep{planck2014-a12}. As with total intensity, the AME polarization map inherits the small-scale fluctuations introduced to the thermal dust polarization map \citep[see][for details]{Thorne:2017}.
 
 \subsubsection{CO Emission}
-In all CO models presented in this work, emission from the $J = 1\rightarrow0, 2\rightarrow1$, and $3\rightarrow2$ transitions at 115.3, 230.5, and 345.8\,GHz, respectively, is modeled as a delta function at the rest frequency. Therefore, a model is fully defined by maps of $I$, $Q$, and $U$ at the reference frequency. We present the new PySM CO models ``co1,'' ``co2,'' and ``co3,'' an implementation of the models of \citet{Puglisi:2017}, in Section~\ref{subsec:co_models}.
+In all CO models presented in this work, emission from the $J = 1\rightarrow0, 2\rightarrow1$, and $3\rightarrow2$ transitions at 115.3, 230.5, and 345.8\,GHz, respectively, is modeled as a delta function at the rest frequency. Therefore, a model is fully defined by maps of $I$, $Q$, and $U$ at the reference frequency. We present the new PySM CO models \texttt{co1}, \texttt{co2}, and \texttt{co3}, an implementation of the models of \citet{Puglisi:2017}, in Section~\ref{subsec:co_models}.
 
 \subsubsection{Other Emission Mechanisms} % BH: Not sure if this is useful, or if it goes here vs discussion
 The current suite of PySM models encompasses most of the emission and polarization mechanism observed from the diffuse ISM of the Milky Way. However, it is not exhaustive, and we identify here a few potential targets for future work.
@@ -119,13 +111,13 @@ A basic overview of the models developed and/or implemented in this work are pro
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
 \startdata
-d9 &  GNILC PR2 (I) + GNILC PR3 (QU) 353 GHz &  Modulated + polarization tensor & Uniform spectral parameters &  & Deterministic & Modified black body & 8192 \\
+\texttt{d9} &  GNILC PR2 (I) + GNILC PR3 (QU) 353 GHz &  Modulated + polarization tensor & Uniform spectral parameters &  & Deterministic & Modified black body & 8192 \\
 \hline
-d10 & same as above & same as above &  $\beta_d, \, T_d$ from GNILC data & Modulated & Deterministic & same as above & 8192 \\
+\texttt{d10} & same as above & same as above &  $\beta_d, \, T_d$ from GNILC data & Modulated & Deterministic & same as above & 8192 \\
 \hline
-d11 & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral parameters & same as above & 8192 \\
+\texttt{d11} & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral parameters & same as above & 8192 \\
 \hline
-d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
+\texttt{d12} &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
 %\bottomrule
 %\end{tabular}
 %\end{center}
@@ -139,13 +131,13 @@ d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  &
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
 \startdata
- s4 & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & uniform spectral index &  & Deterministic & Power law & 8192 \\
+\texttt{s4} & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & uniform spectral index &  & Deterministic & Power law & 8192 \\
 \hline
- s5 & same as above & same as above & $\beta_s$ from Haslam,  S-PASS, WMAP    & Modulated  & Deterministic & Power law & 8192 \\
+\texttt{s5} & same as above & same as above & $\beta_s$ from Haslam,  S-PASS, WMAP    & Modulated  & Deterministic & Power law & 8192 \\
 \hline
- s6 & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral index & Power law & 8192 \\
+\texttt{s6} & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral index & Power law & 8192 \\
 \hline
- s7 & same as above & same as above & same +  $c_s$ from ARCADE & same + fluctuations in $c_s$   & Deterministic & Curved power law & 8192 \\
+\texttt{s7} & same as above & same as above & same +  $c_s$ from ARCADE & same + fluctuations in $c_s$   & Deterministic & Curved power law & 8192 \\
 \enddata 
 \end{deluxetable*}
 
@@ -155,11 +147,11 @@ d12 &   GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian $ {} ^{\dag}$  &
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} &   \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & &}
 \startdata
- co1 & Planck 2013 MILCA smoothed to 1 deg   &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
+\texttt{co1} & Planck 2013 MILCA smoothed to 1 deg   &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
 \hline
- co2 & same as above &   & Deterministic & same as above + polarized .1\% & 2048 \\
+\texttt{co2} & same as above &   & Deterministic & same as above + polarized .1\% & 2048 \\
 \hline
- co3 & same as above & Simulated High Galactic clouds &    Deterministic & same as above & 2048 \\
+\texttt{co3} & same as above & Simulated High Galactic clouds &    Deterministic & same as above & 2048 \\
 \enddata
 \end{deluxetable*}
 
@@ -425,7 +417,7 @@ While in Section~\ref{sec:sync_validation}, we compare the PySM synchrotron mode
 \subsection{Maps}\label{subsec:maps}
 
 PySM models are based on noisy observations of Galactic foreground amplitude maps, complemented in some cases by randomly generated small-scale features (sec.~\ref{sec:small_scales}). Maps of frequency scaling parameters also comprise randomly generated fluctuations, the generation of which is different for the various models. It is important to check to which extent model maps match with observations in the frequency range of interest. In this first step of validation of the PySM foreground models, we compare, for the different foreground models considered here, maps generated using the PySM and actual observations in the frequency range of interest.%\textcolor{red}{[What frequencies do we want to cover? I suggest at least 23~GHz--353~GHz, but this does not fully cover the frequency range of CMB-S4 and LiteBIRD]}
-Specifically, we compare observations the Planck third data release PR3 \cite{planck2016-l03} and PySM dust models \dnine{}, {\tt d11}, {\tt d12} models at the map level. As \dnine{} and {\tt d11} have random fluctuations generated as described in section \ref{sec:small_scales}, we expect that we do not recover as well the small scales in data as for the d12 model \ref{sec:layers}.
+Specifically, we compare observations the Planck third data release PR3 \cite{planck2016-l03} and PySM dust models \texttt{d9}, {\tt d11}, {\tt d12} models at the map level. As \texttt{d9} and {\tt d11} have random fluctuations generated as described in section \ref{sec:small_scales}, we expect that we do not recover as well the small scales in data as for the d12 model \ref{sec:layers}.
 We study how the modeled intensity $I$ and polarized intensity $P = \sqrt{U^2 + Q^2}$ compare to the observations on three selected $16.7^\circ \times 16.7^\circ$ patches of the sky, at 353~GHz. Here, we focus on two local patches: close to the Galactic plane ($[l,b] =[180^\circ,-10^\circ]$) and, centered on the Bicep / Keck field ($[l,b] =[318^\circ,-61^\circ]$).
 We integrate the dust models within the Planck passband (\cite{planck2013-p03d})\footnote{\url{http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_RIMO_R3.00.fits}}, to enable a more straightforward comparison. For the comparison of dust intensity maps, we subtract a Wiener-filtered CMB temperature anisotropies map from SMICA and also adjust (setting to zero) the zero level of the PR3 data and of the simulated maps over a small region of very low dust emission, totaling a sky fraction of 2.5\%.
 %to that of the simulated map over regions of faint dust intensity on the sky.
@@ -494,16 +486,18 @@ For the polarized intensity, close to the Galactic plane (Figure \ref{fig:353_po
 
 \subsection{Power spectra}
 \label{sec:PS-validation}
-In this section we discuss the power spectra validation of the PySM dust and synchrotron models. For our large area validation we choose sky masks with 80\%, 60\%, 40\% and 20\% sky availability. The mask choices for dust and synchrotron validations are different, as the features of the two emissions are somewhat different. The masking choices are discussed in detail in the individual sections. We use healpy \texttt{anafast} function to compute power spectra after masking. We divide the computed power spectra by $\ref{f_{\rm sky}}$ to account for the masking. We make no further attempts to correct for mode-mixing effects due to masking. The uncertainties are computed as 
+In this section we discuss the power spectra validation of the PySM dust and synchrotron models. For our large area validation we choose sky masks with 80\%, 60\%, 40\% and 20\% sky availability. The mask choices for dust and synchrotron validations are different, as the features of the two emissions are somewhat different. The masking choices are discussed in detail in the individual sections. We use healpy \texttt{anafast} function to compute power spectra after masking. We divide the computed power spectra by $f_{\rm sky}$ (defined as the second moment of the mask) to account for the masking. We make no further attempts to correct for mode-mixing effects due to masking. We bin the power spectra in dynamic $\ell$-intervals optimized for map noise and sky fraction.
+
+The polarized dust emission is the dominant foreground contaminant for CMB B-mode observations. We therefore perform additional validation of the dust B-mode polarization in small patches to check the properties of the injected small scales. 
 
 \subsubsection{Dust Emission} \label{sec:dust_validation}
-To compare the performance of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data over a broad range of scales, we present their power spectra computed on both large-area and small-area masks. We first apply the defined masks to the mean-subtracted PySM dust models and NPIPE ``A''/``B'' detector-split maps at delta 353~GHz. We then use \texttt{anafast} to compute the cross-spectra of the masked NPIPE data split maps to minimize noise correlation, bin the spectra with a dynamic $\ell$ interval optimized for map noise, and scale the results into the full-sky $\mathcal{D}_\ell$ by the second moment of the mask. The error bars associated to these cross-spectra are given by the method stated in \cite{Tristram:2005}. The same method is applied to calculate the auto-spectra of the masked model maps. 
+To compare the performance of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data over a broad range of scales, we present their power spectra computed on both large-area and small-area masks. We first apply the defined masks to the mean-subtracted PySM dust models and color-corrected NPIPE ``A''/``B'' detector-split maps at delta 353~GHz. We compute the cross-spectra of the masked NPIPE data splits to minimize noise correlation, bin the spectra with a dynamic $\ell$ interval, and scale the results into the full-sky $\mathcal{D}_\ell$ by the second moment of the mask. The error bars associated to these cross-spectra are given by the method stated in \cite{Tristram:2005}. The same method is applied to calculate the auto-spectra of the masked model maps. 
 
 For our large-area comparison, we use a set of $2^\circ$-apodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits} distributed \url{https://pla.esac.esa.int}} by the Planck collaboration via the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available, in which we take four representative ones for our analysis. It results in masks \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080}, where the number indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$. 
 
-In Figure~\ref{fig:largefield_power}, we show the $TT$, $EE$, and $BB$ power spectra of the \texttt{d9} model, \texttt{d12} model and the NPIPE map with its CMB dipole subtracted. We find that the \texttt{d12} model aligns well with the data in all sky fractions, except that it overestimates the power spectrum magnitude when $f_{\rm sky} = 0.8$. The \texttt{d9} model shows similar behavior for $\ell \lesssim 100$. Beyond that scale, its power declines more rapidly with $\ell$ for $f_{\rm sky} = 0.6, 0.8$, and it exhibits a power bump at $f_{\rm sky} = 0.2$.
+In Figure~\ref{fig:largefield_power}, we show the $TT$, $EE$, and $BB$ power spectra of the \texttt{d9} model, \texttt{d12} model and the NPIPE map with its CMB dipole subtracted. We find that the \texttt{d12} model aligns well with the data in all sky fractions, except that it overestimates the power spectrum magnitude when $f_{\rm sky} = 0.8$. The \texttt{d9} model shows similar behavior for $\ell \lesssim 100$. Beyond that scale, its power declines more rapidly with $\ell$ for $f_{\rm sky} = 0.6, 0.8$, and it exhibits a power bump at $f_{\rm sky} = 0.2$. We note that the \texttt{d10} model will have exactly the same power spectra as model \texttt{d9} at 353 GHz. So we do not show it separately. 
 
-For polarization, the \texttt{d9} model is consistent with the data over all scales and sky fractions for both $EE$ and $BB$. In contrast, \texttt{d12} significantly underestimates both spectra in all cases. This discrepancy can likely be attributed to the fact that this model is constructed using constant-latitude masks, while we use the Planck Galactic masks in this comparison. We also note that the NPIPE $BB$ band power rises at high-$\ell$ due to residual noise which dominates in smaller sky patches.
+For polarization, the \texttt{d9} model is consistent with the data over all scales and sky fractions for both $EE$ and $BB$. In contrast, \texttt{d12} significantly underestimates both spectra in all cases. This discrepancy can likely be attributed to the fact that this model is constructed using isolatitude masks, while we use the Planck Galactic masks in this comparison. We also note that the NPIPE $BB$ band power rises at high-$\ell$ due to residual noise which dominates in smaller sky patches.
 
 \begin{figure}
     \centering
@@ -526,7 +520,9 @@ For polarization, the \texttt{d9} model is consistent with the data over all sca
     \label{fig:smallfield_power}
 \end{figure}
 
-In our small-area case, we mainly follow the analysis method described in \cite{planck2014-XXX} to define the masks for spectra computation. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian, resulting in $f_{\rm sky} \approx 0.008$. We then compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$. The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Figure~\ref{fig:smallfield_power}. 
+In our small-area case, we mainly follow the method described in \cite{planck2014-XXX} to define the masks for spectra computation. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian, resulting in $f_{\rm sky} \approx 0.008$. 
+% We then compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$. 
+The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Figure~\ref{fig:smallfield_power}. 
 
 %To compare the small-scale performances of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data, we mainly follow the analysis method described in \cite{planck2014-XXX} to examine the model behaviors. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian (resulting in $f_{\rm sky} \approx 0.008$), and apply such a mask to the mean-subtracted dust model and NPIPE half-ring split maps at 353~GHz. We then use \texttt{anafast} to compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$, accounting properly for the $f_{\mathrm{sky}}$ of the circular mask. For the masked NPIPE data maps, we instead compute cross-spectrum from the two split maps to minimize the noise correlation. The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. 
 
@@ -696,16 +692,16 @@ Following the procedure in \citet{Chiang:2019}, we compute the cross-correlation
 
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 
-In this section, we quantify the level of non-Gaussianity in the small-scale dust emission generated through the polarization fraction tensor transformation using the simulations from PySM dust model \deleven. Since small-scale fluctuations in the new synchrotron emission maps were constructed following the same algorithm (Section~\ref{sec:small_scales}), we expect those maps to show similar levels of non-Gaussianity. To measure the non-Gaussianity in the maps we use the Minkowski Functionals \citep[MFs][]{Minkowski1903}, which are regularly used to quantify map-space non-Gaussianity in the cosmology literature \citep{Martire:2023, Carones:2024}. Hadwiger’s theorem \citep{hadwigerVorlesungenUeberInhalt1957} implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set. In our case, for two-dimensional maps, we have three kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which correspond to the area, the perimeter and the connectivity of the excursion set, respectively.
+In this section, we quantify the level of non-Gaussianity in the small-scale dust emission generated through the polarization fraction tensor transformation using the simulations from PySM dust model \texttt{d11}. Since small-scale fluctuations in the new synchrotron emission maps were constructed following the same algorithm (Section~\ref{sec:small_scales}), we expect those maps to show similar levels of non-Gaussianity. To measure the non-Gaussianity in the maps we use the Minkowski Functionals \citep[MFs][]{Minkowski1903}, which are regularly used to quantify map-space non-Gaussianity in the cosmology literature \citep{Martire:2023, Carones:2024}. Hadwiger’s theorem \citep{hadwigerVorlesungenUeberInhalt1957} implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set. In our case, for two-dimensional maps, we have three kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which correspond to the area, the perimeter and the connectivity of the excursion set, respectively.
 
-We use these MFs to compare the small-scale structure in \deleven\ to synthesized Gaussian random fields with the same power spectra as the \deleven\ maps.
+We use these MFs to compare the small-scale structure in \texttt{d11} to synthesized Gaussian random fields with the same power spectra as the \texttt{d11} maps.
 %By comparing the MFs of the small-scale structures from \deleven\ with those of Gaussian realizations from extrapolated power law, which is fitted from the power spectra of the maps from \deleven{}, in standard $IQU$ domain, we can have a qualitative estimation of non-Gaussianity in \deleven{} introduced by going into $iqu$ domain.
-As mentioned in Section~\ref{subsec:methodology}, the generated small scales in the \deleven\ model are modulated before they are added to the large scale template. Anisotropy in the large-scale templates might therefore introduce small-scale non-Gaussianity to the maps via this modulation. %To study the potential effect of anisotropy on the non-Gaussianity, we also generate Gaussian realizations with modulation so that we can compare the non-Gaussianity directly, without the influence of anisotropy.
-To isolate the non-Gaussianity of the small-scales, we also generate Gaussian random realizations that are modulated to have the same anisotropy as the small-scale \dnine\ and \deleven\ maps. The two reference sets made of pure Gaussian small scales and modulated Gaussian small scales are built as follows:
+As mentioned in Section~\ref{subsec:methodology}, the generated small scales in the \texttt{d11} model are modulated before they are added to the large scale template. Anisotropy in the large-scale templates might therefore introduce small-scale non-Gaussianity to the maps via this modulation. %To study the potential effect of anisotropy on the non-Gaussianity, we also generate Gaussian realizations with modulation so that we can compare the non-Gaussianity directly, without the influence of anisotropy.
+To isolate the non-Gaussianity of the small-scales, we also generate Gaussian random realizations that are modulated to have the same anisotropy as the small-scale \texttt{d9} and \texttt{d11} maps. The two reference sets made of pure Gaussian small scales and modulated Gaussian small scales are built as follows:
 
 \begin{enumerate}
 
-\item We first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the \deleven\ maps with the \texttt{GAL097} mask, and we synthesize Gaussian random fields that have the fitted power law out to ell = $\ell_{\rm max}=4096$. 
+\item We first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the \texttt{d11} maps with the \texttt{GAL097} mask, and we synthesize Gaussian random fields that have the fitted power law out to ell = $\ell_{\rm max}=4096$. 
 
 \item To obtain only the small scales, we apply a high-pass filter to the fitted power law with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations from the truncated power law using the \texttt{synfast} routine provided by HEALPix. 
 
@@ -717,7 +713,7 @@ To isolate the non-Gaussianity of the small-scales, we also generate Gaussian ra
 \item Finally, the two sets of generated Gaussian small scales (modulated and unmodulated) are added to the large-scale dust template to form the final set of maps.
 \end{enumerate}
 
-Now we have three sets of maps with different small scales co-added: model \deleven, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
+Now we have three sets of maps with different small scales co-added: model \texttt{d11}, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
 We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-mod-ss}, and \texttt{Gaussian-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are fully Gaussian and isotropic since they are built from the \texttt{synfast} routine without any further processing . 
 
 %Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
