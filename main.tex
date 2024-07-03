@@ -432,15 +432,15 @@ These corrections are not required for comparing polarization data.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.48\textwidth]{figures/mask_intxPR3_zero_lvl.png}
+    \includegraphics[width=0.44\textwidth]{figures/mask_intxPR3_zero_lvl.png}
     \caption{Mask $\times$ PR3 intensity used to estimate the zero level of PR3 intensity. This mask is obtained by thresholding the intensity of the smoothed PR3 intensity to preserve only the regions where the dust is very low, to estimate the zero-level of the data and models.}
     \label{fig:mask_zero_lvl_int}
 \end{figure}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.48\textwidth]{figures/gal_plane_non_smooth_wo_zero_lvl.png}
-\caption{Dust intensity at 353GHz at [l = 180, b = -10] with an angular resolution of $4.94\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12. The gap between the white lines represents $4^{\circ}$. }    
+    \includegraphics[width=0.5\textwidth]{figures/gal_plane_non_smooth_wo_zero_lvl.png}
+\caption{Dust intensity at 353GHz at [l = 180, b = -10] with an angular resolution of $4.94\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12.}    
 \label{fig:353_int_gal_plane}
 \end{figure}
 % \begin{figure}
@@ -451,14 +451,14 @@ These corrections are not required for comparing polarization data.
 % \end{figure}
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.48\textwidth]{figures/BK_smooth_30'_wo_zero_lvl.png}
+    \includegraphics[width=0.5\textwidth]{figures/BK_smooth_30'_wo_zero_lvl.png}
     \caption{Dust intensity at 353GHz at [l = 318, b = -61] with an angular resolution of $30\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12. Here, PR3 is contaminated by CIB and extragalactic sources.}
     \label{fig:353_int_BK}
 \end{figure}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.48\textwidth]{figures/pol_gal_plane_smooth_30'.png}
+    \includegraphics[width=0.5\textwidth]{figures/pol_gal_plane_smooth_30'.png}
     \caption{Polarized dust intensity at 353GHz centered at [l = 180, b = -10], smoothed to $30\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12.}
     \label{fig:353_pol_int_gal_plane}
 \end{figure}
@@ -471,7 +471,7 @@ These corrections are not required for comparing polarization data.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.48\textwidth]{figures/pol_BK_smooth_30'.png}
+    \includegraphics[width=0.5\textwidth]{figures/pol_BK_smooth_30'.png}
     \caption{Polarized dust intensity at 353GHz centered at [l = 318, b = -61], smoothed to $30\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12.}
     \label{fig:353_pol_int_BK}
 \end{figure}
@@ -491,11 +491,11 @@ In this section we discuss the power spectra validation of the PySM dust and syn
 The polarized dust emission is the dominant foreground contaminant for CMB B-mode observations. We therefore perform additional validation of the dust B-mode polarization in small patches to check the properties of the injected small scales. 
 
 \subsubsection{Dust Emission} \label{sec:dust_validation}
-To compare the performance of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data over a broad range of scales, we present their power spectra computed with both large-area and small-area masks at 353~GHz where the dust emissions dominate. We first generate PySM dust models maps at 353~GHz, and color-correct the Planck NPIPE 353 GHz channel maps (i.e. scale them by a factor of 0.92) to the same single frequency. Additionally, we subtract the CMB dipole from the NPIPE temperature maps. We then apply identical masks (defined below) to the mean-subtracted PySM dust models and NPIPE ``A''/``B'' detector-split maps. We compute the cross-spectra of the masked NPIPE data splits to minimize noise correlation. We calculate the auto-spectra of the model maps with the masks.
+To compare the performance of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data over a broad range of scales, we present their power spectra computed with both large-area and small-area masks at 353~GHz where the dust emissions dominate. We first generate PySM dust models maps at 353~GHz \sg{(\textbf{specify the resolution of the PySM maps})}, and color-correct the Planck NPIPE 353 GHz channel maps (i.e. scale them by a factor of 0.92) to the same single frequency. Additionally, we subtract the CMB dipole from the NPIPE temperature maps. We then apply identical masks (defined below) to the mean-subtracted PySM dust models and NPIPE ``A''/``B'' detector-split maps. We compute the cross-spectra of the masked NPIPE data splits to minimize noise correlation. We calculate the auto-spectra of the model maps with the masks.
 
 For our large-area comparison, we use a set of $2^\circ$-apodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits} distributed \url{https://pla.esac.esa.int}} by the Planck collaboration via the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available, in which we take four representative ones for our analysis. It results in masks \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080}, where the number indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$. 
 
-In Figure~\ref{fig:largefield_power}, we show the $TT$, $EE$, and $BB$ power spectra of the \texttt{d9} model, \texttt{d12} model and the NPIPE map. The error bars associated to these cross-spectra are computed from 200 NPIPE detector-split simulations. We find that the \texttt{d12} model aligns well with the data in all sky fractions, except that it overestimates the power spectrum magnitude when $f_{\rm sky} = 0.8$. The \texttt{d9} model shows similar behavior for $\ell \lesssim 100$. Beyond that scale, its power declines more rapidly with $\ell$ at $f_{\rm sky} = 0.6$ and $f_{\rm sky} = 0.8$, and it exhibits a power bump around $\ell \sim 100$ for $f_{\rm sky} = 0.2$. We note that the \texttt{d10} model will have exactly the same power spectra as model \texttt{d9} at 353 GHz, so we do not show it separately. 
+In Figure~\ref{fig:largefield_power}, we show the $TT$, $EE$, and $BB$ power spectra of the \texttt{d9} model, \texttt{d12} model and the NPIPE map. The error bars associated to these cross-spectra are computed from 200 NPIPE detector-split simulations. We find that the \texttt{d12} model aligns well with the data in all sky fractions, except that it overestimates the power spectrum magnitude when $f_{\rm sky} = 0.8$. The \texttt{d9} model shows similar behavior for $\ell \lesssim 100$. Beyond that scale, its power declines more rapidly with $\ell$ at $f_{\rm sky} = 0.6$ and $f_{\rm sky} = 0.8$, and it exhibits a power bump around $\ell \sim 100$ for $f_{\rm sky} = 0.2$. We note that the \texttt{d10} model will have exactly the same power spectra as model \texttt{d9} at 353 GHz, so we do not show it separately. At 353 GHz all conclusions that we draw for model \texttt{d9} are exactly valid for model \texttt{d10}.
 
 For polarization, the \texttt{d9} model is consistent with the data over all scales and sky fractions for both $EE$ and $BB$. In contrast, \texttt{d12} significantly underestimates both spectra in all scales. This discrepancy can likely be attributed to the fact that this model is constructed using isolatitude masks, while we use the Planck Galactic masks in this comparison. We also note that the NPIPE $BB$ band power rises at high-$\ell$ due to residual noise which dominates in smaller sky patches.
 
@@ -534,29 +534,28 @@ The representative results from two selected circular fields at $|b| > 30^\circ$
 \end{figure}
 
 % As one of the major science missions of CMB experiments is to acquire high precision primordial B-mode polarization measurements from a small sky patch, 
-We explore whether the PySM models can reproduce the observed dust $BB$ power spectrum's amplitude, and scaling-in-$\ell$, especially in those high Galactic latitude small fields which could be part of future CMB observations. We therefore compute the low-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $40 \le \ell < 110$) and the high-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $110 \le \ell < 370$) of each small field for the model and NPIPE maps, and we present the results as scatter plots in Figure~\ref{fig:smallfield_power_all}. It turns out that the amplitude of the \texttt{d12} model is in general smaller than the preference of NPIPE data, as a large fraction of the d12 data points cluster around the lower-left corner of the plot. The wider span of the \texttt{d12} data points along the vertical direction also implies the model spectrum steepness varies more over the sky. In contrast, the \texttt{d9}/\texttt{d10} data points are fairly compatible with the NPIPE results, although they predict slightly steeper power spectra. If we define the ratio of the low-$\ell$ mean value to the high-$\ell$ mean value as a proxy for describing the spatial power change across the modulation scale, while the perfect fixed-index power law $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ yields a value of $\approx 1.60$, the NPIPE maps give $1.86 \pm 0.93$ and the \texttt{d9}/\texttt{d10} (\texttt{d12}) model map gives $2.37 \pm 0.77$ ($2.24 \pm 0.87$) over sky patches with $|b| > 30^\circ$.
+We explore whether the PySM models can reproduce the observed dust $BB$ power spectrum's amplitude, and scaling-in-$\ell$, especially in those high Galactic latitude small fields which could be part of future CMB observations. We therefore compute the low-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $40 \le \ell < 110$) and the high-$\ell$ averaged $\mathcal{D}_\ell^{BB}$ (over $110 \le \ell < 370$) of each small field for the model and NPIPE maps, and we present the results as scatter plots in Figure~\ref{fig:smallfield_power_all}. It turns out that the amplitude of the \texttt{d12} model is in general smaller than the preference of NPIPE data, as a large fraction of the d12 data points cluster around the lower-left corner of the plot. The wider span of the \texttt{d12} data points along the vertical direction also implies the model spectrum steepness varies more over the sky. In contrast, the \texttt{d9} data points are fairly compatible with those from NPIPE maps, although they predict slightly steeper power spectra. We define the ratio of the low-$\ell$ mean value to the high-$\ell$ mean value as a proxy for describing the spatial power change across the modulation scale. The perfect fixed-index power law $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ yields a value of $\approx 1.60$, the NPIPE maps give $1.86 \pm 0.93$ and the \texttt{d9} (\texttt{d12}) model map gives $2.37 \pm 0.77$ ($2.24 \pm 0.87$) over sky patches with $|b| > 30^\circ$.
 
 \subsubsection{Synchrotron Emission} \label{sec:sync_validation}
 
-\begin{figure*}
-    \centering
-    \includegraphics[width=2.\columnwidth]{figures/synch_valspectra.pdf}
-    \caption{This figure compares the power spectra of the \texttt{s4} model (dark circles) and the input HASLAM/WMAP K-band  map (light circles) when computed on the \texttt{GAL090}, \texttt{GAL070}, \texttt{GAL040}, and \texttt{GAL020} Galactic masks.}
-    \label{fig:spectra_by_field}
-\end{figure*}
+% \begin{figure*}
+%     \centering
+%     \includegraphics[width=2.\columnwidth]{figures/synch_valspectra.pdf}
+%     \caption{This figure compares the power spectra of the \texttt{s4} model (dark circles) and the input HASLAM/WMAP K-band  map (light circles) when computed on the \texttt{GAL090}, \texttt{GAL070}, \texttt{GAL040}, and \texttt{GAL020} Galactic masks.}
+%     \label{fig:spectra_by_field}
+% \end{figure*}
 In this section we detail the validation of the new synchrotron models by comparing the power spectra with observations. For validating the PySM synchrotron temperature models, we use the synchrotron map from the BeyondPlanck re-analysis of Planck LFI data \citep{Andersen:2023}. BeyondPlanck released a synchrotron map\footnote{\url{https://beyondplanck.science/products/files\_v1}} at a reference frequency of 30\,GHz and at $2^\circ$ angular resolution. We produce single frequency temperature maps for the different synchrotron models at 30\,GHz and smoothed with a Gaussian beam with FWHM = $2^\circ$.
 
-We have purposefully chosen an earlier release of BeyondPlanck for our analysis. Later versions of BeyondPlanck, or its successor, CosmoGlobe produce synchrotron intensity maps at 408 MHz. The PySM synchrotron models s5 and s7 are not suitable for producing synchrotron simulations at 408 MHz. This is a consequence of scaling the Haslam map from 408 GHz to 30 GHz for constructing the template for synchrotron intensity. When this template is rescaled to 408 MHz, with scaling that varies over the the sky, the model fails. We do not recommend use of the s5 and s7 models below 10 GHz. Therefore, we validate our models with the synchrotron intensity map at 30 GHz.
+We have purposefully chosen an earlier release of BeyondPlanck for our analysis. Later versions of BeyondPlanck, or its successor, CosmoGlobe produce synchrotron intensity maps at 408 MHz. The PySM synchrotron models s5 and s7 are not suitable for producing synchrotron simulations at 408 MHz. \sg{[\textbf{Move the technical reason for this to synchrotron model section and just refer to that reason.}]} This is a consequence of scaling the Haslam map from 408 GHz to 30 GHz for constructing the template for synchrotron intensity. When this template is rescaled to 408 MHz, with scaling that varies over the the sky, the model fails. We do not recommend use of the s5 and s7 models below 1 GHz. Therefore, we validate our models with the synchrotron intensity map at 30 GHz.
 
 % \giuse{In case of the synchrotron polarization, we  compare the models with band integrated observations. So, we compute bandpass integrated maps  with PySM~3 routines and for  the different synchrotron models. For the sake of fair comparison with Planck data, we adopt the average LFI 30\,GHz RIMO transmission \citep{planck2014-a03}.} The bandpass integrated maps are further smoothed with Gaussian beams of 33.1\arcmin beams to produce model maps at native resolutions of the LFI 30\,GHz data. Finally, the observed power spectra are computed by taking the cross-spectrum between independent detector splits, e.g. A and B, of the NPIPE \footnote{Publicly available through NERSC at \\ /global/cfs/cdirs/cmb/data/planck2020} (PR4) 30\,GHz maps \citep{planck2020-LVII}. 
 
 For synchrotron polarization validation, we compare the models with Planck Revisited synchrotron polarization maps\footnote{\url{https://portal.nersc.gov/project/cmb/Planck\_Revisited}} \citep{Delabrouille:2024}. These are the cleanest full sky maps of polarized synchrotron at 30 GHz, at $1^\circ$ resolution, at the time of analysis. We convert the Planck Revisited synchrotron maps from $\mu {\rm K_{RJ}}$ to $\mu {\rm K_{CMB}}$. 
 
-The synchrotron power spectra is computed for four sky fractions, 80\%, 60\%, 40\% and 20 \%, like for the dust validation. However, we do not use the Planck Galactic masks for this. The Planck Galactic masks capture the shape of the Galactic dust signal, as it is the brightest foreground at CMB frequencies. The shape of the Galactic synchrotron signal differs significantly from the shape of the Galactic masks. Therefore, we construct masks for the synchrotron by thresholding the synchrotron polarized intensity smoothed with a $8.5^\circ$ beam. We additionally mask out a portion of the Galactic plane with a narrow band mask. This ensures that we are always excluding the Galactic plane. In Figure~\ref{fig:sync_masks} we show the regions of these masks. 
+We do not use the Planck Galactic masks for the synchrotron power spectra validation. The Planck Galactic masks capture the shape of the Galactic dust signal, as it is the brightest foreground at CMB frequencies. The shape of the Galactic synchrotron signal differs significantly from the shape of the Galactic masks. Therefore, we construct masks for the synchrotron by thresholding the synchrotron polarized intensity smoothed with a $8.5^\circ$ beam. We additionally mask out a portion of the Galactic plane with a narrow band mask. This ensures that we are always excluding the Galactic plane. In Figure~\ref{fig:sync_masks} we show the regions of these masks. 
 
-We also use the Planck Revisited point source mask to mask out the brightest point sources for the polarization analysis. The combined mask is apodized with a $2^\circ$-$6^\circ$ cosine taper. The apodization length increasing with decreasing sky fraction. The power spectrum is estimated with HEALPix \texttt{anafast} in the same way as for the dust. For the $EE$ and $BB$ spectra, we compute the noise bias and standard deviation from 200 noise realizations. The polarization power spectra are corrected for the noise bias. 
+We also use the Planck Revisited point source mask to mask out the brightest point sources for the polarization analysis. The combined mask is apodized with a $2^\circ$-$6^\circ$ cosine taper. The apodization length increasing with decreasing sky fraction. We compute the noise bias and standard deviation from 200 noise realizations. The polarization power spectra are corrected for the noise bias. The noise standard deviation represent the error on the power spectra due to noise.
 
-% \giuse{We estimated the synchrotron power spectra considering three choices of masks:  full sky  (100\%), 70\% and 50\% sky fractions. To produce the synchrotron  masks, we use the LFI 30\,GHz map of polarized intensity, smoothed with a Gaussian beam of $2^\circ$ FWHM, and masking all the pixels larger than  17 and 10 $\mu{\rm K}_{\rm CMB}$, as shown in Figure \ref{fig:sync_masks}.  Masks are tapered  with a $2^\circ$ cosine apodization.  For the polarization analysis, polarized point sources are also masked using the Planck-LFI DR2 mask\footnote{\bf @shamik could you add the filename reference?}. }
 \begin{figure}
     \centering
     \includegraphics[width=0.46\textwidth]{figures/SYNC_mask_stack.png}
@@ -575,14 +574,14 @@ We also use the Planck Revisited point source mask to mask out the brightest poi
    \label{fig:Dl_sync_galmask}
 \end{figure}
 
-The $TT$, $EE$ and $BB$ power spectra comparisons, for model \texttt{s5}, are shown in Figure~\ref{fig:Dl_sync_galmask}. The comparison for models \texttt{s4}, \texttt{s6} and \texttt{s7} have nearly identical results. The $TT$ power spectra for all sky fractions show excellent agreement with the BeyondPlanck synchrotron temperature power spectra. For polarization $E$ modes, we find a good agreement with observations for all but the 20 \% sky fraction. 
+The $TT$, $EE$ and $BB$ power spectra comparisons, for model \texttt{s5}, are shown in Figure~\ref{fig:Dl_sync_galmask}. The comparison for models \texttt{s4}, \texttt{s6} and \texttt{s7} have nearly identical results, so we only show the results for model \texttt{s5}. The $TT$ power spectra for all sky fractions show excellent agreement with the BeyondPlanck synchrotron temperature power spectra. For polarization $E$ modes, we find a good agreement with observations for all but the 20 \% sky fraction. 
 % So, it is reasonable to argue that for synchrotron temperature there is excellent agreement for all but the brightest parts of the sky, where the comparison is harder to make at 30\,GHz. 
 For BB spectrum, the PySM model has slightly higher power, for $\ell < 100$. The difference increases at smaller sky fractions. 
-\giuse{However, such a divergence is somewhat expected as we are considering multipoles far from the injection one ($\ell\sim36$).} 
+However, such a divergence is somewhat expected as we are considering multipoles that are far from the injection scale, $\ell_*\sim36$.
 % In fact, some of the features observed in the LFI 30 GHz spectra are not found in the pysm spectra as they are by construction generated to have a power law shape.
 For $\ell > 100$, we find a bump in spectrum for the observation. This is probably a combined effect of residual point sources, incorrect masking choice in $B$-mode polarization, and perhaps some residual noise.
 
-\giuse{Moreover, an important caveat of the current synchrotron templates is that despite the point source masking, we find and excess due to Galactic point sources at low   latitudes around the Galactic center. We thus remark here that the \texttt{s4}, \texttt{s5},\texttt{s6} and \texttt{s7} models  are reliable at $\ell \lesssim 3000 $ and outside the Galactic plane. We devote to a future release the treatment of small scale structure in bright regions. }
+An important caveat of the current synchrotron templates is that despite the point source masking, we find and excess due to Galactic point sources at low   latitudes around the Galactic center. We thus remark here that the \texttt{s4}, \texttt{s5}, \texttt{s6} and \texttt{s7} models are reliable at $\ell \lesssim 3000 $ and outside the Galactic plane. We devote to a future release the treatment of small scale structure in bright regions.
 
 
 \subsubsection{BICEP/Keck Patch}
@@ -595,7 +594,7 @@ For $\ell > 100$, we find a bump in spectrum for the observation. This is probab
     \label{fig:psym_BKmatrix}
 \end{figure*}
 
-The cleanest patch of sky in the southern hemisphere is particularly important for ongoing and future CMB experiments that target the primordial B-mode polarization. The strongest constraints on the tensor-to-scalar ratio to date, with an experimental uncertainty $\sigma(r) = 0.009$ and an upper limit of $r < 0.036~(95\%)$, are set by the BICEP/Keck (BK) experiment using their science data up to the 2018 season~\citep[``BK18'';][]{Ade:2021}. The constraints are derived from a combination of BK, NPIPE and WMAP 23--353~GHz data observed from the $\approx 600$ square degree sky patch centering at RA 0h, Dec. $-57.5^{\circ}$. Over the next few years, a collaborative effort between the South Pole Telescope (SPT) and BICEP/Keck will combine high-resolution SPT-3G observations with BICEP3 and BICEP Array observations in order to ``delens'' the observed CMB B-modes to further constrain $r$, yielding $\sigma(r) \lesssim 0.003$~\citep{BICEP/KeckCollaboration:2022}. As this observation field will also overlap with the tentative sky patch of the CMB-S4 experiment for their primordial B-mode search \citep{Abazajian:2022}, there will be continued interest in simulating its Galactic foregrounds, meriting a more comprehensive analysis. 
+The cleanest patch of sky in the southern hemisphere is particularly important for ongoing and future CMB experiments that target the primordial B-mode polarization. The strongest constraints on the tensor-to-scalar ratio to date, with an experimental uncertainty $\sigma(r) = 0.009$ and an upper limit of $r < 0.036~(95\%)$, are set by the BICEP/Keck (BK) experiment using their science data up to the 2018 season~\citep[``BK18'';][]{Ade:2021}. The constraints are derived from a combination of BK, NPIPE and WMAP 23--353~GHz data observed from the $\sim 600$ square degree sky patch centering at RA 0h, Dec. $-57.5^{\circ}$. Over the next few years, a collaborative effort between the South Pole Telescope (SPT) and BICEP/Keck will combine high-resolution SPT-3G observations with BICEP3 and BICEP Array observations in order to ``delens'' the observed CMB B-modes to further constrain $r$, yielding $\sigma(r) \lesssim 0.003$~\citep{BICEP/KeckCollaboration:2022}. As this observation field will also overlap with the tentative sky patch of the CMB-S4 experiment for their primordial B-mode search \citep{Abazajian:2022}, there will be continued interest in simulating its Galactic foregrounds, meriting a more comprehensive analysis. 
 
 \begin{figure}
     \centering
@@ -604,7 +603,7 @@ The cleanest patch of sky in the southern hemisphere is particularly important f
     \label{fig:BKfield_power}
 \end{figure}
 
-As demonstrated in Figure~\ref{fig:psym_BKmatrix}, we apply a new method to compute the $BB$ power spectra of the PySM models in the BK sky patch before comparing them to the best measurement available. In the first panel, the PySM \texttt{d9} $Q$/$U$ maps integrated with a delta 353~GHz bandpass are masked to the BICEP3 observation region and convolved with the BICEP3 beam profile to include the beam-smoothing effect. The next panel shows the results after multiplying the BK18 BICEP3 observation matrix to these smoothed maps. As part of standard data products in the BK analysis \citep{BICEP2Collaboration:2016}, this matrix accurately captures various timestream processing (for example the third-order polynomial filtering applied along RA scans) and beam deprojection in the linear map-making process, turning the input maps as if they are observed and analyzed through the BICEP3 telescope. These maps hence lose their large-scale structures and their color scale is decreased by 10 times. In the third panel, the intermediate maps are further multiplied by the corresponding purification matrix to remove the pure E-modes and ambiguous modes arising from a filtered small-field observation, yielding two B-mode dominated $Q$ and $U$ maps with clear ``cross-like'' and ``plus-like'' pattern respectively. To yield the final science maps, the inverse noise-variance apodization mask is applied in this step as well to weigh down the noisy edge area.
+As demonstrated in Figure~\ref{fig:psym_BKmatrix}, we apply a new method to compute the $BB$ power spectra of the PySM models in the BK sky patch before comparing them to the best measurement available. In the first panel, the PySM \texttt{d9} $Q$/$U$ maps at 353~GHz are masked to the BICEP3 observation region and convolved with the BICEP3 beam profile to include the beam-smoothing effect. The next panel shows the results after multiplying the BK18 BICEP3 observation matrix to these smoothed maps. As part of standard data products in the BK analysis \citep{BICEP2Collaboration:2016}, this matrix accurately captures various timestream processing (for example the third-order polynomial filtering applied along RA scans) and beam deprojection in the linear map-making process, turning the input maps as if they are observed and analyzed through the BICEP3 telescope. These maps hence lose their large-scale structures and their color scale is decreased by 10 times. In the third panel, the intermediate maps are further multiplied by the corresponding purification matrix to remove the pure E-modes and ambiguous modes arising from a filtered small-field observation, yielding two B-mode dominated $Q$ and $U$ maps with clear ``cross-like'' and ``plus-like'' pattern respectively. To yield the final science maps, the inverse noise-variance apodization mask is applied in this step as well to weigh down the noisy edge area.
 
 \begin{table}
     \centering
