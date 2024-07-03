@@ -605,7 +605,8 @@ The cleanest patch of sky in the southern hemisphere is particularly important f
 
 In Figure~\ref{fig:psym_BKmatrix}, we show simulated PySM dust model \texttt{d9} maps that are `reobserved' to emulate the impact of the BK timestream filtering and map-making pipeline. 
 % apply a new method to compute the $BB$ power spectra of the PySM models in the BK sky patch before comparing them to the best measurement available. 
-In the first panel, the PySM \texttt{d9} $Q$/$U$ maps at 353~GHz are masked to the BICEP3 observation region and convolved with the BICEP3 beam profile to include the beam-smoothing effect. 
+In the first panel, the PySM \texttt{d9} $Q$/$U$ maps at 353~GHz are masked to the BICEP3 observation region and convolved with the BICEP3 beam.
+profile to include the beam-smoothing effect. 
 The next panel shows the results after multiplying the BK18 BICEP3 observation matrix to these smoothed maps. As part of standard data products in the BK analysis \citep{BICEP2Collaboration:2016}, this matrix accurately captures various timestream processing (for example the third-order polynomial filtering applied along RA scans) and beam deprojection in the linear map-making process, turning the input maps as if they are observed and analyzed through the BICEP3 telescope. These maps hence lose their large-scale structures and their color scale is decreased by 10 times. In the third panel, the intermediate maps are further multiplied by the corresponding purification matrix to remove the pure E-modes and ambiguous modes arising from a filtered small-field observation, yielding two B-mode dominated $Q$ and $U$ maps with clear ``cross-like'' and ``plus-like'' pattern respectively. To yield the final science maps, the inverse noise-variance apodization mask is applied in this step as well to weigh down the noisy edge area.
 
 \begin{table}
