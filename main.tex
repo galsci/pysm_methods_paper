@@ -729,7 +729,7 @@ To isolate the non-Gaussianity of the small-scales, we also generate Gaussian ra
 \end{enumerate}
 
 Now we have three sets of maps with different small scales co-added: model \texttt{d11}, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
-We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. Note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are fully Gaussian and isotropic since they are built from the \texttt{synfast} routine without any further processing . 
+We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. We note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are fully Gaussian and isotropic since they are built from the \texttt{synfast} routine without any further processing . 
 
 %Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
 
@@ -748,7 +748,7 @@ Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the 
 
 \begin{figure*}
     \centering
-    \includegraphics[width=180mm]{figures/maps_patch_345_35.pdf}
+    \includegraphics[width=180mm]{figures/maps_patch_345_45.pdf}
     \caption{We show the zoom-in plots in the selected patch at the center $(l, b) = (-15^{\circ}$, $45^{\circ})$, which are, from left to right, the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss} (i.e., $\texttt{d11}$ map), \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
     \label{fig:maps:patch2}
 \end{figure*}
@@ -756,7 +756,7 @@ Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the 
 \begin{figure*}
     \centering
     \includegraphics[width=180mm]{figures/MFs_345_45_with_G_rescaled.pdf}
-    \caption{Minkowski Functionals as a function of the threshold $\rho$ for the one realization of I, Q and U small scales in the patch with center of [$-15^{\circ}$ , $45^{\circ} $] in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. The blue dotted one is for \texttt{Gaussian-mod-ss} while the orange solid one is from \texttt{poltens-ss}. We also show the \texttt{Gaussian-ss} in dashed gray line as a comparison.}
+    \caption{Minkowski Functionals as a function of the threshold $\rho$ for the one realization of I, Q and U small scales in the patch with center of $(l, b) = (-15^{\circ}$, $45^{\circ})$ in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. The blue dotted one is for \texttt{Gaussian-mod-ss} while the orange solid one is from \texttt{poltens-ss}. We also show the \texttt{Gaussian-ss} in dashed gray line as a comparison.}
     \label{fig:MF:patch2}
 \end{figure*}
 
