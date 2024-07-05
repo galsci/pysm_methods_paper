@@ -596,7 +596,7 @@ An important caveat of the current synchrotron templates is that despite the poi
     \label{fig:psym_BKmatrix}
 \end{figure*}
 
-The cleanest patch of sky in the southern hemisphere is particularly important for ongoing and future CMB experiments that target the primordial B-mode polarization. The dataset providing the strongest constraining power of the tensor-to-scalar ratio $r$ to date is from the BICEP/Keck (BK) experiment with science data up to the 2018 season~\citep[``BK18'';][]{Ade:2021}. It comprises a combination of BK, NPIPE and WMAP 23--353~GHz data observed from the $\sim 600$ square degree sky patch centering at RA 0h, Dec. $-57.5^{\circ}$. Over the next few years, a collaborative effort between BICEP/Keck and the South Pole Telescope (SPT) will combine the BICEP3 and BICEP Array maps with the overlapping SPT-3G maps in order to ``delens'' the observed CMB B-modes to tighten the constraint of $r$~\citep{BICEP/KeckCollaboration:2022}. As this observation field will also overlap with the tentative sky patch of the CMB-S4 experiment for their primordial B-mode search \citep{Abazajian:2022}, there will be continued interest in simulating its Galactic foregrounds, meriting a more comprehensive analysis. 
+The cleanest patch of sky in the southern hemisphere is particularly important for ongoing and future CMB experiments that target the primordial B-mode polarization. The dataset providing the strongest constraining power of the tensor-to-scalar ratio $r$ to date is from the BICEP/Keck (BK) experiment with science data up to the 2018 observation season~\citep[``BK18'';][]{Ade:2021}. It comprises a combination of BK, NPIPE and WMAP 23--353~GHz data observed from the $\sim 600$ square degree sky patch centering at RA 0h, Dec. $-57.5^{\circ}$. Over the next few years, a collaborative effort between the BICEP/Keck and the South Pole Telescope (SPT) will combine the BICEP3 and BICEP Array maps with the overlapping SPT-3G maps in order to ``delens'' the observed CMB B-modes to tighten the constraint of $r$~\citep{BICEP/KeckCollaboration:2022}. As this observation field will also overlap with the tentative sky patch of the CMB-S4 experiment for their primordial B-mode search \citep{Abazajian:2022}, there will be continued interest in simulating its Galactic foregrounds, meriting a more comprehensive analysis. 
 
 \begin{figure}
     \centering
@@ -605,19 +605,7 @@ The cleanest patch of sky in the southern hemisphere is particularly important f
     \label{fig:BKfield_power}
 \end{figure}
 
-In Figure~\ref{fig:psym_BKmatrix}, we show simulated PySM dust model \texttt{d9} maps that are `reobserved' to emulate the impact of the BK timestream processing and map-making pipeline. 
-% apply a new method to compute the $BB$ power spectra of the PySM models in the BK sky patch before comparing them to the best measurement available. 
-In the first panel, the PySM \texttt{d9} $Q$/$U$ maps at 353~GHz are masked to the BICEP3 observation region and convolved with the BICEP3 beam.
-% profile to include the beam-smoothing effect. 
-The next panel shows the results after multiplying these smoothed maps with the BK18 BICEP3 observation matrix. 
-% As part of standard data products in the BK analysis \citep{BICEP2Collaboration:2016}, 
-The observation matrix accurately captures various timestream processing (for example the third-order polynomial filtering applied along RA scans) and beam deprojection in the linear map-making process \citep{BICEP2Collaboration:2016}. Multiplying the input maps with this matrix produces output maps that appear as if they have been observed and analyzed through the BICEP3 telescope.
-% they are observed and analyzed through the BICEP3 telescope. 
-These maps lose their large-scale structures and the amplitude of fluctuations is decreased by a factor of 10. In the third panel, the intermediate maps are further multiplied by the corresponding purification matrix 
-% to remove the pure E-modes and ambiguous modes arising from a filtered small-field observation, yielding two 
-to obtain pure $B$-mode dominated $Q$ and $U$ maps with clear ``cross-like'' and ``plus-like'' pattern respectively. To yield the final science maps, the inverse noise-variance apodization mask is applied.
-% in this step as well to weigh down the noisy edge area. 
-The power spectra from these `reobserved' PySM model maps are compared with BK best-fit models for dust and synchrotron power spectra. 
+In Figure~\ref{fig:psym_BKmatrix}, we show simulated PySM dust model \texttt{d9} maps that are ``reobserved'' to emulate the impact of the BK timestream processing and map-making pipeline. In the first panel, the PySM \texttt{d9} $Q$/$U$ maps at 353~GHz are masked to the BICEP3 observation region and convolved with the BICEP3 beam. The next panel shows the results after multiplying these smoothed maps with the BK18 BICEP3 observation matrix. The observation matrix accurately captures various timestream processing (for example the third-order polynomial filtering applied along RA scans) and beam deprojection in the linear map-making process \citep{BICEP2Collaboration:2016}. Multiplying the input maps with this matrix produces output maps that appear as if they have been observed and analyzed through the BICEP3 telescope. These maps lose their large-scale structures and the amplitude of fluctuations is decreased by a factor of 10. In the third panel, the intermediate maps are further multiplied by the corresponding purification matrix to obtain pure $B$-mode dominated $Q$ and $U$ maps with clear ``cross-like'' and ``plus-like'' pattern respectively. To yield the final science maps, the inverse noise-variance apodization mask is applied as well.
 
 \begin{table}
     \centering
@@ -634,7 +622,7 @@ The power spectra from these `reobserved' PySM model maps are compared with BK b
     \label{tab:BB_dustratio}
 \end{table}
 
-Applying the same process to other PySM models at frequencies of interest (\texttt{s4}/\texttt{s5}/\texttt{s6}/\texttt{s7} at 20/23/30/40~GHz and \texttt{d9}/\texttt{d19}/\texttt{d12} at 85/150/220/270/353~GHz), we acquire a set of BK pipeline propagated, pure $B$-mode model foreground maps compatible with BK measurements. We then proceed to calculate their $BB$ auto power spectra using the BK binning and present selected results in this section. 
+Applying the same process to other PySM models at frequencies of interest (\texttt{s4}, \texttt{s5}, \texttt{s6}, \texttt{s7} at 20, 23, 30, 40~GHz and \texttt{d9}, \texttt{d10}, \texttt{d12} at 85, 150, 220, 270, 353~GHz), we acquire a set of BK pipeline propagated, pure $B$-mode model foreground maps compatible with BK measurements. We then proceed to calculate their $BB$ auto power spectra using the BK binning and present selected results in this section. 
 
 In Figure~\ref{fig:BKfield_power}, we show the \texttt{d9} and \texttt{d12} $BB$ band power at 353~GHz and the \texttt{s5} band power at 23~GHz, the pivot frequencies adopted in the BK analyses. These PySM power spectra are compared with the BK18 maximum likelihood foreground model comprising a modified blackbody power spectrum ($T_d$ fixed at $19.6~\text{K}$) with parameter $A_{d,\ell=80} = 4.4 \; \mu\text{K}^2$ , $\beta_d = 1.5$ and $\alpha_d = -0.66$ for dust, and a square-law power spectrum with parameter $A_{s,\ell=80} = 0.6 \; \mu\text{K}^2$, $\beta_s = -3.0$ and $\alpha_s = 0.00$ for synchrotron. These BK18 model lines are further suppressed by their band power window functions to account for the mode loss and mode coupling induced by the matrices. All band powers are eventually converted to full-sky $D_\ell$ by a division of the integral of the band power window function. 
 
