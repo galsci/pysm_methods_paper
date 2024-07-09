@@ -395,15 +395,19 @@ where $S_\nu(\theta)$ stands for any of the three Stokes parameters of interest,
 In the implementation used here, the 353~GHz templates for the six emission layers are slightly different from those of \cite{Martinez-Solaeche:2018} as we construct them from more recent Planck data products. Large scale polarized emission maps are the GNILC maps obtained in \cite{planck2016-l04} using the method developed by \cite{Remazeilles:2011}. These are complemented by small scale realizations with scale dependence matching the $T$, $E$ and $B$ dust spectra measured in \cite{planck2016-l11A}, modulated by the large scale local intensity and polarized intensity level. This does result in some filtering out of the real small scale power in intensity and polarization, which is replaced by random fluctuations. Thus we expect departures from the non-Gaussian and non-stationary properties of real dust emission at these scales. %We devote a future work the improvement of statistical properties of the generated of small scale fluctuations.
 
 \subsection{CO Models} \label{subsec:co_models}
-Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ transitions have been detected even in the broad photometric Planck bands \citep{planck2013-p03a, planck2014-a12}. Since CO emission can be polarized \citep{Goldreich:1981}, it may be a relevant foreground for CMB polarization analyses \citep{Puglisi:2017}.  In this section, we provide further details on the  implementation of three CO into the PySM~3 framework.
+Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ transitions have been detected even in the broad photometric Planck bands \citep{planck2013-p03a, planck2014-a12}. Since CO emission can be polarized \citep{Goldreich:1981}, it may be a relevant foreground for CMB polarization analyses \citep{Puglisi:2017}. In this section, we describe the implementation of three CO models into the PySM~3 framework.
 
+All CO models implemented here are based on the CO $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ \texttt{Type-1} intensity maps\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} derived by \citet{planck2013-p03a} from Planck data. The CO maps are obtained exploiting the mismatches in the detector bandpasses to recover the CO from the CMB and the other Galactic foregrounds usi the Modified Internal Linear Combination Algorithm (\texttt{MILCA}) component separation algorithm. The templates produced from this analysis is preferred to direct measurements from existing spectroscopic surveys \citep[e.g.,][]{Dame:2001} because it is not limited to low Galactic latitudes and has a uniform angular resolution over the sky.
 
-All CO models implemented here are based on the CO \texttt{Type-1} intensity maps\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} derived by \citet{planck2013-p03a}. The CO maps are obtained exploiting the mismatches in the detector bandpass to recover the CO from the CMB and the other Galactic foregrounds, with the Modified Internal Linear Combination Algorithm (\texttt{MILCA}) component separation algorithm. The CO  $J = 1\rightarrow 0 $ template is preferred to those from existing spectroscopic surveys \citep[e.g.,][]{Dame:2001} because it is not limited to low Galactic latitudes and has a uniform angular resolution. Moreover, \emph{Planck } \texttt{Type-1} do not involve multi-frequency data for  separating  foregrounds and   is thus less prone to  mismodelling the recovered dust. Hence, we prefer type1 over type2 templates. are less affected by frequency mismodelling of dust.  Consequentely, we    prefer  \texttt{Type-1} over   \texttt{Type-2} and \texttt{Commander} templates.     Although the map is released at a resolution of 10\arcmin, we convolve it with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes. We remark here that this procedure might result into residual emission due to extended Galactic and extra-galactic sources.   The template is then downgraded to coarser pixellization of \texttt{nside=512}.
-The first CO model {\bf\texttt{co1}} adopts the $J = 1\rightarrow0,$  $J = 2\rightarrow1$ and $J = 3\rightarrow2$ templates and assumes no polarization. 
+\citet{planck2013-p03a} also produced \texttt{Type-2} templates based on a multi-frequency analysis. This method is more prone to modeling errors in separating the Galactic dust emission, so we prefer the \texttt{Type-1} templates for our purposes. 
+
+The CO templates have a native resolution of 10\arcmin. We convolve each of the $J = 1\rightarrow0$, $J = 2\rightarrow1$, and $J = 3\rightarrow2$ maps with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes at the possible expense of introducing residual emission from extended Galactic and extra-galactic sources. Finally, the template is downgraded to a coarser pixellization of \texttt{nside=512}. These templates are the foundation on which the CO models are built.
+
+The first CO model {\bf\texttt{co1}} adopts the $J = 1\rightarrow0,$  $J = 2\rightarrow1$ and $J = 3\rightarrow2$ templates as-is and assumes no polarization. 
 
 The second CO model {\bf\texttt{co2}} introduces a simple implementation of polarization. The $I$ maps of the three transitions used in  {\bf\texttt{co1}} are converted to $P$ maps using a sky-constant, user-defined polarization fraction $p$, where the default is $p = 0.1$\%. The $Q$ and $U$ maps are made from the $P$ maps using the polarization angle of the thermal dust emission as determined by a component separation analysis with Commander \citep{planck2014-a12}.
 
-Finally, the third CO model {\bf\texttt{co3}} not only accounts for the polarized emission as in {\bf\texttt{co2}} but also includes small-scale emission from high-Galactic latitude clouds. We adopt the {\bf\texttt{LogSpiral}} model from \citet{Puglisi:2017}, which provided the best fit to Planck data, and perform a dedicated simulation to produce sub-degree and high - Galactic latitude  contribution   of  total intensity  and polarized emission due to the  high-Galactic latitude  molecular clouds. The $I$, $Q$, and $U$ maps generated by the simulation are then added to the $I$, $Q$, and $U$ maps of {\bf\texttt{co2}} to produce the final {\bf\texttt{co3}} model.
+Finally, the third CO model {\bf\texttt{co3}} not only accounts for the polarized emission as in {\bf\texttt{co2}} but also includes small-scale emission from high-Galactic latitude clouds. We perform a dedicated simulation with the {\bf\texttt{LogSpiral}} model from \citet{Puglisi:2017}, which provided the best fit to Planck data, to produce maps of the contribution to the total and polarized CO intensity at sub-degree scales from molecular clouds at high Galactic latitudes. The $I$, $Q$, and $U$ maps generated by the simulation are then added to the $I$, $Q$, and $U$ maps of {\bf\texttt{co2}} to produce the final {\bf\texttt{co3}} model.
  
 \section{Validation and Characterization of Models} \label{sec:validation}
 
@@ -424,7 +428,7 @@ While in Section~\ref{sec:sync_validation}, we compare the PySM synchrotron mode
 \subsection{Maps}\label{subsec:maps}
 
 PySM models are based on noisy observations of Galactic foreground amplitude maps, complemented in some cases by randomly generated small-scale features (sec.~\ref{sec:small_scales}). Maps of frequency scaling parameters also comprise randomly generated fluctuations, the generation of which is different for the various models. It is important to check to which extent model maps match with observations in the frequency range of interest. In this first step of validation of the PySM foreground models, we compare, for the different foreground models considered here, maps generated using the PySM and actual observations in the frequency range of interest.%\textcolor{red}{[What frequencies do we want to cover? I suggest at least 23~GHz--353~GHz, but this does not fully cover the frequency range of CMB-S4 and LiteBIRD]}
-Specifically, we compare observations the Planck third data release PR3 \cite{planck2016-l03} and PySM dust models \texttt{d9}, {\tt d11}, {\tt d12} models at the map level. As \texttt{d9} and {\tt d11} have random fluctuations generated as described in section \ref{sec:small_scales}, we expect that we do not recover as well the small scales in data as for the d12 model \ref{sec:layers}.
+Specifically, we compare observations the Planck third data release PR3 \cite{planck2016-l03} and PySM dust models \texttt{d1}, {\tt d9}, {\tt d12} models at the map level. As \texttt{d9} has random fluctuations generated as described in section \ref{sec:small_scales}, we expect that we do not recover as well the small scales in data as for the d12 model \ref{sec:layers}.
 We study how the modeled intensity $I$ and polarized intensity $P = \sqrt{U^2 + Q^2}$ compare to the observations on three selected $16.7^\circ \times 16.7^\circ$ patches of the sky, at 353~GHz. Here, we focus on two local patches: close to the Galactic plane ($[l,b] =[180^\circ,-10^\circ]$) and, centered on the Bicep / Keck field ($[l,b] =[318^\circ,-61^\circ]$).
 We integrate the dust models within the Planck passband (\cite{planck2013-p03d})\footnote{\url{http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_RIMO_R3.00.fits}}, to enable a more straightforward comparison. For the comparison of dust intensity maps, we subtract a Wiener-filtered CMB temperature anisotropies map from SMICA and also adjust (setting to zero) the zero level of the PR3 data and of the simulated maps over a small region of very low dust emission, totaling a sky fraction of 2.5\%.
 %to that of the simulated map over regions of faint dust intensity on the sky.
@@ -447,7 +451,7 @@ These corrections are not required for comparing polarization data.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/gal_plane_non_smooth_wo_zero_lvl.png}
-\caption{Dust intensity at 353GHz at [l = 180, b = -10] with an angular resolution of $4.94\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12.}    
+\caption{Dust intensity at 353GHz at [l = 180, b = -10] with an angular resolution of $4.94\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12.}    
 \label{fig:353_int_gal_plane}
 \end{figure}
 % \begin{figure}
@@ -459,14 +463,14 @@ These corrections are not required for comparing polarization data.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/BK_smooth_30'_wo_zero_lvl.png}
-    \caption{Dust intensity at 353GHz at [l = 318, b = -61] with an angular resolution of $30\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12. Here, PR3 is contaminated by CIB and extragalactic sources.}
+    \caption{Dust intensity at 353GHz at [l = 318, b = -61] with an angular resolution of $30\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12. Here, PR3 is contaminated by CIB and extragalactic sources.}
     \label{fig:353_int_BK}
 \end{figure}
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/pol_gal_plane_smooth_30'.png}
-    \caption{Polarized dust intensity at 353GHz centered at [l = 180, b = -10], smoothed to $30\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12.}
+    \caption{Polarized dust intensity at 353GHz centered at [l = 180, b = -10], smoothed to $30\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12.}
     \label{fig:353_pol_int_gal_plane}
 \end{figure}
 % \begin{figure}
@@ -479,7 +483,7 @@ These corrections are not required for comparing polarization data.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/pol_BK_smooth_30'.png}
-    \caption{Polarized dust intensity at 353GHz centered at [l = 318, b = -61], smoothed to $30\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12.}
+    \caption{Polarized dust intensity at 353GHz centered at [l = 318, b = -61], smoothed to $30\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12.}
     \label{fig:353_pol_int_BK}
 \end{figure}
 
@@ -672,9 +676,7 @@ It is noteworthy that the frequency dependence of $R_\ell^{BB}(217\times\nu)$ is
 
 At present, it is unclear whether d1, d9, d10, or d12 is a more accurate description of the spatial variability of $T_d$ and $\beta_d$ and thus of frequency decorrelation. Constraints on decorrelation at higher frequencies where the models diverge most sharply would enable more accurate predictions for the level of decorrelation expected at CMB frequencies. As component separation techniques continue to improve by incorporating information in both the pixel domain and the harmonic domain, and as new data sets are becoming available, it is also timely to revisit the component separation analysis with the aim of making improved $T_d$ and $\beta_d$ maps.
 
-\subsection{Extragalactic contamination}
-
-\label{sec:CIBcontamination}
+\subsection{Extragalactic contamination} \label{sec:CIBcontamination}
 
 %[Stanford student Monica Hicks is working with Susan on cross-correlating our models with galaxy surveys a la Chiang \& Menard.] 
 
@@ -989,7 +991,7 @@ Short forward-looking paragraph.
 
 \begin{acknowledgments}
 
-This work was supported by the National Science Foundation under grant No. AST-2106607 (PI S.E.C.). This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration. We are grateful to the BICEP/Keck collaboration for sharing their BK18 matrix products for the validation analysis of this paper. 
+This work was supported by the National Science Foundation under grant No. AST-2106607 (PI S.E.C.). This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration. We thank the BICEP/Keck collaboration for sharing the BK18 matrix products for the validation analysis of this paper. 
 
 \end{acknowledgments}
 
