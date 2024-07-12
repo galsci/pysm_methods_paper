@@ -175,7 +175,12 @@ While the mathematical model of this framework can be applied to any emission me
 
 %\af{We adopt a simple, if somewhat heuristic, approach that treats intensity and polarization components on equal footing, and seems to work well both for dust and synchrotron radiation. Since Galactic emission has such a large dynamic range, $\ln I$ is often used for visualization (and has one-point PDF closer to Gaussian one than the original distribution of $I$). On the other hand, polarization fraction $p$ is widely used in description and analysis of galactic foregrounds, but it is only one scalar quantity out of many that could be constructed from Stokes parameters $I$, $Q$, and $U$. In general, the two-dimensional sky map with given intensity and polarization is described by a symmetric rank 2 tensor $P_{ab}$, with components transforming under local coordinate changes. This suggests that the transformation that attempts to normalize emission should be applied to polarization \textit{tensor}, not its components. The simplest such transformation is logarithmic, with $p_{ab} = \ln P_{ab}$ in the matrix sense}
 
-A two-dimensional sky map of intensity and polarization is described by a symmetric rank-2 tensor $P_{ab}$, with components transforming under local coordinate changes. This suggests that any transformation that attempts to normalize emission should be applied to polarization tensor, not its components. The simplest such transformation is logarithmic, with $p_{ab} = \ln P_{ab}$ in the matrix sense:
+A two-dimensional sky map of intensity and linear polarization is described by the symmetric rank-2 tensor %$P_{ab}$
+
+\begin{equation}
+    P_{ab} = \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right]
+\end{equation}
+whose components transform under local coordinate changes. This suggests that any transformation that attempts to normalize emission should be applied to polarization tensor, not its components. The simplest such transformation is logarithmic, with $p_{ab} = \ln P_{ab}$ in the matrix sense:
 \begin{equation}\label{eq:logP}
 p_{ab} = \left[ \begin{matrix} i+q & u \\ u & i-q \end{matrix} \right] \ = \ 
     \ln \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right].
@@ -702,7 +707,7 @@ We present only the 23\,GHz PySM \texttt{s5} power spectrum in the lower panel o
 
 \subsection{Decorrelation} \label{subsec:decorrelation}
 
-One of the most challenging aspects of dust emission for CMB analyses is that its frequency dependence varies across the sky. If dust had the same SED everywhere, it would be sufficient to measure it at a frequency where it dominates the submillimeter emission and then subtract off all emission in lower frequency maps that is correlated with that template. The extent to which a map of dust emission at one frequency differs from a map of dust emission at a different frequency (aside from an overall normalization) is referred to as ``frequency decorrelation.'' Frequency decorrelation has been identified as a major uncertainty for ongoing and upcoming analyses.
+One of the most challenging aspects of dust emission for CMB analyses is that its frequency dependence varies across the sky. If dust had the same SED everywhere, it would be sufficient to measure it at a frequency where it dominates the submillimeter emission and then subtract off all emission in lower frequency maps that is correlated with that template. The extent to which a map of dust emission at one frequency differs from a map of dust emission at a different frequency (aside from an overall normalization) is referred to as ``frequency decorrelation.'' Frequency decorrelation has been identified as a major uncertainty for ongoing and upcoming analyses \citep{Ade:2021}.
 
 The level of decorrelation between two frequencies $\nu_1$ and $\nu_2$ can be quantified by the spectral correlation parameter $R_\ell$, defined as
 
@@ -717,7 +722,7 @@ The 353 and 217\,GHz Planck channels have the highest sensitivity to polarized d
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figures/decorrelation_dust.pdf}
-    \caption{The decorrelation parameter $1-R_\ell^{BB}$, where $R_\ell^{BB}$ is the correlation parameter defined in Equation~\eqref{eq:R_ell}, for the d1, d10, and d12 dust models between a reference frequency of 217\,GHz and variable $\nu$. $R_\ell$ is evaluated between $50 \leq \ell \leq 160$ over the Planck 70\% sky mask. The 95\% upper limit on decorrelation derived by \citet{planck2016-l11A} over 71\% of the sky is indicated by the black arrow at 353 GHz. The models span a large range in decorrelation level and each has a distinctive dependence on frequency.}
+    \caption{The decorrelation parameter $1-R_\ell^{BB}$, where $R_\ell^{BB}$ is the correlation parameter defined in Equation~\eqref{eq:R_ell}, for the \texttt{d1}, \texttt{d10}, and \texttt{d12} dust models between a reference frequency of 217\,GHz and variable $\nu$. $R_\ell$ is evaluated between $50 \leq \ell \leq 160$ over the Planck 70\% sky mask. The 95\% upper limit on decorrelation derived by \citet{planck2016-l11A} over 71\% of the sky is indicated by the black arrow at 353\,GHz. The models span a large range in decorrelation level and each has a distinctive dependence on frequency.}
     \label{fig:decorrelation}
 \end{figure}
 
