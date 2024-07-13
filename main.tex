@@ -178,13 +178,15 @@ While the mathematical model of this framework can be applied to any emission me
 A two-dimensional sky map of intensity and linear polarization is described by the symmetric rank-2 tensor \citep[e.g.,][]{Landau:1975}
 
 \begin{equation}
-    P_{ab} = \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right]
+    P_{ab} = \frac{1}{2} \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right]
 \end{equation}
-whose components transform under local coordinate changes. This suggests that any transformation that attempts to normalize emission should be applied to polarization tensor, not its components. The simplest such transformation is logarithmic, with $p_{ab} \equiv \ln P_{ab}$ in the matrix sense:
+whose components transform under local coordinate changes. This suggests that any transformation that attempts to normalize emission should be applied to polarization tensor, not its components. The simplest such transformation is logarithmic, with $p_{ab} \equiv \ln 2 P_{ab}$ in the matrix sense:
 \begin{equation}\label{eq:logP}
 p_{ab} = \left[ \begin{matrix} i+q & u \\ u & i-q \end{matrix} \right] \ = \ 
     \ln \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right].
 \end{equation}
+The (arbitrary) factor of two multiplying $P_{ab}$ enables a more physical interpretation of the $i$, $q$, and $u$ parameters, as we shall see.
+
 The transformation can be computed analytically by taking the logarithm of the eigenvalue decomposition of $P_{ab}$. The transformation preserves the polarization direction but compresses the Stokes parameters $I$, $Q$, $U$ into their polarization fraction tensor analogues $i$, $q$, $u$:
 \begin{align}\label{eq:real2pt}
     i &\equiv \frac{1}{2} \ln (I^2 - P^2)\nonumber  \\
