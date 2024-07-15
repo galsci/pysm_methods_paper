@@ -11,7 +11,7 @@
 \newcommand{\sg}[1]{\textcolor{teal}{#1}}
 \newcommand{\jd}[1]{\textcolor{green}{#1}}
 \newcommand{\af}[1]{\textcolor{blue}{#1}}
-
+\newcommand{\nk}[1]{\textcolor{pink}{#1}}
 \begin{document}
 
 \title{Full-Sky Models of Galactic Microwave Emission and Polarization at Sub-arcminute Scales}
@@ -768,19 +768,24 @@ The first set of map, with Gaussian isotropic field is built as follows:
 
 \item we first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the \texttt{d10} maps on the \texttt{GAL097} mask. 
 
-\item To obtain only the small scales, we apply a high-pass filter to the fitted power law power spectra with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations of this filtered power law spectra (with $\ell_{max}=4096$) with the \texttt{synfast} routine provided by HEALPix. 
+\item To retain only the small scales, we apply a high-pass filter to the fitted power law power spectra with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations of these filtered power law spectra (with $\ell_{max}=4096$) with the \texttt{synfast} routine provided by HEALPix. 
 
 \item The generated Gaussian isotropic small scales are added to
-the large-scale dust template to form the first final set of maps
+the large-scale dust template to form the first final set of maps.
 
 \end{enumerate}
 
-For the second set of maps, we need to mimic the effective modulation of \texttt{d10} maps in $IQU$ quantities. We use the following procedure:
+For the second set, we need to mimic the effective modulation of \texttt{d10} maps in $IQU$ quantities. We use the following procedure:
 \begin{enumerate}
 \item we generate modulation maps in the same way as done in $iqu$ space (Eq. 
 \ref{eq:mod_maps}), except that here we implement them directly in $IQU$, therefore obtaining $m_I$ and $m_P$ for temperature and polarization.
+\item We multiplied these modulation maps with maps of Gaussian isotropic small scales (generated as for the first set of Gaussian isotropic maps, as described in point 1 and 2 above) and coadd them with the large-scale dust template.
+\item we compare the power spectra of these maps with those of \texttt{d10} on four different sky mask: 4 GAL40, 60, 80, 97.
+
+\item{we fine-tune the $m_I$ and $m_P$ modulation maps, through multiplication factors in the sky regions defined by the four masks, in order to ensure that the power spectra compute on the different masks are as close as possible to the ones of \texttt{d10}.}
 \end{enumerate}
 
+\nk{Nico to keep working on the text below in order to make it clearer..}
 Now we have three sets of maps with different small scales co-added: model \texttt{d10}, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
 We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. We note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are fully Gaussian and isotropic since they are built from the \texttt{synfast} routine without any further processing. 
 
