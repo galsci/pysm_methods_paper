@@ -394,8 +394,6 @@ To model the complexity of multiple layers of dust along the line of sight, we b
 
 The PSM has been run to produce six maps of dust emission $S_{\nu_0}^k(\theta)$ at $\nu_0 = 353$ GHz (intensity and polarization, for a total of 18 HEALPix maps at nside=2048), and six maps of dust spectral index $\beta_d^k(\theta)$ and dust temperature $T_d^k(\theta)$ at nside=2048, following the approach described in \cite{Martinez-Solaeche:2018}, to form six different layers.
 
-%The PSM has been run to produce six maps of dust emission at 353~GHz (intensity and polarization, for a total of 18 HEALPix maps at {\tt nside=2048}), and six maps of dust spectral index $\beta_d$ and dust temperature $T_d$, also at {\tt nside=2048}, following the approach described in \cite{Martinez-Solaeche:2018}. 
-
 The PySM software uses these maps as inputs, and generates the dust Stokes parameters maps as:
 \begin{equation}
     S_\nu(\theta) = \sum_{k=1}^6 S^{(k)}_{\nu_0}(\theta)
