@@ -782,9 +782,9 @@ For the second set, we need to mimic the effective modulation of \texttt{d10} ma
 \item{We fine-tuned the $m_I$ and $m_P$ modulation maps, through multiplication factors in the sky regions defined by the four masks, in order to ensure that the power spectra compute on the different masks are as close as possible to the ones of \texttt{d10}. For each mask we only consider the part not overlapping with other masks, such as the yellow region in Fig.\ref{fig:sync_masks} showing the additional coverage of \texttt{GAL60} compared with \texttt{GAL40}}
 \end{enumerate}
 
-\nk{Nico to keep working on the text below in order to make it clearer..}
+
 Now we have three sets of maps with different small scales co-added: model \texttt{d10}, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
-We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. We note that the design of the modulation maps is to ensure the final \texttt{Gaussian-mod-ss} maps have the same anisotropy as \texttt{poltens-ss}, which is done by tuning the modulation maps to let \texttt{Gaussian-mod-ss} have the same power spectra behavior as \texttt{poltens-ss} on different masks that exclude the inner part of the Galactic plane. \texttt{Gaussian-ss} are fully Gaussian and isotropic since they are built from the \texttt{synfast} routine without any further processing. 
+We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. 
 
 %Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
 
