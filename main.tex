@@ -91,9 +91,9 @@ We do not develop new models of AME in this work, but rather rely on the existin
 The \texttt{a1} and \texttt{a2} models differ only in their treatment of polarization. AME polarization has not been detected, and recent analysis places an upper limit on the intrinsic polarization fraction of $\lesssim3$\% \citep{Herman:2023}. The \texttt{a1} model assumes that AME is unpolarized, whereas the \texttt{a2} model assumes a constant polarization fraction of 2\%. The polarization angle of the AME in the \texttt{a2} model is based on the polarization angle of the 353\,GHz polarized dust emission determined by component separation with \texttt{Commander} \citep{planck2014-a12}. As with total intensity, the AME polarization map inherits the small-scale fluctuations introduced to the thermal dust polarization map \citep[see][for details]{Thorne:2017}.
 
 \subsubsection{CO Emission}
-In all CO models presented in this work, emission from the $J = 1\rightarrow0, 2\rightarrow1$, and $3\rightarrow2$ transitions at 115.3, 230.5, and 345.8\,GHz, respectively, is modeled as a delta function at the rest frequency. Therefore, a model is fully defined by maps of $I$, $Q$, and $U$ at the reference frequency. We present the new PySM CO models \texttt{co1}, \texttt{co2}, and \texttt{co3}, an implementation of the models of \citet{Puglisi:2017}, in Section~\ref{subsec:co_models}.
+In all CO models presented in this work, emission from the $J = 1\rightarrow0, 2\rightarrow1$, and $3\rightarrow2$ transitions at 115.3, 230.5, and 345.8\,GHz, respectively, is modeled as a delta function at the rest frequency. Therefore, a model is fully defined by maps of $I$, $Q$, and $U$ at the reference frequency. We present the new PySM CO models \texttt{co1}, \texttt{co2}, and \texttt{co3} in Section~\ref{subsec:co_models}.
 
-\subsubsection{Other Emission Mechanisms} % BH: Not sure if this is useful, or if it goes here vs discussion
+\subsubsection{Other Emission Mechanisms}
 The current suite of PySM models encompasses most of the emission and polarization mechanism observed from the diffuse ISM of the Milky Way. However, it is not exhaustive, and we identify here a few potential targets for future work.
 
 Other isotopologues of CO emit at frequencies near the $^{12}$C$^{18}$O lines. However, these species produce much weaker emission and reside in even denser gas than does $^{12}$C$^{18}$O, and so have a more minor role as a CMB foreground. Likewise, HCN has been identified as a potential contributor to the \texttt{Commander} sky model, but mostly toward the Galactic Center \citep{planck2014-a12}. Line emission from \ion{C}{2} at 158\,$\mu$m and \ion{N}{2} at 122 and 205\,$\mu$m from the diffuse ISM was mapped by COBE/FIRAS \citep{Bennett:1994}, but there are currently no CMB experiments operating at such high frequencies. COBE/FIRAS also detected weaker line emission from \ion{C}{1} (370 and 609\,$\mu$m) and CO transitions beyond those modeled in this work, though these lines were mostly seen toward the Galactic Center \citep{Bennett:1994}. Lastly, discrete Galactic sources, whether point sources or extended objects, are included in PySM models only insofar as they appear in the data products employed. Dedicated effort to include models of Galactic cold clumps, planetary nebulae, and stars that have been detected at microwave wavelengths is a potential avenue for future work. 
@@ -194,7 +194,7 @@ The transformation can be computed analytically by taking the logarithm of the e
     u &\equiv  \frac{1}{2}\frac{U}{P} \ln \frac{I+P}{I-P}\nonumber 
     ~~~,
 \end{align}
-where $P \equiv \sqrt{Q^2 + U^2}$ is the usual polarized intensity independent of coordinate system. For small polarization fractions, these reduce to familiar quantities $i\simeq\ln I$, $q\simeq Q/I$, and $u\simeq U/I$. 
+where $P \equiv \sqrt{Q^2 + U^2}$ is the usual polarized intensity independent of coordinate system. For small polarization fractions, these reduce to familiar quantities $i\simeq\ln I$, $q\simeq Q/I$, and $u\simeq U/I$, motivating our referring to $p_{ab}$ as the ``polarization fraction tensor.''
 
 The inverse transformations are
 \begin{align}\label{eq:pt2real}
@@ -225,7 +225,7 @@ Our method for generating small-scale fluctuations is summarized as follows:
     \item Finally, we sum the small-scale and large-scale maps and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
 \end{enumerate}
 
-This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The pivot scale $\ell_2$ prevents the $TE$, $EE$, or $BB$ spectra from exceeding the $TT$ spectrum at any scale. While such power spectra are not necessarily unphysical, maps synthesized from them can produce pixels with polarization fractions in excess of unity \af{AF: is it really so? cf. Section~3 which says $p=\tanh\xi$! some clarification needed?} unless other constraints are imposed, and we wish to avoid that complication here. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
+This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The pivot scale $\ell_2$ prevents the $TE$, $EE$, or $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
 %The algorithm followed to inject small angular scales into the models is summarized in Alg. \ref{alg:small_scales}.
 %\begin{algorithm}
