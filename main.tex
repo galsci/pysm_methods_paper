@@ -558,7 +558,7 @@ To compare the performance of the latest PySM dust models \texttt{d9}, \texttt{d
 
 For our large-area comparison, we use a set of $2^\circ$-apodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits}} from the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available. We take \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080} as representative for our analysis, where the number in the mask name indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$.
 
-In Figure~\ref{fig:largefield_power}, we compare the $TT$, $EE$, and $BB$ power spectra of the \texttt{d9} model, the \texttt{d12} model, and the NPIPE map. Since the \texttt{d10} model is identical to the \texttt{d9} model at 353~GHz, we do not show it separately. The error bars on the cross-spectra are computed from 200 NPIPE detector-split simulations.
+In Figure~\ref{fig:largefield_power}, we compare the $TT$, $EE$, and $BB$ power spectra of the \texttt{d1}, \texttt{d9} and \texttt{d12} model, and the NPIPE map. Since the \texttt{d10} model is identical to the \texttt{d9} model at 353~GHz, we do not show it separately. The error bars on the cross-spectra are computed from 200 NPIPE detector-split simulations.
 
 For the $TT$ spectra, we find that the \texttt{d12} model aligns well with the observed $TT$ spectrum for all sky fractions, except that it underestimates the power spectrum amplitude when $f_{\rm sky} = 0.8$. The \texttt{d9} model shows similar behavior for $\ell \lesssim 100$. Beyond that scale, its power declines more rapidly with $\ell$ at $f_{\rm sky} = 0.6$ and $f_{\rm sky} = 0.8$, and it exhibits a power bump around $\ell \sim 100$ for $f_{\rm sky} = 0.2$.
 
@@ -581,7 +581,7 @@ For polarization, the \texttt{d9} model is generally consistent with the data ov
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/smallfield_power.pdf}
-    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE detector-split maps and dust model maps \texttt{d9} and \texttt{d12}. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A^{BB} \big( l/80 \big)^{\alpha^{BB}+2}$ where $\alpha^{BB} = -2.42$) to the NPIPE data points, which is largely driven by the first two band powers.}
+    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE detector-split maps and dust model maps \texttt{d1}, \texttt{d9} and \texttt{d12}. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A^{BB} \big( l/80 \big)^{\alpha^{BB}+2}$ where $\alpha^{BB} = -2.42$) to the NPIPE data points, which is largely driven by the first two band powers.}
     \label{fig:smallfield_power}
 \end{figure}
 
@@ -592,7 +592,7 @@ In the small-area case, we mainly follow the method described in \cite{planck201
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/all2_lhmean.pdf}
-    \caption{Scatter plots of the mean of the first two $BB$ band powers versus the mean of the last four $BB$ band powers shown in Figure~\ref{fig:smallfield_power}. Each data point represents the results from a circular sky patches with $|b| > 30^\circ$. Dashed reference lines indicating $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ are added to the plots. This power law in fact comes from the analysis of several larger sky regions ($f_\text{sky} = 0.3 \; \text{to} \; 0.8$) by \cite{planck2014-XXX}, but the small-field NPIPE data points, which spread out when the dust amplitude is small presumably due to map noise, are consistent with it as well. Another important feature is that the trends of the \texttt{d9} and \texttt{d12} data points are lower than that of the NPIPE in these log-log plots, implying that the model spectra are steeper.}
+    \caption{Scatter plots of the mean of the first two $BB$ band powers versus the mean of the last four $BB$ band powers shown in Figure~\ref{fig:smallfield_power}. Each data point represents the results from a circular sky patches with $|b| > 30^\circ$. Dashed reference lines indicating $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ are added to the plots. This power law in fact comes from the analysis of several larger sky regions ($f_\text{sky} = 0.3 \; \text{to} \; 0.8$) by \cite{planck2014-XXX}, but the small-field NPIPE data points, which spread out when the dust amplitude is small presumably due to map noise, are consistent with it as well. Another important feature is that the trends of the \texttt{d1}, \texttt{d9} and \texttt{d12} data points are lower than that of the NPIPE in these log-log plots, implying that the model spectra are steeper.}
     \label{fig:smallfield_power_all}
 \end{figure}
 
