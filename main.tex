@@ -344,7 +344,8 @@ Just as a map of Galactic emission at a single frequency is expected to have flu
 As there is no sense of polarization in the spectral parameter maps, we do not work within the polarization fraction tensor framework but rather with standard power spectra. Given a template map $\mathcal{T}$ of some spectral parameter $\beta$, we first fit the power spectrum of $\mathcal{T}$ with a power law $C_\ell \propto \ell^\alpha$ over a range of scales where it is well measured, up to some multipole $\ell_1$. We then generate a map of small scale fluctuations using the power law fit. We multiply the resulting map by a modulation map in analogy with the amplitude modulations described in Section~\ref{sec:dustamplitude}. Finally, we combine the template map with the synthesized small scales using the filter function in Equation~\ref{eq:filter}.
 
 The application of this procedure to the dust and synchrotron spectral parameters is described in the following sections. The adopted fit parameters for each spectral parameter are listed in Table~\ref{tab:smallscale_specpar}.
-
+%Elisa:
+%Because of the dependency of the models on the spectral parameters, when we are far from the reference frequency, the models with varying spectral parameters over the sky fail. We recommend using the PySM models between 1 GHz and 1 THz.
 \subsubsection{Dust Spectral Parameters}\label{subsec:dust_spec_params}
 As described in Section~\ref{subsubsec:dust_model}, the dust emission in all models developed here is governed by the spectral parameters $\beta_d$ and $T_d$. For the $\beta_d$ and $T_d$ template maps, we employ the $\beta_d$ and $T_d$ maps\footnote{\texttt{COM\_CompMap\_Dust-GNILC-Model-Spectral-Index\_2048\_R2.00.fits}, \texttt{COM\_CompMap\_Dust-GNILC-Model-Temperature\_2048\_R2.00.fits}} derived from 2015 Planck GNILC component separation analysis \citep{planck2016-XLVIII}. These maps benefit from lower CIB residuals than the \texttt{Commander} $\beta_d$ and $T_d$ as the methodology employed both spatial and spectral information to disentangle the CIB contribution to the total emission.
 %However, the estimate of $\beta_d$ and $T_d$ is highly degenerate making the maps at small angular scales ($<21.8^\prime$) are contaminated by artifacts due to noise and calibration errors. 
@@ -359,7 +360,7 @@ We construct the modulation map from the GNILC $I$ map smoothed to a resolution 
 
 % BH: This is potentially important, but probably belongs in the validation section
 %However,  we do not expect small scales generated with the spectral parameter maps  to dominate when rescaling maps at frequencies other than the reference one (353 GHz). \giuse{This is mainly granted by the fact that amplitude small scales are few orders of magnitude larger than the ones injected in the  spectral parameter, in the whole range of reliability of the PySM models, e.g. 10-1000 GHz.}
- 
+
 \subsubsection{Synchrotron Spectral Parameters}\label{sec:beta_s}
 As described in Section~\ref{subsubsec:synch_model}, the synchrotron emission in all models developed here is governed by the spectral parameters $\beta_s$ and $c_s$. To build the large scale template for the spatial variation of the synchrotron spectral index $\beta_s$, we begin with the full-sky $\beta_s$ map obtained by combining the Haslam map in total intensity at 408\,MHz \citep{Remazeilles:2015} and WMAP K-band data \citep{Miville-Deschenes:2008}. The map has an angular resolution of about $7^{\circ}$ and was employed by previous PySM synchrotron models \citep{Thorne:2017}.
 
