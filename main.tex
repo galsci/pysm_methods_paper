@@ -554,7 +554,8 @@ For our large-area validation we employ sky masks that leave 80\%, 60\%, 40\% an
 
 The polarized dust emission is the dominant foreground contaminant for CMB $B$-mode observations. We therefore perform additional validation of the dust $B$-mode polarization in small patches to check the properties of the injected small scales. 
 
-\subsubsection{Dust Emission Over the Sky} \label{sec:dust_validation}
+\subsubsection{Dust Emission Over the Sky} 
+\label{sec:dust_validation}
 To compare the performance of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data over a broad range of scales, we present their power spectra computed with both large-area and small-area masks at 353~GHz where the dust emission dominates. We first generate PySM dust models maps at delta 353~GHz and smooth them with a Gaussian beam of 4.82\arcmin, matching the resolution of Planck 353~GHz channel. We color-correct the Planck NPIPE 353~GHz channel maps to the same single frequency by a scaling factor 0.92, and we subtract the CMB dipole from the NPIPE temperature maps. We then apply identical masks (defined below) to the mean-subtracted PySM dust models and NPIPE ``A''/``B'' detector-split maps. We finally compute the auto-spectra of the model maps and the cross-spectra of the NPIPE data splits with the masks to minimize noise correlation. 
 
 For our large-area comparison, we use a set of $2^\circ$-apodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits}} from the Planck Legacy Archive. There are eight masks in total, leaving between 20\% and 99\% of the sky available. We take \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080} as representative for our analysis, where the number in the mask name indicates the percentage of the sky left for analysis, i.e., $100 f_{\rm sky}$.
