@@ -1,7 +1,7 @@
 name: Overleaf Sync with Git
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "24 * * * *"
   push:
     branches:
       - main
