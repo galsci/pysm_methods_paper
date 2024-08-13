@@ -109,11 +109,11 @@ A basic overview of the models developed and/or implemented in this work are pro
 \caption{Summary of the PySM 3.4 models - Dust. $ {} ^{\dag}$See Tab.\ref{tab:smallscale_par} for $\alpha_{EE}$ and $\alpha_{BB}$ .}
 \tablewidth{0pt}
 \tablehead{
-\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max $N_{\rm side}$} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
 \startdata
 \texttt{d9} &  GNILC PR2 (I) + GNILC PR3 (QU) 353 GHz &  Modulated + polarization tensor & Uniform spectral parameters &  & Deterministic & Modified black body & 8192 \\
 \hline
-\texttt{d10} & same as above & same as above &  $\beta_d, \, T_d$ from GNILC data & Modulated & Deterministic & same as above & 8192 \\
+\texttt{d10} & same as above & same as above &  $\beta_d, \, T_d$ from GNILC maps & Modulated & Deterministic & same as above & 8192 \\
 \hline
 \texttt{d11} & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral parameters & same as above & 8192 \\
 \hline
@@ -129,7 +129,7 @@ A basic overview of the models developed and/or implemented in this work are pro
 \caption{Summary of the PySM 3.4 models - Synchrotron}
 \tablewidth{0pt}
 \tablehead{
-\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max $N_{\rm side}$} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
 \startdata
 \texttt{s4} & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & uniform spectral index &  & Deterministic & Power law & 8192 \\
 \hline
@@ -145,7 +145,7 @@ A basic overview of the models developed and/or implemented in this work are pro
 \caption{Summary of the PySM 3.4 models - CO}
 \tablewidth{0pt}
 \tablehead{
-\colhead{Tag} & \colhead{Templates} & \colhead{Templates} &   \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max Nside} \\ & \colhead{at large scales} & \colhead{at small scales} & & &}
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} &   \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max $N_{\rm side}$} \\ & \colhead{at large scales} & \colhead{at small scales} & & &}
 \startdata
 \texttt{co1} & Planck 2013 MILCA smoothed to 1 deg   &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
 \hline
@@ -393,7 +393,7 @@ Evidence for variation of Galactic foreground emission laws as a function of fre
 
 To model the complexity of multiple layers of dust along the line of sight, we base our  PySM~3 implementation \texttt{d12} on the approach of \cite{Martinez-Solaeche:2018} in the PSM software\footnote{See version 2.3.3 \url{https://apc.u-paris.fr/~delabrou/PSM/psm.html}.}. 
 
-The PSM has been run to produce six maps of dust emission $S_{\nu_0}^k(\theta)$ at $\nu_0 = 353$ GHz (intensity and polarization, for a total of 18 HEALPix maps at nside=2048), and six maps of dust spectral index $\beta_d^k(\theta)$ and dust temperature $T_d^k(\theta)$ at nside=2048, following the approach described in \cite{Martinez-Solaeche:2018}, to form six different layers.
+The PSM has been run to produce six maps of dust emission $S_{\nu_0}^k(\theta)$ at $\nu_0 = 353$ GHz (intensity and polarization, for a total of 18 HEALPix maps at $N_{\rm side}$=2048), and six maps of dust spectral index $\beta_d^k(\theta)$ and dust temperature $T_d^k(\theta)$ at $N_{\rm side}$=2048, following the approach described in \cite{Martinez-Solaeche:2018}, to form six different layers.
 
 The PySM software uses these maps as inputs, and generates the dust Stokes parameters maps as:
 \begin{equation}
@@ -420,7 +420,7 @@ All CO models implemented here are based on the CO $J = 1\rightarrow0$, $J = 2\r
 
 \citet{planck2013-p03a} also produced \texttt{Type-2} templates based on a multi-frequency analysis. However, this method is more prone to modeling errors in separating the Galactic dust emission from the CO emission, and so we prefer the \texttt{Type-1} templates for our purposes.
 
-The \texttt{Type-1} CO templates have a native resolution of 10\arcmin. We convolve each of the $J = 1\rightarrow0$, $J = 2\rightarrow1$, and $J = 3\rightarrow2$ maps with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes at the possible expense of introducing residual emission from extended Galactic and extra-galactic sources. Finally, the templates are downgraded to a coarser pixellization of \texttt{nside=512}. These templates are the foundation on which the CO models are built.
+The \texttt{Type-1} CO templates have a native resolution of 10\arcmin. We convolve each of the $J = 1\rightarrow0$, $J = 2\rightarrow1$, and $J = 3\rightarrow2$ maps with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes at the possible expense of introducing residual emission from extended Galactic and extra-galactic sources. Finally, the templates are downgraded to a coarser pixellization of $N_{\rm side} = 512$. These templates are the foundation on which the CO models are built.
 
 The first CO model {\bf\texttt{co1}} adopts the $J = 1\rightarrow0,$  $J = 2\rightarrow1$ and $J = 3\rightarrow2$ templates as-is and assumes no polarization. 
 
@@ -587,7 +587,7 @@ For polarization, the \texttt{d9} model is generally consistent with the data ov
     \label{fig:smallfield_power}
 \end{figure}
 
-In the small-area case, we mainly follow the method described in \cite{planck2014-XXX} to define the masks for spectra computation. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400\,deg$^2$ circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian, resulting in $f_{\rm sky} \sim 0.008$. The representative results from two selected circular fields at Galactic latitude $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Figure~\ref{fig:smallfield_power}. As it would be computational expensive to use simulations to compute the cross-spectra errors of each small sky patch, in this case they are calculated by the method stated in \cite{Tristram:2005}. 
+In the small-area case, we mainly follow the method described in \cite{planck2014-XXX} to define the masks for spectra computation. We first use a HEALPix grid with $N_{\rm side} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400\,deg$^2$ circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian, resulting in $f_{\rm sky} \sim 0.008$. The representative results from two selected circular fields at Galactic latitude $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Figure~\ref{fig:smallfield_power}. As it would be computational expensive to use simulations to compute the cross-spectra errors of each small sky patch, in this case they are calculated by the method stated in \cite{Tristram:2005}. 
 
 %To compare the small-scale performances of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data, we mainly follow the analysis method described in \cite{planck2014-XXX} to examine the model behaviors. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian (resulting in $f_{\rm sky} \approx 0.008$), and apply such a mask to the mean-subtracted dust model and NPIPE half-ring split maps at 353~GHz. We then use \texttt{anafast} to compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$, accounting properly for the $f_{\mathrm{sky}}$ of the circular mask. For the masked NPIPE data maps, we instead compute cross-spectrum from the two split maps to minimize the noise correlation. The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. 
 
