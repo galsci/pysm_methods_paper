@@ -221,16 +221,6 @@ Our method for generating small-scale fluctuations is summarized as follows:
 
 This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The pivot scale $\ell_2$ prevents the $TE$, $EE$, or $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
-%The algorithm followed to inject small angular scales into the models is summarized in Alg. \ref{alg:small_scales}.
-%\begin{algorithm}
-%\caption{Procedure to inject small angular scales.}\label{alg:small_scales}
-%$tqu_{in}  =$ \texttt {real2logpoltens(}$TQU_{in}$\texttt{)} \;
-%$ tqu^{\mathcal{T}} =$ \texttt {alm2map(map2alm($tqu_{in}$)} $* \sigma_\ell $)  \;
-% $ tqu^{ ss} = $\texttt {synfast}$(C_\ell^{xy,ss}\left(1-\sigma_\ell\right) ) * m_k $ \;
-% $ tqu_{out} = tqu^{\mathcal{T}}+ tqu^{ss} $ \;
-% $ TQU_{out} = $ \texttt {logpoltens2real(}$ tqu_{out}$ \texttt{)} \;
-%\end{algorithm}
-
 \begin{table*}
     \centering
     \footnotesize
@@ -265,8 +255,7 @@ where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ an
  
 The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the modulation maps are presented in Table~\ref{tab:smallscale_par}. The values of $\ell_1$ and $\ell_*$ are driven both by the angular resolution and the signal-to-noise ratio of the template maps. We employ $\ell_1=100$ and $\ell_*=80$ for dust and $\ell_1=38$ and $\ell_*=36$ for synchrotron. The $\ell_2$ parameter is chosen to be high enough that dust and synchrotron emission are relatively unconstrained by current full-sky data. We adopt  $\ell_2=2000$ for dust and $\ell_2 = 400$ for synchrotron. The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}.
 
-%Once we have generated small-scale maps, we smoothly connect them to the large scales that are well-measured on the sky. To do this, we need to modulate the amplitude of our small-scale maps so that they inherit information about the large-scale synchrotron or dust intensity.
-The final maps are obtained from 
+The final maps are obtained by combining the large and small scales: 
 \begin{equation} \label{eq:filter}
     a_{\ell m }^{X, out}=  a_{\ell m }^{x, \mathcal{T}} \left(1-\sigma_\ell\right)^{0.2} + a_{\ell m }^{x, ss} \sigma_\ell
     ~~~, 
@@ -293,7 +282,7 @@ The Planck~2015 component separation results in total intensity remain state of 
 
 In total intensity we employ the Planck GNILC 2015 component separated map at $353$\,GHz \citep{planck2016-XLVIII}\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky regions, which complicates its use in our analysis. Therefore, we reprocess the map as follows to a spatially uniform resolution of 21.8\arcmin. To do so, we first note that the map was synthesized from ten needlet maps of different, but spatially-uniform, resolution \citep[][Figure~A.2]{planck2016-l04}. We produce a map of uniform resolution by retaining only the first six needlet maps, which probe the dust intensity from the largest scales down to $21.8\arcmin$. This yields an $N_{\rm side} = 2048$ that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8$\arcmin. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l11B}.
 
-For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the Planck Public Release 3 \citep{planck2016-l04,planck2016-l11B}. While these maps have variable angular resolution, the resolution varies over the sky much more smoothly than in the $I$ map. Given this, and that we wish to retain as much polarization information in our analysis as possible, we employ these variable resolution maps as-is. Their resolution ranges from $21.8\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
+For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the Planck Public Release 3 \citep{planck2016-l04,planck2016-l11B}. While these maps have variable angular resolution, the resolution varies over the sky much more smoothly than in the $I$ map. Given this, and that we wish to retain as much polarization information in our analysis as possible, we employ these variable resolution maps as-is. Their resolution ranges from $5\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
 
 To produce dust emission templates at a monochromatic frequency of 353\,GHz, we divide each of the $I$, $Q$, and $U$ maps by a factor of 1.098 to correct for the Planck bandpass \citep[][Table~2]{planck2016-l11A}.
 
