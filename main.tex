@@ -261,17 +261,18 @@ The final maps are obtained by combining the large and small scales:
     ~~~, 
 \end{equation}
 where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$, and $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps. The filter $\sigma_\ell$ is given by
-%Thus, the power spectra are described by
-%\begin{equation} \label{eq:filter}
-%    C_\ell^{xy} = C_\ell^{xy, \mathcal{T}}\left(1-\sigma_\ell\right)^{0.4} + C_\ell^{xy, ss} \sigma_\ell 
-%\end{equation}
-%where $C_\ell^{xy, \mathcal{T}}$ are the power spectra of the data-driven templates (Section~\ref{sec:templates}), $xy$ is any of $tt$, $te$, $ee$, and $bb$. The filter $\sigma_\ell$ is given by
 
 \begin{equation}
 \sigma_\ell  = \left[1+  e^{ -c_1 (\ell/ \ell_1  -c_2 )}\right]^{-1}  
 ~~~,
 \end{equation}
 where the parameters $c_1$ and $c_2$ govern the width of the filter in multipoles. We adopt $c_1=40$ and $c_2=0.9$ throughout this work. The exponent of $0.2$ on the $\left(1-\sigma_\ell\right)$ term in Equation~\ref{eq:filter} is chosen empirically to smooth the transition between our data-driven templates and the generated small scales. We found that this choice minimizes artifacts at $\ell \simeq \ell_1$ in power spectra computed over large sky areas while maintaining the correct asymptotic behavior.
+
+%Thus, the power spectra are described by
+%\begin{equation} \label{eq:filter}
+%    C_\ell^{xy} = C_\ell^{xy, \mathcal{T}}\left(1-\sigma_\ell\right)^{0.4} + C_\ell^{xy, ss} \sigma_\ell 
+%\end{equation}
+%where $C_\ell^{xy, \mathcal{T}}$ are the power spectra of the data-driven templates (Section~\ref{sec:templates}), $xy$ is any of $tt$, $te$, $ee$, and $bb$. The filter $\sigma_\ell$ is given by
 
 Since the generation of the small scales depends only upon a fixed input power spectrum, we can generate a different map realization on the fly each time a sky is simulated. Thus, the methodology presented here enables generation of an ensemble of sky realizations having the same well-measured large scales but stochastic realizations of the poorly-measured small scales. Further, the small-scale fluctuations can be generated at arbitrarily small scales set only by the resolution of the map since all power spectra can be extended indefinitely in $\ell$. In practice, small scales are generated up to $\ell_{\rm max} = 3N_{\rm side}-1$. % \af{maximum linearly independent}
 
@@ -313,28 +314,21 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
 
 Just as a map of Galactic emission at a single frequency is expected to have fluctuations at smaller angular scales than have been measured, maps of parameters governing its frequency dependence should also have small-scale fluctuations. We therefore introduce small scale fluctuations to our spectral parameter template maps in a way analogous to the amplitude template maps. This more realistically captures the complexity of small-scale Galactic emission.
 
-As there is no sense of polarization in the spectral parameter maps, we do not work within the polarization fraction tensor framework but rather with standard power spectra. Given a template map $\mathcal{T}$ of some spectral parameter $\beta$, we first fit the power spectrum of $\mathcal{T}$ with a power law $C_\ell \propto \ell^\alpha$ over a range of scales where it is well measured, up to some multipole $\ell_1$. We then generate a map of small scale fluctuations using the power law fit. We multiply the resulting map by a modulation map in analogy with the amplitude modulations described in Section~\ref{sec:dustamplitude}. Finally, we combine the template map with the synthesized small scales using the filter function in Equation~\ref{eq:filter}.
+As there is no sense of polarization in the spectral parameter maps, we do not work within the polarization fraction tensor framework but rather with standard power spectra. Given a template map $\mathcal{T}$ of some spectral parameter $\beta$, we first fit the power spectrum of $\mathcal{T}$ with a power law $C_\ell \propto \ell^\alpha$ over a range of scales where it is well measured, up to some multipole $\ell_1$. We then generate a map of small scale fluctuations using the power law fit. We multiply the resulting map by a modulation map in analogy with the amplitude modulations described in Section~\ref{sec:dustamplitude}. Finally, we combine the template map with the synthesized small scales using the filter function in Equation~\ref{eq:filter}. As with the amplitude parameters, we use the input template maps for the spectral parameters as-is in the inner Galactic plane, defined by the Planck \texttt{GAL097} mask.
+
+A major caveat with introducing random fluctuations in the spectral parameters is that the resulting emission maps are no longer guaranteed to resemble data far from the reference frequency. For this reason, we recommend that models with variations in spectral parameters be used only in the frequency range $\sim$1--1000\,GHz.
 
 The application of this procedure to the dust and synchrotron spectral parameters is described in the following sections. The adopted fit parameters for each spectral parameter are listed in Table~\ref{tab:smallscale_specpar}.
-%Elisa:
-Because of the dependency of the models on the spectral parameters, when we are far from the reference frequency, the models with varying spectral parameters over the sky fail. We recommend using the PySM models between 1 GHz and 1\,THz.
-
-%\giuse{increasing at $\ell>40$ in the K-band spectra estimated by masking 80\% of the sky.  Therefore, we  adopt $\ell = 36$ as  cut-off multipole scale  for synchrotron.}
 
 \subsubsection{Dust Spectral Parameters}\label{subsec:dust_spec_params}
-As described in Section~\ref{subsubsec:dust_model}, the dust emission in all models developed here is governed by the spectral parameters $\beta_d$ and $T_d$. For the $\beta_d$ and $T_d$ template maps, we employ the $\beta_d$ and $T_d$ maps\footnote{\texttt{COM\_CompMap\_Dust-GNILC-Model-Spectral-Index\_2048\_R2.00.fits}, \texttt{COM\_CompMap\_Dust-GNILC-Model-Temperature\_2048\_R2.00.fits}} derived from 2015 Planck GNILC component separation analysis \citep{planck2016-XLVIII}. These maps benefit from lower CIB residuals than the \texttt{Commander} $\beta_d$ and $T_d$ as the methodology employed both spatial and spectral information to disentangle the CIB contribution to the total emission.
+As described in Section~\ref{subsubsec:dust_model}, the dust emission in all models developed here is governed by the spectral parameters $\beta_d$ and $T_d$. For the $\beta_d$ and $T_d$ template maps, we employ the $\beta_d$ and $T_d$ maps\footnote{\texttt{COM\_CompMap\_Dust-GNILC-Model-Spectral-Index\_2048\_R2.00.fits}, \texttt{COM\_CompMap\_Dust-GNILC-Model-Temperature\_2048\_R2.00.fits}} derived from 2015 Planck GNILC component separation analysis \citep{planck2016-XLVIII}. These maps benefit from lower CIB residuals than the \texttt{Commander} $\beta_d$ and $T_d$ \citep{planck2014-a12} as the methodology employed both spatial and spectral information to disentangle the CIB contribution to the total emission.
 %However, the estimate of $\beta_d$ and $T_d$ is highly degenerate making the maps at small angular scales ($<21.8^\prime$) are contaminated by artifacts due to noise and calibration errors. 
 
 We fit the power spectra of the $\beta_d$ and $T_d$ template maps over the multipole ranges $200 < \ell < 400$ and $100 < \ell < 400$, respectively. We find that $\alpha_{\beta_d}= 0.04$ and $\alpha_{T_d} = -0.47$ over this range, both flatter than the $\alpha_{tt} = -0.80$ found for the dust amplitude. The adopted pivot multipole $\ell_1$ is larger than that used for dust amplitudes (see Table~\ref{tab:smallscale_par}) since the template maps employed here are derived from intensity-only data rather than a combination of total and polarized intensity. Thus, they remain signal-dominated at $\sim$4 times smaller angular scales.
 
-%The chosen cut-off multipole for $\beta_d$ and $T_d$ is the same as the one adopted for the intensity amplitude template, i.e., $\ell=400 $.
-
 We construct the modulation map from the GNILC $I$ map smoothed to a resolution of $5^\circ$. We apply a linear renormalization such that the (now dimensionless) pixel values in the map range from 0.1 to 2. %BH The text below makes me think that pixels in the I map above and below a certain threshold were ignored in this process rather than taking the literal min and max values of the map
 
 %\giuse{ Also in this case, we   employ a modulation map for the $\beta_d$ and $T_d$ synthetic small scales.   The modulation template is derived from $I$ GNILC amplitude map, smoothed  at 5 deg and \emph{min-max} normalized   from $0.1$ and $2$. The latter step is needed as we expect the modulation map to be dimensionless and  the extreme values have been  empirically identified as the best choice to preserve the range of variation observed in   $\beta_d$ and $T_d$ at both low and intermediate Galactic latitudes. } 
-
-% BH: This is potentially important, but probably belongs in the validation section
-%However,  we do not expect small scales generated with the spectral parameter maps  to dominate when rescaling maps at frequencies other than the reference one (353 GHz). \giuse{This is mainly granted by the fact that amplitude small scales are few orders of magnitude larger than the ones injected in the  spectral parameter, in the whole range of reliability of the PySM models, e.g. 10-1000 GHz.}
 
 \subsubsection{Synchrotron Spectral Parameters}\label{sec:beta_s}
 As described in Section~\ref{subsubsec:synch_model}, the synchrotron emission in all models developed here is governed by the spectral parameters $\beta_s$ and $c_s$. To build the large scale template for the spatial variation of the synchrotron spectral index $\beta_s$, we begin with the full-sky $\beta_s$ map obtained by combining the Haslam map in total intensity at 408\,MHz \citep{Remazeilles:2015} and WMAP K-band data \citep{Miville-Deschenes:2008}. The map has an angular resolution of about $7^{\circ}$ and was employed by previous PySM synchrotron models \citep{Thorne:2017}.
