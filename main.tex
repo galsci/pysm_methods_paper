@@ -343,13 +343,6 @@ To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generat
 
 \subsection{Summary of New Dust and Synchrotron Models}
 
-% \begin{figure*}
-%     \centering
-%     \includegraphics[width=2.\columnwidth]{figures/synch_valspectra.pdf}
-%     \caption{This figure compares the power spectra of the \texttt{s4} model (dark circles) and the input HASLAM/WMAP K-band  map (light circles) when computed on the \texttt{GAL090}, \texttt{GAL070}, \texttt{GAL040}, and \texttt{GAL020} Galactic masks.}
-%     \label{fig:spectra_by_field}
-% \end{figure*}
-
 The new dust and synchrotron models implemented here all improve on previous models through new data-driven templates and use of the polarization fraction tensor framework to model small-scale fluctuations. Multiple models each of dust and synchrotron are provided to explore a range of astrophysical complexity allowed by current constraints. In brief, the \texttt{d9} and \texttt{s4} models use the new data-driven templates and include $I$, $Q$, and $U$ fluctuations up to the largest $\ell$ values simulated, but these models have sky-constant spectral parameters and thus no frequency decorrelation (see Section~\ref{subsec:decorrelation} for discussion). In contrast, \texttt{d10} and \texttt{s5} employ data-driven maps of spectral parameters to which small-scale fluctuations are added, inducing frequency decorrelation. The \texttt{s7} synchrotron model provides an extra spectral parameter---curvature of the frequency spectrum---and thus additional complexity. The \texttt{d11} and \texttt{s6} models allow many realizations of \texttt{d10} and \texttt{s5}, respectively, to be generated in which the large scales are fixed to the data-driven templates and the small scales have the same statistical properties but differing spatial morphologies. Extensive model comparisons are made in Section~\ref{sec:validation}.
 
 \section{Other Models Implemented} \label{sec:other_models}
@@ -585,7 +578,7 @@ In this section, we detail the validation of the new synchrotron models by compa
     \label{fig:sync_masks}
 \end{figure}
 
-We have purposefully chosen an earlier release of BeyondPlanck for our analysis. Later data release versions of BeyondPlanck, or its successor CosmoGlobe, produce synchrotron intensity maps at 408\,MHz \citep{Watts:2023a}. The PySM synchrotron models \texttt{s5} and \texttt{s7} are not suitable for producing synchrotron simulations at 408\,MHz. This is a consequence of scaling the Haslam map from 408\,GHz to 30\,GHz for constructing the template for synchrotron intensity. When this template is rescaled to 408\,MHz, with scaling that varies over the the sky, the model fails. We do not recommend use of the s5 and s7 models below 1\,GHz. Therefore, we validate our models with the synchrotron intensity map at 30\,GHz.
+We have purposefully chosen an earlier release of BeyondPlanck for our analysis. Later data release versions of BeyondPlanck, or its successor CosmoGlobe, produce synchrotron intensity maps at 408\,MHz \citep{Watts:2023a}. The PySM synchrotron models \texttt{s5} and \texttt{s7} are not suitable for producing synchrotron simulations at 408\,MHz. This is a consequence of scaling the Haslam map from 408\,GHz to 30\,GHz for constructing the template for synchrotron intensity. When this template is rescaled to 408\,MHz, with scaling that varies over the the sky, the model fails. We do not recommend use of the \texttt{s5} and \texttt{s7} models below 1\,GHz. Therefore, we validate our models with the synchrotron intensity map at 30\,GHz.
 
 % \giuse{In case of the synchrotron polarization, we  compare the models with band integrated observations. So, we compute bandpass integrated maps  with PySM~3 routines and for  the different synchrotron models. For the sake of fair comparison with Planck data, we adopt the average LFI 30\,GHz RIMO transmission \citep{planck2014-a03}.} The bandpass integrated maps are further smoothed with Gaussian beams of 33.1\arcmin beams to produce model maps at native resolutions of the LFI 30\,GHz data. Finally, the observed power spectra are computed by taking the cross-spectrum between independent detector splits, e.g. A and B, of the NPIPE \footnote{Publicly available through NERSC at \\ /global/cfs/cdirs/cmb/data/planck2020} (PR4) 30\,GHz maps \citep{planck2020-LVII}. 
 
