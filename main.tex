@@ -720,42 +720,50 @@ Following the procedure in \citet{Chiang:2019}, we compute the cross-correlation
 
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 
-We quantify the level of non-Gaussianity in the small-scale dust emission generated through the polarization fraction tensor transformation using the simulations from dust model \texttt{d10}. To measure the non-Gaussianity in the maps we consider the Minkowski Functionals \citep[MFs,][]{Minkowski1903}, which are a common tool to quantify map-space higher order statistical properties \citep{Martire:2023, Carones:2024}. MFs quantify the morphology of excursion sets, i.e., iso-intensity contours. Hadwiger’s theorem \citep{hadwigerVorlesungenUeberInhalt1957}
-implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set. In our case, for two-dimensional maps, we have three kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which correspond to the area, the perimeter and the connectivity of the excursion set, respectively.
+We quantify the level of non-Gaussianity in the small-scale dust emission generated through the polarization fraction tensor transformation using the simulations from dust model \texttt{d10}. To measure the non-Gaussianity in the maps we consider the Minkowski Functionals \citep[MFs,][]{Minkowski1903}, which are a common tool to quantify map-space higher order statistical properties \citep{Martire:2023, Carones:2024}. 
+Hadwiger’s theorem \citep{hadwigerVorlesungenUeberInhalt1957}
+implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set. In our case, for two-dimensional maps, we have three kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which correspond to the area, the perimeter and the connectivity of the excursion set (iso-intensity contour), respectively.
 
-We use these MFs to compare the small-scale structure in \texttt{d10} to those of two other sets of maps: (i) maps where small-scale structures are fully Gaussian and isotropic and (ii) maps where small-scale structures are Gaussian but modulated across the sky. The reason why we need the second set of maps is the following: as described Section \ref{subsec:methodology}, the small scale structures in \texttt{d10} model are generated as Gaussian field in $i$, $q$ and $u$ and multiplied with $m_i$ and $m_p$ modulation maps, before adding them to the large scale maps and transformed back into $I$, $Q$ and $U$. This procedure leads to an effective modulation of small scale structures on $I/Q/U$ maps. We want to understand what is the impact of this effective modulation on MFs, and therefore construct a set of maps which only takes into account this modulation applied to a Gaussian field directly on Stokes parameter maps, without any transformation into polarization fraction tensor analogues. This allows to disentangle the non-Gaussianity generated through modulation from the potential non-Gaussianity due to the polarization fraction tensor transformation.   
-The first set of map, with Gaussian isotropic field is built as follows:
+We use these MFs to compare the small-scale structure in \texttt{d10} to those of two other sets of maps: (i) maps where the small-scale structures are fully Gaussian and isotropic and (ii) maps where the small-scale structures are Gaussian but modulated across the sky. As described Section \ref{subsec:methodology}, the small scale structures in the \texttt{d10} model are generated as a Gaussian random field in $i$, $q$ and $u$, and are multiplied by $m_i$ and $m_p$ modulation maps before they are coadded to the large-scale maps and transformed back into $I$, $Q$ and $U$. %This procedure leads to an effective modulation of small scale structures on $I/Q/U$ maps. 
+We want to understand the impact of this effective modulation on the MFs, and therefore construct a set of maps that are modulated versions of Gaussian-random-field maps. 
+%which only takes into account this modulation applied to a Gaussian field directly on Stokes parameter maps, without any transformation into polarization fraction tensor analogues. 
+This allows to disentangle any non-Gaussianity generated through the modulation from the potential non-Gaussianity introduced due to the polarization fraction tensor transformation.   
+The first set of maps is built as follows:
 \begin{enumerate}
 
 \item We first fit power laws to the $TT$, $EE$, $BB$ power spectra in the multipole range $[800, 2000]$ calculated from the \texttt{d10} maps on the \texttt{GAL097} mask. 
 
-\item To retain only the small scales, we apply a high-pass filter to the fitted power law power spectra with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full sky small scales realizations of these filtered power law spectra (with $\ell_{max}=4096$) with the \texttt{synfast} routine provided by HEALPix. 
+\item To retain only the small scales, we apply a high-pass filter to the fitted power law power spectra with $\ell_{cut} = 200$ for intensity and polarization maps, and then generate full-sky realizations of these filtered power spectra (with $\ell_{max}=4096$) with the \texttt{synfast} routine provided by HEALPix. 
 
-\item The generated Gaussian isotropic small scales are added to
-the large-scale dust template to form the first final set of maps.
+\item The generated Gaussian isotropic small scales are added to the large-scale dust template to form the first set of maps.
 
 \end{enumerate}
 
 For the second set, we need to mimic the effective modulation of \texttt{d10} maps in $IQU$ quantities. We use the following procedure:
 \begin{enumerate}
-\item We generated modulation maps in the same way as done in $iqu$ space (Eq. \ref{eq:mod_maps}), except that here we implemented them directly in $IQU$, therefore obtaining $m_I$ and $m_P$ for temperature and polarization.
-\item We multiplied these modulation maps with maps of Gaussian isotropic small scales (generated as for the first set of Gaussian isotropic maps, as described in point 1 and 2 above) and coadd them with the large-scale dust template.
-\item We compare the power spectra of these maps with those of \texttt{d10} on four different sky masks: \texttt{GAL40, 60, 80, 97}.
+\item We generate modulation maps in the same way as done in $iqu$ space (Eq. \ref{eq:mod_maps}), except that here we implemented them directly in $IQU$, therefore obtaining $m_I$ and $m_P$ for temperature and polarization.
 
-\item{We fine-tuned the $m_I$ and $m_P$ modulation maps, through multiplication factors in the sky regions defined by the four masks, in order to ensure that the power spectra compute on the different masks are as close as possible to the ones of \texttt{d10}. For each mask we only consider the part not overlapping with other masks, such as the yellow region in Fig.\ref{fig:sync_masks} showing the additional coverage of \texttt{GAL60} compared with \texttt{GAL40}}
+\item We multiply these modulation maps with maps of Gaussian isotropic small scales (generated as for the first set of Gaussian isotropic maps, as described in point 1 and 2 above) and coadd them with the large-scale dust template.
+
+%\item We compare the power spectra of these maps with those of \texttt{d10} on four different sky masks: \texttt{GAL40, 60, 80, 97}.
+\item We compare the power spectra of these maps with \texttt{d10} on four non-overlapping sky masks, defined by \texttt{GAL40} and the difference between \texttt{GAL60} and \texttt{GAL40}, \texttt{GAL80} and \texttt{GAL60}, and \texttt{GAL97} and \texttt{GAL80}. 
+
+\item{We fine-tune the $m_I$ and $m_P$ modulation maps, through multiplication factors in the sky regions defined by the four masks, in order to ensure that the power spectra computed on the different masks are as close as possible to \texttt{d10} power spectrum on the same mask. %For each mask we only consider the part not overlapping with other masks, such as the yellow region in Fig. \ref{fig:sync_masks} showing the additional coverage of \texttt{GAL60} compared with \texttt{GAL40}}
 \end{enumerate}
 
 
-Now we have three sets of maps with different small scales co-added: model \texttt{d10}, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
+We thus consider three sets of maps with different small scales co-added: model \texttt{d10}, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
 We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. 
 
 %Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
 
 \subsubsection{Minkowski Functionals on the sphere}
 
-Following the algorithm in \cite{Grewal:2022}, we calculate the MFs for the three $Q$ maps on the sphere, i.e., in HEALPix format, with a \texttt{GAL080} mask\footnote{\url{http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_Mask_GalPlane-apo2_2048_R2.00.fits}}, which masks out the Galactic plane. We first normalize the maps by dividing each map by its standard deviation and retain only pixels with values $[-3, 3]$ over which to calculate the MFs. Results are shown in Figure~\ref{fig:MF:sphere}. The MFs of the corresponding $U$ maps look very similar to $Q$ maps and are not shown here.
+Following the algorithm in \cite{Grewal:2022}, we calculate the MFs for the three $Q$ maps on the sphere, i.e., in HEALPix format, with a \texttt{GAL080} mask\footnote{\url{http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_Mask_GalPlane-apo2_2048_R2.00.fits}}, which masks out the Galactic plane. We first normalize the maps by dividing each map by its standard deviation, and compute the MFs for iso-intensity contours in the range $[-3, 3]$ (Figure \ref{fig:MF:sphere}).  
+% and retain only pixels with values $[-3, 3]$ over which to calculate the MFs. Results are shown in Figure~\ref{fig:MF:sphere}. 
+The MFs of the corresponding $U$ maps look very similar to $Q$ maps and are not shown here.
 
-Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the MFs of \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} are almost identical, while the MFs of \texttt{Gaussian-ss} differ substantially. The difference in MFs between \texttt{poltens-ss} and \texttt{Gaussian-ss} implies the existence of non-Gaussianity in \texttt{poltens-ss}, but the similarity between \texttt{poltens-ss} and \texttt{Gaussian-mod-ss} demonstrates that the non-Gaussianity in \texttt{poltens-ss} comes from the anisotropy in the maps, which originates from the modulation, rather than from the polarization fraction tensor transformation.
+Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the MFs of \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} are almost identical, while the MFs of \texttt{Gaussian-ss} differ substantially. The difference in MFs between \texttt{poltens-ss} and \texttt{Gaussian-ss} indicates the existence of non-Gaussianity in \texttt{poltens-ss}, but the similarity between \texttt{poltens-ss} and \texttt{Gaussian-mod-ss} demonstrates that the non-Gaussianity in \texttt{poltens-ss} comes from the anisotropy in the maps, which originates from the modulation, rather than from the polarization fraction tensor transformation.
 
 \begin{figure*}
     \centering
@@ -783,7 +791,7 @@ We consider a region centered at $(l, b) = (-15^{\circ}$, $45^{\circ})$ with dim
 
 Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} maps presented in Figure~\ref{fig:maps:patch2}. In contrast with the large-area results presented in Figure~\ref{fig:MF:sphere}, in this case we do measure a departure of the \texttt{poltens-ss} MFs from the \texttt{Gaussian-mod-ss} ones. %This points towards the fact that the polarization fraction tensor transformation may indeed have induced some level of non-Gaussianity, distinct from pure modulation effects, that are detectable on small sky regions. 
 This means that the polarization fraction tensor transformation introduced non-Gaussian small-scale structure, distinct from pure modulation effects, that is detectable on small sky regions. 
-We conclude that the level of induced non-Gaussianity differs from one region to the other and does not significantly impact the statistical properties when averaged over large sky fractions.
+We conclude that the level of induced non-Gaussianity differs from region to region and does not significantly impact the statistical properties when averaged over large sky fractions.
 
 % BH: The commented text below has been moved, but retained here for reference + original comments
 % \subsection{Synchrotron validation} \label{sec:sync_validation}
