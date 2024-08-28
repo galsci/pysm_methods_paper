@@ -304,8 +304,8 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
    $\beta_d$ & 400 & 0.04 \\ 
    $T_d$  &  400  & -0.47\\
     \midrule 
-    $\beta_s$ & 38 & -0.61\\
-    $c_s$ & 38 &  -0.61  \\ 
+    $\beta_s$ & 36 & -0.61\\
+    $c_s$ & 36 &  -0.61  \\ 
    \bottomrule
     \end{tabular}
     \caption{Spectral indices adopted for synthesizing small scales in the spectral parameters of dust and synchrotron models. }
@@ -327,15 +327,17 @@ As described in Section~\ref{subsubsec:dust_model}, the dust emission in all mod
 We fit the power spectra of the $\beta_d$ and $T_d$ template maps over the multipole ranges $200 < \ell < 400$ and $100 < \ell < 400$, respectively. We find that $\alpha_{\beta_d}= 0.04$ and $\alpha_{T_d} = -0.47$ over this range, both flatter than the $\alpha_{tt} = -0.80$ found for the dust amplitude. The adopted pivot multipole $\ell_1$ is larger than that used for dust amplitudes (see Table~\ref{tab:smallscale_par}) since the template maps employed here are derived from intensity-only data rather than a combination of total and polarized intensity. Thus, they remain signal-dominated at $\sim$4 times smaller angular scales. We employ the same modulation map as was used for the dust amplitude (see Section~\ref{subsec:methodology}).
 
 \subsubsection{Synchrotron Spectral Parameters}\label{sec:beta_s}
-As described in Section~\ref{subsubsec:synch_model}, the synchrotron emission in all models developed here is governed by the spectral parameters $\beta_s$ and $c_s$. To build the large scale template for the spatial variation of the synchrotron spectral index $\beta_s$, we begin with the full-sky $\beta_s$ map of \citet{Miville-Deschenes:2008} obtained by combining the Haslam map in total intensity at 408\,MHz \citep{Remazeilles:2015} and WMAP K-band data. The map has an angular resolution of about $7^{\circ}$ and was employed by previous PySM synchrotron models \citep{Thorne:2017}.
+As described in Section~\ref{subsubsec:synch_model}, the synchrotron emission in all models developed here is governed by the spectral parameters $\beta_s$ and $c_s$. To build the large scale template for the spatial variation of the synchrotron spectral index $\beta_s$, we begin with the full-sky $\beta_s$ map of \citet{Miville-Deschenes:2008} obtained by combining the Haslam map in total intensity at 408\,MHz \citep{Remazeilles:2015} and WMAP K-band data \citep{Bennett:2013}. The map has an angular resolution of about $7^{\circ}$ and was employed by previous PySM synchrotron models \citep{Thorne:2017}.
 
 Incorporating newer constraints on synchrotron emission at 2.3\,GHz from S-PASS, \citet{Krachmalnicoff:2018} determined that this $\beta_s$ map underestimates the true level of spatial variations in $\beta_s$ across the Southern Galactic Hemisphere. Thus, we follow \citet{Krachmalnicoff:2018} and rescale the $\beta_s$ map by first subtracting its mean value, multiplying the resulting map by a factor of $1.572$, and then adding back the mean value.
 
-We next fit a power-law to the power spectrum of this new template map over the multipole range $2<\ell<38$, finding $\alpha_{\beta_s}=-0.61$ then construct a map from this power spectrum extrapolated to high multipoles. We next construct a modulation map by taking the Haslam 408\,GHz $I$ map, smoothing to $5^\circ$ resolution, then renormalizing the map through a linear transformation such that the (dimensionless) pixel values range from 0.1--2. As with the dust spectral parameter maps (see Section~\ref{subsec:dust_spec_params}), we combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
- 
-For the synchrotron curvature parameter $c_s$, there are no readily available template maps. The existing \texttt{s3} model implements curvature as a sky-constant $c_s = -0.052$, consistent with the measurements from ARCADE \citep[$c_s=-0.052 \pm 0.005$,][]{Kogut:2012}. As an attempt to model a reasonable range of spatial variability, we assume that fluctuations in the value of $c_s$ follow the synchrotron intensity at large angular scales. Specifically, we start from the Haslam map 408\,MHz $I$ map \citep{Remazeilles:2015} smoothed to a resolution of $5 \deg$, which we then rescale with a linear transformation such that the minimum and maximum pixel values over the full sky are $-0.0517$ and $0.0054$, respectively, corresponding to the range of $c_s$ measurements from ARCADE \citep{Kogut:2012}. The resulting $c_s$ map has a mean and standard deviation of $-0.0517$ and $0.0054$, respectively, within the ARCADE footprint.
+We next fit a power-law to the power spectrum of this new template map over the multipole range $2<\ell<36$, finding $\alpha_{\beta_s}=-0.61$ then construct a map from this power spectrum extrapolated to high multipoles. The $\beta_s$ small scales are modulated employing the same modulation map as the synchrotron intensity map (see Section~\ref{subsec:methodology}). 
 
-To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generate a map of Gaussian random fluctuations with the same power law index as the $\beta_s$ map, i.e., $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$. We modulate the resulting map with the same modulation map as used for $\beta_s$ and then combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
+As with the dust spectral parameter maps (see Section~\ref{subsec:dust_spec_params}), we combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
+ 
+For the synchrotron curvature parameter $c_s$, there are no readily available template maps. The existing \texttt{s3} model implements curvature as a sky-constant $c_s = -0.052$, consistent with the measurements from ARCADE \citep[$c_s=-0.052 \pm 0.005$,][]{Kogut:2012}. As an attempt to model a reasonable range of spatial variability, we assume that fluctuations in the value of $c_s$ follow the synchrotron intensity at large angular scales. Specifically, we start from the Haslam map 408\,MHz $I$ map \citep{Remazeilles:2015} smoothed to a resolution of $5 \deg$, which we then rescale with a linear transformation such that the minimum and maximum pixel values over the full sky are $-0.076$  and  $-0.041$ respectively, corresponding to the range of $c_s$ measurements from ARCADE \citep{Kogut:2012}. The resulting $c_s$ map has a mean and standard deviation of $-0.0517$ and $0.0054$, respectively, within the ARCADE footprint.
+
+To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generate a map of Gaussian random fluctuations with the same power law index as the $\beta_s$ map, i.e., $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$. We modulate the resulting map from the   Haslam 408\,GHz $I$ map, smoothed to $5^\circ$ FWHM resolution. We    renormalize the map through a linear transformation such that the (dimensionless) pixel values range from 0.1--2. We finally combine the modulated  high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
 
 \subsection{Summary of New Dust and Synchrotron Models}
 
@@ -549,8 +551,6 @@ For polarization, the \texttt{d9} model is generally consistent with the data ov
 
 In the small-area case, we mainly follow the method described in \cite{planck2014-XXX} to define the masks for spectra computation. We first use a HEALPix grid with $N_{\rm side} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400\,deg$^2$ circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian, resulting in $f_{\rm sky} \sim 0.008$. The representative results from two selected circular fields at Galactic latitude $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Figure~\ref{fig:smallfield_power}. As it would be computational expensive to use simulations to compute the cross-spectra errors of each small sky patch, in this case they are calculated by the method stated in \cite{Tristram:2005}. 
 
-%To compare the small-scale performances of the latest PySM dust models \texttt{d9}, \texttt{d10} and \texttt{d12} with real data, we mainly follow the analysis method described in \cite{planck2014-XXX} to examine the model behaviors. We first use a HEALPix grid with $\texttt{nside} = 8$ to divide the full sky into 768 patches. At the center of each patch, we create a 400-square-degree circular mask with its edge tapered by a $2^\circ$ FWHM Gaussian (resulting in $f_{\rm sky} \approx 0.008$), and apply such a mask to the mean-subtracted dust model and NPIPE half-ring split maps at 353~GHz. We then use \texttt{anafast} to compute the $BB$ auto-spectra of the masked model maps at bin centers $\ell = 55,90,135,190,255,330$ with a dynamic top-hat binning $\Delta \ell = 30,40,50,60,70,80$, and scale them to be the full-sky $\mathcal{D}_\ell^{BB}$, accounting properly for the $f_{\mathrm{sky}}$ of the circular mask. For the masked NPIPE data maps, we instead compute cross-spectrum from the two split maps to minimize the noise correlation. The representative results from two selected circular fields at $|b| > 30^\circ$ of the northern and southern Galactic hemispheres are shown in Fig.~\ref{fig:smallfield_power}. 
-
 \begin{figure*}
     \centering
     \includegraphics[width=2.1\columnwidth]{figures/llmean_hlmean_comparison.pdf}
@@ -565,13 +565,13 @@ Both \texttt{d1} and \texttt{d9} show power amplitudes generally consistent with
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/llmean_hlmean_hist.pdf}
-    \caption{Histograms of the power index proxy $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}} \Big/ \overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$ (from the PySM models or the NPIPE) in all small fields.}
+    \caption{Histograms of the power index proxy $\mathcal{R} \equiv \overline{\mathcal{D}_{\text{low-}\ell}^{BB}} \Big/ \overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$ (from the PySM models or the NPIPE) in all small fields.}
     \label{fig:smallfield_ratio_hist}
 \end{figure}
 
 %%%% talk about several things - amplitude, distribution and index...split right after figure 7
 
-On the scaling-in-$\ell$, we define the ratio of $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$ to $\overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$ as another proxy for describing the spatial power change across the modulation scale. The results are demonstrated as histograms in Figure~\ref{fig:smallfield_ratio_hist}. The perfect fixed-index power law $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ yields a value of $\sim 1.60$ for this ratio, while the NPIPE maps give $1.85 \pm 0.93$ and the \texttt{d1}, \texttt{d9} and \texttt{d12} model maps give $2.03 \pm 0.72$, $2.35 \pm 0.77$ and $2.26 \pm 0.91$ respectively over sky patches with $|b| > 30^\circ$.
+On the scaling-in-$\ell$, we define the ratio $\mathcal{R} \equiv \overline{\mathcal{D}_{\text{low-}\ell}^{BB}} \Big/ \overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$ as another proxy for describing the spatial power change across the modulation scale. The results are demonstrated as histograms in Figure~\ref{fig:smallfield_ratio_hist}. The perfect fixed-index power law $\mathcal{D}_\ell^{BB} \propto \ell^{-0.42}$ yields a value of $\sim 1.60$ for this ratio, while the NPIPE maps give $1.85 \pm 0.93$ and the \texttt{d1}, \texttt{d9} and \texttt{d12} model maps give $2.03 \pm 0.72$, $2.35 \pm 0.77$ and $2.26 \pm 0.91$ respectively over sky patches with $|b| > 30^\circ$.
 
 % help us imrpove our receipe during the model development process. 
 % need to explain the choice of -2.42 --> take the pink dashed reference line caption below
