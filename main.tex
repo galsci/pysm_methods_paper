@@ -751,16 +751,16 @@ For the second set, we need to mimic the effective modulation of \texttt{d10} ma
 
 \item We multiply these modulation maps with maps of Gaussian isotropic small scales (generated as for the first set of Gaussian isotropic maps, as described in point 1 and 2 above) and coadd them with the large-scale dust template.
 
-\item We compare the power spectra of these maps with those of \texttt{d10} on four different sky masks: \texttt{GAL40, 60, 80, 97}.
+\item We compare the power spectra of these maps with those of \texttt{d10} on five different individual sky-fraction masks: \texttt{GAL40, 60, 80, 90, 97}.
 % \item We compare the power spectra of these maps with \texttt{d10} on four non-overlapping sky masks, defined by \texttt{GAL40} and the difference between \texttt{GAL60} and \texttt{GAL40}, \texttt{GAL80} and \texttt{GAL60}, and \texttt{GAL97} and \texttt{GAL80}. 
 
-\item{We fine-tune the $m_I$ and $m_P$ modulation maps, through multiplication factors in the sky regions defined by the non-overlapping region of four masks, in order to ensure that the power spectra computed on the different masks are as close as possible to \texttt{d10} power spectrum on the individual sky-fraction mask. For each non-overlapping mask we only consider the part not overlapping with other masks, such as the yellow region in Fig. \ref{fig:sync_masks} showing the additional coverage of \texttt{GAL60} compared with \texttt{GAL40}}.
+\item{We fine-tune the $m_I$ and $m_P$ modulation maps, through multiplication factors in the sky regions defined by the non-overlapping region of above five masks. For each non-overlapping region we only consider the part not overlapping among masks, such as the yellow region in Fig. \ref{fig:sync_masks} showing the additional coverage of \texttt{GAL60} compared with \texttt{GAL40}} which we denote as \texttt{GAL60-40}. The multiplication factors for the non-overlapping regions are \{\texttt{GAL97-90}, \texttt{GAL90-80}, \texttt{GAL80-60}, \texttt{GAL60-40}, \texttt{GAL40}\} = \{2.32, 1.20, 0.38, 0.78, 2.47\}, \{6.32, 2.50, 1.46, 1.51, 2.60\} for temperature and polarization maps, respectively. These factors are applied to ensure that the power spectra of modulated Gaussian small scales computed on the individual sky-fraction masks are as close as possible to the \texttt{d10} map.
 
 \end{enumerate}
 
 
 We thus consider three sets of maps with different small scales co-added: model \texttt{d10}, a map with purely Gaussian small-scale structure, and a map with modulated Gaussian small-scale structure. %and the last from modulated Gaussian realization in the $IQU$ domain.
-We apply a high-pass filter to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. 
+We apply a high-pass filter with $[\ell_{min}, \ell_{max}] = [200, 2048]$, to retain only the small scales of these maps, which we will refer to as \texttt{poltens-ss}, \texttt{Gaussian-ss}, and \texttt{Gaussian-mod-ss}, respectively. We calculate the MFs both on the sphere and in several selected regions of the sky projected into a Cartesian projection. 
 
 %Below we show the MFs calculated for these three sets of small scales on the sphere and also for a selected flat patch.
 
