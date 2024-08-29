@@ -766,7 +766,7 @@ We apply a high-pass filter with $[\ell_{min}, \ell_{max}] = [200, 2048]$, to re
 
 \subsubsection{Minkowski Functionals on the sphere}
 
-Following the algorithm in \cite{Grewal:2022}, we calculate the MFs for the three $Q$ maps on the sphere, i.e., in HEALPix format, with a \texttt{GAL080} mask\footnote{\url{http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_Mask_GalPlane-apo2_2048_R2.00.fits}}, which masks out the Galactic plane. We first normalize the maps by dividing each map by its standard deviation, and compute the MFs for iso-intensity contours in the range $[-3, 3]$ (Figure \ref{fig:MF:sphere}).  
+Following the algorithm in \cite{Grewal:2022}, we calculate the MFs for the three $Q$ maps on the sphere, i.e., in HEALPix format, with a \texttt{GAL080} mask, which masks out the Galactic plane. We first normalize the maps by dividing each map by its standard deviation, and compute the MFs for iso-intensity contours in the range $[-3, 3]$ (Figure \ref{fig:MF:sphere}).  
 % and retain only pixels with values $[-3, 3]$ over which to calculate the MFs. Results are shown in Figure~\ref{fig:MF:sphere}. 
 The MFs of the corresponding $U$ maps look very similar to $Q$ maps and are not shown here.
 
@@ -782,7 +782,7 @@ Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the 
 \begin{figure*}
     \centering
     \includegraphics[width=180mm]{figures/maps_patch_345_45.pdf}
-    \caption{We show the zoom-in plots in the selected patch at the center $(l, b) = (-15^{\circ}$, $45^{\circ})$, which are, from left to right, the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss} (i.e., $\texttt{d11}$ map), \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
+    \caption{We show the zoom-in plots in the selected patch at the center $(l, b) = (-15^{\circ}$, $45^{\circ})$, which are, from left to right, the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss} (i.e., $\texttt{d10}$ map), \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu K_{RJ}$ and the colorbar on the right is for the last two columns. }
     \label{fig:maps:patch2}
 \end{figure*}
 
