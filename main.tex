@@ -255,7 +255,7 @@ The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the modulation map
 
 The final maps are obtained by combining the large and small scales: 
 \begin{equation} \label{eq:filter}
-    a_{\ell m }^{X, out}=  a_{\ell m }^{x, \mathcal{T}} \left(1-\sigma_\ell\right)^{0.2} + a_{\ell m }^{x, ss} \sigma_\ell
+    a_{\ell m }^{X, out}=  a_{\ell m }^{X, \mathcal{T}} \left(1-\sigma_\ell\right)^{0.2} + a_{\ell m }^{X, ss} \sigma_\ell
     ~~~, 
 \end{equation}
 where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$, and $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps. The filter $\sigma_\ell$ is given by
@@ -265,12 +265,6 @@ where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale tem
 ~~~,
 \end{equation}
 where the parameters $c_1$ and $c_2$ govern the width of the filter in multipoles. We adopt $c_1=40$ and $c_2=1.05$ throughout this work. The exponent of $0.2$ on the $\left(1-\sigma_\ell\right)$ term in Equation~\ref{eq:filter} is chosen empirically to smooth the transition between our data-driven templates and the generated small scales. We found that this choice minimizes artifacts at $\ell \simeq \ell_1$ in power spectra computed over large sky areas while maintaining the correct asymptotic behavior.
-
-%Thus, the power spectra are described by
-%\begin{equation} \label{eq:filter}
-%    C_\ell^{xy} = C_\ell^{xy, \mathcal{T}}\left(1-\sigma_\ell\right)^{0.4} + C_\ell^{xy, ss} \sigma_\ell 
-%\end{equation}
-%where $C_\ell^{xy, \mathcal{T}}$ are the power spectra of the data-driven templates (Section~\ref{sec:templates}), $xy$ is any of $tt$, $te$, $ee$, and $bb$. The filter $\sigma_\ell$ is given by
 
 Since the generation of the small scales depends only upon a fixed input power spectrum, we can generate a different map realization on the fly each time a sky is simulated. Thus, the methodology presented here enables generation of an ensemble of sky realizations having the same well-measured large scales but stochastic realizations of the poorly-measured small scales. Further, the small-scale fluctuations can be generated at arbitrarily small scales set only by the resolution of the map since all power spectra can be extended indefinitely in $\ell$. In practice, small scales are generated up to $\ell_{\rm max} = 3N_{\rm side}-1$.
 
