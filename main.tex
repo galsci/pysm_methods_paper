@@ -205,6 +205,9 @@ and so $0 \leq p \leq 1$. Since the transformation is non-linear, Gaussian fluct
 
 This formalism does not take into account noise in the map, and so care must be taken in regions of low signal-to-noise ratio. Nevertheless, application of this framework to radio astronomy data has yielded significant improvements in reconstruction quality \citep{Arras:2021}.
 
+ Finally, we remark that we ensure to  mask out all the pixels in the input $IQU$ template whose value is such that $I^2<P^2$, as they lead to negative values in the logarithms of eqs.~\eqref{eq:real2pt}.  For both dust and synchrotron, most of the troublesome pixels concentrate around the Crab Nebula. We mask  527 (5) pixels in the synchrotron (dust)  $IQU$  templates    with the median value estimated throughout each map. 
+We state here that this procedure  results into a slightly fainter  Crab Nebula  especially in $QU$ synchrotron maps, but it does not introduce any other observable artifacts into the maps.
+
 \subsubsection{General Methodology}\label{subsec:methodology}
 Our method for generating small-scale fluctuations is summarized as follows: 
 \begin{enumerate}
