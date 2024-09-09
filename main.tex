@@ -242,6 +242,7 @@ To construct the modulation maps $m_i$ and $m_p$, we generally follow the method
     m_p\left(\hat{\theta}\right) &= \left(\frac{C^{ee}_{\ell_*,circ}}{C^{ee}_{\ell_*,full}}\right)^{1/2}
 \end{align}
 where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectrum at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. 
+We remark here that the modulation employed in this work differs from the one presented in \citet{Thorne:2017}. The reason is mainly due to the fact that previous approach was mainly limited by the modulation on \texttt{nside=8} superpixels. The procedure presented in this work claim to improve the quality of the  maps employing more local Galactic  features yielding to  an improved quality of modulated small scales.
  
  \begin{figure*}
      \centering
@@ -255,10 +256,10 @@ The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the modulation map
 
 The final maps are obtained by combining the large and small scales: 
 \begin{equation} \label{eq:filter}
-    a_{\ell m }^{X, out}=  a_{\ell m }^{X, \mathcal{T}} \left(1-\sigma_\ell\right)^{0.2} + a_{\ell m }^{X, ss} \sigma_\ell
+    a_{\ell m }^{X, out}=  a_{\ell m }^{X, \mathcal{T}} \left(1-\sigma_\ell\right)^{\gamma} + a_{\ell m }^{X, ss} \sigma_\ell
     ~~~, 
 \end{equation}
-where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$, and $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps. The filter $\sigma_\ell$ is given by
+where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$,  $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps, and $\gamma$ is set to be  $0.2$ to  ensure negligible artifacts at the transition scales, $\ell_1$. The filter $\sigma_\ell$ is given by
 
 \begin{equation}
 \sigma_\ell  = \left[1+  e^{ -c_1 (\ell/ \ell_1  -c_2 )}\right]^{-1}  
