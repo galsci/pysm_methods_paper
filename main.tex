@@ -206,7 +206,7 @@ and so $0 \leq p \leq 1$. Since the transformation is non-linear, Gaussian fluct
 This formalism does not take into account noise in the map, and so care must be taken in regions of low signal-to-noise ratio. Nevertheless, application of this framework to radio astronomy data has yielded significant improvements in reconstruction quality \citep{Arras:2021}.
 
  Finally, we remark that we ensure to  mask out all the pixels in the input $IQU$ template whose value is such that $I^2<P^2$, as they lead to negative values in the logarithms of eqs.~\eqref{eq:real2pt}.  For both dust and synchrotron, most of the troublesome pixels concentrate around the Crab Nebula. We mask  527 (5) pixels in the synchrotron (dust)  $IQU$  templates    with the median value estimated throughout each map. 
-We state here that this procedure  results into a slightly fainter  Crab Nebula  especially in $QU$ synchrotron maps, but it does not introduce any other observable artifacts into the maps.
+We state here that this procedure  results into a slightly fainter  Crab Nebula  especially in $QU$ synchrotron maps, but it does not introduce any other observable artifacts into the maps.   
 
 \subsubsection{General Methodology}\label{subsec:methodology}
 Our method for generating small-scale fluctuations is summarized as follows: 
@@ -237,7 +237,7 @@ This prescription has several free parameters that require tuning. The pivot sca
     \label{tab:smallscale_par}
 \end{table*}
 
-To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We then compute the $tt$ and $ee$ power spectra within that mask using NaMaster \citep{Alonso:2019}. The modulation maps are constructed from the ratios 
+To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We thus fit a power-law on the $tt$ and $ee$ power spectra estimated within the circle with  NaMaster \citep{Alonso:2019}.  We then evaluated the best-fit power-law spectra, $C_{\ell,circ}$ at the $\ell_*$ multipole.  Finally,  the modulation maps are constructed from the ratios:
 
 \begin{align}
 \label{eq:mod_maps}
