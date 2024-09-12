@@ -20,6 +20,8 @@ jobs:
       env:
         OVERLEAF_PROJECT_ID: ${{ secrets.OVERLEAF_PROJECT_ID }}
         OVERLEAF_COOKIE: ${{ secrets.OVERLEAF_COOKIE }}
+    - name: Configure git user
+      run: git config user.email "github-action@eqedfdosai.com" && git config user.name "Github Actions"
     - name: Pull changes from Overleaf
       run: git pull --rebase overleaf master 
     - name: Push changes to Github and Overleaf (only from main)
