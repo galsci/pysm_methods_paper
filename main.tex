@@ -213,27 +213,27 @@ Our method for generating small-scale fluctuations is summarized as follows:
 \begin{enumerate}
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
     \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
-    \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the $ee$ and $bb$ spectra at $\ell > \ell_2$ are constructed with the power law index of the $tt$ spectrum, while the $te$ spectrum retains its fit index. The $tb$ and $eb$ spectra are assumed to be zero for $\ell > \ell_1$.
+    \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell_0 < \ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the $ee$ and $bb$ spectra at $\ell > \ell_2$ are constructed with the power law index of the $tt$ spectrum, while the $te$ spectrum retains its fit index. The $tb$ and $eb$ spectra are assumed to be zero for $\ell > \ell_1$.
     \item  We synthesize $i$, $q$, and $u$ maps using the constructed $tt$, $te$, $ee$, and $bb$ spectra. These maps are then high-pass filtered at cut-off multipole $\ell_1$.
     \item We construct modulation maps $m_i$ and $m_p$ for intensity and polarization, respectively (see Figure~\ref{fig:modulation_maps}). The synthesized maps are then multiplied by the modulation maps.
     \item We low-pass filter the template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$.
     \item Finally, we sum the small-scale and large-scale maps and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
 \end{enumerate}
 
-This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
+This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
 \begin{table*}
     \centering
     \footnotesize
-    \begin{tabular}{lccccccc}
+    \begin{tabular}{lcccccccc}
     \toprule 
-   &   $ \ell_1  $&$\ell_2$   &$\ell_* $& $\alpha_{tt}$  & $\alpha_{ee}$ &$\alpha_{te}$ &$\alpha_{bb}$ \\
+   & $\ell_0$ &   $ \ell_1  $&$\ell_2$   &$\ell_* $& $\alpha_{tt}$  & $\alpha_{ee}$ &$\alpha_{te}$ &$\alpha_{bb}$ \\
    \midrule  
-   Dust & 100 & 2000 & 80 & -0.80 & -0.42& -0.50 & -0.54 \\ 
-   Synchrotron & 38 & 400 & 36 & -1.00& -0.84 & -1.00 & -0.76 \\
+   Dust & 50 & 100 & 2000 & 80 & -0.80 & -0.42& -0.50 & -0.54 \\ 
+   Synchrotron & 10 & 38 & 400 & 36 & -1.00& -0.84 & -1.00 & -0.76 \\
    \bottomrule
     \end{tabular}
-    \caption{Spectral indices adopted for synthesizing  small scales. The dust spectral index $\alpha_{TT}$ is taken from \citet{Miville-Deschenes:2016}, whereas the other dust indices are adopted from \citet{planck2016-l11A}. We obtain the synchrotron spectral indices  from fits $D_{\ell} \propto \ell^{\alpha}$ in the range $\ell<\ell_1$.}
+    \caption{Spectral indices adopted for synthesizing  small scales. The dust spectral index $\alpha_{TT}$ is taken from \citet{Miville-Deschenes:2016}, whereas the other dust indices are adopted from \citet{planck2016-l11A}. We obtain the synchrotron spectral indices  from fits $D_{\ell} \propto \ell^{\alpha}$ in the range $\ell_0 < \ell<\ell_1$.}
     \label{tab:smallscale_par}
 \end{table*}
 
@@ -996,7 +996,7 @@ This work presents new models of Galactic emission, in total intensity and polar
     \item We develop new models of small-scale, non-Gaussian Galactic emission structure. We combine realizations of this small-scale synthetic emission with the latest component-separated Galactic emission data. We similarly extrapolate spectral parameters... The result is a set of all-sky models for   
     \item We demonstrate that the power spectra of our models broadly agree with data from Planck over large sky areas. 
     \item Summary of BK validation.
-    \item We quantify the frequency decorrelation in our models by computing cross-power spectra. Our models span a range of decorrelation behavior, but we verify that all models are consistent with Planck constraints on decorrelation between 217 and 353 GHz. 
+    \item We quantify the frequency decorrelation in our models by computing cross-power spectra. Our models span a range of decorrelation behavior, but we verify that all models are consistent with Planck constraints on decorrelation between 217 and 353\,GHz. 
     
 \end{enumerate}
 
@@ -1008,6 +1008,6 @@ This work was supported by the National Science Foundation under grant No. AST-2
 
 \end{acknowledgments}
 
-\bibliography{refs.bib,refsADS.bib,refsPlanck.bib}
+\bibliography{refs, refsADS, refsPlanck}
 
 \end{document}
