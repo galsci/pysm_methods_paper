@@ -237,15 +237,16 @@ This prescription has several free parameters that require tuning. The pivot sca
     \label{tab:smallscale_par}
 \end{table*}
 
-To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We thus fit a power-law on the $tt$ and $ee$ power spectra estimated within the circle with  NaMaster \citep{Alonso:2019}.  We then evaluated the best-fit power-law spectra, $C_{\ell,circ}$ at the $\ell_*$ multipole.  Finally,  the modulation maps are constructed from the ratios:
+To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole. Finally, the modulation maps are constructed from the ratios:
 
 \begin{align}
 \label{eq:mod_maps}
     m_i\left(\hat{\theta} \right) &= \left(\frac{C^{tt}_{\ell_*,circ}}{C^{tt}_{\ell_*,full}}\right)^{1/2} \\
     m_p\left(\hat{\theta}\right) &= \left(\frac{C^{ee}_{\ell_*,circ}}{C^{ee}_{\ell_*,full}}\right)^{1/2}
 \end{align}
-where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectrum at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. 
-We remark here that the modulation employed in this work differs from the one presented in \citet{Thorne:2017}. The reason is mainly due to the fact that previous approach was mainly limited by the modulation on \texttt{nside=8} superpixels. The procedure presented in this work claim to improve the quality of the  maps employing more local Galactic  features yielding to  an improved quality of modulated small scales.
+where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above.
+
+%Our approach differs from that of \citet{Thorne:2017} in that their modulation map was constructed on $N_{\rm side} = 8$ superpixels. The procedure presented in this work claim to improve the quality of the  maps employing more local Galactic  features yielding to  an improved quality of modulated small scales.
  
  \begin{figure*}
      \centering
