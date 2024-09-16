@@ -618,7 +618,7 @@ The cleanest patch of sky in the southern hemisphere is particularly crucial for
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/BKfield_power.pdf}
-    \caption{Comparison of the PySM $BB$ power spectra for the BK patch with the BK18 maximum likelihood models. The top panel shows the results of dust at 353~GHz, while the bottom panel presents the synchrotron results at 23~GHz. The first 9 band powers, indicated by solid marker, correspond to the BK science bins used for delivering constraints. The shaded area represents the uncertainty in foreground amplitudes: $\pm 0.75 \; \mu\rm{K^2_{CMB}}$ for dust and a 95\% upper limit of $1.4 \; \mu\rm{K^2_{CMB}}$ for synchrotron, as derived from BK18 MCMC constraints.}
+    \caption{Comparison of the PySM $BB$ power spectra for the BK patch with the BK18 maximum likelihood models. The top panel shows the results of dust at 353~GHz, while the bottom panel presents the synchrotron results at 23~GHz. The first 9 band powers, indicated by solid marker, correspond to the BK science bins used for delivering constraints. The shaded area and the arrow symbol represent the uncertainties in foreground amplitudes: $\pm 0.75 \; \mu\rm{K^2_{CMB}}$ for dust and a 95\% upper limit of $1.4 \; \mu\rm{K^2_{CMB}}$ at $\ell = 80$ for synchrotron, as derived from BK18 MCMC constraints.}
     \label{fig:BKfield_power}
 \end{figure}
 
@@ -635,14 +635,21 @@ Table~\ref{tab:BB_dustratio} further explores how the model amplitudes vary acro
 The \texttt{d9} and \texttt{d10} models show significant improvements over \texttt{d1}, though their dust $BB$ amplitudes still differ from observations in the BK patch. Since the aim of this work is not to provide full sky simulations that align with all available full-sky and partial-sky observations, completely resolving these discrepancies lies beyond its scope. Current power spectrum-based modeling techniques require a certain degree of global averaging of spectrum parameters, which are known to vary across the sky in small patches~\citep{planck2016-l04}. For instance, while dust amplitude can be modulated using large-scale templates, the spectral tilt $\alpha_d$ has to be fixed to a single value for the entire sky, which is inherently unrealistic. Further refinement of new models will be left for future studies. 
 
 %%%
-Lastly, in the lower panel of Figure~\ref{fig:BKfield_power} we compare the old synchrotron \texttt{s1} model 
-and the new model \texttt{s5} to the BK results at 23~GHz. 
+Lastly, we compare synchrotron models with the BK results. We only concentrate on the old synchrotron \texttt{s1} model and the new model \texttt{s5}
+
+
+in the lower panel of Figure~\ref{fig:BKfield_power}
+
 
 
 , as other new models yield similar results. 
+in the lower panel of Figure~\ref{fig:BKfield_power} 
+
 These models clearly exhibit a non-zero $\alpha_s$ and significantly larger power in $\ell \lesssim 100$ when the frequency is 23~GHz. However, this trend reverses at 40~GHz, where the synchrotron amplitude from the BK data becomes several times larger than that in \texttt{s5}, suggesting that the models have a more negative $\beta_s$ than the true sky in this region. While there is an inconsistency of synchrotron power in large scales between our models and the data, it is important not to overinterpret the discrepancies in $\alpha_s$ and $\beta_s$ since the latest BK results provide weak constraints on these two parameters, relying on reprocessed WMAP 23/33~GHz and NPIPE 30/40~GHz maps in the sky patch. Revisiting the discrepancies will be interesting when new synchrotron measurements are released from the BICEP Array telescope which comprises a dedicated 30/40~GHz receiver~\citep{Moncelsi:2020}.
 
 %We present the synchrotron \texttt{s1} model at 23~GHz in the lower panel of Figure~\ref{fig:BKfield_power} and compare it with the \texttt{s5} results only, as other new models yield similar results. These models clearly exhibit a non-zero $\alpha_s$ and significantly larger power in $\ell \lesssim 100$ when the frequency is 23~GHz. However, this trend reverses at 40~GHz, where the synchrotron amplitude from the BK data becomes several times larger than that in \texttt{s5}, suggesting that the models have a more negative $\beta_s$ than the true sky in this region. While there is an inconsistency of synchrotron power in large scales between our models and the data, it is important not to overinterpret the discrepancies in $\alpha_s$ and $\beta_s$ since the latest BK results provide weak constraints on these two parameters, relying on reprocessed WMAP 23/33~GHz and NPIPE 30/40~GHz maps in the sky patch. Revisiting the discrepancies will be interesting when new synchrotron measurements are released from the BICEP Array telescope which comprises a dedicated 30/40~GHz receiver~\citep{Moncelsi:2020}.
+
+%The new synchrotron models, s4, s5 and s7, have more power in the BICEP/Keck patch when compared to the old s1 synchrotron model. The latest BICEP/Keck results only has weak detection of synchrotron. We find that both the old and new PySM models are consistent with the BICEP/Keck upper limit on the synchrotron power. However, the BICEP/Keck maximum likelihood model for synchrotron has a better agreement with the new synchrotron models s4, s5 and s7 than with the old s1 synchrotron model. Thus, the new small scale generation in the synchrotron models s4, s5, and s7 increases the synchrotron power in the BICEP/Keck patch and is in better agreement with the constraints from the latest BICEP/Keck results.
 
 \begin{table}
     \centering
@@ -661,8 +668,6 @@ These models clearly exhibit a non-zero $\alpha_s$ and significantly larger powe
 \end{table}
 
 % BH
-
-%The new synchrotron models, s4, s5 and s7, have more power in the BICEP/Keck patch when compared to the old s1 synchrotron model. The latest BICEP/Keck results only has weak detection of synchrotron. We find that both the old and new PySM models are consistent with the BICEP/Keck upper limit on the synchrotron power. However, the BICEP/Keck maximum likelihood model for synchrotron has a better agreement with the new synchrotron models s4, s5 and s7 than with the old s1 synchrotron model. Thus, the new small scale generation in the synchrotron models s4, s5, and s7 increases the synchrotron power in the BICEP/Keck patch and is in better agreement with the constraints from the latest BICEP/Keck results.
 
 \subsection{Decorrelation} \label{subsec:decorrelation}
 
@@ -715,7 +720,7 @@ Following the procedure in \citet{Chiang:2019}, we compute the cross-correlation
 
 We quantify the level of non-Gaussianity in the small-scale dust emission generated through the polarization fraction tensor transformation using the simulations from dust model \texttt{d10}. To measure the non-Gaussianity in the maps we consider the Minkowski Functionals \citep[MFs,][]{Minkowski1903}, which are a common tool to quantify map-space higher order statistical properties \citep{Martire:2023, Carones:2024}. 
 Hadwiger’s theorem \citep{hadwigerVorlesungenUeberInhalt1957}
-implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set. In our case, for two-dimensional maps, we have three kinds of MFs, $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$ which correspond to the area, the perimeter and the connectivity of the excursion set (iso-intensity contour), respectively.
+implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set. In our case, for two-dimensional maps, we have three kinds of MFs. These are $\mathcal{V}_0$, $\mathcal{V}_1$ and $\mathcal{V}_2$, which correspond to the area, the perimeter and the connectivity of the excursion set (iso-intensity contour), respectively.
 
 We use these MFs to compare the small-scale structure in \texttt{d10} to those of two other sets of maps: (i) maps where the small-scale structures are fully Gaussian and isotropic and (ii) maps where the small-scale structures are Gaussian but modulated across the sky. As described Section \ref{subsec:methodology}, the small scale structures in the \texttt{d10} model are generated as a Gaussian random field in $i$, $q$ and $u$, and are multiplied by $m_i$ and $m_p$ modulation maps before they are coadded to the large-scale maps and transformed back into $I$, $Q$ and $U$. %This procedure leads to an effective modulation of small scale structures on $I/Q/U$ maps. 
 We want to understand the impact of this effective modulation on the MFs, and therefore construct a set of maps that are modulated versions of Gaussian-random-field maps. 
@@ -734,9 +739,9 @@ The first set of maps is built as follows:
 
 For the second set, we need to mimic the effective modulation of \texttt{d10} maps in $IQU$ quantities. We use the following procedure:
 \begin{enumerate}
-\item We generate modulation maps in the same way as done in $iqu$ space (Eq. \ref{eq:mod_maps}), except that here we implemented them directly in $IQU$, therefore obtaining $m_I$ and $m_P$ for temperature and polarization.
+\item We generate modulation maps in the same way as done in $iqu$ space (Eq. \ref{eq:mod_maps}), except that here we implement them directly in $IQU$, therefore obtaining $m_I$ and $m_P$ for temperature and polarization.
 
-\item We multiply these modulation maps with maps of Gaussian isotropic small scales (generated as for the first set of Gaussian isotropic maps, as described in point 1 and 2 above) and coadd them with the large-scale dust template.
+\item We multiply these modulation maps with maps of Gaussian isotropic small scales (generated as for the first set of Gaussian isotropic maps, as described in steps 1 and 2 above) and coadd them with the large-scale dust template.
 
 \item We compare the power spectra of these maps with those of \texttt{d10} on five different individual sky-fraction masks: \texttt{GAL40, 60, 80, 90, 97}.
 % \item We compare the power spectra of these maps with \texttt{d10} on four non-overlapping sky masks, defined by \texttt{GAL40} and the difference between \texttt{GAL60} and \texttt{GAL40}, \texttt{GAL80} and \texttt{GAL60}, and \texttt{GAL97} and \texttt{GAL80}. 
