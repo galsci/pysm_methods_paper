@@ -205,7 +205,7 @@ and so $0 \leq p \leq 1$. Since the transformation is non-linear, Gaussian fluct
 
 This formalism does not take into account noise in the map, and so care must be taken in regions of low signal-to-noise ratio. Nevertheless, application of this framework to radio astronomy data has yielded significant improvements in reconstruction quality \citep{Arras:2021}.
 
- Finally, we remark that we ensure to  mask out all the pixels in the input $IQU$ template whose value is such that $I^2<P^2$, as they lead to negative values in the logarithms of eqs.~\eqref{eq:real2pt}.  For both dust and synchrotron, most of the troublesome pixels concentrate around the Crab Nebula. We mask  527 (5) pixels in the synchrotron (dust)  $IQU$  templates    with the median value estimated throughout each map. 
+ Finally, we remark that we ensure to  mask out all the pixels in the input $IQU$ template whose value is such that $I^2<P^2$, as they lead to negative values in the logarithms of eqs.~\eqref{eq:real2pt}.  For both dust and synchrotron, most of the troublesome pixels concentrate around the Crab Nebula. We mask  527 (5) pixels in the synchrotron (dust)  $IQU$  templates with the median value estimated throughout each map. 
 We state here that this procedure  results into a slightly fainter  Crab Nebula  especially in $QU$ synchrotron maps, but it does not introduce any other observable artifacts into the maps.   
 
 \subsubsection{General Methodology}\label{subsec:methodology}
@@ -278,7 +278,24 @@ We do not intend for the above procedure to be useful for the inner Galactic pla
 \subsubsection{Dust Amplitude}\label{sec:dustamplitude}
 The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous PySM models, e.g., \texttt{d0} and \texttt{d1}, employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for a detailed discussion). To address this issue, we instead use dust templates from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{Remazeilles:2011}. 
 
-In total intensity we employ the Planck GNILC 2015 component separated map\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}} at $353$\,GHz \citep{planck2016-XLVIII}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky region, which complicates its use in our analysis. Therefore, we reprocess the map as follows to a spatially uniform resolution of $21.8\arcmin$. To do so, we first note that the map was synthesized from ten needlet maps of different, but spatially-uniform, resolution \citep[][Figure~A.2]{planck2016-l04}. We produce a map of uniform resolution by retaining only the first six needlet maps\footnote{Available at NERSC: \url{https://portal.nersc.gov/project/cmb/pysm-data/dust_gnilc/inputs/COM_CompMap_Dust-GNILC-F353_2048_21p8acm.fits}}, which probe the dust intensity from the largest scales down to $21.8\arcmin$. This yields an $N_{\rm side} = 2048$ that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8\arcmin$. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l11B}.
+In total intensity we employ the Planck GNILC 2015 component separated map\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}} at $353$\,GHz \citep{planck2016-XLVIII}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky region, which complicates its use in our analysis. Therefore, we reprocess the map as follows to a spatially uniform resolution of $21.8\arcmin$. To do so, we first note that the map was synthesized from ten needlet maps of different, but spatially-uniform, resolution \citep[][Figure~A.2]{planck2016-l04}. \textcolor{magenta}{Each of the $j=1,\cdots,10$ needlet maps can be reconstructed from the Planck GNILC 2015 dust map as follows:}
+\begin{equation}
+\textcolor{magenta}{
+\gamma^{j}(\hat{n})
+=\sum_{\substack{\ell,m}} \left(a_{\ell m}\, h^{j}_\ell\right)Y_{\ell m}(\hat{n})\,,}
+\label{eq:needlets_maps}
+\end{equation}
+\textcolor{magenta}{where $a_{\ell m}$ are the spherical harmonic coefficients of the Planck GNILC 2015 dust map,  $h^{j}_\ell$ is the $j^\text{th}$ needlet window function as defined in \citet[][Figure~A.2]{planck2016-l04}, and $Y_{\ell m}(\hat{n})$ denote spherical harmonics.}
+ We produce a map of uniform resolution by retaining only the first six needlet maps\footnote{Available at NERSC: \url{https://portal.nersc.gov/project/cmb/pysm-data/dust_gnilc/inputs/}}, %\footnote{Available at NERSC: \url{https://portal.nersc.gov/project/cmb/pysm-data/dust_gnilc/inputs/COM_CompMap_Dust-GNILC-F353_2048_21p8acm.fits}}, 
+ which probe the dust intensity from the largest scales down to $21.8\arcmin$:
+ \begin{equation}
+ \textcolor{magenta}{
+ d^{\text{GNILC,}\, 21.8'}(\hat{n})
+=\sum_{j=1}^6 h^{j}_\ell \gamma^{j}(\hat{n})\,.
+}
+\label{eq:trucated_synthesis}
+\end{equation}
+This yields an $N_{\rm side} = 2048$ that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8\arcmin$. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l11B}.
 
 For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the Planck Public Release 3 \citep{planck2016-l04,planck2016-l11B}. While these maps have variable angular resolution, the resolution varies over the sky much more smoothly than in the $I$ map. Given this, and that we wish to retain as much polarization information in our analysis as possible, we employ these variable resolution maps as-is. Their resolution ranges from $5\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
 
@@ -527,7 +544,7 @@ In Figure~\ref{fig:largefield_power}, we compare the $TT$, $EE$, and $BB$ power 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figures/largefield_power_all_TEB_pub.pdf}
-    \caption{The $TT$, $EE$ and $BB$ power spectra for the \texttt{d1} (dashed lines), \texttt{d9} (solid lines) and \texttt{d12} (dotted lines) models, along with the NPIPE detector-split maps (circles), are computed using the \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080} Galactic masks. Each comparison set is color-coded to represent the respective sky fraction $f_{\mathrm{sky}}$. The \texttt{d10} model is not shown as it is identical to \texttt{d9} at 353~GHz.}
+    \caption{The $TT$, $EE$ and $BB$ power spectra for the \texttt{d1} (dashed lines), \texttt{d9} (solid lines) and \texttt{d12} (dotted lines) models, along with the NPIPE detector-split maps (circles), are computed using the \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080} Galactic masks. Each comparison set is colored to represent the respective sky fraction $f_{\mathrm{sky}}$. The \texttt{d10} model is not shown as it is identical to \texttt{d9} at 353~GHz.}
     \label{fig:largefield_power}
 \end{figure}
 
@@ -542,7 +559,7 @@ For polarization, the \texttt{d9} model is generally consistent with the data ov
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/smallfield_power.pdf}
-    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE detector-split maps and the dust model maps \texttt{d1}, \texttt{d9} and \texttt{d12}. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A^{BB} \big( l/80 \big)^{\alpha^{BB}+2}$ where $\alpha^{BB} = -2.54$) to the NPIPE data points, with the fit largely influenced by the first two band powers.}
+    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE detector-split maps and the dust model maps \texttt{d1}, \texttt{d9} and \texttt{d12}. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A \, \big( l/80 \big)^{\alpha+2}$ where $\alpha = -2.54$) to the NPIPE data points, with the fit largely influenced by the first two band powers.}
     \label{fig:smallfield_power}
 \end{figure}
 
