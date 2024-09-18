@@ -548,12 +548,20 @@ In Figure~\ref{fig:largefield_power}, we compare the $TT$, $EE$, and $BB$ power 
     \label{fig:largefield_power}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%???For
-For the $TT$ spectra, we find that the \texttt{d12} model aligns well with the observed $TT$ spectrum for all sky fractions, except that it underestimates the power spectrum amplitude when $f_{\rm sky} = 0.8$. The \texttt{d9} model shows similar behavior for $\ell \lesssim 100$. Beyond that scale, its power declines more rapidly with $\ell$ at $f_{\rm sky} = 0.6$ and $f_{\rm sky} = 0.8$, and it exhibits a power bump around $\ell \sim 100$ for $f_{\rm sky} = 0.2$.
+We find that the \texttt{d1} and \texttt{d12} models align well with the observed $TT$ spectrum, except that they underestimate the power spectrum at $\ell > 500$ when $f_{\rm sky} = 0.8$. \texttt{d9} shows similar behavior at $\ell \lesssim 100$ for all sky fractions. However, as the parameters $c_1$, $c_2$ and $\gamma$ in Equation~
+
+template extrapolation 
+controlling the transition are optimized for polarization, the power of this model declines more rapidly beyond that scale when $f_{\rm sky} = 0.6$ and $0.8$. It exhibits a power bump around $\ell \sim 100$ for $f_{\rm sky} = 0.2$.
+
+, indicating the limitation of template extrapolation. Since 
+
+\texttt{d9} transition bad...
 
 %???For
-For polarization, the \texttt{d9} model is generally consistent with the data over all scales and sky fractions for both $EE$ and $BB$. In contrast, \texttt{d12} significantly underestimates both spectra in all scales. This discrepancy can likely be attributed to the fact that this model is constructed using isolatitude masks, while we use the Planck Galactic masks in this comparison. We also note that the NPIPE $BB$ band power rises at high-$\ell$ due to residual noise which dominates in smaller sky patches.
+The \texttt{d1} and \texttt{d9} models are generally consistent with the data over all scales and sky fractions for $EE$. 
+
+$BB$
+In contrast, \texttt{d12} significantly underestimates both spectra in all scales. This discrepancy can likely be attributed to the fact that this model is constructed using isolatitude masks, while we use the Planck Galactic masks in this comparison. We also note that the NPIPE $BB$ band power rises at high-$\ell$ due to residual noise which dominates in smaller sky patches.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}
