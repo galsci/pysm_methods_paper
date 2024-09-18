@@ -265,7 +265,7 @@ The final maps are obtained by combining the large and small scales:
 \end{equation}
 where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$,  $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps, and $\gamma$ is set to be  $0.2$ to  ensure negligible artifacts at the transition scales, $\ell_1$. The filter $\sigma_\ell$ is given by
 
-\begin{equation}
+\begin{equation} \label{eq:filter2}
 \sigma_\ell  = \left[1+  e^{ -c_1 (\ell/ \ell_1  -c_2 )}\right]^{-1}  
 ~~~,
 \end{equation}
@@ -537,7 +537,7 @@ Given that polarized dust emission is the dominant foreground contaminant for CM
 \label{sec:dust_validation}
 To evaluate the performance of the PySM dust models \texttt{d1}, \texttt{d9}, \texttt{d10} and \texttt{d12} against real data across a wide range of scales, we present their power spectra computed using both large-area and small-area masks at 353~GHz, where the dust emission is dominat. First, we generate PySM dust models maps at delta 353~GHz and smooth them with a $4.82\arcmin$ Gaussian beam to match the resolution of the Planck 353~GHz channel. We color-correct the Planck NPIPE 353~GHz channel maps\footnote{\url{https://portal.nersc.gov/project/cmb/planck2020/}}~\citep{PlanckCollaboration:2020} to the same delta frequency using a scaling factor 1/1.098~\citep{planck2016-l11A}, and subtract the CMB dipole from the NPIPE temperature maps. We then apply identical masks (defined below) to the mean-subtracted PySM dust models and NPIPE ``A''/``B'' detector-split maps. Finally, we compute the auto-spectra of the model maps and the cross-spectra of the NPIPE data splits using these masks to minimize noise correlation. 
 
-For our large-area comparison, we use a set of $2^\circ$-apodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits}} from the Planck Legacy Archive. With eight in total, these mask cover a range of sky fractions, leaving between 20\% and 99\% of the sky unmasked. For our analysis, we take four representative masks: \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080}, where the number in the mask name indicates the percentage of the sky avaliable for analysis, i.e., $100 f_{\rm sky}$.
+For our large-area comparison, we use a set of $2^\circ$-apodized Galactic masks\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits}} from the Planck Legacy Archive. With eight in total, these mask cover a range of sky fractions, leaving between 20\% and 99\% of the sky unmasked. For our analysis, we take four representative masks: \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080}, where the number in the mask name indicates the percentage of the sky available for analysis, i.e., $100 f_{\rm sky}$.
 
 In Figure~\ref{fig:largefield_power}, we compare the $TT$, $EE$, and $BB$ power spectra of the \texttt{d1}, \texttt{d9} and \texttt{d12} models against the NPIPE map. Since the \texttt{d10} model is identical to the \texttt{d9} model at 353~GHz, it is not shown separately. Error bars on the cross-spectra are derived from 200 NPIPE detector-split simulations.
 
@@ -548,24 +548,9 @@ In Figure~\ref{fig:largefield_power}, we compare the $TT$, $EE$, and $BB$ power 
     \label{fig:largefield_power}
 \end{figure}
 
-We find that the \texttt{d1} and \texttt{d12} models align well with the observed $TT$ spectrum, except that they underestimate the power spectrum at $\ell > 500$ when $f_{\rm sky} = 0.8$. \texttt{d9} shows similar behavior at $\ell \lesssim 100$ for all sky fractions. However, the power of this model declines more rapidly beyond that scale when $f_{\rm sky} = 0.6$ and $0.8$. It exhibits a power bump around $\ell \sim 100$ for $f_{\rm sky} = 0.2$.
+We find that the \texttt{d1} and \texttt{d12} models generally match the observed $TT$ spectrum, although they underestimate the power at $\ell > 500$ when $f_{\rm sky} = 0.8$. The \texttt{d9} model shows similar agreement with observations at $\ell \lesssim 100$ across all sky fractions. However, its power declines more steeply at higher multipoles for $f_{\rm sky} = 0.6$ and $0.8$, and it exhibits an unnatural bump around $\ell \sim 80$ for $f_{\rm sky} = 0.2$ and $0.4$. This artifact occurs because the parameters $c_1$, $c_2$ and $\gamma$ in Equation~\ref{eq:filter} and~\ref{eq:filter2}, which control the smoothing of the transition from large-scale template power to small-scale synthesized power, were optimized for polarization rather than temperature. 
 
-
-as the parameters $c_1$, $c_2$ and $\gamma$ in Equation~
-
-template extrapolation 
-controlling the transition are optimized for polarization, 
-
-, indicating the limitation of template extrapolation. Since 
-
-\texttt{d9} transition bad...
-
-%???For
-The \texttt{d1} and \texttt{d9} models are generally consistent with the data over all scales and sky fractions for $EE$. 
-
-$BB$
-In contrast, \texttt{d12} significantly underestimates both spectra in all scales. This discrepancy can likely be attributed to the fact that this model is constructed using isolatitude masks, while we use the Planck Galactic masks in this comparison. We also note that the NPIPE $BB$ band power rises at high-$\ell$ due to residual noise which dominates in smaller sky patches.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In terms of polarization, \texttt{d12} significantly underestimates both $EE$ and $BB$ spectra across all scales. On the contrary, both \texttt{d1} and \texttt{d9} aligns well with the data across all scales and sky fractions for $EE$, with \texttt{d9} demonstrating smooth power transitions for both $EE$ and $BB$ spectra. The NPIPE $BB$ band power rises at high-$\ell$ presumably due to residual noise dominating smaller sky patches --- a behavior not observed in $\texttt{d9}$, as its small-scale power is derived from template extrapolation. 
 
 \begin{figure}
     \centering
