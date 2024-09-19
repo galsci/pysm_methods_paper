@@ -237,14 +237,14 @@ This prescription has several free parameters that require tuning. The pivot sca
     \label{tab:smallscale_par}
 \end{table*}
 
-To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole. Finally, the modulation maps are constructed from the ratios:
+To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole. Finally, the modulation maps are constructed from the ratios:
 
 \begin{align}
 \label{eq:mod_maps}
     m_i\left(\hat{\theta} \right) &= \left(\frac{C^{tt}_{\ell_*,circ}}{C^{tt}_{\ell_*,full}}\right)^{1/2} \\
     m_p\left(\hat{\theta}\right) &= \left(\frac{C^{ee}_{\ell_*,circ}}{C^{ee}_{\ell_*,full}}\right)^{1/2}
 \end{align}
-where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. As we employ $N_{\rm side} = 8$ rather than $N_{\rm side} = 2$ as done by \citet{Thorne:2017}, we incorporate smaller-scale information into the modulation maps.
+where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. Given the improvements to the Planck polarization following the study of \citet{Thorne:2017} \citep{planck2016-l01}, we are able to employ $N_{\rm side} = 8$ superpixels and overlapping circular regions rather computing the modulation in $N_{\rm side} = 2$ superpixels and then smoothing with a $10^\circ$ beam. Thus, we incorporate smaller-scale information into the modulation maps than previous PySM models.
  
  \begin{figure*}
      \centering
@@ -254,7 +254,7 @@ where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ an
      \label{fig:modulation_maps}
  \end{figure*}
  
-The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the small-scale maps are presented in Table~\ref{tab:smallscale_par}. The values of $\ell_1$ and $\ell_*$ are driven both by the angular resolution and the signal-to-noise ratio of the template maps. We employ $\ell_1=100$ and $\ell_*=80$ for dust and $\ell_1=38$ and $\ell_*=36$ for synchrotron. The $\ell_2$ parameter is chosen to be high enough that dust and synchrotron emission are relatively unconstrained by current full-sky data. We adopt  $\ell_2=2000$ for dust and $\ell_2 = 400$ for synchrotron. The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}.
+The $\ell_1$, $\ell_2$, and $\ell_*$ values used to construct the small-scale maps are presented in Table~\ref{tab:smallscale_par}. The values of $\ell_1$ and $\ell_*$ are driven both by the angular resolution and the signal-to-noise ratio of the template maps. We employ $\ell_1=100$ and $\ell_*=80$ for dust and $\ell_1=38$ and $\ell_*=36$ for synchrotron. The $\ell_2$ parameter is chosen to be high enough that dust and synchrotron emission are relatively unconstrained by current full-sky data. We adopt  $\ell_2=2000$ for dust and $\ell_2 = 400$ for synchrotron. The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}. % BH: Need to say where the alphas come from!
 
 The final maps are obtained by combining the large and small scales: 
 \begin{equation} \label{eq:filter}
@@ -278,24 +278,21 @@ Finally, we emphasize that our procedures are optimized for producing polarizati
 \subsubsection{Dust Amplitude}\label{sec:dustamplitude}
 The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous PySM models, e.g., \texttt{d0} and \texttt{d1}, employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for a detailed discussion). To address this issue, we instead use dust templates from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{Remazeilles:2011}. 
 
-In total intensity we employ the Planck GNILC 2015 component separated map\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}} at $353$\,GHz \citep{planck2016-XLVIII}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky region, which complicates its use in our analysis. Therefore, we reprocess the map as follows to a spatially uniform resolution of $21.8\arcmin$. To do so, we first note that the map was synthesized from ten needlet maps of different, but spatially-uniform, resolution \citep[][Figure~A.2]{planck2016-l04}. \textcolor{magenta}{Each of the $j=1,\cdots,10$ needlet maps can be reconstructed from the Planck GNILC 2015 dust map as follows:}
+In total intensity we employ the Planck GNILC 2015 component separated map\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}} at $353$\,GHz \citep{planck2016-XLVIII}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky region, which complicates its use in our analysis. Therefore, we reprocess the map to a spatially uniform resolution of $21.8\arcmin$. To do so, we first note that the map was synthesized from ten needlet maps of different, but spatially-uniform, resolutions \citep[][Figure~A.2]{planck2016-l04}. Each of the $j=1,\cdots,10$ needlet maps can be reconstructed from the Planck GNILC 2015 dust map as follows:
+
 \begin{equation}
-\textcolor{magenta}{
 \gamma^{j}(\hat{n})
-=\sum_{\substack{\ell,m}} \left(a_{\ell m}\, h^{j}_\ell\right)Y_{\ell m}(\hat{n})\,,}
+=\sum_{\substack{\ell,m}} \left(a_{\ell m}\, h^{j}_\ell\right)Y_{\ell m}(\hat{n})\,,
 \label{eq:needlets_maps}
 \end{equation}
-\textcolor{magenta}{where $a_{\ell m}$ are the spherical harmonic coefficients of the Planck GNILC 2015 dust map,  $h^{j}_\ell$ is the $j^\text{th}$ needlet window function as defined in \citet[][Figure~A.2]{planck2016-l04}, and $Y_{\ell m}(\hat{n})$ denote spherical harmonics.}
- We produce a map of uniform resolution by retaining only the first six needlet maps\footnote{Available at NERSC: \url{https://portal.nersc.gov/project/cmb/pysm-data/dust_gnilc/inputs/}}, %\footnote{Available at NERSC: \url{https://portal.nersc.gov/project/cmb/pysm-data/dust_gnilc/inputs/COM_CompMap_Dust-GNILC-F353_2048_21p8acm.fits}}, 
- which probe the dust intensity from the largest scales down to $21.8\arcmin$:
+where $a_{\ell m}$ are the spherical harmonic coefficients of the Planck GNILC 2015 dust map,  $h^{j}_\ell$ is the $j^\text{th}$ needlet window function \citep[see][Figure~A.2]{planck2016-l04}, and $Y_{\ell m}(\hat{n})$ denotes spherical harmonics. We produce a map of uniform resolution by retaining only the first six needlet maps\footnote{Available at NERSC: \url{https://portal.nersc.gov/project/cmb/pysm-data/dust_gnilc/inputs/}}, which probe the dust intensity from the largest scales down to $21.8\arcmin$:
+
  \begin{equation}
- \textcolor{magenta}{
  d^{\text{GNILC,}\, 21.8'}(\hat{n})
 =\sum_{j=1}^6 h^{j}_\ell \gamma^{j}(\hat{n})\,.
-}
 \label{eq:trucated_synthesis}
 \end{equation}
-This yields an $N_{\rm side} = 2048$ that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8\arcmin$. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l11B}.
+This yields an $N_{\rm side} = 2048$ map that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8\arcmin$. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l11B}.
 
 For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the Planck Public Release 3 \citep{planck2016-l04,planck2016-l11B}. While these maps have variable angular resolution, the resolution varies over the sky much more smoothly than in the $I$ map. Given this, and that we wish to retain as much polarization information in our analysis as possible, we employ these variable resolution maps as-is. Their resolution ranges from $5\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
 
@@ -559,7 +556,7 @@ In terms of polarization, \texttt{d12} significantly underestimates both $EE$ an
     \label{fig:smallfield_power}
 \end{figure}
 
-For our small-area comparison, we instead follow the method described in \cite{planck2014-XXX} to define the masks for spectrum computation. The full sky is divided into 768 patches with a HEALPix grid with $N_{\rm side} = 8$. At the center of each patch, we construct a circular mask covering 400~deg$^2$, with the edges tapered by a $2^\circ$ FWHM Gaussian, yielding $f_{\rm sky} \sim 0.008$. Figure~\ref{fig:smallfield_power} presents representative results from two selected circular fields located at Galactic latitudes $|b| > 30^\circ$ in the northern and southern Galactic hemispheres. Since running simulations to compute cross-spectra errors for each small patch would be computationally expensive, the errors are calculated according to the Xspect formalism stated in \cite{Tristram:2005}. 
+For our small-area comparison, we instead follow the method described in \cite{planck2014-XXX} to define the masks for spectrum computation. The full sky is divided into 768 patches with a HEALPix grid with $N_{\rm side} = 8$. At the center of each patch, we construct a circular mask covering 400~deg$^2$, with the edges tapered by a $2^\circ$ FWHM Gaussian, yielding $f_{\rm sky} \sim 0.008$. Figure~\ref{fig:smallfield_power} presents representative results from two selected circular fields located at Galactic latitudes $|b| > 30^\circ$ in the northern and southern Galactic hemispheres. Since running simulations to compute cross-spectra errors for each small patch would be computationally expensive, the errors are calculated according to the Xspect formalism \citep{Tristram:2005}. 
 
 \begin{figure*}
     \centering
