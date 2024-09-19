@@ -311,15 +311,15 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
 \subsubsection{Methods Overview}
 \begin{table}
     \centering
-    \begin{tabular}{lcc}
+    \begin{tabular}{lccc}
     \toprule 
-   &   $ \ell_1   $    &$\alpha$  \\
+   & $\ell_0$ & $\ell_1$ & $\alpha$  \\
    \midrule  
-   $\beta_d$ & 400 & 0.04 \\ 
-   $T_d$  &  400  & -0.47\\
+   $\beta_d$ & 200 & 400 & 0.04 \\ 
+   $T_d$ & 100 & 400  & -0.47\\
     \midrule 
-    $\beta_s$ & 36 & -0.61\\
-    $c_s$ & 36 &  -0.61  \\ 
+    $\beta_s$ & 10 & 36 & -0.61\\
+    $c_s$ & 10 & 36 & -0.61  \\ 
    \bottomrule
     \end{tabular}
     \caption{Spectral indices adopted for synthesizing small scales in the spectral parameters of dust and synchrotron models. }
@@ -328,7 +328,7 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
 
 Just as a map of Galactic emission at a single frequency is expected to have fluctuations at smaller angular scales than have been measured, maps of parameters governing its frequency dependence should also have small-scale fluctuations. We therefore introduce small scale fluctuations to our spectral parameter template maps in a way analogous to the amplitude template maps. This more realistically captures the complexity of small-scale Galactic emission.
 
-As there is no sense of polarization in the spectral parameter maps, we do not work within the polarization fraction tensor framework but rather with standard power spectra. Given a template map $\mathcal{T}$ of some spectral parameter $X$, we first fit the power spectrum of $\mathcal{T}$ with a power law $C_\ell^{XX} \propto \ell^\alpha$ over a range of scales where it is well measured, up to some multipole $\ell_1$. We then generate a map of small scale fluctuations using the power law fit. We multiply the resulting map by a modulation map in analogy with the amplitude modulations described in Section~\ref{subsec:methodology}. Finally, we combine the template map with the synthesized small scales using the filter function in Equation~\ref{eq:filter}. As with the amplitude parameters, we use the input template maps for the spectral parameters as-is in the inner Galactic plane, defined by the Planck \texttt{GAL097} mask.
+As there is no sense of polarization in the spectral parameter maps, we do not work within the polarization fraction tensor framework but rather with standard power spectra. Given a template map $\mathcal{T}$ of some spectral parameter $X$, we first fit the power spectrum of $\mathcal{T}$ with a power law $C_\ell^{XX} \propto \ell^\alpha$ over a range of scales $\ell_0 < \ell < \ell_1$ where it is well measured. We then generate a map of small scale fluctuations using the power law fit. We multiply the resulting map by a modulation map in analogy with the amplitude modulations described in Section~\ref{subsec:methodology}. Finally, we combine the template map with the synthesized small scales using the filter function in Equation~\ref{eq:filter}. As with the amplitude parameters, we use the input template maps for the spectral parameters as-is in the inner Galactic plane, defined by the Planck \texttt{GAL097} mask.
 
 An important caveat with introducing random fluctuations in the spectral parameters is that the resulting emission maps are no longer guaranteed to resemble data far from the reference frequency. For this reason, we recommend that models with variations in spectral parameters be used only in the frequency range $\sim$1--1000\,GHz.
 
@@ -343,11 +343,11 @@ We fit the power spectra of the $\beta_d$ and $T_d$ template maps over the multi
 \subsubsection{Synchrotron Spectral Parameters}\label{sec:beta_s}
 As described in Section~\ref{subsubsec:synch_model}, the synchrotron emission in all models developed here is governed by the spectral parameters $\beta_s$ and $c_s$. To build the large scale template for the spatial variation of the synchrotron spectral index $\beta_s$, we begin with the full-sky $\beta_s$ map of \citet{Miville-Deschenes:2008} obtained by combining the Haslam map in total intensity at 408\,MHz \citep{Remazeilles:2015} and WMAP 3\,yr K-band data \citep{Hinshaw:2007}. The map has an angular resolution of about $7^{\circ}$ and was employed by previous PySM synchrotron models \citep{Thorne:2017}.
 
-Incorporating newer constraints on synchrotron emission at 2.3\,GHz from S-PASS, \citet{Krachmalnicoff:2018} determined that this $\beta_s$ map underestimates the true level of spatial variations in $\beta_s$ across the Southern Galactic Hemisphere. Thus, we follow \citet{Krachmalnicoff:2018} and rescale the $\beta_s$ map by first subtracting its mean value, multiplying the resulting map by a factor of $1.572$, and then adding back the mean value.
+Incorporating newer constraints on synchrotron emission at 2.3\,GHz from S-PASS, \citet{Krachmalnicoff:2018} determined that this $\beta_s$ map underestimates the true level of spatial variations in $\beta_s$ across the Southern Galactic Hemisphere. Thus, we follow \citet{Krachmalnicoff:2018} and rescale the $\beta_s$ map by first subtracting its mean value ($\bar{\beta} = -3.00$), multiplying the resulting map by a factor of $1.572$, and then adding back the mean value.
 
-We next fit a power-law to the power spectrum of this new template map over the multipole range $2<\ell<36$, finding $\alpha_{\beta_s}=-0.61$ then construct a map from this power spectrum extrapolated to high multipoles. The $\beta_s$ small scales are modulated employing the same modulation map as the synchrotron intensity map (see Section~\ref{subsec:methodology}). As with the dust spectral parameter maps (see Section~\ref{subsec:dust_spec_params}), we combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
+We next fit a power-law to the power spectrum of this new template map over the multipole range $10 < \ell < 36$, finding $\alpha_{\beta_s}=-0.61$ then construct a map from this power spectrum extrapolated to high multipoles. The $\beta_s$ small scales are modulated employing the same modulation map as the synchrotron intensity map (see Section~\ref{subsec:methodology}). As with the dust spectral parameter maps (see Section~\ref{subsec:dust_spec_params}), we combine this high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
  
-For the synchrotron curvature parameter $c_s$, there are no readily available template maps. The existing \texttt{s3} model implements curvature as a sky-constant $c_s = -0.052$, consistent with the measurements from ARCADE \citep[$c_s=-0.052 \pm 0.005$,][]{Kogut:2012}. As an attempt to model a reasonable range of spatial variability, we assume that fluctuations in the value of $c_s$ follow the synchrotron intensity at large angular scales. Specifically, we start from the Haslam map 408\,MHz $I$ map of \citet{Remazeilles:2015} smoothed to a resolution of $5 \deg$. We then rescale this map with a linear transformation such that the minimum and maximum pixel values over the full sky are $-0.076$  and  $-0.041$ respectively, corresponding to the range of $c_s$ measurements from ARCADE \citep{Kogut:2012}. The resulting $c_s$ map has a mean and standard deviation of $-0.0517$ and $0.0054$, respectively, within the ARCADE footprint.
+For the synchrotron curvature parameter $c_s$, there are no readily available template maps. The existing \texttt{s3} model implements curvature as a sky-constant $c_s = -0.052$, consistent with the measurements from ARCADE \citep[$c_s=-0.052 \pm 0.005$,][]{Kogut:2012}. To model a reasonable range of spatial variability, we assume that fluctuations in the value of $c_s$ follow the synchrotron intensity at large angular scales. Specifically, we start from the Haslam map 408\,MHz $I$ map of \citet{Remazeilles:2015} smoothed to a resolution of $5 \deg$. We then rescale this map with a linear transformation such that the minimum and maximum pixel values over the full sky are $-0.076$ and $-0.041$ respectively, corresponding to the range of $c_s$ measurements from ARCADE \citep{Kogut:2012}. The resulting $c_s$ map has a mean and standard deviation of $-0.0517$ and $0.0054$, respectively, within the ARCADE footprint.
 
 To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generate a map of Gaussian random fluctuations with the same power law index as the $\beta_s$ map, i.e., $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$. We modulate the resulting map with the Haslam 408\,GHz $I$ map, smoothed to $5^\circ$ FWHM resolution. We renormalize the map through a linear transformation such that the (dimensionless) pixel values range from 0.1--2. We finally combine the modulated high-$\ell$ map with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
 
