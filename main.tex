@@ -212,12 +212,12 @@ We state here that this procedure  results into a slightly fainter  Crab Nebula 
 Our method for generating small-scale fluctuations is summarized as follows: 
 \begin{enumerate}
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
+    \item We low-pass filter these template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$ to yield the final large-scale maps.
     \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
     \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell_0 < \ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the $ee$ and $bb$ spectra at $\ell > \ell_2$ are constructed with the power law index of the $tt$ spectrum, while the $te$ spectrum retains its fit index. The $tb$ and $eb$ spectra are assumed to be zero for $\ell > \ell_1$.
     \item  We synthesize $i$, $q$, and $u$ maps using the constructed $tt$, $te$, $ee$, and $bb$ spectra. These maps are then high-pass filtered at cut-off multipole $\ell_1$.
-    \item We construct modulation maps $m_i$ and $m_p$ for intensity and polarization, respectively (see Figure~\ref{fig:modulation_maps}). The synthesized maps are then multiplied by the modulation maps.
-    \item We low-pass filter the template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$.
-    \item Finally, we sum the small-scale and large-scale maps and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
+    \item We construct modulation maps $m_i$ and $m_p$ for intensity and polarization, respectively (see Figure~\ref{fig:modulation_maps}). The synthesized maps are then multiplied by the modulation maps to yield the final small-scale maps.
+    \item Finally, we sum the large-scale and small-scale maps (from Steps 2 and 6, respectively) and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
 \end{enumerate}
 
 This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
@@ -244,9 +244,7 @@ To construct the modulation maps $m_i$ and $m_p$, we generally follow the method
     m_i\left(\hat{\theta} \right) &= \left(\frac{C^{tt}_{\ell_*,circ}}{C^{tt}_{\ell_*,full}}\right)^{1/2} \\
     m_p\left(\hat{\theta}\right) &= \left(\frac{C^{ee}_{\ell_*,circ}}{C^{ee}_{\ell_*,full}}\right)^{1/2}
 \end{align}
-where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above.
-
-%Our approach differs from that of \citet{Thorne:2017} in that their modulation map was constructed on $N_{\rm side} = 2$ superpixels. The procedure presented in this work claim to improve the quality of the  maps employing more local Galactic  features by increasing the resolution of the modulation templates.
+where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. As we employ $N_{\rm side} = 8$ rather than $N_{\rm side} = 2$ as done by \citet{Thorne:2017}, we incorporate smaller-scale information into the modulation maps.
  
  \begin{figure*}
      \centering
