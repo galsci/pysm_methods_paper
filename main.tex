@@ -104,12 +104,12 @@ A basic overview of the models developed and/or implemented in this work are pro
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{d9} &  GNILC PR2 ($I$) + GNILC PR3 ($Q$/$U$) 353 GHz & Modulated + polarization tensor & Uniform spectral parameters & \centering ---  & \centering Deterministic & Modified blackbody \\
+\texttt{d9} & GNILC PR2 ($I$) + GNILC PR3 ($Q$/$U$) 353 GHz & Modulated + polarization tensor & \centering Uniform spectral parameters & \centering ---  & \centering Deterministic & Modified blackbody \\
 \hline
 \\
-\texttt{d10} & Same as above & Same as above &  $\beta_d, \, T_d$ from GNILC & \centering Modulated & \centering Deterministic & \centering Same as above \tabularnewline
+\texttt{d10} & \centering Same as above & Same as above &  \centering $\beta_d, \, T_d$ from GNILC & \centering Modulated & \centering Deterministic & \centering Same as above \tabularnewline
 \hline
-\texttt{d11} & Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral parameters & \centering Same as above \tabularnewline
+\texttt{d11} & \centering Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral parameters & \centering Same as above \tabularnewline
 \hline
 \texttt{d12} &  GNILC PR2 ($I$) + PR3 ($Q$/$U$) 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering Deterministic & 6 layers, each modelled as a different modified blackbody \\
 %\bottomrule
@@ -125,15 +125,15 @@ A basic overview of the models developed and/or implemented in this work are pro
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{s4} & Haslam ($I$) 408 MHz + WMAP ($Q$/$U$) 23 GHz & Modulated + polarization tensor & Uniform spectral index & \centering --- & \centering Deterministic & \centering Power law \tabularnewline
+\texttt{s4} & Haslam ($I$) 408 MHz + WMAP ($Q$/$U$) 23 GHz & Modulated + polarization tensor & \centering Uniform spectral index & \centering --- & \centering Deterministic & \centering Power law \tabularnewline
 \hline
 \\
-\texttt{s5} & Same as above & Same as above & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering Deterministic & \centering Power law \tabularnewline
+\texttt{s5} & \centering Same as above & Same as above & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering Deterministic & \centering Power law \tabularnewline
 \hline
-\texttt{s6} & Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral index & \centering Power law \tabularnewline
+\texttt{s6} & \centering Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral index & \centering Power law \tabularnewline
 \hline
 \\
-\texttt{s7} & Same as above & Same as above & Same +  $c_s$ from ARCADE & \centering Same + $c_s$ fluctuations & \centering Deterministic & \centering Curved power law \tabularnewline
+\texttt{s7} & \centering Same as above & Same as above & Same +  $c_s$ from ARCADE & \centering Same + $c_s$ fluctuations & \centering Deterministic & \centering Curved power law \tabularnewline
 \enddata 
 \end{deluxetable*}
 
