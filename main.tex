@@ -98,19 +98,19 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 \subsection{Summary of New Models}
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
 
-\begin{deluxetable*}{m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm} m{.7cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models - Dust. All models have a maximum $N_\text{side} = 8192$, excep that \texttt{d12} has 2048.}
+\begin{deluxetable*}{m{0.5cm} m{2.5cm} m{2.2cm} m{2.2cm} m{2.2cm} m{2.5cm} m{2.2cm}} \label{table:summarydust}
+\caption{Summary of the PySM 3.4 models --- Dust. All models have a maximum $N_\text{side} = 8192$, except \texttt{d12} (2048).}
 \tablewidth{0pt}
 \tablehead{
-\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max $N_{\rm side}$} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{d9} &  GNILC PR2 (I) + GNILC PR3 (QU) 353 GHz &  Modulated + polarization tensor & Uniform spectral parameters &  & Deterministic & Modified black body & 8192 \\
+\texttt{d9} &  GNILC PR2 (I) + GNILC PR3 (QU) 353 GHz &  Modulated + polarization tensor & Uniform spectral parameters &  \centering ---  & Deterministic & Modified black body \\
 \hline
-\texttt{d10} & same as above & same as above &  $\beta_d, \, T_d$ from GNILC maps & Modulated & Deterministic & same as above & 8192 \\
+\texttt{d10} & Same as above & Same as above &  $\beta_d, \, T_d$ from GNILC maps & Modulated & Deterministic & Same as above \\
 \hline
-\texttt{d11} & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral parameters & same as above & 8192 \\
+\texttt{d11} & Same as above & Same as above & Same as above & Same as above & Stochastic $I$/$Q$/$U$ \& spectral parameters & Same as above \\
 \hline
-\texttt{d12} &  GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body & 2048 \\
+\texttt{d12} &  GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body \\
 %\bottomrule
 %\end{tabular}
 %\end{center}
@@ -118,36 +118,35 @@ A basic overview of the models developed and/or implemented in this work are pro
 %\end{table*}
 \end{deluxetable*}
 
-\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm}  m{.7cm}  } \label{table:summarysynch}
-\caption{Summary of the PySM 3.4 models - Synchrotron}
+\begin{deluxetable*}{m{0.5cm} m{2.5cm}  m{2.2cm}  m{2.2cm} m{2.2cm}  m{2.5cm}  m{2.2cm}} \label{table:summarysynch}
+\caption{Summary of the PySM 3.4 models --- Synchrotron. All models have a maximum $N_\text{side} = 8192$.}
 \tablewidth{0pt}
 \tablehead{
-\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max $N_{\rm side}$} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{s4} & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & uniform spectral index &  & Deterministic & Power law & 8192 \\
+\texttt{s4} & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & Uniform spectral index & \centering --- & Deterministic & Power law \\
 \hline
-\texttt{s5} & same as above & same as above & $\beta_s$ from Haslam,  S-PASS, WMAP    & Modulated  & Deterministic & Power law & 8192 \\
+\texttt{s5} & Same as above & Same as above & $\beta_s$ from Haslam, S-PASS, WMAP & Modulated  & Deterministic & Power law \\
 \hline
-\texttt{s6} & same as above & same as above & same as above & same as above & Stochasticity in IQU and  spectral index & Power law & 8192 \\
+\texttt{s6} & Same as above & Same as above & Same as above & Same as above & Stochastic $I$/$Q$/$U$ \& spectral index & Power law \\
 \hline
-\texttt{s7} & same as above & same as above & same +  $c_s$ from ARCADE & same + fluctuations in $c_s$   & Deterministic & Curved power law & 8192 \\
+\texttt{s7} & Same as above & Same as above & Same +  $c_s$ from ARCADE & Same + fluctuations in $c_s$ & Deterministic & Curved power law \\
 \enddata 
 \end{deluxetable*}
 
-\begin{deluxetable*}{   m{0.5cm} m{2cm}  m{2.2cm}     m{2cm}  m{2cm}  m{.7cm}  } \label{table:summaryco}
-\caption{Summary of the PySM 3.4 models - CO}
+\begin{deluxetable*}{m{0.5cm} m{4cm} m{4.4cm} m{2cm} m{3cm}} \label{table:summaryco}
+\caption{Summary of the PySM 3.4 models --- CO. All models have a maximum $N_\text{side} = 2048$.}
 \tablewidth{0pt}
 \tablehead{
-\colhead{Tag} & \colhead{Templates} & \colhead{Templates} &   \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max $N_{\rm side}$} \\ & \colhead{at large scales} & \colhead{at small scales} & & &}
+\colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales}}
 \startdata
-\texttt{co1} & Planck 2013 MILCA smoothed to 1 deg   &  & Deterministic & Single line emissions at 115, 230 and 346 GHz & 2048 \\
+\texttt{co1} & \centering PR1 MILCA smoothed to $1^{\circ}$ & \centering --- & Deterministic & Single line emissions at 115, 230, 346~GHz \\
 \hline
-\texttt{co2} & same as above &   & Deterministic & same as above + polarized .1\% & 2048 \\
+\texttt{co2} & \centering Same as above & \centering ---  & Deterministic & Same as above + $0.1\%$ polarized \\
 \hline
-\texttt{co3} & same as above & Simulated High Galactic clouds &    Deterministic & same as above & 2048 \\
+\texttt{co3} & \centering Same as above & Simulated high galactic clouds & Deterministic & \centering Same as above  \\
 \enddata
 \end{deluxetable*}
-
 
 \section{Dust and Synchrotron Models: Stochastic Emission at Small Angular Scales} \label{sec:small_scales}
 The methods presented here aim to preserve the well-measured large-scale information in existing observations of dust and synchrotron emission (the ``template'' maps), filter out the noisy small-scale emission in the maps, and replace those small scales with a stochastic realization that has a reasonable correspondence with the large-scale emission. Specifically, the synthetic small-scale structure should have a power spectrum that connects smoothly to the power spectrum of the real data at large scales. Our approach is to generate stochastic realizations of small-scale emission that is modulated by the large-scale signal.
