@@ -5,12 +5,8 @@
 \usepackage{booktabs} % BH: Not sure that this is needed
 
 % For commenting, to be deleted when done
-%\usepackage[svgnames]{xcolor}
-\newcommand{\bsh}[1]{\textcolor{red}{(BSH: #1)}}
 \newcommand{\giuse}[1]{\textcolor{orange}{(GP: #1)}}
 \newcommand{\sg}[1]{\textcolor{teal}{#1}}
-\newcommand{\jd}[1]{\textcolor{green}{#1}}
-\newcommand{\nk}[1]{\textcolor{pink}{#1}}
 \begin{document}
 
 \title{Full-Sky Models of Galactic Microwave Emission and Polarization at Sub-arcminute Scales}
@@ -103,7 +99,7 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
 
 \begin{deluxetable*}{m{0.5cm} m{2cm}  m{2.2cm}  m{2cm} m{2.2cm}  m{2cm}  m{2cm} m{.7cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models - Dust. $ {} ^{\dag}$See Tab.\ref{tab:smallscale_par} for $\alpha_{EE}$ and $\alpha_{BB}$ .}
+\caption{Summary of the PySM 3.4 models - Dust.}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Modelling properties} & \colhead{Max $N_{\rm side}$} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales} &&&}
@@ -232,7 +228,7 @@ This prescription has several free parameters that require tuning. The pivot sca
    Synchrotron & 10 & 38 & 400 & 36 & -1.00& -0.84 & -1.00 & -0.76 \\
    \bottomrule
     \end{tabular}
-    \caption{Spectral indices adopted for synthesizing  small scales. The dust spectral index $\alpha_{TT}$ is taken from \citet{Miville-Deschenes:2016}, whereas the other dust indices are adopted from \citet{planck2016-l11A}. The synchrotron spectral indices are obtained from fits $D_{\ell} \propto \ell^{\alpha}$ in the range $\ell_0 < \ell< \ell_1$.}
+    \caption{Spectral indices adopted for synthesizing small scales, where $D_{\ell}^{XX} \propto \ell^{\alpha}$. The dust spectral index $\alpha_{tt}$ is taken from \citet{Miville-Deschenes:2016}, whereas the other dust indices are adopted from \citet{planck2016-l11A}. The synchrotron spectral indices are obtained from fits $D_{\ell} \propto \ell^{\alpha}$ in the range $\ell_0 < \ell< \ell_1$.}
     \label{tab:smallscale_par}
 \end{table*}
 
