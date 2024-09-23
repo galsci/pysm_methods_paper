@@ -98,19 +98,20 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 \subsection{Summary of New Models}
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
 
-\begin{deluxetable*}{m{0.5cm} m{2.5cm} m{2.2cm} m{2.2cm} m{2.2cm} m{2.5cm} m{2.2cm}} \label{table:summarydust}
+\begin{deluxetable*}{m{0.5cm} m{2.5cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.5cm} m{2.8cm}} \label{table:summarydust}
 \caption{Summary of the PySM 3.4 models --- Dust. All models have a maximum $N_\text{side} = 8192$, except \texttt{d12} (2048).}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{d9} &  GNILC PR2 (I) + GNILC PR3 (QU) 353 GHz &  Modulated + polarization tensor & Uniform spectral parameters &  \centering ---  & Deterministic & Modified black body \\
+\texttt{d9} &  GNILC PR2 ($I$) + GNILC PR3 ($Q$/$U$) 353 GHz & Modulated + polarization tensor & Uniform spectral parameters & \centering ---  & \centering Deterministic & Modified blackbody \\
 \hline
-\texttt{d10} & Same as above & Same as above &  $\beta_d, \, T_d$ from GNILC maps & Modulated & Deterministic & Same as above \\
+\\
+\texttt{d10} & Same as above & Same as above &  $\beta_d, \, T_d$ from GNILC & \centering Modulated & \centering Deterministic & \centering Same as above \tabularnewline
 \hline
-\texttt{d11} & Same as above & Same as above & Same as above & Same as above & Stochastic $I$/$Q$/$U$ \& spectral parameters & Same as above \\
+\texttt{d11} & Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral parameters & \centering Same as above \tabularnewline
 \hline
-\texttt{d12} &  GNILC PR2 (I) + PR3 (QU) 353 GHz & Modulated + gaussian & Random realization for each layer & Random realization for each layer & Deterministic & 6 layers each modelled as a different modified black body \\
+\texttt{d12} &  GNILC PR2 ($I$) + PR3 ($Q$/$U$) 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering Deterministic & 6 layers, each modelled as a different modified blackbody \\
 %\bottomrule
 %\end{tabular}
 %\end{center}
@@ -118,23 +119,25 @@ A basic overview of the models developed and/or implemented in this work are pro
 %\end{table*}
 \end{deluxetable*}
 
-\begin{deluxetable*}{m{0.5cm} m{2.5cm}  m{2.2cm}  m{2.2cm} m{2.2cm}  m{2.5cm}  m{2.2cm}} \label{table:summarysynch}
+\begin{deluxetable*}{m{0.5cm} m{2.5cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.5cm} m{2.8cm}} \label{table:summarysynch}
 \caption{Summary of the PySM 3.4 models --- Synchrotron. All models have a maximum $N_\text{side} = 8192$.}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{s4} & Haslam (I) 408 MHz + WMAP (QU) 23 GHz & Modulated + polarization tensor & Uniform spectral index & \centering --- & Deterministic & Power law \\
+\texttt{s4} & Haslam ($I$) 408 MHz + WMAP ($Q$/$U$) 23 GHz & Modulated + polarization tensor & Uniform spectral index & \centering --- & \centering Deterministic & \centering Power law \tabularnewline
 \hline
-\texttt{s5} & Same as above & Same as above & $\beta_s$ from Haslam, S-PASS, WMAP & Modulated  & Deterministic & Power law \\
+\\
+\texttt{s5} & Same as above & Same as above & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering Deterministic & \centering Power law \tabularnewline
 \hline
-\texttt{s6} & Same as above & Same as above & Same as above & Same as above & Stochastic $I$/$Q$/$U$ \& spectral index & Power law \\
+\texttt{s6} & Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral index & \centering Power law \tabularnewline
 \hline
-\texttt{s7} & Same as above & Same as above & Same +  $c_s$ from ARCADE & Same + fluctuations in $c_s$ & Deterministic & Curved power law \\
+\\
+\texttt{s7} & Same as above & Same as above & Same +  $c_s$ from ARCADE & \centering Same + $c_s$ fluctuations & \centering Deterministic & \centering Curved power law \tabularnewline
 \enddata 
 \end{deluxetable*}
 
-\begin{deluxetable*}{m{0.5cm} m{4cm} m{4.4cm} m{2cm} m{3cm}} \label{table:summaryco}
+\begin{deluxetable*}{m{0.5cm} m{4.2cm} m{4.4cm} m{2cm} m{3cm}} \label{table:summaryco}
 \caption{Summary of the PySM 3.4 models --- CO. All models have a maximum $N_\text{side} = 2048$.}
 \tablewidth{0pt}
 \tablehead{
@@ -144,7 +147,8 @@ A basic overview of the models developed and/or implemented in this work are pro
 \hline
 \texttt{co2} & \centering Same as above & \centering ---  & Deterministic & Same as above + $0.1\%$ polarized \\
 \hline
-\texttt{co3} & \centering Same as above & Simulated high galactic clouds & Deterministic & \centering Same as above  \\
+\\
+\texttt{co3} & \centering Same as above & Simulated high galactic clouds & Deterministic & \centering Same as above \tabularnewline
 \enddata
 \end{deluxetable*}
 
@@ -224,7 +228,7 @@ This prescription has several free parameters that require tuning. The pivot sca
    Synchrotron & 10 & 38 & 400 & 36 & -1.00& -0.84 & -1.00 & -0.76 \\
    \bottomrule
     \end{tabular}
-    \caption{Spectral indices adopted for synthesizing small scales, where $D_{\ell}^{XX} \propto \ell^{\alpha}$.}
+    \caption{Model parameters adopted for synthesizing small scales, where $D_{\ell}^{XX} \propto \ell^{\alpha}$.}
     \label{tab:smallscale_par}
 \end{table*}
 
@@ -314,7 +318,7 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
     $c_s$ & 10 & 36 & -0.61  \\ 
    \bottomrule
     \end{tabular}
-    \caption{Spectral indices adopted for synthesizing small scales in the spectral parameters of dust and synchrotron models. }
+    \caption{Model parameters adopted for synthesizing small-scale dust and synchrotron emission, where $\mathcal{D}_\ell^{XX} \propto \ell^\alpha$.}
     \label{tab:smallscale_specpar}
 \end{table}
 
