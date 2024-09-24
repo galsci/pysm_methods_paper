@@ -99,12 +99,12 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
 
 \begin{deluxetable*}{m{0.5cm} m{2.5cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm} m{2.8cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models --- Dust. All models have a maximum $N_\text{side} = 8192$, except \texttt{d12} (2048).}
+\caption{Summary of the PySM 3.4 models --- Dust}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{d9} & GNILC PR2 ($I$) + GNILC PR3 ($Q$/$U$) 353 GHz & Modulated + polarization tensor & \centering Uniform spectral parameters & \centering ---  & \centering Deterministic & Modified blackbody \\
+\texttt{d9} & GNILC PR2 ($I$) + GNILC PR3 ($Q$/$U$) 353 GHz & Modulated + polarization fraction tensor & \centering Uniform spectral parameters & \centering ---  & \centering Deterministic & Modified blackbody \\
 \hline
 \\
 \texttt{d10} & \centering Same as above & Same as above & \centering $\beta_d, \, T_d$ from GNILC PR2 & \centering Modulated & \centering Deterministic & \centering Same as above \tabularnewline
@@ -117,15 +117,16 @@ A basic overview of the models developed and/or implemented in this work are pro
 %\end{center}
 \enddata
 %\end{table*}
+\tablecomments{All models have a maximum $N_\text{side} = 8192$, except \texttt{d12} (2048).}
 \end{deluxetable*}
 
 \begin{deluxetable*}{m{0.5cm} m{2.5cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm} m{2.8cm}} \label{table:summarysynch}
-\caption{Summary of the PySM 3.4 models --- Synchrotron. All models have a maximum $N_\text{side} = 8192$.}
+\caption{Summary of the PySM 3.4 models --- Synchrotron}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{s4} & Haslam ($I$) 408 MHz + WMAP ($Q$/$U$) 23 GHz & Modulated + polarization tensor & \centering Uniform spectral index & \centering --- & \centering Deterministic & \centering Power law \tabularnewline
+\texttt{s4} & Haslam ($I$) 408 MHz + WMAP ($Q$/$U$) 23 GHz & Modulated + polarization fraction tensor & \centering Uniform spectral index & \centering --- & \centering Deterministic & \centering Power law \tabularnewline
 \hline
 \\
 \texttt{s5} & \centering Same as above & Same as above & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering Deterministic & \centering Power law \tabularnewline
@@ -135,11 +136,12 @@ A basic overview of the models developed and/or implemented in this work are pro
 \hline
 \\
 \texttt{s7} & \centering Same as above & Same as above & Same + $c_s$ from ARCADE & \centering Same + $c_s$ fluctuations & \centering Deterministic & \centering Curved power law \tabularnewline
-\enddata 
+\enddata
+\tablecomments{All models have a maximum $N_\text{side} = 8192$.}
 \end{deluxetable*}
 
 \begin{deluxetable*}{m{0.5cm} m{4.2cm} m{4.4cm} m{2.6cm} m{3cm}} \label{table:summaryco}
-\caption{Summary of the PySM 3.4 models --- CO. All models have a maximum $N_\text{side} = 2048$.}
+\caption{Summary of the PySM 3.4 models --- CO}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Templates} & \colhead{Templates} & \colhead{Stochasticity} & \colhead{Model} \\ & \colhead{at large scales} & \colhead{at small scales}}
@@ -151,6 +153,7 @@ A basic overview of the models developed and/or implemented in this work are pro
 \\
 \texttt{co3} & \centering Same as above & \centering Simulated high galactic clouds & \centering Deterministic & \centering Same as above \tabularnewline
 \enddata
+\tablecomments{All models have a maximum $N_\text{side} = 2048$.}
 \end{deluxetable*}
 
 \section{Dust and Synchrotron Models: Stochastic Emission at Small Angular Scales} \label{sec:small_scales}
@@ -171,7 +174,7 @@ A two-dimensional sky map of intensity and linear polarization is described by t
 \begin{equation}
     P_{ab} = \frac{1}{2} \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right]
 \end{equation}
-whose components transform under local coordinate changes. This suggests that any transformation that attempts to normalize emission should be applied to polarization tensor, not its components. The simplest such transformation is logarithmic, with $p_{ab} \equiv \ln 2 P_{ab}$ in the matrix sense:
+whose components transform under local coordinate changes. This suggests that any transformation that attempts to normalize emission should be applied to the polarization tensor, not its components. The simplest such transformation is logarithmic, with $p_{ab} \equiv \ln 2 P_{ab}$ in the matrix sense:
 \begin{equation}\label{eq:logP}
 p_{ab} \equiv \ln \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right] \ = \ 
     \left[ \begin{matrix} i+q & u \\ u & i-q \end{matrix} \right].
@@ -271,7 +274,7 @@ Since the generation of the small scales depends only upon a fixed input power s
 
 We do not intend for the above procedure to be useful for the inner Galactic plane, which has been imaged at high signal-to-noise ratio at relatively small scales. We thus do not apply the small-scale amplitude extrapolation to the $3\%$ of the sky in the Galactic plane as defined by the Planck \texttt{GAL097} mask\footnote{\texttt{HFI\_Mask\_GalPlane-apo2\_2048\_R2.00.fits}}, where we instead use the observed templates as-is at all scales. To ensure a smooth transition between the template used in this region and synthesized small scales employed over the rest of the map, we apodize the mask with a $5^\circ$ Gaussian taper. This reflects our expectation that our procedure is most useful for making physically motivated synthetic realizations of diffuse Galactic emission at high Galactic latitudes rather than in the Galactic plane.
 
-Another challenge for our prescription is pixels that, likely from noise, have $I^2 < P^2$, rendering the transformation in Equation~\eqref{eq:real2pt} invalid. We identify 527 such pixels in our dust template and 5 in our synchrotron template, all in the vicinity of the Crab Nebula. Thus, we set the $i$, $q$, and $u$ values at the location of these pixels to fiducial values of 4.51, 0.07, and 0.01 in the dust maps and 4.55, 0.017, $-0.001$ in the synchrotron maps. Given these complications, we do not advise using the simulations in the vicinity of the Crab Nebula.
+Another challenge for our prescription is pixels that, whether from noise or systematic errors, have $I^2 < P^2$, rendering the transformation in Equation~\eqref{eq:real2pt} invalid. We identify 527 such pixels in our dust template and 5 in our synchrotron template, all in the vicinity of the Crab Nebula. To address this, we set the $i$, $q$, and $u$ values at the location of these pixels to fiducial values of 4.51, 0.07, and 0.01 in the dust maps and 4.55, 0.017, $-0.001$ in the synchrotron maps. Given these complications, we do not advise using the simulations in the vicinity of the Crab Nebula.
 
 Finally, we emphasize that our procedures are optimized for producing polarization rather than total intensity maps. For instance, we could in principle retain much smaller angular scales from the intensity templates, however we require uniform parameters in intensity and polarization to implement the polarization fraction tensor framework. Other choices, such as the value of $\gamma$, are based on polarization spectra. Some of the non-idealities of the maps in total intensity produced as a consequence of these choices are documented in Section~\ref{sec:validation}.
 
@@ -350,7 +353,7 @@ To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generat
 
 \subsection{Summary of New Dust and Synchrotron Models}
 
-The new dust and synchrotron models implemented here all improve on previous models through new data-driven templates and use of the polarization fraction tensor framework to model small-scale fluctuations. Multiple models each of dust and synchrotron are provided to explore a range of astrophysical complexity allowed by current constraints. In brief, the \texttt{d9} and \texttt{s4} models use the new data-driven templates and include $I$, $Q$, and $U$ fluctuations up to the largest $\ell$ values simulated, but these models have sky-constant spectral parameters and thus no frequency decorrelation (see Section~\ref{subsec:decorrelation} for discussion). In contrast, \texttt{d10} and \texttt{s5} employ data-driven maps of spectral parameters to which small-scale fluctuations are added, inducing frequency decorrelation. The \texttt{s7} synchrotron model provides an extra spectral parameter---curvature of the frequency spectrum---and thus additional complexity. The \texttt{d11} and \texttt{s6} models allow many realizations of \texttt{d10} and \texttt{s5}, respectively, to be generated in which the large scales are fixed to the data-driven templates and the small scales have the same statistical properties but differing spatial morphologies. Extensive model comparisons are made in Section~\ref{sec:validation}.
+The new dust and synchrotron models implemented here all improve on previous models through new data-driven templates and use of the polarization fraction tensor framework to model small-scale fluctuations. Multiple models each of dust and synchrotron are provided to explore a range of astrophysical complexity allowed by current constraints. In brief, the \texttt{d9} and \texttt{s4} models use the new data-driven templates and include $I$, $Q$, and $U$ fluctuations up to the largest $\ell$ values simulated, but these models have sky-constant spectral parameters and thus no frequency decorrelation (see Section~\ref{subsec:decorrelation} for discussion). In contrast, \texttt{d10} and \texttt{s5} employ data-driven maps of spectral parameters to which small-scale fluctuations are added, inducing frequency decorrelation. The \texttt{s7} synchrotron model provides an extra spectral parameter---curvature of the frequency spectrum---and thus additional complexity. The \texttt{d11} and \texttt{s6} models allow many realizations of \texttt{d10} and \texttt{s5}, respectively, to be generated in which the large scales are fixed to the data-driven templates and the small scales have the same statistical properties but differing spatial morphologies. Tables~\ref{table:summarydust} and \ref{table:summarysynch} provide a high-level summary of these models. Extensive model comparisons are made in Section~\ref{sec:validation}.
 
 \section{Other Models Implemented} \label{sec:other_models}
 
