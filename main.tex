@@ -98,20 +98,21 @@ Finally, emission from the Solar System is also detected at microwave wavelength
 \subsection{Summary of New Models}
 A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections as well as in the PySM documentation\footnote{\url{https://pysm3.readthedocs.io/en/latest/models.html}}.
 
-\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.5cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models --- Dust}
+\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.2cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarydust}
+\caption{Summary of the PySM 3.4 models --- Dust.}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} \\ & & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{d9} & Modified blackbody & GNILC PR2 ($I$) + GNILC PR3 ($Q$/$U$) 353 GHz & Modulated + polarization fraction tensor & \centering Uniform spectral parameters & \centering ---  & \centering Deterministic \tabularnewline
+\texttt{d9} & Modified blackbody & GNILC PR2 $I$ + GNILC PR3 $Q$/$U$ 353 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_d, \, T_d$ & \centering ---  & \centering Deterministic \tabularnewline
 \hline
 \\
 \texttt{d10} & \centering Same as above & \centering Same as above & Same as above & \centering $\beta_d, \, T_d$ from GNILC PR2 & \centering Modulated & \centering Deterministic \tabularnewline
 \hline
-\texttt{d11} & \centering Same as above & \centering Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral parameters \\
+\\
+\texttt{d11} & \centering Same as above & \centering Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$, $Q$, $U$ \& $\beta_d, \, T_d$ \\
 \hline
-\texttt{d12} & 6 layers, each modelled as a different modified blackbody &  GNILC PR2 ($I$) + PR3 ($Q$/$U$) 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering Deterministic \tabularnewline
+\texttt{d12} & 6 layers, each is a different modified blackbody & GNILC PR2 $I$ + PR3 $Q$/$U$ 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering Deterministic \tabularnewline
 %\bottomrule
 %\end{tabular}
 %\end{center}
@@ -120,19 +121,19 @@ A basic overview of the models developed and/or implemented in this work are pro
 \tablecomments{All models have a maximum $N_\text{side} = 8192$, except \texttt{d12} (2048).}
 \end{deluxetable*}
 
-\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.5cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarysynch}
-\caption{Summary of the PySM 3.4 models --- Synchrotron}
+\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.2cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarysynch}
+\caption{Summary of the PySM 3.4 models --- Synchrotron.}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} \\ & & \colhead{at large scales} & \colhead{at small scales} & & \colhead{at small scales}}
 \startdata
-\texttt{s4} & \centering Power law  & Haslam ($I$) 408 MHz + WMAP ($Q$/$U$) 23 GHz & Modulated + polarization fraction tensor & \centering Uniform spectral index & \centering --- & \centering Deterministic \tabularnewline
+\texttt{s4} & \centering Power law  & Haslam $I$ 408 MHz + WMAP $Q$/$U$ 23 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_s$ & \centering --- & \centering Deterministic \tabularnewline
 \hline
 \\
 \texttt{s5} & \centering Power law & \centering Same as above & Same as above & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering Deterministic \tabularnewline
 \hline
 \\
-\texttt{s6} & \centering Power law & \centering Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$/$Q$/$U$ \& spectral index \tabularnewline
+\texttt{s6} & \centering Power law & \centering Same as above & Same as above & Same as above & \centering Same as above & Stochastic $I$, $Q$, $U$ \& $\beta_s$ \tabularnewline
 \hline
 \\
 \texttt{s7} & \centering Curved power law & \centering Same as above & Same as above & Same + $c_s$ from ARCADE & \centering Same + $c_s$ fluctuations & \centering Deterministic \tabularnewline
@@ -140,8 +141,8 @@ A basic overview of the models developed and/or implemented in this work are pro
 \tablecomments{All models have a maximum $N_\text{side} = 8192$.}
 \end{deluxetable*}
 
-\begin{deluxetable*}{m{0.5cm} m{3cm} m{4.2cm} m{4.4cm} m{2.2cm}} \label{table:summaryco}
-\caption{Summary of the PySM 3.4 models --- CO}
+\begin{deluxetable*}{m{0.5cm} m{3cm} m{4.2cm} m{4.4cm} m{2.4cm}} \label{table:summaryco}
+\caption{Summary of the PySM 3.4 models --- CO.}
 \tablewidth{0pt}
 \tablehead{
 \colhead{Tag} & \colhead{Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Stochasticity} \\ & & \colhead{at large scales} & \colhead{at small scales}}
