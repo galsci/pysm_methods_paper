@@ -96,7 +96,7 @@ Our focus in this work is on emission from the ISM of the Milky Way, but PySM in
 Finally, emission from the Solar System is also detected at microwave wavelengths in the form of Zodiacal light as well as thermal emission from planets and other rocky bodies. Solar System signals are necessarily time-dependent and thus are not suited for the map-based framework employed by PySM. We therefore do not consider them here.
 
 \subsection{Summary of New Models}
-A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections.
+A basic overview of the models developed and/or implemented in this work are provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO). The details of each of these models are described in the following sections as well as in the PySM documentation\footnote{\url{https://pysm3.readthedocs.io/en/latest/models.html}}.
 
 \begin{deluxetable*}{m{0.5cm} m{2.5cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm} m{2.8cm}} \label{table:summarydust}
 \caption{Summary of the PySM 3.4 models --- Dust}
@@ -322,7 +322,7 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
     $c_s$ & 10 & 36 & -0.61  \\ 
    \bottomrule
     \end{tabular}
-    \caption{Model parameters adopted for synthesizing small-scale dust and synchrotron emission, where $\mathcal{D}_\ell^{XX} \propto \ell^\alpha$.}
+    \caption{Model parameters adopted for synthesizing small-scale dust and synchrotron emission, where $\mathcal{D}_\ell^{xy} \propto \ell^{\alpha_{xy}}$.}
     \label{tab:smallscale_specpar}
 \end{table}
 
@@ -693,7 +693,7 @@ The 353 and 217\,GHz Planck channels have the highest sensitivity to polarized d
     \label{fig:decorrelation}
 \end{figure}
 
-In Figure~\ref{fig:decorrelation}, we compare the \texttt{d1}, \texttt{d10}, and \texttt{d12} models to this upper limit and analyze more generally how the level of decorrelation with respect to the 217\,GHz map changes with frequency. For each model, we compute $R_\ell^{BB}\left(217\times\nu\right)$ over the multipole range $50 \leq \ell \leq 160$ over the GAL70 mask as a function of $\nu$. We adopt a uniform weighting to average the spectra over the broad multipole bin since $\mathcal{D}_\ell^{BB}$ for dust scales roughly as $\ell^{-0.5}$ (see Table~\ref{tab:smallscale_par}). However, nearly identical results are obtained with uniform weighting in $C_\ell$ instead.
+In Figure~\ref{fig:decorrelation}, we compare the \texttt{d1}, \texttt{d10}, and \texttt{d12} models to this upper limit and analyze more generally how the level of decorrelation with respect to the 217\,GHz map changes with frequency. For each model, we compute $R_\ell^{BB}\left(217\times\nu\right)$ over the multipole range $50 \leq \ell \leq 160$ over the Planck \texttt{GAL070} mask as a function of $\nu$. We adopt a uniform weighting to average the spectra over the broad multipole bin since $\mathcal{D}_\ell^{BB}$ for dust scales roughly as $\ell^{-0.5}$ (see Table~\ref{tab:smallscale_par}). However, nearly identical results are obtained with uniform weighting in $C_\ell$ instead.
 
 We find that all three models respect the upper limit set by \citet{planck2016-l11A}, with \texttt{d12} coming closest to saturating it ($R_\ell^{BB}(217\times353) = 0.9930$), then \texttt{d10} (0.9979), then \texttt{d1} (0.9993). The models thus span a range of viable levels of decorrelation. Because the spectral parameters ($T_d$ and $\beta_d$) of the \texttt{d9} model do not vary across the sky, that model has no decorrelation by construction (i.e., $R_\ell = 1$).
 
