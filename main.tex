@@ -264,13 +264,13 @@ The final maps are obtained by combining the large and small scales:
     a_{\ell m }^{X, out}=  a_{\ell m }^{X, \mathcal{T}} \left(1-\sigma_\ell\right)^{\gamma} + a_{\ell m }^{X, ss} \sigma_\ell
     ~~~, 
 \end{equation}
-where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$,  $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps, and $\gamma$ is set to be  $0.2$ to  ensure negligible artifacts at the transition scales, $\ell_1$. The filter $\sigma_\ell$ is given by
+where $a_{\ell m }^{X, \mathcal{T}}$ are the coefficients of the large-scale templates, with $X$ any of $t$, $e$, and $b$, and $a_{\ell m }^{X, ss}$ is derived from the synthesized small-scale fluctuation maps. The exponent of $0.2$ on the $\left(1-\sigma_\ell\right)$ term is chosen empirically to smooth the transition between our data-driven templates and the generated small scales. We found that this choice minimizes artifacts at $\ell \simeq \ell_1$ in power spectra computed over large sky areas while maintaining the correct asymptotic behavior. The filter $\sigma_\ell$ is given by
 
 \begin{equation} \label{eq:filter2}
 \sigma_\ell  = \left[1+  e^{ -c_1 (\ell/ \ell_1  -c_2 )}\right]^{-1}  
 ~~~,
 \end{equation}
-where the parameters $c_1$ and $c_2$ govern the width of the filter in multipoles. We adopt $c_1=40$ and $c_2=1.05$ throughout this work. The exponent of $0.2$ on the $\left(1-\sigma_\ell\right)$ term in Equation~\ref{eq:filter} is chosen empirically to smooth the transition between our data-driven templates and the generated small scales. We found that this choice minimizes artifacts at $\ell \simeq \ell_1$ in power spectra computed over large sky areas while maintaining the correct asymptotic behavior.
+where the parameters $c_1$ and $c_2$ govern the width of the filter in multipoles. We adopt $c_1=40$ and $c_2=1.05$ throughout this work.
 
 Since the generation of the small scales depends only upon a fixed input power spectrum, we can generate a different map realization on the fly each time a sky is simulated. Thus, the methodology presented here enables generation of an ensemble of sky realizations having the same well-measured large scales but stochastic realizations of the poorly-measured small scales. Further, the small-scale fluctuations can be generated at arbitrarily small scales set only by the resolution of the map since all power spectra can be extended indefinitely in $\ell$. In practice, small scales are generated up to $\ell_{\rm max} = 3N_{\rm side}-1$.
 
@@ -324,7 +324,7 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
     $c_s$ & 10 & 36 & -0.61  \\ 
    \bottomrule
     \end{tabular}
-    \caption{Model parameters adopted for synthesizing small-scale dust and synchrotron emission, where $\mathcal{D}_\ell^{xy} \propto \ell^{\alpha_{xy}}$.}
+    \caption{Model parameters adopted for synthesizing small-scale dust and synchrotron emission, where $\mathcal{D}_\ell^{XX} \propto \ell^{\alpha_{XX}}$.}
     \label{tab:smallscale_specpar}
 \end{table}
 
@@ -393,14 +393,13 @@ All CO models implemented here are based on the CO $J = 1\rightarrow0$, $J = 2\r
 
 \citet{planck2013-p03a} also produced \texttt{Type-2} templates based on a multi-frequency analysis. However, this method is more prone to modeling errors in separating the Galactic dust emission from the CO emission, and so we prefer the \texttt{Type-1} templates for our purposes.
 
-The \texttt{Type-1} CO templates have a native resolution of $10\arcmin$. We convolve each of the $J = 1\rightarrow0$, $J = 2\rightarrow1$, and $J = 3\rightarrow2$ maps with a 1$^\circ$ Gaussian beam to reduce noise contamination especially at intermediate and high Galactic latitudes at the possible expense of introducing residual emission from extended Galactic and extra-galactic sources. Finally, the templates are downgraded to a coarser pixellization of $N_{\rm side} = 512$. These templates are the foundation on which all three of the CO models are built.
+The \texttt{Type-1} CO templates have a native resolution of $10\arcmin$. We convolve each of the $J = 1\rightarrow0$, $J = 2\rightarrow1$, and $J = 3\rightarrow2$ maps with a 1$^\circ$ Gaussian beam to reduce noise contamination, especially at intermediate and high Galactic latitudes, at the possible expense of introducing residual emission from extended Galactic and extra-galactic sources. Finally, the templates are downgraded to a coarser pixellization of $N_{\rm side} = 512$. These templates are the foundation on which all three of the CO models are built.
 
-The first CO model {\bf\texttt{co1}} adopts the $J = 1\rightarrow0,$  $J = 2\rightarrow1$ and $J = 3\rightarrow2$ templates as-is and assumes no polarization. 
+The first CO model \texttt{co1} adopts the $J = 1\rightarrow0,$  $J = 2\rightarrow1$ and $J = 3\rightarrow2$ templates as-is and assumes no polarization. 
 
-The second CO model {\bf\texttt{co2}} introduces a simple implementation of polarization. The $I$ maps of the three transitions used in  {\bf\texttt{co1}} are converted to $P$ maps using a sky-constant, user-defined polarization fraction $p$, where the default is $p = 0.1$\%. The $Q$ and $U$ maps are made from the $P$ maps using the polarization angle of the thermal dust emission as determined by a component separation analysis with Commander \citep{planck2014-a12}.
+The second CO model \texttt{co2} introduces a simple implementation of polarization. The $I$ maps of the three transitions used in \texttt{co1} are converted to $P$ maps using a sky-constant, user-defined polarization fraction $p$, where the default is $p = 0.1$\%. The $Q$ and $U$ maps are made from the $P$ maps using the polarization angle of the thermal dust emission as determined by a component separation analysis with Commander \citep{planck2014-a12}.
 
-Finally, the third CO model {\bf\texttt{co3}} not only accounts for the polarized emission as in {\bf\texttt{co2}} but also includes small-scale emission from high-Galactic latitude clouds. We perform a dedicated simulation with the {\bf\texttt{LogSpiral}} model from \citet{Puglisi:2017}, which provided the best fit to Planck data, to produce maps of the contribution to the total and polarized CO intensity at sub-degree scales from molecular clouds at high Galactic latitudes. The $I$, $Q$, and $U$ maps generated by the simulation are then added to the $I$, $Q$, and $U$ maps of {\bf\texttt{co2}} to produce the final {\bf\texttt{co3}} model. We remark that this injection introduces CO emission at around the sub-degree scales  in regions where the CO templates have very low  signal-to-noise ratio. 
-
+Finally, the third CO model \texttt{co3} not only accounts for the polarized emission as in \texttt{co2} but also includes small-scale emission from high-Galactic latitude clouds. We perform a dedicated simulation with the {\bf\texttt{LogSpiral}} model from \citet{Puglisi:2017}, which provided the best fit to Planck data, to produce maps of the contribution to the total and polarized CO intensity at sub-degree scales from molecular clouds at high Galactic latitudes. The $I$, $Q$, and $U$ maps generated by the simulation are then added to the $I$, $Q$, and $U$ maps of \texttt{co2} to produce the final \texttt{co3} model. This injection introduces CO emission at scales $\lesssim1^\circ$ in regions where the CO templates have very low signal-to-noise ratio. 
 
  
 \section{Validation and Characterization of Models} \label{sec:validation}
