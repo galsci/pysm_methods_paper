@@ -248,14 +248,14 @@ To construct the modulation maps $m_i$ and $m_p$, we generally follow the method
 where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}.
 
 Given the improvements to the Planck polarization following the study of \citet{Thorne:2017} \citep[see discussion in][]{planck2016-l01}, we are able to employ $N_{\rm side} = 8$ superpixels and overlapping circular regions rather computing the modulation in $N_{\rm side} = 2$ superpixels and then smoothing with a $10^\circ$ beam. Thus, we incorporate smaller-scale information into the modulation maps than previous PySM models. 
- 
+
 \begin{figure*}
-     \centering
-     \includegraphics[width=2\columnwidth]{figures/mod_dust.png}\\
-      \includegraphics[width=2\columnwidth]{figures/mod_synch.png}\\
-     \caption{Modulation maps $m_i$ and $m_p$ for (top) dust and  (bottom) synchrotron. }
-     \label{fig:modulation_maps}
- \end{figure*}
+    \includegraphics[width=\textwidth]{figures/draft_flowchart_fig_larger_INCOMPLETE.pdf}
+    \caption{DRAFT flowchart figure}
+    \label{fig:flowchart}
+\end{figure*}
+ 
+
  
 The adopted values of $\ell_1$ and $\ell_*$ are driven both by the angular resolution and the signal-to-noise ratio of the template maps. We employ $\ell_1=100$ and $\ell_*=80$ for dust and $\ell_1=38$ and $\ell_*=36$ for synchrotron. The $\ell_2$ parameter is chosen to be high enough that dust and synchrotron emission are relatively unconstrained by current full-sky data. We adopt  $\ell_2=2000$ for dust and $\ell_2 = 400$ for synchrotron. For dust we employ a power law index of $\alpha_{tt} = -0.80$ based on the range of fit $\alpha_{TT}$ in Planck, WISE, and MegaCam data by \citet{Miville-Deschenes:2016}. We adopt $\alpha_{ee} = -0.42$, $\alpha_{te} = -0.50$, and $\alpha_{bb} = -0.54$ from fits to Planck $TT$, $TE$, and $BB$ spectra, respectively, over 71\% of the sky \citep{planck2016-l11A}. For synchrotron we adopt $\alpha_{tt} = -1.00$ and $\alpha_{te} = -1.00$ based on the observed spectra of the synchrotron template map. We adopt $\alpha_{ee} = -0.84$ and $\alpha_{bb} = -0.76$ following fits to synchrotron maps over 78\% of the sky produced with the \texttt{Commander} pipeline \citep{planck2016-l04}. The $\ell_1$, $\ell_2$, $\ell_*$, and $\alpha$ values used to construct the small-scale maps are all summarized in Table~\ref{tab:smallscale_par}.
 
