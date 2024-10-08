@@ -223,7 +223,7 @@ Our method for generating small-scale fluctuations is summarized as follows:
 
 This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
-\begin{table*}
+\begin{table}
     \centering
     \footnotesize
     \begin{tabular}{lcccccccc}
@@ -236,7 +236,7 @@ This prescription has several free parameters that require tuning. The pivot sca
     \end{tabular}
     \caption{Model parameters adopted for synthesizing small scales, where $D_{\ell}^{xy} \propto \ell^{\alpha_{xy}}$.}
     \label{tab:smallscale_par}
-\end{table*}
+\end{table}
 
 To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole. Finally, the modulation maps are constructed from the ratios:
 
@@ -245,7 +245,7 @@ To construct the modulation maps $m_i$ and $m_p$, we generally follow the method
     m_i\left(\hat{\theta} \right) &= \left(\frac{C^{tt}_{\ell_*,circ}}{C^{tt}_{\ell_*,full}}\right)^{1/2} \\
     m_p\left(\hat{\theta}\right) &= \left(\frac{C^{ee}_{\ell_*,circ}}{C^{ee}_{\ell_*,full}}\right)^{1/2}
 \end{align}
-where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}.
+where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. %The modulation maps are illustrated in Figure~\ref{fig:modulation_maps}.
 
 Given the improvements to the Planck polarization following the study of \citet{Thorne:2017} \citep[see discussion in][]{planck2016-l01}, we are able to employ $N_{\rm side} = 8$ superpixels and overlapping circular regions rather computing the modulation in $N_{\rm side} = 2$ superpixels and then smoothing with a $10^\circ$ beam. Thus, we incorporate smaller-scale information into the modulation maps than previous PySM models. 
 
