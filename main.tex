@@ -782,34 +782,6 @@ This means that the polarization fraction tensor transformation introduced non-G
 We conclude that the level of induced non-Gaussianity differs from region to region and does not significantly impact the statistical properties when averaged over large sky fractions.
 
 % BH: The commented text below has been moved, but retained here for reference + original comments
-% \subsection{Synchrotron validation} \label{sec:sync_validation}
-% \textbf{Shamik:} \giuse{\sout{In this section we detail the validation of the new synchrotron models by comparing them with BeyondPlanck synchrotron map for temperature, and LFI 30\,GHz observations for polarization.}}  We compare the model with data at both  map and power spectrum  levels. For validating the PySM synchrotron temperature models, we use the synchrotron map from the BeyondPlanck re-analysis of Planck LFI data \citep{Anderson2023}. BeyondPlanck released a synchrotron map\footnote{https://beyondplanck.science/products/files\_v1} at a reference frequency of 30\,GHz and at $2^\circ$ angular resolution. We produce single frequency temperature maps for the different synchrotron models at 30\,GHz and smoothed with a Gaussian beam with FWHM = $2^\circ$.
-
-% \giuse{In case of the synchrotron polarization, we  compare the models with band integrated observations. So, we compute bandpass integrated maps  with PySM~3 routines and for  the different synchrotron models. For the sake of fair comparison with \emph{Planck} data, we adopt the average LFI 30\,GHz RIMO transmission \citep{planck2014-a03}.} The bandpass integrated maps are further smoothed with Gaussian beams of 33.1 arcmin beams to produce model maps at native resolutions of the LFI 30 GHz data. Finally, the observed power spectra are computed by taking the cross-spectrum between independent detector splits, e.g. A and B, of the NPIPE \footnote{Publicly available through NERSC at \\ /global/cfs/cdirs/cmb/data/planck2020} (PR4) 30\,GHz maps \citep{planck2020-LVII}. 
-
-% %\subsubsection{Galactic masks}
-% \giuse{We estimated the synchrotron power spectra considering three choices of masks:  full sky  (100\%), 70\% and 50\% sky fractions. To produce the masks for the latter cases, we use the LFI 30\,GHz map of polarized intensity, smoothed with a Gaussian beam of $2^\circ$ FWHM, and masked all the pixels larger than  17 and 10 $\mu{\rm K}_{\rm CMB}$, and they are shown in Figure \ref{fig:sync_masks}.  Masks are apodized  with a $2^\circ$ cosine apodization.}
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.46\textwidth]{figures/sync_galactic_mask.png}
-%     \caption{Figure showing the two different Galactic masks used for the synchrotron validation. The yellow region is included by the 50\% sky mask, while the 70\% mask additionally includes the pink region.}
-%     \label{fig:sync_masks}
-% \end{figure}
-
-% We use HEALPix \footnote{https://healpix.sourceforge.io} \texttt{anafast} function \citep{2005ApJ...622..759G, 2019JOSS....4.1298Z}  to compute the power spectra for the model and observation maps. For the polarization analysis, both the model and the LFI maps are additionally masked with the apodized LFI DR2 polarized point source mask. 
-% For this validation test, we
-% do not use a pseudo-$C_\ell$ estimator as the synchrotron signal is not statistically isotropic, and we correct for the partial sky by naively dividing by an $f_{\rm sky}$ factor.
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.48\textwidth]{figures/Dlcomp_PySM3-4b7_s5_vs_BPnLFI30_BPI.png}
-%     \caption{Figure showing comparison of power spectra of the PySM s5 model with observation on different sky fractions. The spectra obtained for models s4, s6 and s7 are similar so we don't show them here. The $TT$ power spectrum comparison is done with synchrotron maps from BeyondPlanck release 1 \citep{Anderson2023}. The $EE$ and $BB$ power spectra is compared with NPIPE LFI 30\,GHz map \citep{planck2020-LVII}. The LFI 30\,GHz spectra are computed as a cross spectra between the NPIPE splits A and B.}
-%     \label{fig:Dl_sync_galmask}
-% \end{figure}
-
-% The $TT$, $EE$ and $BB$ power spectra comparisons, for model s5, are shown in Figure~\ref{fig:Dl_sync_galmask}. The comparison for models s4, s6 and s7 have nearly identical results. The $TT$ power spectra for masked skies show excellent agreement with the BeyondPlanck synchrotron temperature power spectra. However, there is poor agreement for the full sky power spectra. On the full sky most of the spectra is dominated by what happens in the Galactic plane, which for observational data is contaminated by free-free and AME. Even with the BeyondPlanck component separation, the synchrotron power in the brightest sky regions is likely to have some residual contamination and associated uncertainty. The new PySM synchrotron models are difficult to assess in the regions of brightest galactic synchrotron emission and we caution users against using the synchrotron models in the brightest parts of the galaxy. However, going away from the galactic plane, we find excellent agreement with observations at power spectrum level.
-% % So, it is reasonable to argue that for synchrotron temperature there is excellent agreement for all but the brightest parts of the sky, where the comparison is harder to make at 30\,GHz. 
-% For polarization we find reasonable agreement at $\ell \lesssim 100$. For $\ell > 100$ the PySM synchrotron models typically have less power than the data. However, an important caveat is that despite the point source masking, there is some residual radio point source contribution to this power in the LFI maps.
 
 % \subsubsection{Map level validation}
 % %In this section, we present a map-level validation of the PySM dust models \dnine{}, {\tt d11}, {\tt d12} models against the Planck third data release (PR3) \cite{}.
