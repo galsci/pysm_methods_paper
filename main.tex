@@ -747,65 +747,6 @@ Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \te
 This means that the polarization fraction tensor transformation introduced non-Gaussian small-scale structure, distinct from pure modulation effects, that is detectable on small sky regions. 
 We conclude that the level of induced non-Gaussianity differs from region to region and does not significantly impact the statistical properties when averaged over large sky fractions.
 
-% BH: The commented text below has been moved, but retained here for reference + original comments
-
-% \subsubsection{Map level validation}
-% %In this section, we present a map-level validation of the PySM dust models \dnine{}, {\tt d11}, {\tt d12} models against the Planck third data release (PR3) \cite{}.
-% \textbf{Elisa}: In this section, we compare at the map level, Planck third data release PR3 \cite{planck2016-l03}) and PySM dust models \dnine{}, {\tt d11}, {\tt d12} models. We study how well the modeled intensity $I$ and polarized intensity $P = \sqrt{U^2 + Q^2}$ match the observations on three selected $16.7^\circ \times 16.7^\circ$ patches of the sky, at 353~GHz. Here, we focus on two local patches: close to the Galactic plane ($[l,b] =[180^\circ,-10^\circ]$) and, centered on the Bicep / Keck field ($[l,b] =[318^\circ,-61^\circ]$).
-% Similar to Section~\ref{sec:sync_validation}, we integrate the dust models within the Planck passbands to enable direct comparison. For comparison of intensity maps, we subtract a Wiener-filtered CMB temperature anisotropies map from SMICA and adjust the zero level of the PR3 data to that of the simulated map over regions of faint dust intensity on the sky.
-% The mask used to adjust the zero levels is shown in figure \ref{fig:mask_zero_lvl_int}. These corrections are not required for comparing polarization data.
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.48\textwidth]{figures/mask_intxPR3_zero_lvl.png}
-%     \caption{Mask $\times$ PR3 intensity used to estimate the zero level of PR3 intensity. This mask is obtained by thresholding the intensity of the smoothed PR3 intensity to preserve only the regions where the dust is very low, to estimate the zero-level of the data and models.}%more details
-%     \label{fig:mask_zero_lvl_int}
-% \end{figure}
-
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.48\textwidth]{figures/gal_plane_non_smooth_wo_zero_lvl.png}
-% \caption{Dust intensity at 353GHz at [l = 180, b = -10] with an angular resolution of 4.94': (a) PR3 (b) d9 (c) d11 (d) d12}    
-% \label{fig:353_int_gal_plane}
-% \end{figure}
-% % \begin{figure}
-% %     \centering
-% %     \includegraphics[scale = 0.6]{figures/NGP_non_smooth_wo_zero_lvl.png}
-% %     \caption{Dust intensity at 353GHz centered at [l = 0, b = 90]: (a) PR3 (b) d9 (c) d11 (d) d12}
-% %     \label{fig:353_int_NP}
-% % \end{figure}
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.48\textwidth]{figures/BK_non_smooth_wo_zero_lvl.png}
-%     \caption{Dust intensity at 353GHz at [l = 318, b = -61] with an angular resolution of $4.94\arcmin$: (a) PR3 (b) d9 (c) d11 (d) d12. Here, PR3 is contaminated by CIB and extragalactic sources.}
-%     \label{fig:353_int_BK}
-% \end{figure}
-
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.48\textwidth]{figures/pol_gal_plane_smooth_30'.png}
-%     \caption{Polarized dust intensity at 353GHz centered at [l = 180, b = -10] with an angular resolution of 4.94', smoothed to 30 arcmin: (a) PR3 (b) d9 (c) d11 (d) d12.}
-%     \label{fig:353_pol_int_gal_plane}
-% \end{figure}
-% % \begin{figure}
-% %     \centering
-% %     \includegraphics[scale = 0.6]{figures/pol_NGP_smooth_30'.png}
-% %     \caption{Polarized dust intensity at 353GHz centered at [l = 0, b = 90].}
-% %     \label{fig:353_pol_int_NGP}
-% % \end{figure}
-
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.48\textwidth]{figures/pol_BK_smooth_30'.png}
-%     \caption{Polarized dust intensity at 353GHz centered at [l = 318, b = -61] with an angular resolution of 4.94', smoothed to 30 arcmin: (a) PR3 (b) d9 (c) d11 (d) d12.}
-%     \label{fig:353_pol_int_BK}
-% \end{figure}
-
-% Intensity and polarization at 353~GHz are displayed in Figures~\ref{fig:353_int_gal_plane} to \ref{fig:353_pol_int_BK}. Varying choices for filtering the real data and generation of random small scales result in varying dust emission properties. For Intensity, d9 and d11 are very similar, with a loss of real structures, replaced by random realizations up to a scale of $l_{max} = 16384$, while d12 is more similar to the actual data. 
-% Around the Bicep / Keck patch center (Figure~\ref{fig:353_int_BK}), the PR3 data is contaminated by the CIB, which masks out dust emission. 
-
-% For the polarized intensity, close to the Galactic plane (Figure \ref{fig:353_pol_int_gal_plane}), we see a resemblance between the data and the three models. In the North and South poles, noise dominates in PR3 without smoothing, so the comparison is made at a resolution of $30\arcmin$. Overall, the agreement seems adequate between the models and the data considering the current level of uncertainties. 
-% %After smoothing with a Gaussian beam of 30 arcmin, we discern dust structures.
-
 \section{Future Outlook} \label{sec:discussion}
 
 The Galactic emission models presented in this work are created from the latest data from large-area surveys like Planck, and informed by the latest literature constraints on the spectral behavior of Galactic emission components. These models incorporate some of the expected complexity of polarized emission at scales that are not yet well-constrained by data -- in particular, the non-Gaussianity of interstellar emission structure. While this represents a step forward in the realism of these models over previous all-sky Galactic emission models, there are a number of idealizations that could be improved in future work. 
@@ -846,11 +787,6 @@ In addition to the small-scale structure of the diffuse dust and synchrotron emi
 
 The models available for each emission component can be used in various combinations to form a number of unique Galactic sky models. While every user has this combinatoric freedom, we also prescribe a suite of recommended model sets. Our goal is to facilitate analyses that use a common set of assumptions. Community-wide use of this suite of Galactic emission model sets will enable easier comparisons between scientific forecasts for various experimental designs. Further, this will enable exploration of synergies between multiple experiments---for example, optimizing joint analyses of data from multiple telescopes.
 
-% BH: Not convinced we should be calling out specific experiments here
-%for example analyzing CMB-S4 data together with that of the precursor South Pole and/or Simons Observatories, or using CMB-S4 high resolution data to help delens LiteBIRD and LiteBIRD high frequency data to help remove dust from CMB-S4.
-
-%For example, these model sets can be used to explore the use of CMB-S4 high-resolution data to help delens LiteBIRD data, and LiteBIRD high-frequency data to help separate the dust foreground from CMB-S4 data.
-
 Table~\ref{tab:modelsuite} details three model sets, representing increasing levels of complexity. The low complexity model set is highly idealized. Because this model implements synchrotron and dust variability in amplitude alone and not in their spectral parameters, these components exhibit no frequency decorrelation. The medium complexity model set includes Galactic emission properties that are expected physically, like sky-variable spectral parameters for the dust and synchrotron, extrapolated to small scales. The high complexity model set models Galactic emission properties that are physically realistic but as-yet undetected, like polarized AME and spatially varying synchrotron curvature. The high complexity model set uses the layer model for Galactic dust emission (Section~\ref{sec:layers}) and thus features line-of-sight frequency decorrelation, and the degree-scale decorrelation at frequencies dominated by the dust emission is near the maximum allowed by current constraints (Figure~\ref{fig:decorrelation}).
 
 These model sets have already been executed for four experiments using the most recent bandpasses and beam models for each experiment: CMB-S4, LiteBIRD, Simons Observatory, and South Pole Telescope 3G. The results of these simulations and their documentation are publicly available in the CMB-S4 Data Portal at \url{https://data.cmb-s4.org}. The data products can be downloaded individually via direct HTTPS access as FITS files with no need of authentication, or they can be downloaded in batch mode using Globus to a Supercomputer or another Globus Endpoint.
@@ -863,11 +799,13 @@ This work presents new models of Galactic emission in total intensity and polari
 
 \begin{enumerate}
     \item We develop new models of small-scale, non-Gaussian Galactic emission structure. We combine realizations of this small-scale synthetic emission with the latest component-separated Galactic emission data. We similarly extrapolate spectral parameters... The result is a set of all-sky models for   % BH: Call out polfrac
-    \item Other models implemented...
-    %\item We demonstrate that the power spectra of our models broadly agree with data from Planck over large sky areas. % BH: What is the important thing to say here?
-    \item Summary of BK validation.
+    \item Other models implemented... (MKD and CO)
+    \item Improve agreement overall with data relative to previous PySM dust and synchrotron models. (We demonstrate that the power spectra of our models broadly agree with data from Planck over large sky areas.) In particular, Figure 6: improvement over previous PySM models in small patch BB power and ell-dependence
+    \item CIB contamination
+    \item We quantify the departure from non-Gaussianity of the small-scale structure introduced by the polarization fraction tensor framework. Probably something on non-Gaussianity: The polarization fraction tensor framework is 
     \item We quantify the frequency decorrelation with the decorrelation parameter $\mathcal{R}_\ell$ (Equation~\eqref{eq:R_ell}). While all models are consistent with Planck constraints on decorrelation between 217 and 353\,GHz, they span a large range of decorrelation level and have distinct frequency dependence of $R_\ell$.
-    \item Probably something on non-Gaussianity
+    \item Model suite
+    \item PySM3+files/data availability (or move to final paragraph)
     
 \end{enumerate}
 
