@@ -297,6 +297,8 @@ To produce dust emission templates at a monochromatic frequency of 353\,GHz, we 
 \subsubsection{Synchrotron Amplitude}
 Deriving a full-sky template for synchrotron emission in total intensity is challenging both for the paucity of low frequency surveys with full sky coverage and the difficulty in disentangling synchrotron emission from free-free emission and AME at frequencies above $\sim$10\,GHz. We follow \citet{Thorne:2017} in basing our template on the Haslam 408\,MHz survey \citep{Haslam:1982} and in particular the reprocessing of the original maps by \citet{Remazeilles:2015}. We rescale the 408\,MHz map to 23\,GHz assuming a sky-constant scaling of the brightness temperature with $\nu^{-3.1}$. Finally, we smooth the resulting map with a $2^\circ$ Gaussian beam.
 
+A key limitation of the current synchrotron templates is that, despite the point source masking, we still find excess power from Galactic point sources at low Galactic latitudes near the Galactic center. We find that our models are unaffected by this issue at $\ell \lesssim 3000$ and outside the Galactic plane. Addressing small scale structures in bright regions will be deferred to a future release.
+
 Constructing a synchrotron template in polarization is somewhat easier than total intensity because both free-free emission and AME have very low levels of polarization. Thus, we directly employ the WMAP K-band (23\,GHz) $Q$ and $U$ maps\footnote{\url{https://lambda.gsfc.nasa.gov/data/map/dr5/skymaps/9yr/raw/wmap_band_iqumap_r9_9yr_K_v5.fits}} from Data Release~5 directly as our templates. As with the $I$ map, we smooth the $Q$ and $U$ templates with a $2^\circ$ Gaussian beam.
 
 \subsection{Small Scale Fluctuations in Spectral Parameters} \label{sec:spec_params}
@@ -351,7 +353,7 @@ The new dust and synchrotron models implemented here all improve on previous mod
 \section{Other Models Implemented} \label{sec:other_models}
 
 \subsection{Dust Layer Model} \label{sec:layers}
-Evidence for variation of Galactic foreground emission laws as a function of frequency across the sky implies that emission laws must also vary along the line of sight \citep[e.g.,][]{Krachmalnicoff:2018, SPIDERCollaboration:2024}. As a consequence, even if dust emission can be described locally by a modified blackbody (Equation~\ref{eq:dust-emission-law}), a superposition of emission regions (i.e., an integral along the line of sight) is not a modified blackbody. In addition, if along the line of sight different line elements emit polarized radiation with different polarization angles, the frequency scaling can vary between $I$, $Q$ and $U$ \citep{Tassis:2015}. Evidence for this ``line-of-sight frequency decorrelation'' has been found in Planck data \citep{Pelgrims:2021}.
+Evidence for variation of Galactic foreground emission laws as a function of frequency across the sky \citep[e.g.,][]{Krachmalnicoff:2018, SPIDERCollaboration:2024} implies that emission laws must also vary along the line of sight. As a consequence, even if dust emission can be described locally by a modified blackbody (Equation~\ref{eq:dust-emission-law}), a superposition of emission regions (i.e., an integral along the line of sight) is not a modified blackbody. In addition, if along the line of sight different line elements emit polarized radiation with different polarization angles, the frequency scaling can vary between $I$, $Q$ and $U$ \citep{Tassis:2015}. Evidence for this ``line-of-sight frequency decorrelation'' has been found in Planck data \citep{Pelgrims:2021}.
 
 To model the complexity of multiple layers of dust along the line of sight, we base our PySM~3 implementation \texttt{d12} on the approach of \cite{Martinez-Solaeche:2018} in the PSM software\footnote{See version 2.3.3 \url{https://apc.u-paris.fr/~delabrou/PSM/psm.html}.}. 
 
@@ -378,7 +380,7 @@ In this model, maps of spectral parameters ($\beta_d$ and $T_d$) are randomly ge
 \subsection{CO Models} \label{subsec:co_models}
 Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ transitions have been detected even in the broad photometric Planck bands \citep{planck2013-p03a, planck2014-a12}. CO emission can be polarized \citep{Goldreich:1981} and so is a relevant foreground for CMB polarization analyses \citep{Puglisi:2017}. In this section, we describe the implementation of three CO models into the PySM~3 framework.
 
-Because of the intrinsically low degree of CO polarization and the long integration time required to achieve a significant detection, it is difficult to carry out CO polarization surveys and wide area measurements have not yet been made. In the absence of data-based templates, the approach to modeling CO has been to assume a small degree of polarization applied to total intensity maps. For instance, \citet{Puglisi:2017} presented a model to simulate the polarized emission of CO lines in molecular clouds at high Galactic latitudes by considering the 3D spatial distribution of CO in the Galaxy. %Given the lack of observational constraints, the model assumed a strong correlation between the CO polarization and the polarized galactic dust emission to forecast the amplitude of CO polarized emission.
+Because of the intrinsically low degree of CO polarization and the long integration time required to achieve a significant detection, it is difficult to carry out CO polarization surveys and wide area measurements have not yet been made. In the absence of data-based templates, the approach to modeling CO has been to assume a small degree of polarization applied to total intensity maps. For instance, \citet{Puglisi:2017} presented a model to simulate the polarized emission of CO lines in molecular clouds at high Galactic latitudes by considering the 3D spatial distribution of CO in the Galaxy.
 
 All CO models implemented here are based on the CO $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ \texttt{Type-1} intensity maps\footnote{\url{HFI_CompMap_CO-Type1_2048_R2.00.fits}} derived by \citet{planck2013-p03a} from Planck data. The CO maps are obtained exploiting the mismatches in the detector bandpasses to recover the CO from the CMB and the other Galactic foregrounds using the Modified Internal Linear Combination Algorithm (\texttt{MILCA}). The templates produced from this analysis are preferred to direct measurements from existing spectroscopic surveys \citep[e.g.,][]{Dame:2001} because they are not limited to low Galactic latitudes and have a uniform angular resolution over the sky.
 
@@ -401,52 +403,9 @@ Since the \texttt{d10} model is one particular realization of the stochastic mod
 
 \subsection{Maps}\label{subsec:maps}
 
-%PySM models are based on noisy observations of Galactic foreground amplitude maps, complemented in some cases by randomly generated small-scale features (sec.~\ref{sec:small_scales} and \ref{sec:layers}). Maps of frequency scaling parameters also comprise randomly generated fluctuations, the generation of which is different for the various models. 
+We provide several map-level comparisons between PySM dust models and observations. Specifically, we compare data from the Planck third data release PR3 \cite{planck2016-l03} and PySM dust models \texttt{d1} (which was widely used as a reference in previous versions of the PySM, and is described in \cite{Thorne:2017}), {\tt d9} (which is similar to \texttt{d1}, but uses different input templates and includes small scale fluctuations of template maps and spectral parameters, as described in Sec.~\ref{sec:small_scales}), and {\tt d12}, which is conceptually quite different from the other two models. The goal is to provide a qualitative comparison of the spatial characteristics of the models at small scales. We select $16.7^\circ \times 16.7^\circ$ patches of the sky, and compare the data and models at 353~GHz in both total and polarized intensity. We focus on two patches, one close to the Galactic plane with $(l,b) =(180^\circ,-10^\circ)$, and the second centered on the BICEP/Keck field at $(l,b) =(318^\circ,-61^\circ)$. 
 
-%It is important to check to which extent model maps match with observations in the frequency range of interest. 
-%In this first step of validation of the PySM foreground models, 
-%We compare our models to actual observations in the frequency range of interest for the different foreground models considered here. %\textcolor{red}{[What frequencies do we want to cover? I suggest at least 23~GHz--353~GHz, but this does not fully cover the frequency range of CMB-S4 and LiteBIRD]}
-% Jacques
-
-We provide several map-level comparisons between PySM dust models and observations. 
-Specifically, we compare data from the Planck third data release PR3 \cite{planck2016-l03} and PySM dust models \texttt{d1} (which was widely used as a reference in previous versions of the PySM, and is described in \cite{Thorne:2017}), {\tt d9} (which is similar to \texttt{d1}, but uses different input templates and includes small scale fluctuations of template maps and spectral parameters, as described in Sec.~\ref{sec:small_scales}), and {\tt d12}, which is conceptually quite different from the other two models. The goal is to provide a qualitative comparison of the spatial characteristics of the models at small scales. We select $16.7^\circ \times 16.7^\circ$ patches of the sky, and compare the data and models at 353~GHz in both total and polarized intensity. We focus on two patches, one close to the Galactic plane with $(l,b) =(180^\circ,-10^\circ)$, and the second centered on the BICEP/Keck field at $(l,b) =(318^\circ,-61^\circ)$. 
-%In this comparison, we want to compare the PySM models that don't include randomly generated small-scales (d1 and d12) \textcolor{red}{[JD: this is not correct, d12 at least contains randomly generated small scales]} with models that include them (d9). 
-%As \texttt{d9} has random fluctuations generated as described in section \ref{sec:small_scales}, we expect that we do not recover as well the small scales in data as for the d12 model \ref{sec:layers}. %discuss what we expect for d1
-%We study how the modeled intensity $I$ and polarized intensity $P = \sqrt{U^2 + Q^2}$ compare to the observations on selected $16.7^\circ \times 16.7^\circ$ patches of the sky, at 353~GHz. We focus on two patches, one close to the Galactic plane ($[l,b] =[180^\circ,-10^\circ]$) and the second centered on the Bicep/Keck field ($[l,b] =[318^\circ,-61^\circ]$).
-We integrate the dust models in the Planck passband \citep{planck2013-p03d}.\footnote{\url{http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_RIMO_R3.00.fits}} For the comparison between total intensity maps, we subtract a Wiener-filtered CMB temperature anisotropy map from SMICA.
-%and also adjust (setting to zero) the zero level of the PR3 data and the simulated maps over a small region of very low dust emission, totaling a sky fraction of 2.5\%.
-%to that of the simulated map over regions of faint dust intensity on the sky.
-% This readjustment is slightly different for the three dust models and the data considered (i.e., the zero level is not exactly the same in all the maps). 
-%We compute the mean of the intensity in the regions considered for the three dust models and data and then subtract this quantity from the dust intensity of each model and data.
-% The mask used to adjust the zero levels is shown in Figure~\ref{fig:mask_zero_lvl_int}. 
-% These corrections are not required for comparing polarization data. 
-%PR3: 13.97uKcmb
-%d9: 14.46uKcmb
-%d11: 14.59uKcmb
-%d12: 6.41uKcmb
-%note: JD - there is considerable uncertainty on the zero level of the maps (if I got my calculations right, the CIB monopole at 353GHz is of the order of 300uKcmb, and is not known with 5% accuracy -- the difference between models based on FIRAS is more like 10-20%)
-
-
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.44\textwidth]{figures/mask_intxPR3_zero_lvl.png}
-%     \caption{Mask $\times$ PR3 intensity used to estimate the zero level of PR3 intensity. This mask is obtained by thresholding the intensity of the smoothed PR3 intensity to preserve only the regions where the dust is very low, to estimate the zero-level of the data and models.}
-%     \label{fig:mask_zero_lvl_int}
-% \end{figure}
-
-% \begin{figure}
-%     \centering
-%     \begin{minipage}[c]{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=0.45\textwidth]{figures/gal_plane_non_smooth_wo_zero_lvl.png} % first figure itself
-%         \caption{Dust intensity at 353GHz at [l = 180, b = -10] with an angular resolution of $4.94\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12.}
-%     \end{minipage}\hfill
-%     \begin{minipage}[c]{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=0.45\textwidth]{figures/BK_smooth_30'_wo_zero_lvl.png} % second figure itself
-%         \caption{Dust intensity at 353GHz at [l = 318, b = -61] with an angular resolution of $30\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12. Here, PR3 is contaminated by CIB and extragalactic sources.}
-%     \end{minipage}
-% \end{figure}
+We integrate the dust models in the Planck passband \citep{planck2013-p03d}. For the comparison between total intensity maps, we subtract a Wiener-filtered CMB temperature anisotropy map from SMICA.
 
 \begin{figure*}[t!]
     \centering
@@ -455,18 +414,6 @@ We integrate the dust models in the Planck passband \citep{planck2013-p03d}.\foo
 \caption{Dust intensity at 353GHz at [l = 180, b = -10] (left) and [l = 318, b = -61] (right) with an angular resolution of $4.94\arcmin$.}    
 \label{fig:353_int}
 \end{figure*}
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale = 0.6]{figures/NGP_non_smooth_wo_zero_lvl.png}
-%     \caption{Dust intensity at 353GHz centered at [l = 0, b = 90]: (a) PR3 (b) d9 (c) d11 (d) d12}
-%     \label{fig:353_int_NP}
-% \end{figure}
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{figures/BK_smooth_30'_wo_zero_lvl.png}
-%     \caption{Dust intensity at 353GHz at [l = 318, b = -61] with an angular resolution of $30\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12. Here, PR3 is contaminated by CIB and extragalactic sources.}
-%     \label{fig:353_int_BK}
-% \end{figure}
 
 \begin{figure*}[t!]
     \centering
@@ -475,35 +422,13 @@ We integrate the dust models in the Planck passband \citep{planck2013-p03d}.\foo
     \caption{Polarized dust intensity at 353GHz centered at [l = 180, b = -10] (left) and [l = 318, b = -61] (right), smoothed to $30\arcmin$.}
     \label{fig:353_pol_int}
 \end{figure*}
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale = 0.6]{figures/pol_NGP_smooth_30'.png}
-%     \caption{Polarized dust intensity at 353GHz centered at [l = 0, b = 90].}
-%     \label{fig:353_pol_int_NGP}
-% \end{figure}
-
-% \begin{figure}[ht!]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{figures/pol_BK_smooth_30'.png}
-%     \caption{Polarized dust intensity at 353GHz centered at [l = 318, b = -61], smoothed to $30\arcmin$: (a) PR3 (b) d1 (c) d9 (d) d12.}
-%     \label{fig:353_pol_int_BK}
-% \end{figure}
 
 Intensity and polarization at 353~GHz are displayed in Figures~\ref{fig:353_int} and \ref{fig:353_pol_int}. 
-%Varying choices for filtering the real data and generation of random small scales result in varying dust emission properties. 
-%Jacques
 In intensity, model {\tt d9} filters more of the real data and generates more random small-scale structures than models {\tt d1} and {\tt d12}. We can visually appreciate the impact of this choice in the left panel of Figure~\ref{fig:353_int}, near the Galactic plane. 
-%At high Galactic latitudes (right panel of Fig.~\ref{fig:353_int}), the PR3 observations are visibly contaminated by CIB fluctuations, which also contaminate model {\tt d1}. For model {\tt d9}, these CIB fluctuations are replaced by randomly generated small scales. Model {\tt d12}, which uses a $5\arcmin$ GNILC intensity map, as described in sec. \ref{sec:layers}, preserves more of the real dust structures, while filtering much of the CIB contamination.
-Note that the color scale is different for several of the models in the right panel of Fig.~\ref{fig:353_int}. This is because the models have different zero points, mainly due to uncertainty in the CIB monopole. For the generation of model {\tt d12}, a monopole of 0.09~MJy/sr is subtracted from the DR2 GNILC intensity map. 
-In the case of model {\tt d1}, it is due to the difference in the CIB monopole between PR3 and PR2 products, as model {\tt d1} is based on PR2 data. 
-%As expected, in intensity, we see that d12 is more similar to the actual data in Figure~\ref{fig:353_int} than d9 that has random small-scale generation up to larger scales. We can visually appreciate the impact of different prescriptions for adding small scales in intensity, with more small-scale structures in model d9. 
 
-In Figure~\ref{fig:353_pol_int}, we compare the observations and models for polarized intensity at a resolution of $30\arcmin$, to reduce the effects of instrumental noise in the PR3 data. 
-%since the PR3 data are contaminated by instrumental noise. 
-%In total intensity, d9 and d11 are very similar (with small differences due to the fact that different seeds are used to generate small-scale structures). Real structures are replaced by random realizations as described in section \ref{sec:small_scales}, while for intensity d12 is more similar to the actual data by construction at small scales, and more filamentary. 
-% Around the BICEP/Keck patch center (Figure~\ref{fig:353_int_BK}), the PR3 data are contaminated by the CIB, which masks out dust emission. 
-For both of the regions -- close to the Galactic plane and in the center of the Bicep/Keck patch -- all three models are in reasonable visual agreement with the observations. 
-%After smoothing with a Gaussian beam of 30 arcmin, we discern dust structures.
+Note that the color scale is different for several of the models in the right panel of Fig.~\ref{fig:353_int}. This is because the models have different zero points, mainly due to uncertainty in the CIB monopole. For the generation of model {\tt d12}, a monopole of 0.09~MJy/sr is subtracted from the DR2 GNILC intensity map. In the case of model {\tt d1}, it is due to the difference in the CIB monopole between PR2 and PR3 products, as model {\tt d1} is based on PR2 data.
+
+In Figure~\ref{fig:353_pol_int}, we compare the observations and models for polarized intensity at a resolution of $30\arcmin$, to reduce the effects of instrumental noise in the PR3 data. For both of the regions --- close to the Galactic plane and in the center of the Bicep/Keck patch --- all three models are in reasonable visual agreement with the observations. 
 
 \subsection{Power spectra}
 \label{sec:PS-validation}
@@ -574,7 +499,7 @@ In this section, we detail the validation of the new synchrotron models by compa
     \label{fig:sync_masks}
 \end{figure}
 
-We have purposely chosen an earlier release of BeyondPlanck for our analysis. Later data release versions of BeyondPlanck, or its successor CosmoGlobe, produce synchrotron intensity maps at 408~MHz~\citep{Watts:2023}. The PySM synchrotron models \texttt{s5} and \texttt{s7} are not suitable for producing synchrotron simulations at 408\,MHz. This is a consequence of scaling the Haslam map from 408\,MHz to 30\,GHz for constructing the template for synchrotron intensity. When this template is rescaled to 408\,MHz, with scaling that varies over the the sky, the model fails. We do not recommend use of the \texttt{s5} and \texttt{s7} models below 1\,GHz. Therefore, we validate our models with the synchrotron intensity map at 30\,GHz.
+We have purposely chosen an earlier release of BeyondPlanck for our analysis. Later data release versions of BeyondPlanck, or its successor CosmoGlobe, produce synchrotron intensity maps at 408~MHz~\citep{Watts:2023}. The PySM synchrotron models \texttt{s5} and \texttt{s7} are not suitable for producing synchrotron simulations at 408\,MHz. This is a consequence of scaling the Haslam map from 408\,MHz to 30\,GHz for constructing the template for synchrotron intensity. When this template is rescaled to 408\,MHz, with scaling that varies over the the sky, the model fails. Therefore, we validate our models with the synchrotron intensity map at 30\,GHz.
 
 For synchrotron polarization validation, we compare the models with Planck Revisited synchrotron polarization maps\footnote{\url{https://portal.nersc.gov/project/cmb/Planck\_Revisited}} \citep{Delabrouille:2024}. These are the lowest-noise full sky maps of polarized synchrotron at 30\,GHz at $1^\circ$ resolution at the time of analysis. 
 
@@ -592,9 +517,6 @@ For the polarization analysis, we further apply the Planck Revisited point sourc
 In Figure~\ref{fig:Dl_sync_galmask} we present $TT$, $EE$ and $BB$ power spectra comparisons for models \texttt{s1} and \texttt{s5}. Since models \texttt{s4}, \texttt{s6} and \texttt{s7} yield nearly identical results, we display only the results for model \texttt{s5}. The $TT$ power spectra across all sky fractions for both models show excellent agreement with the BeyondPlanck synchrotron temperature power spectra. For the $EE$ power spectra, model \texttt{s5} demonstrates good agreement in the multipole range where signal-to-noise is $\gtrsim 1$ for the Planck Revisited polarized synchrotron power spectra. In contrast, model \texttt{s1} exhibits higher power for most multipoles compared to the Planck Revisited $EE$-synchrotron spectrum for the 80\% and 60\% sky fractions, although they align well for the 40\% and 20\% sky fractions. We also observe a distinct change in the shape of the $EE$ power spectrum for the \texttt{s1} model around the injection scale, $\ell_*\sim 36$ \citep{Thorne:2017}. The improved performance for model \texttt{s5} comes from the empirical optimization of the filters in Equation~\eqref{eq:filter}. Both models have higher $BB$ power for 80\% and 60\% sky fractions, but model \texttt{s1} shows better agreement with observations for smaller sky fractions.
 
 For $\ell \sim 200$, we find a bump in spectrum for the Planck Revisited observations. This is likely caused by our inability to perform noise debiasing where the signal-to-noise ratio is low. However, the combined effect of residual point sources and incorrect masking choices may also contribute to the residual bias. Based on the current results, we conclude that while our synchrotron models are validated for $\ell \lesssim 300$ for intensity, they are only consistent with observations up to $\ell \lesssim 100$ in polarization due to limited signal-to-noise of the polarized synchrotron data at smaller scales.
-
-%An important caveat of the current synchrotron templates is that despite the point source masking, we find excess power due to Galactic point sources at low  Galactic  latitudes around the Galactic center. Thus, we conclude that the \texttt{s4}, \texttt{s5}, \texttt{s6} and \texttt{s7} models are reliable at $\ell \lesssim 3000$ and outside the Galactic plane. We devote to a future release the treatment of small scale structure in bright regions.
-A key limitation of the current synchrotron templates is that, despite the point source masking, we still find excess power from Galactic point sources at low Galactic latitudes near the Galactic center. Therefore, we can only confirm that the \texttt{s4}, \texttt{s5}, \texttt{s6} and \texttt{s7} models remains unaffected by this impact at $\ell \lesssim 3000$ and outside the Galactic plane. Addressing small scale structures in bright regions will be devoted to a future release. 
 
 \subsubsection{Dust and Synchrotron Emission in the BICEP/Keck Patch}
 \label{sec:BK_validation}
@@ -692,18 +614,13 @@ Following a procedure similar to \citet{Chiang:2019}, we compute the cross-corre
 
 We perform the same cross-correlation analysis to quantify the extragalactic contamination in the $\beta_d$ maps. We find, as expected, higher extragalactic contamination in the \texttt{d1} $\beta_d$ map than in the \texttt{d10} $\beta_d$ map. We emphasize that the mitigation of CIB contamination in the GNILC-processed Planck data affects both the spatial structure of the template frequency maps \textit{and} their extrapolation to other frequencies via the spectral parameter maps. 
 
-
-
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 
 We quantify the level of non-Gaussianity in the small-scale dust emission generated through the polarization fraction tensor transformation using the simulations from dust model \texttt{d10} at 353 GHz (which is identical to the \texttt{d9} dust at that frequency). To measure the non-Gaussianity in the maps we consider the Minkowski Functionals \citep[MFs,][]{Minkowski1903}, which are a common tool to quantify map-space higher order statistical properties \citep{Martire:2023, Carones:2024}. 
 Hadwiger’s theorem \citep{hadwigerVorlesungenUeberInhalt1957}
 implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set. In our case, for two-dimensional maps, we have three kinds of MFs. These are $\mathcal{V}_0$, $\mathcal{V}_1$, and $\mathcal{V}_2$, which correspond to the area, the perimeter and the connectivity of the excursion set (iso-intensity contour), respectively.
 
-We use these MFs to compare the small-scale structure in \texttt{d10} to those of two other sets of maps: (i) maps where the small-scale structures are fully Gaussian and isotropic and (ii) maps where the small-scale structures are Gaussian but anisotropic across the sky. As described Section \ref{subsec:methodology}, the small scale structures in the \texttt{d10} model are generated as a Gaussian random field in $i$, $q$, and $u$, and are multiplied by $m_i$ and $m_p$ modulation maps before they are coadded to the large-scale maps and transformed back into $I$, $Q$ and $U$. %This procedure leads to an effective modulation of small scale structures on $I/Q/U$ maps. 
-We want to understand the impact of this effective modulation on the MFs, and therefore construct a set of maps that are modulated versions of Gaussian-random-field maps. 
-%which only takes into account this modulation applied to a Gaussian field directly on Stokes parameter maps, without any transformation into polarization fraction tensor analogues. 
-This allows us to disentangle any non-Gaussianity generated through the modulation from the potential non-Gaussianity introduced due to the polarization fraction tensor transformation.
+We use these MFs to compare the small-scale structure in \texttt{d10} to those of two other sets of maps: (i) maps where the small-scale structures are fully Gaussian and isotropic and (ii) maps where the small-scale structures are Gaussian but anisotropic across the sky. As described Section \ref{subsec:methodology}, the small scale structures in the \texttt{d10} model are generated as a Gaussian random field in $i$, $q$, and $u$, and are multiplied by $m_i$ and $m_p$ modulation maps before they are coadded to the large-scale maps and transformed back into $I$, $Q$ and $U$. We want to understand the impact of this effective modulation on the MFs, and therefore construct a set of maps that are modulated versions of Gaussian-random-field maps. This allows us to disentangle any non-Gaussianity generated through the modulation from the potential non-Gaussianity introduced due to the polarization fraction tensor transformation.
 
 The first set of maps contains isotropic small-scale structure. We construct the small-scale structure by generating a Gaussian random field with power-law power spectra in $TT$, $EE$, and $BB$, using power laws fit to the power spectrum of the \texttt{d10} maps on the \texttt{GAL097} mask in the multipole range $[800, 2000]$. This Gaussian random field is then high-pass filtered to remove power below $\ell_{cut} = 200$ in both total intensity and polarization, and co-added to the large-scale dust template.
 
@@ -743,9 +660,7 @@ Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the 
 \subsubsection{Minkowski Functionals on small regions}
 We consider a $20^{\circ}\times20^{\circ}$ region centered at $(l, b) = (-15^{\circ}$, $45^{\circ})$ to determine whether significant differences in the MFs between \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} sets of maps exist in small regions of sky. Those maps are shown in Figure~\ref{fig:maps:patch2}. We can see by eye that \texttt{poltens-ss} contains structure that is not present in the \texttt{Gaussian-mod-ss} maps. We calculate the MFs of these small-scale maps, following \cite{Mantz:2008} for the calculation of MFs for a square patch. Before the calculation, we also rescale all the small scales linearly to be in the range [-1, 1], using the $minmax$ scheme.
 
-Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} maps presented in Figure~\ref{fig:maps:patch2}. In contrast with the large-area results presented in Figure~\ref{fig:MF:sphere}, in this case we do measure a departure of the \texttt{poltens-ss} MFs from the \texttt{Gaussian-mod-ss} ones. %This points towards the fact that the polarization fraction tensor transformation may indeed have induced some level of non-Gaussianity, distinct from pure modulation effects, that are detectable on small sky regions. 
-This means that the polarization fraction tensor transformation introduced non-Gaussian small-scale structure, distinct from pure modulation effects, that is detectable on small sky regions. 
-We conclude that the level of induced non-Gaussianity differs from region to region and does not significantly impact the statistical properties when averaged over large sky fractions.
+Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} maps presented in Figure~\ref{fig:maps:patch2}. In contrast with the large-area results presented in Figure~\ref{fig:MF:sphere}, in this case we do measure a departure of the \texttt{poltens-ss} MFs from the \texttt{Gaussian-mod-ss} ones. This means that the polarization fraction tensor transformation introduced non-Gaussian small-scale structure, distinct from pure modulation effects, that is detectable on small sky regions. We conclude that the level of induced non-Gaussianity differs from region to region and does not significantly impact the statistical properties when averaged over large sky fractions.
 
 \section{Future Outlook} \label{sec:discussion}
 
