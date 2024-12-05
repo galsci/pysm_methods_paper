@@ -710,14 +710,17 @@ All component models implemented in these suites are intended to be realistic ov
 
 \section{Summary and Conclusions} \label{sec:summary}
 
-This work presents new models of Galactic emission in total intensity and polarization at frequencies relevant to CMB experiments. The models represent a data-driven understanding of the processes that dominate interstellar emission at these frequencies. We characterize various properties of the models in order to compare them with each other and, where possible, validate them against observational constraints. We summarize the key conclusions of this work as follows:
+This work presents new models of Galactic emission in total intensity and polarization at frequencies relevant to CMB experiments ($\sim$1--1000\,GHz). The key conclusions of this work as follows:
+
+%The models represent a data-driven understanding of the processes that dominate interstellar emission at these frequencies. We characterize various properties of the models in order to compare them with each other and, where possible, validate them against observational constraints.
 
 \begin{enumerate}
-    \item We develop new models of small-scale, non-Gaussian Galactic emission structure. We combine realizations of this small-scale synthetic emission with the latest component-separated Galactic emission data. We similarly extrapolate spectral parameters... The result is a set of all-sky models for   % BH: Call out polfrac
-    \item Other models implemented... (MKD and CO)
-    \item Improve agreement overall with data relative to previous PySM dust and synchrotron models. (We demonstrate that the power spectra of our models broadly agree with data from Planck over large sky areas.) In particular, Figure 6: improvement over previous PySM models in small patch BB power and ell-dependence
+    \item We develop new models of small-scale, non-Gaussian Galactic dust and synchrotron emission based on the polarization fraction tensor framework. We combine realizations of this small-scale synthetic emission with well-measured large scales to produce maps with realistic levels of fluctuations at all angular scales, including in maps of spectral parameters (see Figure~\ref{fig:flowchart} for a schematic). The result is a set of all-sky models of dust and synchrotron emission that agree with observational data at large scales and that are consistent but stochastic at small scales.
+    \item We implement the dust layer model of \citet{Martinez-Solaeche:2018} into PySM, providing an alternative dust model that has realistic line-of-sight integration, producing line-of-sight frequency decorrleation.
+    \item We implement three models of CO line emission and polarization based on Planck CO maps \citep{planck2013-p03a} and on models of high-latitude CO emission from the literature \citep{Puglisi:2017}.
+    \item The dust and synchrotron models implemented in this work are in better overall agreement with observational data relative to previous PySM models. In particular, the dust $BB$ amplitude and ell-dependence in the new models much more closely match the 353\,GHz Planck NPIPE maps (Figure~\ref{fig:smallfield_power_all}).
     \item CIB contamination
-    \item We quantify the departure from non-Gaussianity of the small-scale structure introduced by the polarization fraction tensor framework. Probably something on non-Gaussianity: The polarization fraction tensor framework is 
+    \item We find that the polarization fraction tensor framework yields maps with appreciable non-Gaussian small-scale structure in small patches. However, we find that the non-Gaussianity, as measured by Minkowski functionals, greatly diminishes when averaging over large sky areas.
     \item We quantify the frequency decorrelation with the decorrelation parameter $\mathcal{R}_\ell$ (Equation~\eqref{eq:R_ell}). While all models are consistent with Planck constraints on decorrelation between 217 and 353\,GHz, they span a large range of decorrelation level and have distinct frequency dependence of $R_\ell$.
     \item Model suite
     \item PySM3+files/data availability (or move to final paragraph)
