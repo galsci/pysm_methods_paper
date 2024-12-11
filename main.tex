@@ -2,7 +2,6 @@
 \bibliographystyle{aasjournal}
 \providecommand{\sorthelp}[1]{}
 \usepackage{amsmath}
-\usepackage{booktabs} % BH: Compilation breaks without this, but I am not sure we need it if making standard aastex tables?
 
 \begin{document}
 
@@ -216,20 +215,16 @@ Our method for generating small-scale fluctuations is summarized as follows:
 
 This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
-\begin{deluxetable}
-    \centering
-    \footnotesize
-    \begin{tabular}{lcccccccc}
-    %\toprule 
-   & $\ell_0$ &   $ \ell_1  $&$\ell_2$   &$\ell_* $& $\alpha_{tt}$  & $\alpha_{ee}$ &$\alpha_{te}$ &$\alpha_{bb}$ \\
-   %\midrule  
+\begin{deluxetable*}{lcccccccc}
+    \caption{Model parameters for synthesizing small-scale emission}
+   \tablehead{& \colhead{$\ell_0$} &   \colhead{$\ell_1$} & \colhead{$\ell_2$} & \colhead{$\ell_*$} & \colhead{$\alpha_{tt}$}  & \colhead{$\alpha_{ee}$} & \colhead{$\alpha_{te}$} & \colhead{$\alpha_{bb}$}}
+   \startdata
    Dust & 50 & 100 & 2000 & 80 & -0.80 & -0.42& -0.50 & -0.54 \\ 
    Synchrotron & 10 & 38 & 400 & 36 & -1.00& -0.84 & -1.00 & -0.76 \\
-   %\bottomrule
-    \end{tabular}
-    \caption{Model parameters adopted for synthesizing small scales, where $D_{\ell}^{xy} \propto \ell^{\alpha_{xy}}$.}
+   \enddata
+    \tablecomments{Spectra are parameterized assuming $D_{\ell}^{xy} \propto \ell^{\alpha_{xy}}$.}
     \label{tab:smallscale_par}
-\end{deluxetable}
+\end{deluxetable*}
 
 To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole. Finally, the modulation maps are constructed from the ratios:
 
@@ -304,22 +299,19 @@ Constructing a synchrotron template in polarization is somewhat easier than tota
 \subsection{Small Scale Fluctuations in Spectral Parameters} \label{sec:spec_params}
 
 \subsubsection{Methods Overview} \label{subsec:spec_params_overview}
-\begin{table}
-    \centering
-    \begin{tabular}{lccc}
-    \toprule 
-   & $\ell_0$ & $\ell_1$ & $\alpha$  \\
-   \midrule  
+
+\begin{deluxetable}{lccc}
+    \caption{Model parameters for synthesizing spectral parameter maps at small scales}
+   \tablehead{& \colhead{$\ell_0$} & \colhead{$\ell_1$} & \colhead{$\alpha$}}
+   \startdata
    $\beta_d$ & 200 & 400 & 0.04 \\ 
    $T_d$ & 100 & 400  & -0.47\\
-    \midrule 
     $\beta_s$ & 10 & 36 & -0.61\\
     $c_s$ & 10 & 36 & -0.61  \\ 
-   \bottomrule
-    \end{tabular}
-    \caption{Model parameters adopted for synthesizing small-scale dust and synchrotron emission, where $\mathcal{D}_\ell^{XX} \propto \ell^{\alpha_{XX}}$.}
+    \enddata
+    \tablecomments{Spectra are parameterized assuming $\mathcal{D}_\ell^{XX} \propto \ell^{\alpha_{XX}}$.}
     \label{tab:smallscale_specpar}
-\end{table}
+\end{deluxetable}
 
 Just as a map of Galactic emission at a single frequency is expected to have fluctuations at smaller angular scales than have been measured, maps of parameters governing its frequency dependence should also have small-scale fluctuations. We therefore introduce small scale fluctuations to our spectral parameter template maps in a way analogous to the amplitude template maps. This more realistically captures the complexity of small-scale Galactic emission.
 
@@ -549,21 +541,18 @@ At large angular scales $\ell \lesssim 100$, the new \texttt{PySM} models are la
 
 Table~\ref{tab:BB_dustratio} further explores how the model amplitudes vary across frequencies, presenting the deviation ratios down to 85~GHz. \texttt{d9} consistently maintains a deviation factor of around two, while \texttt{d1} and \texttt{d10} deviate less from the measurements at lower frequencies. This suggests that these models have too large a value of $\beta_d$ relative to the BK model value of 1.5 in this patch. The frequency-dependent trend observed in \texttt{d12} is incompatible with a simple change of $\beta_d$ and likely reflects the multiple-layer behavior inherent to this model. 
 
-\begin{table}
-    \centering
-    \begin{tabular}{lccccc}
-    \toprule 
-     & 85~GHz & 150~GHz & 220~GHz & 270~GHz & 353~GHz \\
-    \midrule
+\begin{deluxetable}{lccccc}
+    \caption{Comparison to BK18}
+     \tablehead{& \colhead{85~GHz} & \colhead{150~GHz} & \colhead{220~GHz} & \colhead{270~GHz} & \colhead{353~GHz}}
+    \startdata
     \texttt{d1}  & 2.42	& 2.63 & 2.81 & 2.94 & 3.13 \\
     \texttt{d9}  & 2.17 & 2.12 & 2.08 & 2.06 & 2.03 \\
     \texttt{d10} & 0.96 & 1.30 & 1.59 & 1.77 & 2.03 \\
     \texttt{d12} & 2.76	& 2.27 & 2.08 & 2.02 & 1.96 \\
-   \bottomrule
-    \end{tabular}
-    \caption{The deviation ratio of the reobserved \texttt{PySM} dust $BB$ spectrum to the BK18 maximum likelihood model at each frequency. These ratios are derived by fitting the BK18 model to the \texttt{PySM} band power at their science bins.}
+    \enddata
+    \tablecomments{The deviation ratio of the reobserved \texttt{PySM} dust $BB$ spectrum to the BK18 maximum likelihood model at each frequency. These ratios are derived by fitting the BK18 model to the \texttt{PySM} band power at their science bins.}
     \label{tab:BB_dustratio}
-\end{table}
+\end{deluxetable}
 
 Overall, the \texttt{d9} and \texttt{d10} models demonstrate substantial improvements over \texttt{d1}, particularly in their ability to extrapolate the large-scale templates and capture the preferred small-scale power decay that the NPIPE data are unable to reveal in this specific field. However, while the discrepancies in amplitude are reduced, they still persist when compared to the BK18 measurements. Since the aim of this work is not to provide full sky simulations that perfectly align with all available full-sky and partial-sky observations, completely resolving these differences lies beyond its scope. Current power spectrum-based modeling techniques require a certain degree of global averaging of spectrum parameters, which are known to vary across the sky in small patches~\citep{planck2016-l04}. For instance, while dust amplitude can be modulated using large-scale templates, the spectral tilt $\alpha_d$ has to be fixed to a single value for the entire sky, which is inherently unrealistic. Further refinement of new models will be left for future studies. 
 
@@ -685,22 +674,17 @@ In addition to the small-scale structure of the diffuse dust and synchrotron emi
 
 \section{Recommended Model Suite}\label{sec:modelsuite}
 
-\begin{table*}
-    \centering
-    \begin{tabular}{p{0.1\textwidth} p{0.2\textwidth} p{0.5\textwidth}}
-    
-    \toprule 
-    Complexity & Model set & Short description \\
-    \midrule
+\begin{deluxetable*}{p{0.1\textwidth} p{0.2\textwidth} p{0.5\textwidth}}
+    \caption{Recommended Model Suite}
+    \tablehead{\colhead{Complexity} & \colhead{Model set} & \colhead{Short description}}
+    \startdata
     Low  & \texttt{d9, s4, f1, a1, co1} & Small-scale emission fluctuations in amplitude only; no frequency decorrelation in dust or synchrotron. Unpolarized CO emission.   \\
     Medium  & \texttt{d10, s5, f1, a1, co3} & Extrapolation to small scales for both amplitude and spectral parameters in dust and synchrotron. CO polarization at the 1\% level.  \\
     High  & \texttt{d12, s7, f1, a2, co3} & Dust layer model, spatially varying synchrotron curvature, polarized AME and CO.  \\
-   
-   \bottomrule
-    \end{tabular}
-    \caption{Summary of the suite of model sets described in Section \ref{sec:modelsuite}. These are recommended combinations of models at three levels of complexity (low, medium, and high).  }
+   \enddata
+    \tablecomments{Summary of the suite of model sets described in Section~\ref{sec:modelsuite}. These are recommended combinations of models at three levels of complexity (low, medium, and high).}
     \label{tab:modelsuite}
-\end{table*}
+\end{deluxetable*}
 
 The models available for each emission component can be used in various combinations to form a number of unique Galactic sky models. While every user has this combinatoric freedom, we also prescribe a suite of recommended model sets. Our goal is to facilitate analyses that use a common set of assumptions. Community-wide use of this suite of Galactic emission model sets will enable easier comparisons between scientific forecasts for various experimental designs. Further, this will enable exploration of synergies between multiple experiments---for example, optimizing joint analyses of data from multiple telescopes.
 
