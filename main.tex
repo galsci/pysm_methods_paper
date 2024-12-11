@@ -216,20 +216,20 @@ Our method for generating small-scale fluctuations is summarized as follows:
 
 This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
-\begin{table}
+\begin{deluxetable}
     \centering
     \footnotesize
     \begin{tabular}{lcccccccc}
-    \toprule 
+    %\toprule 
    & $\ell_0$ &   $ \ell_1  $&$\ell_2$   &$\ell_* $& $\alpha_{tt}$  & $\alpha_{ee}$ &$\alpha_{te}$ &$\alpha_{bb}$ \\
-   \midrule  
+   %\midrule  
    Dust & 50 & 100 & 2000 & 80 & -0.80 & -0.42& -0.50 & -0.54 \\ 
    Synchrotron & 10 & 38 & 400 & 36 & -1.00& -0.84 & -1.00 & -0.76 \\
-   \bottomrule
+   %\bottomrule
     \end{tabular}
     \caption{Model parameters adopted for synthesizing small scales, where $D_{\ell}^{xy} \propto \ell^{\alpha_{xy}}$.}
     \label{tab:smallscale_par}
-\end{table}
+\end{deluxetable}
 
 To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole. Finally, the modulation maps are constructed from the ratios:
 
