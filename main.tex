@@ -397,8 +397,6 @@ Since the \texttt{d10} model is one particular realization of the stochastic mod
 
 We provide several map-level comparisons between PySM dust models and observations. Specifically, we compare data from the Planck third data release PR3 \cite{planck2016-l03} and PySM dust models \texttt{d1} (which was widely used as a reference in previous versions of the PySM, and is described in \cite{Thorne:2017}), {\tt d9} (which is similar to \texttt{d1}, but uses different input templates and includes small scale fluctuations of template maps and spectral parameters, as described in Sec.~\ref{sec:small_scales}), and {\tt d12}, which is conceptually quite different from the other two models. The goal is to provide a qualitative comparison of the spatial characteristics of the models at small scales. We select $16.7^\circ \times 16.7^\circ$ patches of the sky, and compare the data and models at 353~GHz in both total and polarized intensity. We focus on two patches, one close to the Galactic plane with $(l,b) =(180^\circ,-10^\circ)$, and the second centered on the BICEP/Keck field at $(l,b) =(318^\circ,-61^\circ)$. 
 
-We integrate the dust models in the Planck passband \citep{planck2013-p03d}. For the comparison between total intensity maps, we subtract a Wiener-filtered CMB temperature anisotropy map from SMICA.
-
 \begin{figure*}[t!]
     \centering
     \includegraphics[height=0.395\textwidth]{figures/I_gal_plane.png}
@@ -414,6 +412,8 @@ We integrate the dust models in the Planck passband \citep{planck2013-p03d}. For
     \caption{Polarized dust intensity at 353GHz centered at [l = 180, b = -10] (left) and [l = 318, b = -61] (right), smoothed to $30\arcmin$.}
     \label{fig:353_pol_int}
 \end{figure*}
+
+We integrate the dust models in the Planck passband \citep{planck2013-p03d}. For the comparison between total intensity maps, we subtract a Wiener-filtered CMB temperature anisotropy map from SMICA.
 
 Intensity and polarization at 353~GHz are displayed in Figures~\ref{fig:353_int} and \ref{fig:353_pol_int}. 
 In intensity, model {\tt d9} filters more of the real data and generates more random small-scale structures than models {\tt d1} and {\tt d12}. We can visually appreciate the impact of this choice in the left panel of Figure~\ref{fig:353_int}, near the Galactic plane. 
@@ -484,16 +484,16 @@ During the development of the \texttt{PySM} models presented in the present stud
 
 In this section, we detail the validation of the new synchrotron models by comparing the power spectra with observations. For validating the \texttt{PySM} synchrotron temperature models, we use the synchrotron map\footnote{\url{https://beyondplanck.science/products/files\_v1}} from the BeyondPlanck re-analysis of Planck LFI data \citep{Andersen:2023}. This map is at a reference frequency of 30\,GHz and has an angular resolution of $2^\circ$. We produce single-frequency temperature maps for the different synchrotron models at 30\,GHz and smooth with a Gaussian beam with FWHM = $2^\circ$.
 
+We have purposely chosen an earlier release of BeyondPlanck for our analysis. Later data release versions of BeyondPlanck, or its successor CosmoGlobe, produce synchrotron intensity maps at 408~MHz~\citep{Watts:2023}. The PySM synchrotron models \texttt{s5} and \texttt{s7} are not suitable for producing synchrotron simulations at 408\,MHz. This is a consequence of scaling the Haslam map from 408\,MHz to 30\,GHz with a constant $\beta_s$ for constructing the template for synchrotron intensity and then applying a spatially variable $\beta_s$ to evaluate the model (see Section~\ref{subsec:spec_params_overview}). Therefore, we validate our models with the synchrotron intensity map at 30\,GHz.
+
+For synchrotron polarization validation, we compare the models with Planck Revisited synchrotron polarization maps\footnote{\url{https://portal.nersc.gov/project/cmb/Planck\_Revisited}} \citep{Delabrouille:2024}. These are the lowest-noise full sky maps of polarized synchrotron at 30\,GHz at $1^\circ$ resolution at the time of analysis. 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.46\textwidth]{figures/SYNC_mask_stack.png}
     \caption{The four different Galactic masks used for the synchrotron validation. The red region is the 20 \% mask; the orange region shows the additional sky coverage for 40 \% mask; the yellow region shows the added coverage for 60 \%; the green region is the added sky patch of 80 \% mask. The purple region is excluded in all masks.}
     \label{fig:sync_masks}
 \end{figure}
-
-We have purposely chosen an earlier release of BeyondPlanck for our analysis. Later data release versions of BeyondPlanck, or its successor CosmoGlobe, produce synchrotron intensity maps at 408~MHz~\citep{Watts:2023}. The PySM synchrotron models \texttt{s5} and \texttt{s7} are not suitable for producing synchrotron simulations at 408\,MHz. This is a consequence of scaling the Haslam map from 408\,MHz to 30\,GHz with a constant $\beta_s$ for constructing the template for synchrotron intensity and then applying a spatially variable $\beta_s$ to evaluate the model (see Section~\ref{subsec:spec_params_overview}). Therefore, we validate our models with the synchrotron intensity map at 30\,GHz.
-
-For synchrotron polarization validation, we compare the models with Planck Revisited synchrotron polarization maps\footnote{\url{https://portal.nersc.gov/project/cmb/Planck\_Revisited}} \citep{Delabrouille:2024}. These are the lowest-noise full sky maps of polarized synchrotron at 30\,GHz at $1^\circ$ resolution at the time of analysis. 
 
 We do not use the Planck Galactic masks for the synchrotron power spectra validation. The Planck Galactic masks capture the shape of the Galactic dust signal, as it is the brightest foreground at CMB frequencies. The shape of the Galactic synchrotron signal differs significantly from the shape of the Galactic masks. Therefore, we construct masks for the synchrotron by thresholding the synchrotron polarized intensity smoothed with a $8.5^\circ$ beam. We additionally mask out a portion of the Galactic plane with a narrow band mask. This ensures that we are always excluding the Galactic plane. In Figure~\ref{fig:sync_masks} we show the coverages of these masks. 
 
