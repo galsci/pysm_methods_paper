@@ -202,7 +202,7 @@ and so $0 \leq p \leq 1$. Since the transformation is non-linear, Gaussian fluct
 This formalism does not take into account noise in the map, and so care must be taken in regions of low signal-to-noise ratio. Nevertheless, application of this framework to radio astronomy data has yielded significant improvements in reconstruction quality \citep{Arras:2021}.
 
 \subsubsection{General Methodology}\label{subsec:methodology}
-Our method for generating small-scale fluctuations is summarized as follows: 
+Our method for generating small-scale fluctuations is summarized as follows (Figure \ref{fig:flowchart}): 
 \begin{enumerate}
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
     \item We low-pass filter these template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$ to yield the final large-scale maps.
@@ -226,7 +226,7 @@ This prescription has several free parameters that require tuning. The pivot sca
     \label{tab:smallscale_par}
 \end{deluxetable*}
 
-To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole. Finally, the modulation maps are constructed from the ratios:
+To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole (Table \ref{tab:smallscale_par}). Finally, the modulation maps are constructed from the ratios:
 
 \begin{align}
 \label{eq:mod_maps}
@@ -238,7 +238,7 @@ where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ an
 Given the improvements to the Planck polarization following the study of \citet{Thorne:2017} \citep[see discussion in][]{planck2016-l01}, we are able to employ $N_{\rm side} = 8$ superpixels and overlapping circular regions rather computing the modulation in $N_{\rm side} = 2$ superpixels and then smoothing with a $10^\circ$ beam. Thus, we incorporate more smaller-scale information into the modulation maps than previous PySM models. 
 
 \begin{figure*}
-    \includegraphics[width=\textwidth]{figures/draft_flowchart_fig_larger_scalesep2.001.jpeg}
+    \includegraphics[width=\textwidth]{figures/draft_flowchart_fig_larger_scalesep2.pdf}
     \caption{DRAFT flowchart figure}
     \label{fig:flowchart}
 \end{figure*}
