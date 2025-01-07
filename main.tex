@@ -16,30 +16,26 @@ Polarized foreground emission from the Galaxy is one of the biggest challenges f
 \end{abstract}
 
 \section{Introduction}
-One of the principal challenges for current and future cosmic microwave background (CMB) polarization experiments is mitigating contaminating emission from the Galaxy. Polarized Galactic emission is brighter than current upper limits on a primordial $B$-mode signal at all frequencies, even in particularly clean patches of the high Galactic latitude sky \citep{planck2016-l11A}. Many ongoing and upcoming surveys such as the Simons Observatory \citep{Ade:2019}, CMB-S4 \citep{Abazajian:2022}, and LiteBIRD \citep{LiteBIRDCollaboration:2023} observe large sky fractions ($f_{\rm sky} \gtrsim 10\%$) and will need to mitigate foreground emission potentially many times brighter than the targeted cosmological signals. Understanding the potential complexities of Galactic emission and designing analyses that are robust to these complexities are of paramount importance for constraining the physics of the early Universe.
+One of the principal challenges for current and future cosmic microwave background (CMB) polarization experiments is mitigating contaminating emission from the Galaxy. Polarized Galactic emission is brighter than current upper limits on a primordial $B$-mode signal at all frequencies, even in particularly clean patches of the high Galactic latitude sky \citep{planck2016-l11A}. Many ongoing and upcoming surveys such as the Simons Observatory \citep{Ade:2019}, CMB-S4 \citep{Abazajian:2022}, and LiteBIRD \citep{LiteBIRDCollaboration:2023} observe large sky fractions and will need to mitigate foreground emission potentially many times brighter than the targeted cosmological signals. Understanding the potential complexities of Galactic emission and designing analyses that are robust to these complexities are of paramount importance for constraining the physics of the early Universe.
 
 Galactic emission is constrained by current data across the full sky over a range of angular scales and frequencies. However, it is not known perfectly, and a primary role of modeling is to provide a suite of possible extrapolations to unmeasured scales and frequencies that reflect the current level of uncertainties in the spatial distribution and frequency dependence of each contributing emission mechanism. At the same time, models should accord with observational constraints as closely as possible.
 
 To this end, tools have been developed to simulate full-sky, multi-frequency realizations of Galactic emission drawing both on data-driven constraints and theoretical models. The Planck Sky Model \citep[PSM;][]{delabrouille2012} was originally built to develop data analysis tools for the Planck mission, using pre-existing data sets. The PSM evolved throughout the Planck mission timeline to include Planck observations and adjust to Planck data analysis requirements, and it has been widely used in various data challenges and for planning future CMB and 21\,cm line mapping experiments \citep[e.g.,][]{Remazeilles:2018, Fornazier:2022, Ghosh:2022}. Building on the PSM, the Python Sky Model \citep[PySM;][]{Thorne:2017} provides a Python interface to expanded classes of foreground models. PySM has been employed for both forecasting \citep[e.g.,][]{Abazajian:2022, Hensley:2022, CCAT-PrimeCollaboration:2023, Wolz:2024} and data analysis \citep[e.g.,][]{Vacher:2023, SPIDERCollaboration:2024}.
 
-In this work, we develop techniques to overcome a number of limitations of previous generations of Galactic emission models. We first introduce the polarization fraction tensor formalism as a physically motivated way to model Galactic polarization at small angular scales in a relatively spatially isotropic way. We demonstrate the use of this framework in generating ensembles of sky realizations in which each realization has a different spatial morphology but the same statistical properties at small angular scales while retaining the well-measured large-scale features of the Galaxy. In addition to algorithmic development, we employ data products from more recent analyses of microwave total intensity and polarization data than used in previous models. Finally, we implement a number of additional models of dust and CO emission from the literature to provide a more complete range of models, consistent with current data, that reflect the present uncertainties on the behavior of microwave foregrounds. We validate and characterize all of the models, and assess their relative abilities to capture various physical effects and to accord with available data-driven constraints.  
-
-%The models developed here follow several general principles, in line with the ethos of previous generations of Galactic emission models. The models are explicitly data-based on scales and frequencies where the Galactic emission is well-measured: we use the best available data to the extent possible. Where we do not have high-fidelity measurements, we have some freedom on the ultimate characteristics of our synthetic Galactic emission. We strive to be guided by two principles: first, we take a \giuse{``physics-driven" approach to the problem wherever possible, preferring to be guided by our current understanding of ISM physics. Second, we consider follow an ``data-driven'' approach so that the new models rely on the  state of art of  latest datasets. }
+In this work, we develop techniques to overcome a number of limitations of previous generations of Galactic emission models. We first introduce the polarization fraction tensor formalism as a physically motivated way to model Galactic polarization at small angular scales. We demonstrate the use of this framework in generating ensembles of sky realizations in which each realization has a different spatial morphology but the same statistical properties at small angular scales while retaining the well-measured large-scale features of the Galaxy. In addition to algorithmic development, we employ data products from more recent analyses of microwave total intensity and polarization data than used in previous models. Finally, we implement a number of additional models of dust and CO emission from the literature to provide a more complete range of models, consistent with current data, that reflect the present uncertainties on the behavior of microwave foregrounds. We validate and characterize all of the models, and assess their relative abilities to capture various physical effects and to accord with available data-driven constraints.
 
 Synthesizing the suite of models implemented in this work and elsewhere, we define three full-sky models of Galactic foreground emission in total intensity and polarization. These models are driven by the existing data where observational constraints are unambiguous and span a range of complexities (labeled low, medium, and high) in their approach to modeling emission in the parameter space that is not well-constrained by data. This suite enables individual experiments to optimize their designs over current uncertainties in our understanding of the Galactic foreground sky, and supports self-consistent comparative and---especially---joint analyses of multiple experiments.
 
 We organize the paper as follows: Section~\ref{sec:methods} is an overview of how Galactic emission models are implemented in PySM; Section~\ref{sec:small_scales} presents our methodology for generating stochastic simulations of small-scale emission using the polarization fraction tensor formalism; Section~\ref{sec:other_models} describes our implementation of an alternative dust model and of a suite of CO emission models; Section~\ref{sec:validation} details a collection of validation metrics for the new models; Section~\ref{sec:discussion} discusses limitations of the models presented here and future directions for development; Section \ref{sec:modelsuite} presents our proposed suite of three sky models that span a range of complexity; and Section~\ref{sec:summary} concludes with a summary.
 
-\section{Methods Overview} \label{sec:methods}
+\section{Modeling Framework} \label{sec:methods}
 
 \subsection{The PySM Software}
-The PySM software provides a convenient interface for generating full-sky maps of total and polarized emission at far-infrared through radio frequencies. Users can select one or more emission mechanisms to simulate, including the CMB, dust, synchrotron radiation, free-free emission, and CO line emission. Most emission mechanisms have more than one model to select from, where here a model refers both to the spatial morphology and frequency dependence of the emission. Stokes $I$, $Q$, and $U$ maps are provided in HEALPix\footnote{\url{https://healpix.sourceforge.io}}  \citep{Gorski:2005} format at the requested $N_{\rm side}$ at a user-specified frequency or integrated over a user-specified bandpass.
+The PySM software\footnote{\url{https://pysm3.readthedocs.io/en/latest/index.html}} provides a convenient interface for generating full-sky maps of total and polarized emission at far-infrared through radio frequencies. Users can select one or more emission mechanisms to simulate, including the CMB, dust, synchrotron radiation, free-free emission, and CO line emission. Most emission mechanisms have more than one model to select from, where here a model refers both to the spatial morphology and frequency dependence of the emission. Stokes $I$, $Q$, and $U$ maps are provided in HEALPix\footnote{\url{https://healpix.sourceforge.io}}  \citep{Gorski:2005} format at the requested $N_{\rm side}$ at a user-specified frequency or integrated over a user-specified bandpass.
 
 One of the aims of this work is to extend the highest angular resolution of the maps that PySM can generate. The first and most stringent challenge of such high resolutions is the sheer size of the templates: a single $I$, $Q$, or $U$ map at a pixel size of $0.4\arcmin$ ($N_{\rm side}=8192$) occupies ~3\,GB in single precision and is 256 times larger than an original PySM~2 map. The groundwork that allowed the implementation of this new generation of Galactic models started in 2019 with the rewrite of PySM and its release as PySM~3 \citep[see][for details]{Zonca:2021}. The problem of distribution has been solved by hosting all the input templates at NERSC\footnote{\url{https://portal.nersc.gov/project/cmb/pysm-data}}, with templates downloaded and cached by PySM as needed using the facilities included in \texttt{astropy.data} \citep{AstropyCollaboration:2013, AstropyCollaboration:2018}. Moreover, all the members of the CMB community using NERSC for computing are able to directly access the same folders locally.
 
 The second issue is memory usage. PySM~3 leverages \texttt{numba} \citep{Lam:2015} to compile Python on-the-fly to machine code so that the evaluation and bandpass integration of each model avoids the temporary arrays allocated by \texttt{numpy} and reduces memory consumption at least by a factor of two. Moreover, \texttt{numba} supports multi-threading so it can make use of all the cores available in the system. Thanks to these improvements, foreground models with a resolution up to $N_{\rm side}=8192$ can be generated while keeping the disk, memory, and CPU requirements manageable. We defer to Section~\ref{sec:small_scales} a discussion of the algorithmic improvements that enable models to be constructed at these small angular scales.
-
-%In this work, we develop new models of dust and synchrotron emission that we then implement in PySM. In addition to these new models, we implement one existing dust model and three CO models from the literature. All of these models are added to the suite of existing PySM models. Finally, we define three sets of models that provide ``low,'' ``medium,'' and ``high'' complexity realizations of the microwave sky based on current constraints from data and modeling uncertainties. As these model suites involve both old and new PySM models, we provide an overview of Galactic emission models in the following subsection before detailing the new models in Sections~\ref{sec:small_scales} and \ref{sec:other_models}.
 
 \subsection{Overview of Galactic Emission Mechanisms} \label{sec:emission_mechanisms}
 The Galactic interstellar medium (ISM) consists of matter and radiation in various forms. At the microwave wavelengths relevant for CMB observations, there are several relevant emission mechanisms, each with their own frequency dependence and spatial distribution on the sky.
@@ -86,70 +82,14 @@ In all CO models presented in this work, emission from the $J = 1\rightarrow0, 2
 \subsubsection{Other Emission Mechanisms}
 The current suite of PySM models encompasses most of the microwave emission and polarization mechanisms observed from the diffuse ISM of the Milky Way. However, it is not exhaustive, and we identify here a few potential targets for future work.
 
-Other isotopologues of CO emit at frequencies near the $^{12}$C$^{18}$O lines. However, these species produce much weaker emission and reside in even denser gas than does $^{12}$C$^{18}$O, and so have a more minor role as a CMB foreground. Likewise, HCN has been identified as a potential contributor to the \texttt{Commander} sky model, but mostly toward the Galactic Center \citep{planck2014-a12}. Line emission from \ion{C}{2} at 158\,$\mu$m and \ion{N}{2} at 122 and 205\,$\mu$m from the diffuse ISM was mapped by COBE/FIRAS \citep{Bennett:1994}, but there are currently no CMB experiments operating at such high frequencies. COBE/FIRAS also detected weaker line emission from \ion{C}{1} (370 and 609\,$\mu$m) and CO transitions beyond those modeled in this work, though these lines were mostly seen toward the Galactic Center \citep{Bennett:1994}. Lastly, discrete Galactic sources, whether point sources or extended objects, are included in PySM models only insofar as they appear in the data products employed. Dedicated effort to include models of Galactic cold clumps, planetary nebulae, and stars that have been detected at microwave wavelengths is a potential avenue for future work.
+Other isotopologues of CO emit at frequencies near the $^{12}$C$^{18}$O lines. However, these species produce much weaker emission and reside in even denser gas than does $^{12}$C$^{18}$O, and so have a more minor role as a CMB foreground. Likewise, HCN has been identified as a potential contributor to the \texttt{Commander} sky model, but mostly toward the Galactic Center \citep{planck2014-a12}. Line emission from \ion{C}{2} at 158\,$\mu$m and \ion{N}{2} at 122 and 205\,$\mu$m from the diffuse ISM was mapped by COBE/FIRAS \citep{Bennett:1994}, but there are currently no CMB experiments operating at such high frequencies. COBE/FIRAS also detected weaker line emission from \ion{C}{1} (370 and 609\,$\mu$m) and CO transitions beyond those modeled in this work, though these lines were mostly seen toward the Galactic Center \citep{Bennett:1994}. 
 
 Our focus in this work is on emission from the ISM of the Milky Way, but PySM also includes models of extragalactic emission (e.g., the cosmic infrared background, the CMB). Given the tight coupling between extragalactic signals through mechanisms like CMB lensing, the thermal Sunyaev-Zeldovich effect, and the kinetic Sunyaev-Zeldovich effect, extragalactic modeling requires a separate, dedicated effort beyond our scope.
 
 Finally, emission from the Solar System is detected at microwave wavelengths in the form of Zodiacal light as well as thermal emission from planets and other rocky bodies. Solar System signals are necessarily time-dependent and thus are not suited for the map-based framework employed by PySM. We therefore do not consider them here.
 
-\subsection{Summary of New Models}
-A basic overview of the models developed and/or implemented in this work is provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO), organized in ascending order of complexity. The details of each of these models are described in the following sections as well as in the PySM documentation\footnote{\url{https://pysm3.readthedocs.io/en/latest/models.html}}.
-
-\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.2cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarydust}
-\caption{Summary of the PySM 3.4 models --- Dust.}
-\tablewidth{0pt}
-\tablehead{
-\colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale} & \colhead{Large scale} & \colhead{Small scale}}
-\startdata
-\texttt{d9} & Modified blackbody & GNILC PR2 $I$ + GNILC PR3 $Q$/$U$ 353 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_d$, $T_d$ & \centering ---  & \centering --- \tabularnewline
-\hline
-\\
-\texttt{d10} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \centering $\beta_d, \, T_d$ from GNILC PR2 & \centering Modulated & \centering --- \tabularnewline
-\hline
-\\
-\texttt{d11} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_d$, $T_d$ \\
-\hline
-\texttt{d12} & 6 layers, each is a different modified blackbody & GNILC PR2 $I$ + GNILC $Q$/$U$ 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering --- \tabularnewline
-\enddata
-\tablecomments{All models have a maximum $N_\text{side} = 8192$, except \texttt{d12} (2048). The symbol \textquotedbl\ represents ``ditto'', indicating that the value is the same as the one above. The symbol --- indicates that a specific feature is not available in a model.}
-\end{deluxetable*}
-
-\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.2cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarysynch}
-\caption{Summary of the PySM 3.4 models --- Synchrotron.}
-\tablewidth{0pt}
-\tablehead{
-\colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale} & \colhead{Large scale} & \colhead{Small scale}}
-\startdata
-\texttt{s4} & \centering Power law  & Haslam $I$ 408 MHz + WMAP $Q$/$U$ 23 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_s$ & \centering --- & \centering --- \tabularnewline
-\hline
-\\
-\texttt{s5} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering --- \tabularnewline
-\hline
-\\
-\texttt{s6} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_s$ \tabularnewline
-\hline
-\\
-\texttt{s7} & \centering Curved power law & \centering \textquotedbl & \textquotedbl & \textquotedbl + $c_s$ from ARCADE & \centering \textquotedbl + $c_s$ fluctuations & \centering --- \tabularnewline
-\enddata
-\tablecomments{All models have a maximum $N_\text{side} = 8192$.}
-\end{deluxetable*}
-
-\begin{deluxetable*}{m{0.5cm} m{3.3cm} m{4.2cm} m{4.4cm} m{2.4cm}} \label{table:summaryco}
-\caption{Summary of the PySM 3.4 models --- CO.}
-\tablewidth{0pt}
-\tablehead{
-\colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale}}
-\startdata
-\texttt{co1} & Single line emissions at 115, 230, 346~GHz & \centering Planck PR2 Type-1  maps  smoothed to $1^{\circ}$ & \centering --- & \centering --- \tabularnewline
-\hline
-\\
-\texttt{co2} & \textquotedbl + $0.1\%$ polarized & \centering \textquotedbl & \centering ---  & \centering --- \tabularnewline
-\hline
-\\
-\texttt{co3} & \centering \textquotedbl & \centering \textquotedbl & \centering Simulated high galactic clouds & \centering --- \tabularnewline
-\enddata
-\tablecomments{All models have a maximum $N_\text{side} = 2048$.}
-\end{deluxetable*}
+%\subsection{Summary of New Models}
+%A basic overview of the models developed and/or implemented in this work is provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO), organized in ascending order of complexity. The details of each of these models are described in the following sections as well as in the PySM documentation\footnote{\url{https://pysm3.readthedocs.io/en/latest/models.html}}.
 
 \section{Dust and Synchrotron Models: Stochastic Emission at Small Angular Scales} \label{sec:small_scales}
 The methods presented here aim to preserve the well-measured large-scale information in existing observations of dust and synchrotron emission (the ``template'' maps), filter out the noisy small-scale emission in the maps, and replace those small scales with a stochastic realization that has a reasonable correspondence with the large-scale emission. Specifically, the synthetic small-scale structure should have a power spectrum that connects smoothly to the power spectrum of the real data at large scales. Our approach is to generate stochastic realizations of small-scale emission that is modulated by the large-scale signal.
@@ -341,6 +281,45 @@ To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generat
 
 \subsection{Summary of New Dust and Synchrotron Models}
 
+\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.2cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarydust}
+\caption{Summary of the PySM 3.4 models --- Dust.}
+\tablewidth{0pt}
+\tablehead{
+\colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale} & \colhead{Large scale} & \colhead{Small scale}}
+\startdata
+\texttt{d9} & Modified blackbody & GNILC PR2 $I$ + GNILC PR3 $Q$/$U$ 353 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_d$, $T_d$ & \centering ---  & \centering --- \tabularnewline
+\hline
+\\
+\texttt{d10} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \centering $\beta_d, \, T_d$ from GNILC PR2 & \centering Modulated & \centering --- \tabularnewline
+\hline
+\\
+\texttt{d11} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_d$, $T_d$ \\
+\hline
+\texttt{d12} & 6 layers, each is a different modified blackbody & GNILC PR2 $I$ + GNILC $Q$/$U$ 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering --- \tabularnewline
+\enddata
+\tablecomments{All models have a maximum $N_\text{side} = 8192$, except \texttt{d12} (2048). The symbol \textquotedbl\ represents ``ditto'', indicating that the value is the same as the one above. The symbol --- indicates that a specific feature is not available in a model.}
+\end{deluxetable*}
+
+\begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.2cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarysynch}
+\caption{Summary of the PySM 3.4 models --- Synchrotron.}
+\tablewidth{0pt}
+\tablehead{
+\colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale} & \colhead{Large scale} & \colhead{Small scale}}
+\startdata
+\texttt{s4} & \centering Power law  & Haslam $I$ 408 MHz + WMAP $Q$/$U$ 23 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_s$ & \centering --- & \centering --- \tabularnewline
+\hline
+\\
+\texttt{s5} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering --- \tabularnewline
+\hline
+\\
+\texttt{s6} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_s$ \tabularnewline
+\hline
+\\
+\texttt{s7} & \centering Curved power law & \centering \textquotedbl & \textquotedbl & \textquotedbl + $c_s$ from ARCADE & \centering \textquotedbl + $c_s$ fluctuations & \centering --- \tabularnewline
+\enddata
+\tablecomments{All models have a maximum $N_\text{side} = 8192$.}
+\end{deluxetable*}
+
 The new dust and synchrotron models implemented here all improve on previous models through new data-driven templates, and use of the polarization fraction tensor framework to model small-scale fluctuations. Multiple models of dust and synchrotron are provided to explore a range of astrophysical complexity allowed by current constraints. In brief, the \texttt{d9} and \texttt{s4} models use the new data-driven templates and include $I$, $Q$, and $U$ fluctuations up to the largest $\ell$ values simulated, but these models have sky-constant spectral parameters and thus no frequency decorrelation (see Section~\ref{subsec:decorrelation} for discussion). In contrast, \texttt{d10} and \texttt{s5} employ data-driven maps of spectral parameters to which small-scale fluctuations are added, inducing frequency decorrelation. The \texttt{s7} synchrotron model provides an extra spectral parameter---curvature of the frequency spectrum---and thus additional complexity. The \texttt{d11} and \texttt{s6} models allow many realizations of \texttt{d10} and \texttt{s5}, respectively, to be generated in which the large scales are fixed to the data-driven templates and the small scales have the same statistical properties but differing spatial morphologies. Tables~\ref{table:summarydust} and \ref{table:summarysynch} provide a high-level summary of these models. Extensive model comparisons are made in Section~\ref{sec:validation}.
 
 \section{Other Models Implemented} \label{sec:other_models}
@@ -371,7 +350,24 @@ The construction of these maps does result in some filtering out of the real sma
 In this model, maps of spectral parameters ($\beta_d$ and $T_d$) are randomly generated for each layer as described in \cite{Martinez-Solaeche:2018}. As a consequence, they are not constrained to match the observed temperature and spectral index maps. While their statistics (e.g., amplitude, correlation between $\beta_d$ and $T_d$) are compatible with those of real data, they provide a different realization, which results in increased differences between the real sky and the model at frequencies increasingly far from the reference frequency, $\nu_0 = 353$~GHz.
 
 \subsection{CO Models} \label{subsec:co_models}
-Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ transitions have been detected even in the broad photometric Planck bands \citep{planck2013-p03a, planck2014-a12}. CO emission can be polarized \citep{Goldreich:1981} and so may be a relevant foreground for CMB polarization analyses \citep{Puglisi:2017}. In this section, we describe the implementation of three CO models into the PySM~3 framework.
+\begin{deluxetable*}{m{0.5cm} m{3.3cm} m{4.2cm} m{4.4cm} m{2.4cm}} \label{table:summaryco}
+\caption{Summary of the PySM 3.4 models --- CO.}
+\tablewidth{0pt}
+\tablehead{
+\colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale}}
+\startdata
+\texttt{co1} & Single line emissions at 115, 230, 346~GHz & \centering Planck PR2 Type-1  maps  smoothed to $1^{\circ}$ & \centering --- & \centering --- \tabularnewline
+\hline
+\\
+\texttt{co2} & \textquotedbl + $0.1\%$ polarized & \centering \textquotedbl & \centering ---  & \centering --- \tabularnewline
+\hline
+\\
+\texttt{co3} & \centering \textquotedbl & \centering \textquotedbl & \centering Simulated high galactic clouds & \centering --- \tabularnewline
+\enddata
+\tablecomments{All models have a maximum $N_\text{side} = 2048$.}
+\end{deluxetable*}
+
+Galactic CO line emission is strong enough that the $J = 1\rightarrow0$, $J = 2\rightarrow1$, $J = 3\rightarrow2$ transitions have been detected even in the broad photometric Planck bands \citep{planck2013-p03a, planck2014-a12}. CO emission can be polarized \citep{Goldreich:1981} and so may be a relevant foreground for CMB polarization analyses \citep{Puglisi:2017}. In this section, we describe the implementation of three CO models into the PySM~3 framework. These models are summarized in Table \ref{table:summaryco}. 
 
 Because of the intrinsically low degree of CO polarization and the long integration time required to achieve a significant detection, it is difficult to carry out CO polarization surveys, and wide area measurements have not yet been made. In the absence of data-based templates, the approach to modeling CO has been to assume a small degree of polarization applied to total intensity maps. For instance, \citet{Puglisi:2017} presented a model to simulate the polarized emission of CO lines in molecular clouds at high Galactic latitudes by considering the 3D spatial distribution of CO in the Galaxy.
 
