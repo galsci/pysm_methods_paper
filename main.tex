@@ -116,6 +116,12 @@ p_{ab} \equiv \ln \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right] 
 \end{equation}
 The (arbitrary) factor of two multiplying $P_{ab}$ enables a more physical interpretation of the $i$, $q$, and $u$ parameters, as we shall see.
 
+\begin{figure*}
+    \includegraphics[width=0.9\textwidth]{figures/draft_flowchart_fig_larger_scalesep.pdf}
+    \caption{An overview of the steps for building model \texttt{d10}. 1. We begin with GNILC-derived $I$, $Q$, $U$ maps of the polarized dust emission at 353 GHz (``amplitude parameters", left) and maps of the GNILC-derived dust temperature and spectral index (``spectral parameters", right). 2. The amplitude parameters are transformed via the polarization tensor fraction formalism to $i$, $q$, $u$. 3. The maps are filtered by scale: large scales are untouched, and small-scale map structure is replaced by structure synthesized from a power spectrum extrapolated from a power-law fit to the large-scale data. 4. The small-scale structure maps are modulated by maps of the large-scale structure in the appropriate quantity. 5. The large- and small-scale maps are co-added. The $i$, $q$, $u$ maps are transformed back to $I$, $Q$, and $U$. The combination of these final amplitude maps and the final spectral parameter maps define the \texttt{d10} model.   }
+    \label{fig:flowchart}
+\end{figure*}
+
 The transformation can be computed analytically by taking the logarithm of the eigenvalue decomposition of $P_{ab}$. While the polarization direction is preserved, the Stokes parameters $I$, $Q$, and $U$ are compressed into their polarization fraction tensor analogues $i$, $q$, and $u$:
 \begin{align}\label{eq:real2pt}
     i &\equiv \frac{1}{2} \ln (I^2 - P^2)\nonumber  \\
@@ -175,12 +181,6 @@ To construct the modulation maps $m_i$ and $m_p$, we generally follow the method
 where $C^{tt}_{\ell_*,full}$ and $C^{ee}_{\ell_*,full}$ are the full-sky $tt$ and $ee$ power spectra evaluated at $\ell = \ell_*$, respectively. We choose $\ell_* \lesssim \ell_1$ in order to have reliable estimates of the power spectrum at $\ell_*$. Finally, we smooth $m_i$ and $m_p$ with a kernel equivalent to the apodized mask described above. 
 
 Whereas previous PySM models used modulation maps constructed in $N_{\rm side} = 2$ superpixels and then smoothed with a $10^\circ$ beam \citep{Thorne:2017}, we employ $N_{\rm side} = 8$ superpixels and overlapping circular regions. This is motivated by improvements to the Planck polarization maps since the earlier study. Thus the models developed in this work incorporate smaller-scale information into the modulation maps than previous PySM models.
-
-\begin{figure*}
-    \includegraphics[width=\textwidth]{figures/draft_flowchart_fig_larger_scalesep.pdf}
-    \caption{An overview of the steps for building model \texttt{d10}. 1. We begin with GNILC-derived $I$, $Q$, $U$ maps of the polarized dust emission at 353 GHz (``amplitude parameters", left) and maps of the GNILC-derived dust temperature and spectral index (``spectral parameters", right). 2. The amplitude parameters are transformed via the polarization tensor fraction formalism to $i$, $q$, $u$. 3. The maps are filtered by scale: large scales are untouched, and small-scale map structure is replaced with  }
-    \label{fig:flowchart}
-\end{figure*}
   
 The adopted values of $\ell_1$ and $\ell_*$ are driven both by the angular resolution and the signal-to-noise ratio of the template maps. We employ $\ell_1=100$ and $\ell_*=80$ for dust and $\ell_1=38$ and $\ell_*=36$ for synchrotron. The $\ell_2$ parameter is chosen to be high enough that, for $\ell > \ell_2$, dust and synchrotron emission are relatively unconstrained by current full-sky data. We adopt  $\ell_2=2000$ for dust and $\ell_2 = 400$ for synchrotron. For dust we employ a power law index of $\alpha_{tt} = -0.80$ based on the range of fit $\alpha_{TT}$ in Planck, WISE, and MegaCam data by \citet{Miville-Deschenes:2016}. We adopt $\alpha_{ee} = -0.42$, $\alpha_{te} = -0.50$, and $\alpha_{bb} = -0.54$ from fits to Planck $TT$, $TE$, and $BB$ spectra, respectively, over 71\% of the sky \citep{planck2016-l11A}. For synchrotron we adopt $\alpha_{tt} = -1.00$ and $\alpha_{te} = -1.00$ based on the observed spectra of the synchrotron template map. We adopt $\alpha_{ee} = -0.84$ and $\alpha_{bb} = -0.76$ following fits to synchrotron maps over 78\% of the sky produced with the \texttt{Commander} pipeline \citep{planck2016-l04}. The $\ell_1$, $\ell_2$, $\ell_*$, and $\alpha$ values used to construct the small-scale maps are all summarized in Table~\ref{tab:smallscale_par}.
 
