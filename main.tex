@@ -12,7 +12,7 @@
 \shortauthors{The PanEx PySM Collaboration}
 
 \correspondingauthor{Giuseppe Puglisi}
-%\email{}
+\email{Giuseppe.puglisi@dfa.unict.it}
 
 \author[0000-0001-5104-7122]{Julian Borrill}
 \affiliation{Computational Cosmology Center \& Physics Division, Lawrence Berkeley National Laboratory, 1 Cyclotron Road, Berkeley, CA 94720, USA}
@@ -156,9 +156,6 @@ Other isotopologues of CO emit at frequencies near the $^{12}$C$^{18}$O lines. H
 Our focus in this work is on emission from the ISM of the Milky Way, but PySM also includes models of extragalactic emission (e.g., the cosmic infrared background, the CMB). Given the tight coupling between extragalactic signals through mechanisms like CMB lensing, the thermal Sunyaev-Zeldovich effect, and the kinetic Sunyaev-Zeldovich effect, extragalactic modeling requires a separate, dedicated effort beyond our scope.
 
 Finally, emission from the Solar System is detected at microwave wavelengths in the form of Zodiacal light as well as thermal emission from planets and other rocky bodies. Solar System signals are necessarily time-dependent and thus are not suited for the map-based framework employed by PySM. We therefore do not consider them here.
-
-%\subsection{Summary of New Models}
-%A basic overview of the models developed and/or implemented in this work is provided in Tables~\ref{table:summarydust} (dust), \ref{table:summarysynch} (synchrotron), and \ref{table:summaryco} (CO), organized in ascending order of complexity. The details of each of these models are described in the following sections as well as in the PySM documentation\footnote{\url{https://pysm3.readthedocs.io/en/latest/models.html}}.
 
 \section{Dust and Synchrotron Models: Stochastic Emission at Small Angular Scales} \label{sec:small_scales}
 The methods presented here aim to preserve the well-measured large-scale information in existing observations of dust and synchrotron emission (the ``template'' maps), filter out the noisy small-scale emission in the maps, and replace those small scales with a stochastic realization that has a reasonable correspondence with the large-scale emission. Specifically, the synthetic small-scale structure should have a power spectrum that connects smoothly to the power spectrum of the real data at large scales. Our approach is to generate stochastic realizations of small-scale emission that is modulated by the large-scale signal.
@@ -333,9 +330,6 @@ The application of this procedure to the dust and synchrotron spectral parameter
 As described in Section~\ref{subsubsec:dust_model}, the dust emission in all models developed here is governed by the spectral parameters $\beta_d$ and $T_d$. For the $\beta_d$ and $T_d$ template maps, we employ the $\beta_d$ and $T_d$ maps\footnote{\texttt{COM\_CompMap\_Dust-GNILC-Model-Spectral-Index\_2048\_R2.00.fits}, \texttt{COM\_CompMap\_Dust-GNILC-Model-Temperature\_2048\_R2.00.fits}} derived from 2015 Planck GNILC component separation analysis \citep{planck2016-XLVIII}. These maps have lower CIB contamination than the \texttt{Commander} $\beta_d$ and $T_d$ maps \citep{planck2014-a12} as the methodology employed both spatial and spectral information to disentangle the CIB contribution to the total emission (see discussion in Section~\ref{sec:CIBcontamination}).
 
 We fit the power spectra of the $\beta_d$ and $T_d$ template maps over the multipole ranges $200 < \ell < 400$ and $100 < \ell < 400$, respectively. We find that $\alpha_{\beta_d}= 0.04$ and $\alpha_{T_d} = -0.47$ over this range, both flatter than the $\alpha_{tt} = -0.80$ found for the dust amplitude. The adopted pivot multipole $\ell_1$ is larger than that used for dust amplitudes (see Table~\ref{tab:smallscale_par}) since the template maps employed here are derived from intensity-only data rather than a combination of total and polarized intensity. Thus, they remain signal-dominated at $\sim$4 times smaller angular scales. We employ the same modulation map as was used for the dust amplitude (see Section~\ref{subsec:methodology}).
-
-% BH: Will adapt this for paragraph in discussion section. I don't think we need to address this point here
-%We remark here that the templates  of $\beta_d$ and $T_d$ employed for the new models  used in our new models exhibit significant degeneracy. This degeneracy arises from two primary factors: intrinsic parameter correlations, as highlighted in recent literature  \citep{Demyk:2017}, and limitations in the fitting procedure.  Specifically, using a limited number of \emph{Planck} frequency channels (217, 353, 545, 857 GHz)introduces further parameter degeneracies.  Crucially, the inclusion of synthesized small angular scales  ($<21.8^\prime$) addresses this issue. While this injection mitigates noise and calibration errors, its most significant effect is the complete breaking of the $\beta_d - T_d$degeneracy.
 
 \subsubsection{Synchrotron Spectral Parameters}\label{sec:beta_s}
 As described in Section~\ref{subsubsec:synch_model}, the synchrotron emission in all models developed here is governed by the spectral parameters $\beta_s$ and $c_s$. To build the large-scale template for the spatial variation of the synchrotron spectral index $\beta_s$, we begin with the full-sky $\beta_s$ map of \citet{Miville-Deschenes:2008}, obtained by combining the Haslam map in total intensity at 408\,MHz \citep{Remazeilles:2015} and WMAP 3\,yr K-band data \citep{Hinshaw:2007}. The map has an angular resolution of about $7^{\circ}$ and was employed by previous PySM synchrotron models \citep{Thorne:2017}.
@@ -722,6 +716,11 @@ Figure~\ref{fig:MF:patch2} shows the MFs of the \texttt{Gaussian-mod-ss} and \te
 The Galactic emission models presented in this work are created from the latest data from large-area surveys like Planck and are informed by the latest literature constraints on the spectral behavior of Galactic emission components. These models incorporate some of the expected complexity of polarized emission at scales that are not yet well-constrained by data---in particular, the non-Gaussianity of interstellar emission structure. While this represents a step forward in the realism of these models over previous all-sky Galactic emission models, there are a number of idealizations that could be improved in future work.
 
 %However, the estimate of $\beta_d$ and $T_d$ is highly degenerate making the maps at small angular scales ($<21.8^\prime$) are contaminated by artifacts due to noise and calibration errors. 
+
+% BH: Will adapt this for paragraph in discussion section.
+%We remark here that the templates  of $\beta_d$ and $T_d$ employed for the new models  used in our new models exhibit significant degeneracy. This degeneracy arises from two primary factors: intrinsic parameter correlations, as highlighted in recent literature  \citep{Demyk:2017}, and limitations in the fitting procedure.  Specifically, using a limited number of \emph{Planck} frequency channels (217, 353, 545, 857 GHz)introduces further parameter degeneracies.  Crucially, the inclusion of synthesized small angular scales  ($<21.8^\prime$) addresses this issue. While this injection mitigates noise and calibration errors, its most significant effect is the complete breaking of the $\beta_d - T_d$degeneracy.
+
+
 
 By imposing a cut-off in $\ell$ over which data-driven templates are employed, the models developed here are discarding high signal-to-noise information at small scales over portions of the sky where emission is bright. Future methodologies would ideally retain information from the templates on as small a scale as possible, with that cut-off scale varying across the sky. Further, particularly as sensitive data are being collected over partial sky areas by sensitive ground-based experiments, methods to incorporate partial sky templates should be developed.
 
