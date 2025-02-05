@@ -182,12 +182,6 @@ p_{ab} \equiv \ln \left[ \begin{matrix} I+Q & U \\ U & I-Q \end{matrix} \right] 
 \end{equation}
 The (arbitrary) factor of two multiplying $P_{ab}$ enables a more physical interpretation of the $i$, $q$, and $u$ parameters, as we shall see.
 
-\begin{figure*}
-    \includegraphics[width=0.9\textwidth]{figures/draft_flowchart_fig_larger_scalesep.pdf}
-    \caption{An overview of the steps for building model \texttt{d10}. 1. We begin with GNILC-derived $I$, $Q$, $U$ maps of the polarized dust emission at 353 GHz (``amplitude parameters", left) and maps of the GNILC-derived dust temperature and spectral index (``spectral parameters", right). 2. The amplitude parameters are transformed via the polarization tensor fraction formalism to $i$, $q$, $u$. 3. The maps are filtered by scale: large scales are untouched, and small-scale map structure is replaced by structure synthesized from a power spectrum extrapolated from a power-law fit to the large-scale data. 4. The small-scale structure maps are modulated by maps of the large-scale structure in the appropriate quantity. 5. The large- and small-scale maps are co-added. The $i$, $q$, $u$ maps are transformed back to $I$, $Q$, and $U$. The combination of these final amplitude maps and the final spectral parameter maps define the \texttt{d10} model.   }
-    \label{fig:flowchart}
-\end{figure*}
-
 The transformation can be computed analytically by taking the logarithm of the eigenvalue decomposition of $P_{ab}$. While the polarization direction is preserved, the Stokes parameters $I$, $Q$, and $U$ are compressed into their polarization fraction tensor analogues $i$, $q$, and $u$:
 \begin{align}\label{eq:real2pt}
     i &\equiv \frac{1}{2} \ln (I^2 - P^2)\nonumber  \\
@@ -213,20 +207,14 @@ where $\xi \equiv \sqrt{q^2 + u^2}$. A number of useful features of this transfo
 and so $0 \leq p \leq 1$. Since the transformation is non-linear, Gaussian fluctuations introduced in $i$, $q$, and $u$ maps will necessarily become non-Gaussian when transformed back to $I$, $Q$, and $U$.
 
 \subsubsection{General Methodology}\label{subsec:methodology}
-Our method for generating small-scale fluctuations is summarized as follows (Figure \ref{fig:flowchart}): 
-\begin{enumerate}
-    \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
-    \item We low-pass filter these template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$ to yield the final large-scale maps.
-    \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
-    \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell_0 < \ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the $ee$ and $bb$ spectra at $\ell > \ell_2$ are constructed with the power law index of the $tt$ spectrum, while the $te$ spectrum retains its fit index. The $tb$ and $eb$ spectra are assumed to be zero for $\ell > \ell_1$.
-    \item  We synthesize $i$, $q$, and $u$ maps using the constructed $tt$, $te$, $ee$, and $bb$ spectra. These maps are then high-pass filtered at cut-off multipole $\ell_1$.
-    \item We construct modulation maps $m_i$ and $m_p$ for intensity and polarization, respectively (see Figure~\ref{fig:flowchart}). The synthesized maps are then multiplied by the modulation maps to yield the final small-scale maps.
-    \item Finally, we sum the large-scale and small-scale maps (from Steps 2 and 6, respectively) and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
-\end{enumerate}
 
-This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
+\begin{figure*}
+    \includegraphics[width=0.95\textwidth]{figures/draft_flowchart_fig_larger_scalesep.pdf}
+    \caption{An overview of the steps for building model \texttt{d10}. 1. We begin with GNILC-derived $I$, $Q$, $U$ maps of the polarized dust emission at 353 GHz (``amplitude parameters", left) and maps of the GNILC-derived dust temperature and spectral index (``spectral parameters", right). 2. The amplitude parameters are transformed via the polarization tensor fraction formalism to $i$, $q$, $u$. 3. The maps are filtered by scale: large scales are untouched, and small-scale map structure is replaced by structure synthesized from a power spectrum extrapolated from a power-law fit to the large-scale data. 4. The small-scale structure maps are modulated by maps of the large-scale structure in the appropriate quantity. 5. The large- and small-scale maps are co-added. The $i$, $q$, $u$ maps are transformed back to $I$, $Q$, and $U$. The combination of these final amplitude maps and the final spectral parameter maps define the \texttt{d10} model.}
+    \label{fig:flowchart}
+\end{figure*}
 
-\begin{deluxetable*}{lcccccccc}
+\begin{deluxetable*}{lcccccccc}[ht] \label{tab:smallscale_par}
     \caption{Model parameters for synthesizing small-scale emission}
    \tablehead{& \colhead{$\ell_0$} &   \colhead{$\ell_1$} & \colhead{$\ell_2$} & \colhead{$\ell_*$} & \colhead{$\alpha_{tt}$}  & \colhead{$\alpha_{ee}$} & \colhead{$\alpha_{te}$} & \colhead{$\alpha_{bb}$}}
    \startdata
@@ -234,8 +222,20 @@ This prescription has several free parameters that require tuning. The pivot sca
    Synchrotron & 10 & 38 & 400 & 36 & -1.00& -0.84 & -1.00 & -0.76 \\
    \enddata
     \tablecomments{Spectra are parameterized assuming $D_{\ell}^{xy} \propto \ell^{\alpha_{xy}}$.}
-    \label{tab:smallscale_par}
 \end{deluxetable*}
+
+Our method for generating small-scale fluctuations is summarized as follows (Figure~\ref{fig:flowchart}): 
+\begin{enumerate}
+    \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
+    \item We low-pass filter these template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$ to yield the final large-scale maps.
+    \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
+    \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell_0 < \ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the $ee$ and $bb$ spectra at $\ell > \ell_2$ are constructed with the power law index of the $tt$ spectrum, while the $te$ spectrum retains its fit index. The $tb$ and $eb$ spectra are assumed to be zero for $\ell > \ell_1$.
+    \item  We synthesize $i$, $q$, and $u$ maps using the constructed $tt$, $te$, $ee$, and $bb$ spectra. These maps are then high-pass filtered at cut-off multipole $\ell_1$.
+    \item We construct modulation maps $m_i$ and $m_p$ for intensity and polarization, respectively (see Figure~\ref{fig:flowchart}). The synthesized maps are then multiplied by the modulation maps to yield the final small-scale maps.
+    \item Finally, we sum the large-scale and small-scale maps (from Steps~2 and 6, respectively) and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
+\end{enumerate}
+
+This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
 To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole (Table \ref{tab:smallscale_par}). Finally, the modulation maps are constructed from the ratios:
 
