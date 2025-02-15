@@ -357,10 +357,10 @@ To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generat
 \texttt{d9} & Modified blackbody & GNILC PR2 $I$ + GNILC PR3 $Q$/$U$ 353 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_d$, $T_d$ & \centering ---  & \centering --- \tabularnewline
 \hline
 \\
-\texttt{d10} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \centering $\beta_d, \, T_d$ from GNILC PR2 & \centering Modulated & \centering --- \tabularnewline
+\texttt{d10} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering $\beta_d, \, T_d$ from GNILC PR2 & \centering Modulated & \centering --- \tabularnewline
 \hline
 \\
-\texttt{d11} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_d$, $T_d$ \\
+\texttt{d11} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_d$, $T_d$ \\
 \hline
 \texttt{d12} & 6 layers, each is a different modified blackbody & GNILC PR2 $I$ + GNILC $Q$/$U$ 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering --- \tabularnewline
 \enddata
@@ -376,13 +376,13 @@ To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generat
 \texttt{s4} & \centering Power law  & Haslam $I$ 408 MHz + WMAP $Q$/$U$ 23 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_s$ & \centering --- & \centering --- \tabularnewline
 \hline
 \\
-\texttt{s5} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering --- \tabularnewline
+\texttt{s5} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering --- \tabularnewline
 \hline
 \\
-\texttt{s6} & \centering \textquotedbl & \centering \textquotedbl & \textquotedbl & \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_s$ \tabularnewline
+\texttt{s6} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_s$ \tabularnewline
 \hline
 \\
-\texttt{s7} & \centering Curved power law & \centering \textquotedbl & \textquotedbl & \textquotedbl + $c_s$ from ARCADE & \centering \textquotedbl + $c_s$ fluctuations & \centering --- \tabularnewline
+\texttt{s7} & \centering Curved power law & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl + $c_s$ from ARCADE & \centering \textquotedbl + $c_s$ fluctuations & \centering --- \tabularnewline
 \enddata
 \tablecomments{All models have a maximum $N_\text{side} = 8192$.}
 \end{deluxetable*}
@@ -509,7 +509,7 @@ In Figure~\ref{fig:largefield_power}, we compare the $TT$, $EE$, and $BB$ power 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figures/largefield_power_all_TEB_pub.pdf}
-    \caption{The $TT$, $EE$ and $BB$ power spectra for the \texttt{d1} (dashed lines), \texttt{d9} (solid lines) and \texttt{d12} (dotted lines) models, along with the NPIPE detector-split maps (circles), computed using the \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080} Galactic masks. Each comparison set is colored to represent the respective sky fraction $f_{\rm sky}$. The \texttt{d10} model is not shown as it is identical to \texttt{d9} at 353~GHz.}
+    \caption{The 353~GHz $TT$, $EE$ and $BB$ power spectra for the \texttt{d1} (dashed lines), \texttt{d9} (solid lines) and \texttt{d12} (dotted lines) models, along with the NPIPE detector-split maps (circles), computed using the \texttt{GAL020}, \texttt{GAL040}, \texttt{GAL060} and \texttt{GAL080} Galactic masks. Each comparison set is colored to represent the respective sky fraction $f_{\rm sky}$. The \texttt{d10} model is not shown as it is identical to \texttt{d9} at 353~GHz.}
     \label{fig:largefield_power}
 \end{figure}
 
@@ -520,20 +520,20 @@ In polarization, \texttt{d12} significantly underestimates both $EE$ and $BB$ sp
 \begin{figure}
     \centering
     \includegraphics[width=0.48\textwidth]{figures/smallfield_power.pdf}
-    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE detector-split maps and the dust model maps \texttt{d1}, \texttt{d9} and \texttt{d12}. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A \, \big( l/80 \big)^{\alpha}$ where $\alpha = -0.54$) to the NPIPE data points, with the fit largely driven by the first two bandpowers.}
+    \caption{The binned $BB$ power spectra from the 353~GHz NPIPE detector-split maps and the dust model maps \texttt{d1}, \texttt{d9} and \texttt{d12} in two representative fields. The dashed lines indicate the best-fit of the fixed-index power law ($\mathcal{D}_\ell^{BB} = A \, \big( l/80 \big)^{\alpha}$ where $\alpha = -0.54$) to the NPIPE data points, with the fit largely driven by the first two bandpowers.}
     \label{fig:smallfield_power}
 \end{figure}
 
 \begin{figure*}
     \centering
     \includegraphics[width=2.1\columnwidth]{figures/llmean_hlmean_comparison.pdf}
-    \caption{Scatter plots of the mean of the first two $BB$ bandpowers, $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$, and the mean of the last four $BB$ bandpowers, $\overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$, as illustrated in Figure~\ref{fig:smallfield_power}. The top panel compares $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$ of \texttt{d1}, \texttt{d9}, and \texttt{d12} against that of NPIPE, while the bottom panel shows the same comparison for $\overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$. Each data point represents the results from a circular sky patch with $|b| > 30^\circ$. Dashed lines indicate the 1:1 ratio.}
+    \caption{Scatter plots of the mean of the first two 353~GHz $BB$ bandpowers, $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$, and the mean of the last four $BB$ bandpowers, $\overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$, as illustrated in Figure~\ref{fig:smallfield_power}. The top panel compares $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$ of \texttt{d1}, \texttt{d9}, and \texttt{d12} against that of NPIPE, while the bottom panel shows the same comparison for $\overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$. Each data point represents the results from a circular sky patch with $|b| > 30^\circ$. Dashed lines indicate the 1:1 ratio.}
     \label{fig:smallfield_power_all}
 \end{figure*}
 
 For our small-area comparison, we instead follow the method described in \cite{planck2014-XXX} to define the masks for power spectrum computation. The full sky is divided into 768 patches with a HEALPix grid with $N_\text{side} = 8$. At the center of each patch, we construct a circular mask covering 400~deg$^2$, with the edges tapered by a $2^\circ$ FWHM Gaussian, yielding $f_{\rm sky} \sim 0.008$. Figure~\ref{fig:smallfield_power} presents representative results from two selected circular fields located at Galactic latitudes $|b| > 30^\circ$ in the northern and southern Galactic hemispheres. Since the computational cost of running simulations for cross-spectra error calculations in each small patch is high, the errors are estimated using analytical approximations of the cross-correlation matrix of power spectra~\citep{Tristram:2005}.
 
-To assess whether the \texttt{PySM} models can accurately replicate the observed dust $BB$ power spectrum amplitude and scaling in $\ell$, particularly in small, high-Galactic latitude fields relevant to future CMB observations, we calculate the low-$\ell$ averaged bandpower $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$ (over $40 \le \ell < 110$) and the high-$\ell$ averaged bandpower $\overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$ (over $110 \le \ell < 370$) for both the model and NPIPE maps in each small field with $|b| > 30^\circ$. These metrics reduce the impact of noise variation in the NPIPE $BB$ data in the circular sky patches, serving as proxies for comparing dust amplitudes between the model and the data at two different angular scales. The results are presented as scatter plots in Figure~\ref{fig:smallfield_power_all}.
+To assess whether the \texttt{PySM} models can accurately replicate the observed dust $BB$ power spectrum amplitude and scaling in $\ell$, particularly in small, high-Galactic latitude fields relevant to future CMB observations, we calculate the low-$\ell$ averaged bandpower $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$ (over $40 \le \ell < 110$) and the high-$\ell$ averaged bandpower $\overline{\mathcal{D}_{\text{high-}\ell}^{BB}}$ (over $110 \le \ell < 370$) for both the model and NPIPE maps in each small field with $|b| > 30^\circ$. These metrics reduce the impact of noise fluctuation in the NPIPE $BB$ data in the circular sky patches, serving as proxies for comparing dust amplitudes between the model and the data at two different angular scales. The results are presented as scatter plots in Figure~\ref{fig:smallfield_power_all}.
 
 Both the \texttt{d1} and \texttt{d9} models exhibit power spectral amplitudes that are generally consistent with NPIPE, but \texttt{d9} demonstrates a significant improvement in correlation, particularly increasing the correlation coefficient from 0.887 to 0.998 in the low-$\ell$ regime. This improvement stems from the combination of GNILC large-scale templates and small-scale modulation, which is especially evident in regions with a high signal-to-noise ratio, such as in the $\overline{\mathcal{D}_{\text{low-}\ell}^{BB}}$ comparison or in small fields with substantial dust amplitudes. 
 
@@ -583,7 +583,7 @@ For $\ell \sim 200$, we find a bump in the power spectrum of the Planck Revisite
     \label{fig:psym_BKmatrix}
 \end{figure*}
 
-The cleanest patch of sky in the southern hemisphere is particularly crucial for ongoing and future CMB experiments aimed at measuring primordial $B$-mode polarization. The most powerful current dataset for constraining the tensor-to-scalar ratio $r$ to date comes from the BICEP/Keck (BK) experiment~\citep[][henceforth ``BK18'']{Ade:2021}. This dataset includes BK observations up to the 2018 observation season, covering a $\sim 600$ square degree sky patch centered at RA 0h, Dec. $-57.5^{\circ}$, and incorporates NPIPE and WMAP data across the 23--353~GHz range from the same region. In the coming years, a collaborative effort between BICEP/Keck and the South Pole Telescope (SPT) will combine the BICEP3 and BICEP Array maps with overlapping SPT-3G maps to ``delens'' the observed CMB $B$-modes, further tightening constraints on $r$~\citep{TheBICEP/KeckCollaboration:2024}. Given that this observation field overlaps with the planned survey area for the Simons Observatory and CMB-S4 \citep{Ade:2019, Abazajian:2022}, there will be sustained interest in simulating Galactic foregrounds in this region, and thus we provide a dedicated analysis of our models in this footprint. 
+The cleanest regions of sky in the southern hemisphere are particularly crucial for ongoing and future CMB experiments aimed at measuring primordial $B$-mode polarization. The most powerful current dataset for constraining the tensor-to-scalar ratio $r$ to date comes from the BICEP/Keck (BK) experiment~\citep[][henceforth ``BK18'']{Ade:2021}. This analysis includes observations up to and including the 2018 observation season, covering a $\sim 600$ square degree sky patch centered at RA 0h, Dec. $-57.5^{\circ}$, and incorporates NPIPE and WMAP data across the 23--353~GHz range from the same region. In the coming years, a collaborative effort between BICEP/Keck and the South Pole Telescope (SPT) will combine the BICEP3 and BICEP Array maps with overlapping SPT-3G maps to ``delens'' the observed CMB $B$-modes, further tightening constraints on $r$~\citep{TheBICEP/KeckCollaboration:2024}. Given that this observation field overlaps with the planned survey area for the Simons Observatory and CMB-S4 \citep{Ade:2019, Abazajian:2022}, there will be sustained interest in simulating Galactic foregrounds in this region, and thus we provide a dedicated analysis of our models in this footprint. 
 
 \begin{figure}
     \centering
