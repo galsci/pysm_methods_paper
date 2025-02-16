@@ -360,6 +360,7 @@ To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generat
 \texttt{d10} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering $\beta_d, \, T_d$ from GNILC PR2 & \centering Modulated & \centering --- \tabularnewline
 \hline
 \\
+\\
 \texttt{d11} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_d$, $T_d$ \\
 \hline
 \texttt{d12} & 6 layers, each is a different modified blackbody & GNILC PR2 $I$ + GNILC $Q$/$U$ 353 GHz & Modulated + gaussian & \centering Random realization for each layer & \centering  Random realization for each layer & \centering --- \tabularnewline
@@ -373,13 +374,14 @@ To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generat
 \tablehead{
 \colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Frequency scaling} & \colhead{Frequency scaling} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale} & \colhead{Large scale} & \colhead{Small scale}}
 \startdata
-\texttt{s4} & \centering Power law  & Haslam $I$ 408 MHz + WMAP $Q$/$U$ 23 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_s$ & \centering --- & \centering --- \tabularnewline
+\texttt{s4} & \centering Power law & Haslam $I$ 408 MHz + WMAP $Q$/$U$ 23 GHz & Modulated + polarization fraction tensor & \centering Uniform $\beta_s$ & \centering --- & \centering --- \tabularnewline
 \hline
 \\
 \texttt{s5} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & $\beta_s$ from Haslam, S-PASS, WMAP & \centering Modulated & \centering --- \tabularnewline
 \hline
 \\
-\texttt{s6} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & $I$, $Q$, $U$ \& $\beta_s$ \tabularnewline
+\\
+\texttt{s6} & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl & \centering $I$, $Q$, $U$ \& $\beta_s$ \tabularnewline
 \hline
 \\
 \texttt{s7} & \centering Curved power law & \centering \textquotedbl & \centering \textquotedbl & \centering \textquotedbl + $c_s$ from ARCADE & \centering \textquotedbl + $c_s$ fluctuations & \centering --- \tabularnewline
@@ -423,10 +425,10 @@ In this model, maps of spectral parameters ($\beta_d$ and $T_d$) are randomly ge
 \tablehead{
 \colhead{Tag} & \colhead{Spectrum Model} & \colhead{Templates} & \colhead{Templates} & \colhead{Stochasticity} \\ & & \colhead{Large scale} & \colhead{Small scale}}
 \startdata
-\texttt{co1} & Single line emissions at 115, 230, 346~GHz & \centering Planck PR2 Type-1  maps  smoothed to $1^{\circ}$ & \centering --- & \centering --- \tabularnewline
+\texttt{co1} & \centering Single line emissions at 115, 230, 346~GHz & \centering Planck PR2 Type-1  maps  smoothed to $1^{\circ}$ & \centering --- & \centering --- \tabularnewline
 \hline
 \\
-\texttt{co2} & \textquotedbl + $0.1\%$ polarized & \centering \textquotedbl & \centering ---  & \centering --- \tabularnewline
+\texttt{co2} & \centering \textquotedbl + $0.1\%$ polarized & \centering \textquotedbl & \centering ---  & \centering --- \tabularnewline
 \hline
 \\
 \texttt{co3} & \centering \textquotedbl & \centering \textquotedbl & \centering Simulated high galactic clouds & \centering --- \tabularnewline
