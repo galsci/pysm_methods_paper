@@ -605,7 +605,7 @@ All models exhibit excess dust $BB$ power relative to the measured values in thi
 
 At large angular scales $\ell \lesssim 100$, the new \texttt{PySM} models are largely influenced by their underlying GNILC templates, while the BK18 constraints on dust $BB$ power come primarily from BK measurements at 220~GHz. The NPIPE power spectrum in the same plot reveals that the variations seen in the first three bandpowers of the \texttt{d9} model are directly inherited from its large-scale templates. The remaining amplitude discrepancy is likely caused by a noise bias present in the GNILC maps.
 
-Table~\ref{tab:BB_dustratio} further explores how the model amplitudes vary across frequencies, presenting the uniform deviation ratios between the PySM models and BK measurements down to 85~GHz. These ratios are determined by fitting the nine bandpowers of the \texttt{PySM} models to the dust component of the BK18 maximum likelihood foreground model, which follows a modified blackbody power spectrum (with $T_d$ fixed at $19.6~\text{K}$) and is characterized by parameters $A_{d,\ell=80} = 4.4 \; \mu\rm{K^2_{CMB}}$, $\beta_d = 1.5$ and $\alpha_d = -0.66$. \texttt{d9} consistently maintains a deviation factor of around two, while \texttt{d1} and \texttt{d10} deviate less from the measurements at lower frequencies. This suggests that these models have too large a value of $\beta_d$ relative to the BK measured value of $1.49^{+0.13}_{-0.12}$ in this patch. The frequency-dependent trend observed in \texttt{d12} is incompatible with a simple change of $\beta_d$ and likely reflects the multiple-layer behavior inherent to this model. 
+Table~\ref{tab:BB_dustratio} further explores how the model amplitudes vary across frequencies, presenting the uniform deviation ratios between the PySM models and BK measurements down to 85~GHz. These ratios are determined by fitting the nine bandpowers of the \texttt{PySM} models to the dust component of the BK18 maximum likelihood foreground model, which follows a modified blackbody power spectrum (with $T_d$ fixed at $19.6~\text{K}$) and is characterized by parameters $A_{d,\ell=80} = 4.4 \; \mu\rm{K^2_{CMB}}$, $\beta_d = 1.5$ and $\alpha_d = -0.66$. \texttt{d9} consistently maintains a deviation factor of around two, while \texttt{d1} and \texttt{d10} deviate less from the measurements at lower frequencies. This suggests that these models have too large a value of $\beta_d$ relative to the BK measured value in this patch. The frequency-dependent trend observed in \texttt{d12} is incompatible with a simple change of $\beta_d$ and likely reflects the multiple-layer behavior inherent to this model. 
 
 \begin{deluxetable}{lccccc}
     \caption{Comparison to BK18}
@@ -701,14 +701,14 @@ Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the 
 \begin{figure*}
     \centering
     \includegraphics[width=180mm]{figures/maps_patch_345_45.pdf}
-    \caption{We show the zoom-in plots in the selected patch at the center $(l, b) = (-15^{\circ}$, $45^{\circ})$, which are, from left to right, the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss} (i.e., $\texttt{d10}$ map), \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for I, Q and U respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu \rm K_{RJ}$ and the colorbar on the right is for the last two columns. }
+    \caption{We show the zoom-in plots in the selected patch at the center $(l, b) = (-15^{\circ}$, $45^{\circ})$, which are, from left to right, the final map with \texttt{Gaussian-mod-ss}, final map with \texttt{poltens-ss} (i.e., $\texttt{d10}$ map), \texttt{Gaussian-mod-ss} only map and \texttt{poltens-ss} only map. From top to bottom is for $I$, $Q$ and $U$ respectively. The colorbar on the left indicates the pixel values in the left-most two columns in the units of $\mu \rm K_{RJ}$ and the colorbar on the right is for the last two columns. }
     \label{fig:maps:patch2}
 \end{figure*}
 
 \begin{figure*}
     \centering
     \includegraphics[width=180mm]{figures/MFs_345_45_with_G_rescaled.pdf}
-    \caption{Minkowski Functionals as a function of the threshold $\rho$ for one realization of I, Q and U small scales in the patch with center of $(l, b) = (-15^{\circ}$, $45^{\circ})$ in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. The blue dotted one is for \texttt{Gaussian-mod-ss} while the orange solid one is from \texttt{poltens-ss}. We also show the \texttt{Gaussian-ss} in dashed gray line as a comparison.}
+    \caption{Minkowski Functionals as a function of the threshold $\rho$ for one realization of $I$, $Q$ and $U$ small scales in the patch with center of $(l, b) = (-15^{\circ}$, $45^{\circ})$ in Galactic coordinates. Each row shows three kinds of Minkowski Functionals. The blue dotted one is for \texttt{Gaussian-mod-ss} while the orange solid one is from \texttt{poltens-ss}. We also show the \texttt{Gaussian-ss} in dashed gray line as a comparison.}
     \label{fig:MF:patch2}
 \end{figure*}
 
