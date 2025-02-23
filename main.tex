@@ -302,11 +302,11 @@ For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_Comp
 To produce dust emission templates at a monochromatic frequency of 353\,GHz, we divide each of the $I$, $Q$, and $U$ maps by a factor of 1.098 to correct for the Planck bandpass \citep[][Table~2]{planck2016-l11A}.
 
 \subsubsection{Synchrotron Amplitude}
-Deriving a full-sky template for synchrotron emission in total intensity is challenging, both for the paucity of low-frequency surveys with full sky coverage and the difficulty in disentangling synchrotron emission from free-free emission and AME at frequencies above $\sim$10\,GHz. We follow \citet{Thorne:2017} in basing our template on the Haslam 408\,MHz survey \citep{Haslam:1982} and in particular the reprocessing of the original maps by \citet{Remazeilles:2015}. We rescale the 408\,MHz map to 23\,GHz assuming a sky-constant scaling of the brightness temperature with $\nu^{-3.1}$. Finally, we smooth the resulting map with a $2^\circ$ Gaussian beam.
+Deriving a full-sky template for synchrotron emission in total intensity is challenging, both due to the paucity of low-frequency surveys with full sky coverage and the difficulty in disentangling synchrotron emission from free-free emission and AME at frequencies above $\sim$10\,GHz. We follow \citet{Thorne:2017} in basing our template on the Haslam 408\,MHz survey \citep{Haslam:1982} and in particular the reprocessing of the original maps by \citet{Remazeilles:2015}. We rescale the 408\,MHz map to 23\,GHz assuming a sky-constant scaling of the brightness temperature with $\nu^{-3.1}$. Finally, we smooth the resulting map with a $2^\circ$ Gaussian beam.
 
 A key limitation of the current synchrotron total intensity template is that, despite the point source masking, we still find excess power from Galactic point sources at low Galactic latitudes near the Galactic center. This excess power can then leak into our final polarization maps through the polarization fraction tensor transformations (Equations~\eqref{eq:real2pt} and \eqref{eq:pt2real}). Our models are unaffected by this issue at $\ell \lesssim 3000$ and outside the Galactic plane. Addressing small-scale structures in bright regions will be deferred to a future release. %To avoid this, we replaces the brightest regions of the Galactic mid-plane (\sim 7\%) with the input templates.
 
-Constructing a synchrotron template in polarization is more straightforward than total intensity because both free-free emission and AME have very low levels of polarization. Thus, we directly employ the WMAP K-band (23\,GHz) $Q$ and $U$ maps\footnote{\url{https://lambda.gsfc.nasa.gov/data/map/dr5/skymaps/9yr/raw/wmap_band_iqumap_r9_9yr_K_v5.fits}} from Data Release~5 directly as our templates. As with the $I$ map, we smooth the $Q$ and $U$ templates with a $2^\circ$ Gaussian beam.
+Constructing a synchrotron template in polarization is more straightforward than total intensity because both free-free emission and AME have very low levels of polarization. Thus, we directly employ the WMAP K-band (23\,GHz) $Q$ and $U$ maps\footnote{\url{https://lambda.gsfc.nasa.gov/data/map/dr5/skymaps/9yr/raw/wmap_band_iqumap_r9_9yr_K_v5.fits}} from Data Release~5 as our templates. As with the $I$ map, we smooth the $Q$ and $U$ templates with a $2^\circ$ Gaussian beam.
 
 \subsection{Small-Scale Fluctuations in Spectral Parameters} \label{sec:spec_params}
 
@@ -320,7 +320,21 @@ Model maps are not guaranteed to resemble data far from the reference frequency.
 
 The application of this procedure to the dust and synchrotron spectral parameters is described in the following sections. The adopted fit parameters for each spectral parameter are listed in Table~\ref{tab:smallscale_specpar}.
 
+\begin{deluxetable}{lccc}
+    \caption{Model parameters for synthesizing spectral parameter maps at small scales}
+   \tablehead{& \colhead{$\ell_0$} & \colhead{$\ell_1$} & \colhead{$\alpha$}}
+   \startdata
+   $\beta_d$ & 200 & 400 & 0.04 \\ 
+   $T_d$ & 100 & 400  & -0.47\\
+    $\beta_s$ & 10 & 36 & -0.61\\
+    $c_s$ & 10 & 36 & -0.61  \\ 
+    \enddata
+    \tablecomments{Spectra are parameterized assuming $\mathcal{D}_\ell^{XX} \propto \ell^{\alpha_{XX}}$.}
+    \label{tab:smallscale_specpar}
+\end{deluxetable}
+
 \subsubsection{Dust Spectral Parameters}\label{subsec:dust_spec_params}
+
 As described in Section~\ref{subsubsec:dust_model}, the dust emission in all models developed here is governed by the spectral parameters $\beta_d$ and $T_d$. For the $\beta_d$ and $T_d$ template maps, we employ the $\beta_d$ and $T_d$ maps\footnote{\texttt{COM\_CompMap\_Dust-GNILC-Model-Spectral-Index\_2048\_R2.00.fits}, \texttt{COM\_CompMap\_Dust-GNILC-Model-Temperature\_2048\_R2.00.fits}} derived from 2015 Planck GNILC component separation analysis \citep{planck2016-XLVIII}. These maps have lower CIB contamination than the \texttt{Commander} $\beta_d$ and $T_d$ maps \citep{planck2014-a12} as the methodology employed both spatial and spectral information to disentangle the CIB contribution to the total emission (see discussion in Section~\ref{sec:CIBcontamination}). The GNILC spectral parameter fits show a large variability over the sky, when compared with the \texttt{Commander} spectral parameters, especially at high Galactic latitudes \citep{planck2016-XLVIII}. The informative priors on spectral parameters used in the \texttt{Commander} analysis restricts spatial variation of the best fit of spectral parameters in regions of low signal-to-noise, with a distribution that peaks close to the prior \citep{planck2014-a12}. The spatial variability seen in the GNILC spectral parameters correlates to structures seen in the dust intensity. 
 
 We fit the power spectra of the $\beta_d$ and $T_d$ template maps over the multipole ranges $200 < \ell < 400$ and $100 < \ell < 400$, respectively. We find that $\alpha_{\beta_d}= 0.04$ and $\alpha_{T_d} = -0.47$ over this range, both flatter than the $\alpha_{tt} = -0.80$ found for the dust amplitude. The adopted pivot multipole $\ell_1$ is larger than that used for dust amplitudes (see Table~\ref{tab:smallscale_par}) since the template maps employed here are derived from intensity-only data rather than a combination of total and polarized intensity. Thus, they remain signal-dominated at $\sim$4 times smaller angular scales. We employ the same modulation map as was used for the dust $i$ map (see Section~\ref{subsec:methodology}).
