@@ -225,13 +225,14 @@ Our method for generating small-scale fluctuations is summarized as follows (Fig
     \item We first transform the $I$, $Q$, and $U$ templates into $i$, $q$, and $u$ templates via Equation~\eqref{eq:real2pt}.
     \item We low-pass filter these template $i$, $q$, and $u$ maps with cut-off multipole $\ell_1$ to yield the final large-scale maps.
     \item We then compute the $tt$, $te$, $ee$, and $bb$ full-sky power spectra from the $i$, $q$, and $u$ maps in analogy with how $TT$, $TE$, $EE$, and $BB$ spectra are computed from $I$, $Q$, and $U$ maps.
-    \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell_0 < \ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the $ee$ and $bb$ spectra at $\ell > \ell_2$ are constructed with the power law index of the $tt$ spectrum, while the $te$ spectrum retains its fit index. The $tb$ and $eb$ spectra are assumed to be zero for $\ell > \ell_1$.
+    \item We model the $\ell$-dependence of each spectrum as a broken power law in $\ell$. To estimate the power spectrum at scales smaller than some scale $\ell_1$, we first fit the spectrum over the range $\ell_0 < \ell < \ell_1$ with a free amplitude and a fixed power law index from the literature (Table~\ref{tab:smallscale_par}). We then extrapolate from $\ell_1$ to a second pivot scale $\ell_2$ using the fit power law. Finally, the $ee$ and $bb$ spectra are extended to $\ell > \ell_2$ using the steeper power law index of the $tt$ spectrum, while the $te$ spectrum retains its fit index. The $tb$ and $eb$ spectra are assumed to be zero for $\ell > \ell_1$.
     \item  We synthesize $i$, $q$, and $u$ maps using the constructed $tt$, $te$, $ee$, and $bb$ spectra. These maps are then high-pass filtered at cut-off multipole $\ell_1$.
     \item We construct modulation maps $m_i$ and $m_p$ for intensity and polarization, respectively (see Figure~\ref{fig:flowchart}). The synthesized maps are then multiplied by the modulation maps to yield the final small-scale maps.
     \item Finally, we combine the large-scale and small-scale maps (from Steps~2 and 6, respectively) and transform back to $I$, $Q$, and $U$ maps via Equation~\eqref{eq:pt2real}.
 \end{enumerate}
 
-This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using too large of scales in the power spectrum fit as they are often not well-described by a power law. The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
+This prescription has several free parameters that require tuning. The pivot scale $\ell_1$ governs up to which multipole information is taken from the input template maps versus what is generated randomly. The scale $\ell_0$ avoids using the largest scales in the power spectrum fit as they are subject to large sample variance. %often not well-described by a power law.
+The pivot scale $\ell_2$ prevents the $EE$ and $BB$ spectra from exceeding the $TT$ spectrum at any scale. Finally, the modulation maps $m_i$ and $m_p$ ensure that the injected small-scale fluctuations are larger in bright regions (e.g., at low Galactic latitude) and smaller in faint regions (e.g., at high Galactic latitude).
 
 To construct the modulation maps $m_i$ and $m_p$, we generally follow the method outlined in \citet{Thorne:2017}. For each pixel at the location $\hat{\theta}$ in an $N_{\rm side} = 8$ HEALPix map, we define a circular mask centered on $\hat{\theta}$ of radius $11.3^\circ$  and apodize it with a $2^\circ$ Gaussian profile. We compute the $tt$ and $ee$ power spectra within each circle using NaMaster \citep{Alonso:2019}, to which we fit simple power laws in $\ell$. We then evaluate these best-fit power-law spectra at the $\ell_*$ multipole (Table \ref{tab:smallscale_par}). Finally, the modulation maps are constructed from the ratios:
 
@@ -280,7 +281,7 @@ Finally, we emphasize that our procedures are optimized for producing polarizati
 \subsubsection{Dust Amplitude}\label{sec:dustamplitude}
 The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous PySM models, e.g., \texttt{d0} and \texttt{d1}, employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for a detailed discussion). To address this issue, we instead use dust templates from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{Remazeilles:2011}. 
 
-In total intensity we employ the Planck GNILC 2015 component separated map\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}} at $353$\,GHz \citep{planck2016-XLVIII}. This map has variable angular resolution, ranging from $21.8\arcmin$ up to $5\arcmin$ depending on the sky region, which complicates its use in our analysis. Therefore, we reprocess the map to a spatially uniform resolution of $21.8\arcmin$. To do so, we first note that the map was synthesized from ten needlet maps of different, but spatially uniform, resolutions \citep[][Figure~A.2]{planck2016-XLVIII}. Each of the $j=1,\cdots,10$ needlet maps can be reconstructed from the Planck GNILC 2015 dust map as follows:
+In total intensity we employ the Planck GNILC 2015 component separated map\footnote{\texttt{COM\_CompMap\_Dust-GNILC-F353\_2048\_R2.00.fits}} at $353$\,GHz \citep{planck2016-XLVIII}. This map has variable angular resolution, ranging from $21.8\arcmin$ to $5\arcmin$ depending on the sky region, which complicates its use in our analysis. Therefore, we reprocess the map to a spatially uniform resolution of $21.8\arcmin$. To do so, we first note that the map was synthesized from ten needlet maps of different, but spatially uniform, resolutions \citep[][Figure~A.2]{planck2016-XLVIII}. Each of the $j=1,\cdots,10$ needlet maps can be reconstructed from the Planck GNILC 2015 dust map as follows:
 
 \begin{equation}
 \gamma^{j}(\hat{n})
@@ -296,7 +297,7 @@ where $a_{\ell m}$ are the spherical harmonic coefficients of the Planck GNILC 2
 \end{equation}
 This yields an $N_{\rm side} = 2048$ map that reproduces the Planck GNILC 2015 dust intensity template at all scales $\geq 21.8\arcmin$. Finally, we subtract the CIB monopole of $0.13\, \text{MJy}\,\text{sr}^{-1}$ present in the map \citep[][Section~2.2]{planck2016-l11B}.
 
-For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the Planck Public Release 3 \citep{planck2016-l04,planck2016-l11B}. While these maps have variable angular resolution, the resolution varies over the sky much more smoothly than in the $I$ map. Given this, and that we wish to retain as much polarization information in our analysis as possible, we employ these variable resolution maps as-is. Their resolution ranges from $5\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixellated at $N_{\rm side} = 2048$. 
+For the dust $Q$ and $U$ maps we employ the dust maps\footnote{\texttt{COM\_CompMap\_IQU-thermaldust-gnilc-varres\_2048\_R3.00.fits}} produced by the GNILC component separation from the Planck Public Release 3 \citep{planck2016-l04,planck2016-l11B}. While these maps have variable angular resolution, the resolution varies over the sky much more smoothly than in the $I$ map. Given this, and that we wish to retain as much polarization information in our analysis as possible, we employ these variable resolution maps as-is. Their resolution ranges from $5\arcmin$ in the Galactic plane to $80\arcmin$ at high Galactic latitudes. The maps are pixelated at $N_{\rm side} = 2048$. 
 
 To produce dust emission templates at a monochromatic frequency of 353\,GHz, we divide each of the $I$, $Q$, and $U$ maps by a factor of 1.098 to correct for the Planck bandpass \citep[][Table~2]{planck2016-l11A}.
 
@@ -310,19 +311,6 @@ Constructing a synchrotron template in polarization is more straightforward than
 \subsection{Small-Scale Fluctuations in Spectral Parameters} \label{sec:spec_params}
 
 \subsubsection{Methods Overview} \label{subsec:spec_params_overview}
-
-\begin{deluxetable}{lccc}
-    \caption{Model parameters for synthesizing spectral parameter maps at small scales}
-   \tablehead{& \colhead{$\ell_0$} & \colhead{$\ell_1$} & \colhead{$\alpha$}}
-   \startdata
-   $\beta_d$ & 200 & 400 & 0.04 \\ 
-   $T_d$ & 100 & 400  & -0.47\\
-    $\beta_s$ & 10 & 36 & -0.61\\
-    $c_s$ & 10 & 36 & -0.61  \\ 
-    \enddata
-    \tablecomments{Spectra are parameterized assuming $\mathcal{D}_\ell^{XX} \propto \ell^{\alpha_{XX}}$.}
-    \label{tab:smallscale_specpar}
-\end{deluxetable}
 
 Just as a map of Galactic emission at a single frequency is expected to have fluctuations at smaller angular scales than have been measured, maps of parameters governing its frequency dependence should also have small-scale fluctuations. We therefore introduce small-scale fluctuations to our spectral parameter template maps in a manner analogous to the amplitude template maps. This more realistically captures the complexity of small-scale Galactic emission than would spatially uniform spectral parameters.
 
