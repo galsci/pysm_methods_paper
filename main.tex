@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\title{Full-Sky Models of Galactic Microwave Emission and Polarization at Sub-arcminute Scales for the Python Sky Model}
+\title{Full-sky Models of Galactic Microwave Emission and Polarization at Sub-arcminute Scales for the Python Sky Model}
 \shorttitle{Full-Sky Models of Galactic Microwave Emission and Polarization}
 \shortauthors{The PanEx GS Group}
 
@@ -759,7 +759,7 @@ This work presents new models of Galactic emission in total intensity and polari
     \item We develop new models of small-scale, non-Gaussian Galactic dust and synchrotron emission based on the polarization fraction tensor framework. We combine realizations of this small-scale synthetic emission with well-measured large scales to produce maps with realistic levels of fluctuations at all angular scales, including in maps of spectral parameters (see Figure~\ref{fig:flowchart} for a schematic). The result is a set of all-sky models of dust and synchrotron emission that agree with observational data at large scales and that are consistent but stochastic at small scales.
     \item We implement the dust layer model of \citet{Martinez-Solaeche:2018} into \texttt{PySM}, providing an alternative dust model that has realistic line-of-sight integration, producing line-of-sight frequency decorrleation.
     \item We implement three models of CO line emission and polarization based on Planck CO maps \citep{planck2013-p03a} and on models of high-Galactic latitude CO emission from the literature \citep{Puglisi:2017}.
-    \item The dust and synchrotron models implemented in this work show improved overall agreement with observational data compared to previous \texttt{PySM} models. In particular, the small-area dust $BB$ amplitude and multipole dependence in the power spectra of the new models align more closely with those of the 353~GHz Planck NPIPE maps across the sky (Figure~\ref{fig:smallfield_power_all}).
+    \item The dust and synchrotron models implemented in this work show improved overall agreement with observational data compared to previous \texttt{PySM} models. In particular, the small-area dust $BB$ amplitude and multipole dependence in the power spectra of the \texttt{d9}, \texttt{d10}, and \texttt{d11} models align more closely with those of the 353~GHz Planck NPIPE maps across the sky (Figure~\ref{fig:smallfield_power_all}).
     \item We quantify the frequency decorrelation with the decorrelation parameter $\mathcal{R}_\ell$ (Equation~\ref{eq:R_ell}). While all models are consistent with Planck constraints on decorrelation between 217 and 353\,GHz, they span a large range of decorrelation level and have distinct frequency dependence of $\mathcal{R}_\ell$ (Figure~\ref{fig:decorrelation}).
     \item We demonstrate that by using dust amplitude and spectral templates derived from the GNILC algorithm, the new \texttt{PySM} models contain significantly less contamination from the CIB than previous models (Figure~\ref{fig:extragal_contamination}).
     \item We find that the polarization fraction tensor framework yields maps with appreciable non-Gaussian small-scale structure in small patches (Figure~\ref{fig:MF:patch2}). However, we find that the non-Gaussianity greatly diminishes when averaging over large sky areas (Figure~\ref{fig:MF:sphere}).
