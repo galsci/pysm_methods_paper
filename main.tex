@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage[T1]{fontenc}
 
+
 \begin{document}
 
 \title{Full-sky Models of Galactic Microwave Emission and Polarization at Sub-arcminute Scales for the Python Sky Model}
@@ -276,6 +277,8 @@ Finally, we emphasize that our procedures are optimized for producing polarizati
     \tablecomments{Spectra are parameterized assuming $D_{\ell}^{xy} \propto \ell^{\alpha_{xy}}$.}
 \end{deluxetable*}
 
+\vspace{-1.1cm}
+
 \subsubsection{Dust Amplitude}\label{sec:dustamplitude}
 The Planck~2015 component separation results in total intensity remain state of the art despite updates in polarization in the 2018 data release \citep{planck2016-l04}. Previous \texttt{PySM} models, e.g., \texttt{d0} and \texttt{d1}, employed the dust templates from the \texttt{Commander} component separation analysis \citep{planck2014-a11}. However, the model fitting employed in \citet{planck2014-a11} did not differentiate between Galactic dust emission and the Cosmic Infrared Background (CIB), and so the component separated dust maps retain CIB signal that should not be included in simulations of Galactic emission (see Section~\ref{sec:CIBcontamination} for a detailed discussion). To address this issue, we instead use dust templates from analyses that separated Galactic dust emission from the CIB using the Generalized Needlet Internal Linear Combination (GNILC) algorithm \citep{Remazeilles:2011}. 
 
@@ -318,6 +321,7 @@ Model maps are not guaranteed to resemble data far from the reference frequency.
 
 The application of this procedure to the dust and synchrotron spectral parameters is described in the following sections. The adopted fit parameters for each spectral parameter are listed in Table~\ref{tab:smallscale_specpar}.
 
+
 \begin{deluxetable}{lccc}
     \caption{Model parameters for synthesizing spectral parameter maps at small scales}
    \tablehead{& \colhead{$\ell_0$} & \colhead{$\ell_1$} & \colhead{$\alpha$}}
@@ -330,6 +334,8 @@ The application of this procedure to the dust and synchrotron spectral parameter
     \tablecomments{Spectra are parameterized assuming $\mathcal{D}_\ell^{XX} \propto \ell^{\alpha_{XX}}$.}
     \label{tab:smallscale_specpar}
 \end{deluxetable}
+
+\vspace{-.5cm}
 
 \subsubsection{Dust Spectral Parameters}\label{subsec:dust_spec_params}
 
@@ -349,6 +355,8 @@ For the synchrotron curvature parameter $c_s$, there are no readily available te
 To extend our $c_s$ map to angular scales $\ell > \ell_1 = 36$, we first generate a map of Gaussian random fluctuations with the same power law index as the $\beta_s$ map, i.e., $\alpha _{c_s}=\alpha _{\beta_s} = -0.61$. We modulate the resulting map with the Haslam 408\,GHz $I$ map, smoothed to a $5^\circ$ FWHM resolution. We renormalize the map through a linear transformation such that the (dimensionless) pixel values range from 0.1--2. Finally, the modulated high-$\ell$ map is combined with the low-$\ell$ template following the filter function of Equation~\ref{eq:filter}.
 
 \subsection{Summary of New Dust and Synchrotron Models}
+
+\vspace{-1.5cm}
 
 \begin{deluxetable*}{m{0.5cm} m{2.8cm} m{2.2cm} m{2.2cm} m{2.4cm} m{2.2cm} m{2.6cm}} \label{table:summarydust}
 \caption{Summary of the \texttt{PySM}~3.4 models --- Dust.}
@@ -420,7 +428,11 @@ The construction of these maps does result in some filtering out of the real sma
 
 In this model, maps of spectral parameters ($\beta_d$ and $T_d$) are randomly generated for each layer as described in \cite{Martinez-Solaeche:2018}. As a consequence, they are not constrained to match the observed temperature and spectral index maps. While their statistics (e.g., amplitude, correlation between $\beta_d$ and $T_d$) are compatible with those of real data, they provide a different realization, which results in increased differences between the real sky and the model at frequencies increasingly far from the reference frequency, $\nu_0 = 353$~GHz.
 
-\subsection{CO Models} \label{subsec:co_models}
+\subsection{CO Models} 
+
+\vspace{-0.8cm}
+
+\label{subsec:co_models}
 \begin{deluxetable*}{m{0.5cm} m{3.3cm} m{4.2cm} m{4.4cm} m{2.4cm}} \label{table:summaryco}
 \caption{Summary of the \texttt{PySM}~3.4 models --- CO.}
 \tablewidth{0pt}
@@ -673,6 +685,13 @@ We perform the same cross-correlation analysis to quantify the extragalactic con
 
 \subsection{Non-Gaussianity} \label{sec:nongaussianity}
 
+\begin{figure*}
+    \centering
+    \includegraphics[width=180mm]{figures/MFs_80p_sky_Q.pdf}
+    \caption{MFs for the small scales of three sets of $Q$ maps on the sphere with \texttt{GAL080} mask. The large scales are filtered out by excluding multipoles $\ell < 200$ in the maps, and we choose $\ell_\text{max} = 2048$ when obtaining the small scales. We show the MFs as a function of threshold $\rho$, for \texttt{Gaussian-mod-ss} in blue, \texttt{poltens-ss} in orange and \texttt{Gaussian-ss} in dashed gray.}
+    \label{fig:MF:sphere}
+\end{figure*}
+
 We quantify the level of non-Gaussianity in the small-scale dust emission generated through the polarization fraction tensor transformation used in dust model \texttt{d10} at 353 GHz (which is identical to \texttt{d9} at that frequency). To measure the non-Gaussianity in the maps we consider the Minkowski Functionals \citep[MFs,][]{Minkowski1903}, which are a common tool to quantify map-space, higher-order statistical properties \citep[e.g.,][]{Rahman:2021, Martire:2023, Carones:2024}. Hadwiger’s theorem implies that, for any $n$-dimensional excursion set defined with a threshold value $\rho$, there exist $n+1$ MFs that geometrically and topologically describe the morphology of the set \citep{hadwigerVorlesungenUeberInhalt1957}. In our case, for two-dimensional maps, we have three kinds of MFs. These are $\mathcal{V}_0$, $\mathcal{V}_1$, and $\mathcal{V}_2$, which correspond to the area, the perimeter and the connectivity of the excursion set (iso-intensity contour), respectively.
 
 We use these MFs to compare the small-scale structure in \texttt{d10} to those of two other sets of maps: (i) maps where the small-scale structures are fully Gaussian and isotropic and (ii) maps where the small-scale structures are Gaussian but anisotropic across the sky. As described Section~\ref{subsec:methodology}, the small scale structures in the \texttt{d10} model are generated as a Gaussian random field in $i$, $q$, and $u$, and are multiplied by the $m_i$ and $m_p$ modulation maps before they are coadded to the large-scale maps and transformed back into $I$, $Q$ and $U$. We want to understand the impact of this effective modulation on the MFs, and therefore construct a set of maps that are amplitude-modulated versions of Gaussian-random-field maps. This allows us to disentangle any non-Gaussianity generated through the modulation from the potential non-Gaussianity introduced due to the polarization fraction tensor transformation.
@@ -685,16 +704,12 @@ We thus consider three sets of maps with different small scales co-added: model 
 
 \subsubsection{Minkowski Functionals on the sphere}
 
+
 Following the algorithm in \cite{Grewal:2022}, we calculate the MFs for the three $Q$ maps on the sphere, i.e., in HEALPix format, on the \texttt{GAL080} mask. We first normalize the maps by dividing each map by its standard deviation, and compute the MFs for iso-intensity contours in the range $[-3, 3]$ (Figure~\ref{fig:MF:sphere}). The MFs of the corresponding $U$ maps look very similar to $Q$ maps and are not shown here.
 
 Figure~\ref{fig:MF:sphere} shows that when averaging over a large sky area, the MFs of \texttt{Gaussian-mod-ss} and \texttt{poltens-ss} are almost identical, while the MFs of \texttt{Gaussian-ss} differ substantially. The difference in MFs between \texttt{poltens-ss} and \texttt{Gaussian-ss} indicates the existence of non-Gaussianity in \texttt{poltens-ss}, but the similarity between \texttt{poltens-ss} and \texttt{Gaussian-mod-ss} demonstrates that the non-Gaussianity in \texttt{poltens-ss} comes from the anisotropy in the maps, which originates from the modulation, rather than from the polarization fraction tensor transformation.
 
-\begin{figure*}
-    \centering
-    \includegraphics[width=180mm]{figures/MFs_80p_sky_Q.pdf}
-    \caption{MFs for the small scales of three sets of $Q$ maps on the sphere with \texttt{GAL080} mask. The large scales are filtered out by excluding multipoles $\ell < 200$ in the maps, and we choose $\ell_\text{max} = 2048$ when obtaining the small scales. We show the MFs as a function of threshold $\rho$, for \texttt{Gaussian-mod-ss} in blue, \texttt{poltens-ss} in orange and \texttt{Gaussian-ss} in dashed gray.}
-    \label{fig:MF:sphere}
-\end{figure*}
+
 
 \begin{figure*}
     \centering
@@ -732,6 +747,8 @@ As our knowledge of diffuse ISM physics improves, there are further opportunitie
 In addition to the small-scale structure of the diffuse dust and synchrotron emission, the real sky at these frequencies contains emission from discrete sources that are not explicitly included in our models. These include cold clumps \citep{Clancy:2023}, as well as planetary nebulae, supernova remnants, pulsar wind nebulae, and so forth \citep{Naess:2020, Guan:2021}. Nearby galaxies, while not technically within the scope of Galactic emission modeling, should also be incorporated as they are not included in existing simulations of the extragalactic sky.
 
 \section{Recommended Model Suite}\label{sec:modelsuite}
+
+\vspace{-.8cm}
 
 \begin{deluxetable*}{p{0.1\textwidth} p{0.2\textwidth} p{0.5\textwidth}}
     \caption{Recommended Model Suite}
@@ -774,7 +791,7 @@ The construction of Galactic emission models is necessarily an iterative process
 \section*{Acknowledgments}
 We thank the Atacama Cosmology Telescope (ACT), BICEP/Keck, BLAST, CCAT, CMB-S4, LiteBIRD, Simons Observatory (SO), and South Pole Telescope (SPT) Collaborations for their support of the Pan-Experiment Galactic Science Group, which coordinated this community-wide effort. We thank the BICEP/Keck Collaboration for sharing the BK18 matrix products used in this study. We are grateful to Irene Abril-Cabezas, Carlo Baccigalupi, Colin Bischoff, Dick Bond, Fran\c{c}ois Boulanger, Tuhin Ghosh, Fran\c{c}ois Levrier, Fazlu Rahman, and many other members of the Pan-Experiment Galactic Science Group for stimulating discussions that motivated and improved this work. 
 
-This work was supported by the National Science Foundation under grant No. AST-2106607 (PI S.E.C.). This research used resources of the National Energy Research Scientific Computing Center, a DOE Office of Science User Facility supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231 using NERSC award HEP-ERCAP0032657. N.K. and M.R. acknowledge support by the RadioForegroundsPlus Project HORIZON-CL4-2023-SPACE-01, GA 101135036. M.M.N. acknowledges support from the Princeton Undergraduate Summer Research Program. M.D.H. and S.E.C. acknowledge support from the Stanford Physics Undergraduate Summer Research Program. M.R. acknowledges the support of the Spanish Ministry of Science and Innovation through grants PID2022-139223OB-C21 and PID2022-140670NA-I00. This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration.
+This work was supported by the National Science Foundation under grant No. AST-2106607 (PI S.E.C.). S.E.C. additionally acknowledges support from an Alfred P. Sloan Research Fellowship. This research used resources of the National Energy Research Scientific Computing Center, a DOE Office of Science User Facility supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231 using NERSC award HEP-ERCAP0032657. N.K. and M.R. acknowledge support by the RadioForegroundsPlus Project HORIZON-CL4-2023-SPACE-01, GA 101135036. M.M.N. acknowledges support from the Princeton Undergraduate Summer Research Program. M.D.H. and S.E.C. acknowledge support from the Stanford Physics Undergraduate Summer Research Program. M.R. acknowledges the support of the Spanish Ministry of Science and Innovation through grants PID2022-139223OB-C21 and PID2022-140670NA-I00. This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration.
 
 Some of the results in this paper have been derived using the \texttt{healpy} and \texttt{HEALPix} packages.
 
