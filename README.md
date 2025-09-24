@@ -1,4 +1,8 @@
+**This is the GitHub source for the paper: PySM Methods paper, published at https://iopscience.iop.org/article/10.3847/1538-4357/adf212.**
+
 # PySM Methods paper
+
+**Latest versions:** [ApJ publication](https://iopscience.iop.org/article/10.3847/1538-4357/adf212) · [arXiv preprint](https://arxiv.org/abs/2502.20452)
 
 The paper is automatically synchronized from Overleaf to the Github repository [`galsci/pysm_methods_paper`](https://github.com/galsci/pysm_methods_paper/) hourly.
 
