@@ -1,6 +1,6 @@
-**This is the GitHub source for the paper: PySM Methods paper, published at https://iopscience.iop.org/article/10.3847/1538-4357/adf212.**
+**This is the GitHub source for the paper: Full-sky Models of Galactic Microwave Emission and Polarization at Subarcminute Scales for the Python Sky Model, published at https://iopscience.iop.org/article/10.3847/1538-4357/adf212.**
 
-# PySM Methods paper
+# Full-sky Models of Galactic Microwave Emission and Polarization at Subarcminute Scales for the Python Sky Model
 
 **Latest versions:** [ApJ publication](https://iopscience.iop.org/article/10.3847/1538-4357/adf212) · [arXiv preprint](https://arxiv.org/abs/2502.20452)
 
